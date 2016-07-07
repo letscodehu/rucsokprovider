@@ -11,14 +11,16 @@ define(
 		vm.rucsoks = [];
 		
 		vm.dirty = true;
+		vm.preload = false;
 		vm.addRucsok = addRucsok;
 		vm.checkRucsok = checkRucsok;
 		vm.showAddModal = showAddModal;
 		vm.rucsok = rucsok;
 		
 		function addRucsok() {
-			console.log("add");
+			vm.preload = true;
 			rucsokService.addRucsok(vm.rucsok).then(function(){
+				vm.preload = false;
 				rucsokService.getRucsok().then(function(data) {
 					vm.rucsoks = data;
 					closeAddModal();

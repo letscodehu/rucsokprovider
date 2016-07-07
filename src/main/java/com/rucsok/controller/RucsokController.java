@@ -7,10 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rucsok.entity.Rucsok;
 import com.rucsok.repository.RucsokRepository;
+import com.rucsok.request.RucsokCheckRequest;
+import com.rucsok.request.RucsokInsertRequest;
+import com.rucsok.response.RucsokDeleteResponse;
 
 
 @RestController
@@ -42,7 +46,16 @@ public class RucsokController {
 	
 	@RequestMapping(name="postrucsok", path = "/rucsok", method = RequestMethod.POST)
 	public Rucsok putRucsok(@RequestBody RucsokInsertRequest request) {
-		return repo.save(request.rucsok);
+		if (null == repo.findByLink(request.rucsok.getLink())) {
+			repo.save(request.rucsok);	
+		}
+		return request.rucsok;
+	}
+	
+	@RequestMapping(name="delete-rucsok", path = "/rucsok", method = RequestMethod.DELETE)
+	public RucsokDeleteResponse removeRucsok(@RequestParam long id) {
+		repo.delete(repo.findOne(id));
+		return new RucsokDeleteResponse(true);
 	}
 	
 }

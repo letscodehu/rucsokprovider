@@ -6,20 +6,46 @@
 			akarok!</a>
 	</p>
 </div>
-<div ng-if="vm.rucsoks.length !== 0" class="inner cover">
-	<div ng-repeat="rucsok in vm.rucsoks" id="rucsok{{rucsok.id}}"
-		class="col-md-3 card">
-		<div class="rucsok-content">
-			<p>{{rucsok.title}}</p>
-			<img ng-src="{{rucsok.image}}" alt="{{rucsok.title}}" />
+
+<!-- SEARCH BAR -->
+<div ng-if="vm.rucsoks.length !== 0" id="navbar"
+	class="navbar-collapse collapse">
+	<form class="navbar-form navbar-right">
+		<div class="form-group">
+			<input type="text"
+				placeholder="Ha meghalok, ráterhelik a családomra?"
+				ng-model="vm.search" class="form-control">
 		</div>
-		<div class="rucsok-timing">{{rucsok.time}}</div>
-	</div>
-	<p class="lead">
-		<a href="#" ng-click="vm.showAddModal()"
-			class="btn btn-lg btn-default">Toljad a tutit!</a>
-	</p>
+		<button type="submit" class="btn btn-success">Keressé!</button>
+	</form>
 </div>
+
+<div data-ng-if="vm.rucsoks.length !== 0" class="inner cover">
+	<!-- RUCSOK-LIST -->
+	<a target="_blank" data-ng-href="{{rucsok.link}}"
+		data-ng-repeat="rucsok in vm.rucsoks | filter : vm.search"
+		id="rucsok{{rucsok.id}}">
+		<div class="col-md-2 card">
+			<div class="rucsok-content">
+				<p class="wrap">{{rucsok.title}}</p>
+				<img class="thumbnail" data-ng-src="{{rucsok.image}}"
+					alt="{{rucsok.title}}" />
+			</div>
+			<div class="rucsok-timing">{{rucsok.time}}</div>
+		</div>
+	</a>
+
+	<!-- UPLOAD BUTTON -->
+	<div class="col-md-12">
+		<p class="lead">
+			<a href="#" data-ng-click="vm.showAddModal()"
+				class="btn btn-lg btn-default">Toljad a tutit!</a>
+		</p>
+	</div>
+
+</div>
+
+<!-- MODAL -->
 <div id="rucsok-modal" class="modal fade">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
@@ -31,11 +57,15 @@
 				<h4 class="modal-title">Toldacuccot</h4>
 			</div>
 			<div class="modal-body">
-				<input placeholder="Ide jöhet az url" type="text" ng-change="vm.dirty = true" ng-model="vm.url" />
+				<input placeholder="Ide jöhet az url" type="text"
+					ng-change="vm.dirty = true" ng-model="vm.url" />
+				<div data-ng-show="vm.preload" class="preloader">
+					<img class="thumbnail" src="/images/preload.gif" />
+				</div>	
 				<div ng-if="!vm.dirty">
 					<div class="preview-title">{{vm.rucsok.title}}</div>
 					<div class="preview-image">
-						<img ng-src="{{vm.rucsok.image}}" />
+						<img  class="thumbnail" ng-src="{{vm.rucsok.image}}" />
 					</div>
 				</div>
 			</div>

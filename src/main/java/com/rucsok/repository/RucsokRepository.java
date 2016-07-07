@@ -13,5 +13,7 @@ public interface RucsokRepository extends CrudRepository<Rucsok, Long> {
 
 	@Query("SELECT r FROM Rucsok r")
 	public List<Rucsok> getAllRucsok();
+
+	public Rucsok findByLink(String link);
 	
 }

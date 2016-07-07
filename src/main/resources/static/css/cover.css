@@ -125,11 +125,20 @@ body {
 	box-shadow : 1px 1px 1px #000;
 	background-color: #222;
 	color: #fff;
-	padding: 1em;
-	margin: 0.5em;
 	min-height: 20%;
 }
 
+.thumbnail {
+	max-width:100%;
+}
+
+.wrap {
+	word-wrap: break-word;
+}
+
+.modal-body {
+	color: #222;
+}
 
 /*
  * Footer
@@ -171,6 +180,6 @@ body {
   .masthead,
   .mastfoot,
   .cover-container {
-    width: 700px;
+    width: 900px;
   }
 }

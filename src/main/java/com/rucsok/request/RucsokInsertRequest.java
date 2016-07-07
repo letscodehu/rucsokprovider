@@ -1,4 +1,4 @@
-package com.rucsok.controller;
+package com.rucsok.request;
 
 import com.rucsok.entity.Rucsok;
 

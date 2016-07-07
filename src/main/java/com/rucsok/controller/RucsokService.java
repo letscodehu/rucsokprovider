@@ -7,6 +7,7 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
 import org.jsoup.Jsoup;
+import org.jsoup.UnsupportedMimeTypeException;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
@@ -34,17 +35,21 @@ public class RucsokService {
 			url = "http://" + url;
 		}
 		Rucsok r = new Rucsok();
-		Document doc = Jsoup.connect(url).get();
 		r.setLink(url);
-		r.setTitle(getTitle(doc));
-		r.setImage(getImage(doc));
+		try {
+			Document doc = Jsoup.connect(url).get();
+			r.setTitle(getTitle(doc));
+			r.setImage(getImage(doc));
+		} catch (UnsupportedMimeTypeException ex) {
+			r.setImage(url);
+		}
 		return r;
 	}
 
 	private String getTitle(Document doc) {
 		String title;
 		Elements metaOgTitle = doc.select("meta[property=og:title]");
-		if (metaOgTitle!=null) {
+		if (metaOgTitle != null) {
 			title = metaOgTitle.attr("content");
 		}
 		else {
