@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<title>Napi Misi - amikor eljön a vég</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"></link>
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous"></link>
+ <link th:href="@{/css/cover.css}" rel="stylesheet"></link>
+
+<!-- Latest compiled and minified JavaScript -->
+</head>
+<body>
+<div class="site-wrapper">
+
+      <div class="site-wrapper-inner">
+
+        <div class="cover-container">
+
+          <div class="masthead clearfix">
+            
+          </div>
+
+          <rucsok></rucsok>
+
+          <div class="mastfoot">
+            <div class="inner">
+              <p>Minden rücsök fenntartva &copy; 2016.</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+<script th:src="@{/js/lib/requirejs/require.js}" data-main="/js/main"></script>
+</body>
+</html>

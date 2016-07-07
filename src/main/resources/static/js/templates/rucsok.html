@@ -1,0 +1,13 @@
+<div ng-if="vm.rucsoks.length === 0" class="inner cover">
+	<h1 class="cover-heading">Nem tudod mivel baszd el az idődet?</h1>
+	<p class="lead">"That's just sad..."</p>
+	<p class="lead">
+		<a href="#" ng-click="vm.rucsok()" class="btn btn-lg btn-default">Rücskölni akarok!</a>
+	</p>
+</div>
+<div ng-if="vm.rucsoks.length !== 0"  class="inner cover">
+	<div ng-repeat="rucsok in vm.rucsoks" id="rucsok{{rucsok.id}}" class="col-md-3 card">
+	<div class="rucsok-content">{{rucsok.quote}}</div>
+	<div class="rucsok-timing">{{rucsok.time | datefilter}}</div>
+	</div>
+</div>
