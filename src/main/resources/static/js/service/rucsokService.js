@@ -22,7 +22,7 @@ define([], function() {
 			var deferred = $q.defer();
 			// viva la promise, peti
 			$http({
-				"url" : "/rucsok", 
+				"url" : "/check-rucsok", 
 				"method" : "POST",
 				"data" : {"url": url},
 			}).then(function(resp) {
@@ -37,7 +37,7 @@ define([], function() {
 			// viva la promise, peti
 			$http({
 				"url" : "/rucsok", 
-				"method" : "PUT",
+				"method" : "POST",
 				"data" : {"rucsok" : rucsok},
 			}).then(function(resp) {
 				deferred.resolve(resp.data);
@@ -47,6 +47,7 @@ define([], function() {
 		}
 				
 		return {
+			addRucsok : addRucsok,
 			checkRucsok : checkRucsok,
 			getRucsok : getRucsok
 		}

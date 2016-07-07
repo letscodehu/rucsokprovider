@@ -1,6 +1,6 @@
 package com.rucsok.controller;
 
-public class RucsokRequest {
+public class RucsokCheckRequest {
 
 	public String url;
 	

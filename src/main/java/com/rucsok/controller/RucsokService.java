@@ -2,6 +2,10 @@ package com.rucsok.controller;
 
 import java.io.IOException;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -13,6 +17,18 @@ import com.rucsok.entity.Rucsok;
 @Service
 public class RucsokService {
 
+	
+	@PersistenceContext
+	private EntityManager em;
+
+	@Transactional()
+	public boolean save(Rucsok r) {
+		em.persist(r);
+		em.flush();
+		return true;
+	}
+	
+	
 	public Rucsok crawl(String url) throws IOException {
 		if (!url.contains("http://") && !url.contains("https://")) {
 			url = "http://" + url;

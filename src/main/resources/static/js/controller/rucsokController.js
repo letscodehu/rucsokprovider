@@ -17,8 +17,13 @@ define(
 		vm.rucsok = rucsok;
 		
 		function addRucsok() {
-			rucsokService.addRucsok(vm.rucsok);
-			closeAddModal();
+			console.log("add");
+			rucsokService.addRucsok(vm.rucsok).then(function(){
+				rucsokService.getRucsok().then(function(data) {
+					vm.rucsoks = data;
+					closeAddModal();
+				});	
+			})
 		}
 		
 		function checkRucsok() {
@@ -39,6 +44,9 @@ define(
 		function rucsok() {
 			rucsokService.getRucsok().then(function(data) {
 				vm.rucsoks = data;
+				if (vm.rucsoks.length == 0) {
+					showAddModal();
+				}
 			});
 		}
 	}
