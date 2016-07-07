@@ -9,8 +9,35 @@ public class Rucsok {
 
 	@Id
 	private long id;
-	private String quote;
+	private String title;
+	private String link;
+	private String image;
 	
+	
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getLink() {
+		return link;
+	}
+
+	public void setLink(String link) {
+		this.link = link;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
 	public long getId() {
 		return id;
 	}
@@ -18,28 +45,5 @@ public class Rucsok {
 	public void setId(long id) {
 		this.id = id;
 	}
-
-	public String getQuote() {
-		return quote;
-	}
-
-	public void setQuote(String quote) {
-		this.quote = quote;
-	}
-
-	public RucsokType getType() {
-		return type;
-	}
-
-	public void setType(RucsokType type) {
-		this.type = type;
-	}
-
-	private RucsokType type;
-	
-	private enum RucsokType {
-		QUOTE, LINK
-	}
-	
 	
 }
