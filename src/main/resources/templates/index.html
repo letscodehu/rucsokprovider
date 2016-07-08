@@ -26,7 +26,7 @@
 			<p>Minden rücsök fenntartva &copy; 2016.</p>
 		</footer>
 	</div>
-
+	<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 	<script th:src="@{/js/lib/requirejs/require.js}" data-main="/js/main"></script>
 </body>
 </html>

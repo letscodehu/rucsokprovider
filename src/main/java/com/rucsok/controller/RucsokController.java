@@ -26,7 +26,7 @@ public class RucsokController {
 	@Autowired
 	private RucsokService rService;
 	
-	
+
 	@RequestMapping(name="getrucsok", path = "/rucsok", method = RequestMethod.GET)
 	public List<Rucsok> getRucsok() {
 		return repo.getAllRucsok();

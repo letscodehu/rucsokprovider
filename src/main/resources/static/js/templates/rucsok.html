@@ -12,9 +12,12 @@
 	class="navbar-collapse collapse">
 	<form class="navbar-form navbar-right">
 		<div class="form-group">
-			<input type="text"
+			<input class="search-field" type="text"
 				placeholder="Ha meghalok, ráterhelik a családomra?"
-				ng-model="vm.search" class="form-control">
+				ng-model="vm.search" class="form-control"> <a href="#"
+				alt="Hát nem megmondtam, hogy ne gyere be meg ne gyere erre he!"
+				data-ng-click="vm.showLoginModal()" class="btn btn-sm btn-default">Lépjek
+				már be!</a>
 		</div>
 	</form>
 </div>
@@ -38,12 +41,13 @@
 			<a href="#" data-ng-click="vm.showAddModal()"
 				class="btn btn-lg btn-default">Toljad a tutit!</a> <a href="#"
 				data-ng-click="vm.refresh()" class="btn btn-lg btn-default">Frissíccsé'!</a>
+
 		</p>
 	</div>
 
 </div>
 
-<!-- MODAL -->
+<!-- UPLOAD MODAL -->
 <div id="rucsok-modal" class="modal fade">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
@@ -73,6 +77,42 @@
 					class="btn btn-primary">Csekk</button>
 				<button ng-if="!vm.dirty" ng-click="vm.addRucsok()" type="button"
 					class="btn btn-primary">Toljad!</button>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<!-- LOGIN MODAL -->
+<div id="login-modal" class="modal fade">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title">Belépeke</h4>
+			</div>
+			<div class="modal-body">
+				<div class="input-group">
+					<input class="form-control" name="username" ng-model="vm.username"
+						placeholder="Júzer" /> <input type="password"
+						class="form-control" name="password" ng-model="vm.password"
+						placeholder="Passz" />
+				</div>
+				<div data-ng-show="(vm.invalidlogin === true)" role="alert"
+					class="alert alert-warning">Hát ezt benézted!</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Bazár</button>
+				<button ng-if="vm.dirty"
+					ng-click="vm.login(vm.username, vm.password)" type="button"
+					class="btn btn-primary">Nyomjad a prést!</button>
+				<button ng-if="!vm.dirty" ng-click="vm.facebookLogin()"
+					type="button" class="btn btn-primary">Fészbúkról</button>
 			</div>
 		</div>
 		<!-- /.modal-content -->
