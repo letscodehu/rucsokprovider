@@ -16,30 +16,28 @@
 				placeholder="Ha meghalok, ráterhelik a családomra?"
 				ng-model="vm.search" class="form-control">
 		</div>
-		<button type="submit" class="btn btn-success">Keressé!</button>
 	</form>
 </div>
 
-<div data-ng-if="vm.rucsoks.length !== 0" class="inner cover">
+<div data-ng-if="vm.rucsoks.length !== 0" class="inner">
 	<!-- RUCSOK-LIST -->
-	<a target="_blank" data-ng-href="{{rucsok.link}}"
+	<div class="col-md-2 card" data-ng-click="vm.visit(rucsok.link)"
 		data-ng-repeat="rucsok in vm.rucsoks | filter : vm.search"
 		id="rucsok{{rucsok.id}}">
-		<div class="col-md-2 card">
-			<div class="rucsok-content">
-				<p class="wrap">{{rucsok.title}}</p>
-				<img class="thumbnail" data-ng-src="{{rucsok.image}}"
-					alt="{{rucsok.title}}" />
-			</div>
-			<div class="rucsok-timing">{{rucsok.time}}</div>
+		<div class="rucsok-content">
+			<p class="wrap">{{rucsok.title}}</p>
+			<img class="thumbnail" data-ng-src="{{rucsok.image}}"
+				alt="{{rucsok.title}}" />
 		</div>
-	</a>
+		<div class="rucsok-timing">{{rucsok.time}}</div>
+	</div>
 
 	<!-- UPLOAD BUTTON -->
 	<div class="col-md-12">
 		<p class="lead">
 			<a href="#" data-ng-click="vm.showAddModal()"
-				class="btn btn-lg btn-default">Toljad a tutit!</a>
+				class="btn btn-lg btn-default">Toljad a tutit!</a> <a href="#"
+				data-ng-click="vm.refresh()" class="btn btn-lg btn-default">Frissíccsé'!</a>
 		</p>
 	</div>
 
@@ -61,11 +59,11 @@
 					ng-change="vm.dirty = true" ng-model="vm.url" />
 				<div data-ng-show="vm.preload" class="preloader">
 					<img class="thumbnail" src="/images/preload.gif" />
-				</div>	
+				</div>
 				<div ng-if="!vm.dirty">
 					<div class="preview-title">{{vm.rucsok.title}}</div>
 					<div class="preview-image">
-						<img  class="thumbnail" ng-src="{{vm.rucsok.image}}" />
+						<img class="thumbnail" ng-src="{{vm.rucsok.image}}" />
 					</div>
 				</div>
 			</div>

@@ -9,16 +9,6 @@ a:hover {
   color: #fff;
 }
 
-/* Custom default button */
-.btn-default,
-.btn-default:hover,
-.btn-default:focus {
-  color: #333;
-  text-shadow: none; /* Prevent inheritence from `body` */
-  background-color: #fff;
-  border: 1px solid #fff;
-}
-
 
 /*
  * Base structure
@@ -122,10 +112,13 @@ body {
 */
 
 .card {
+	padding-top : 0.5em;
+	margin-top : 0.5em;
 	box-shadow : 1px 1px 1px #000;
 	background-color: #222;
 	color: #fff;
 	min-height: 20%;
+	cursor: pointer;
 }
 
 .thumbnail {
@@ -140,13 +133,19 @@ body {
 	color: #222;
 }
 
+.headline {
+	width: 100%;
+	text-transform : uppercase;
+	vertical-align: top;
+	text-align: right;
+}
+
 /*
  * Footer
  */
 
-.mastfoot {
-  color: #999; /* IE8 proofing */
-  color: rgba(255,255,255,.5);
+.footer {
+	
 }
 
 
@@ -155,15 +154,7 @@ body {
  */
 
 @media (min-width: 768px) {
-  /* Pull out the header and footer */
-  .masthead {
-    position: fixed;
-    top: 0;
-  }
-  .mastfoot {
-    position: fixed;
-    bottom: 0;
-  }
+ 
   /* Start the vertical centering */
   .site-wrapper-inner {
     vertical-align: middle;
