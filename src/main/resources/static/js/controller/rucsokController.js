@@ -31,6 +31,7 @@ define(
 				
 				function executeLogin(username, password) {
 					var csrf = $("[name='_csrf']").val();
+					console.log(csrf)
 					$.ajax({
 				        type: 'POST',
 				        url: '/login',
