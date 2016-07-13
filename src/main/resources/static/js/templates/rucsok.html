@@ -59,7 +59,7 @@
 				<h4 class="modal-title">Toldacuccot</h4>
 			</div>
 			<div class="modal-body">
-				<input placeholder="Ide jöhet az url" type="text"
+				<input id="rucsok-url" class="form-control" ng-class="vm.urlErrorClass" placeholder="Ide jöhet az url" type="text"
 					ng-change="vm.dirty = true" ng-model="vm.url" />
 				<div data-ng-show="vm.preload" class="preloader">
 					<img class="thumbnail" src="/images/preload.gif" />

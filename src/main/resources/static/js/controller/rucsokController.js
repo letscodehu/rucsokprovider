@@ -31,6 +31,7 @@ define(
 				
 				function executeLogin(username, password) {
 					var csrf = $("[name='_csrf']").val();
+					console.log(csrf)
 					$.ajax({
 				        type: 'POST',
 				        url: '/login',
@@ -84,12 +85,23 @@ define(
 					$('#login-modal').modal("hide");
 				}
 				
+				function checkUrl(url){
+					return typeof url !== 'undefined' && url.substr(0,4) === 'http';
+				}
+				//élethack
+				$('#rucsok-url').on('focus', function(){
+					vm.urlErrorClass = '';
+				});
 
 				function checkRucsok() {
-					rucsokService.checkRucsok(vm.url).then(function(data) {
-						vm.dirty = false;
-						vm.rucsok = data;
-					});
+					if(checkUrl(vm.url)){
+						rucsokService.checkRucsok(vm.url).then(function(data) {
+							vm.dirty = false;
+							vm.rucsok = data;
+						});
+					}else{
+						vm.urlErrorClass = 'alert-danger';
+					}
 				}		
 
 				function showAddModal() {
