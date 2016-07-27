@@ -16,23 +16,21 @@ import com.rucsok.request.RucsokCheckRequest;
 import com.rucsok.request.RucsokInsertRequest;
 import com.rucsok.response.RucsokDeleteResponse;
 
-
 @RestController
 public class RucsokController {
 
 	@Autowired
 	private RucsokRepository repo;
-	
+
 	@Autowired
 	private RucsokService rService;
 	
-
-	@RequestMapping(name="getrucsok", path = "/rucsok", method = RequestMethod.GET)
+	@RequestMapping(name = "getrucsok", path = "/rucsok", method = RequestMethod.GET)
 	public List<Rucsok> getRucsok() {
 		return repo.getAllRucsok();
 	}
-	
-	@RequestMapping(name="checkrucsok", path = "/check-rucsok", method = RequestMethod.POST)
+
+	@RequestMapping(name = "checkrucsok", path = "/check-rucsok", method = RequestMethod.POST)
 	public Rucsok checkRucsok(@RequestBody RucsokCheckRequest request) {
 		Rucsok r = null;
 		try {
@@ -43,19 +41,20 @@ public class RucsokController {
 		}
 		return r;
 	}
-	
-	@RequestMapping(name="postrucsok", path = "/rucsok", method = RequestMethod.POST)
+
+	@RequestMapping(name = "postrucsok", path = "/rucsok", method = RequestMethod.POST)
 	public Rucsok putRucsok(@RequestBody RucsokInsertRequest request) {
 		if (null == repo.findByLink(request.rucsok.getLink())) {
-			repo.save(request.rucsok);	
+			repo.save(request.rucsok);
 		}
 		return request.rucsok;
 	}
-	
-	@RequestMapping(name="delete-rucsok", path = "/rucsok", method = RequestMethod.DELETE)
+
+	@RequestMapping(name = "delete-rucsok", path = "/rucsok", method = RequestMethod.DELETE)
 	public RucsokDeleteResponse removeRucsok(@RequestParam long id) {
 		repo.delete(repo.findOne(id));
 		return new RucsokDeleteResponse(true);
 	}
 	
+
 }
