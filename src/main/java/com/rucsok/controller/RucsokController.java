@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,7 +15,9 @@ import com.rucsok.entity.Rucsok;
 import com.rucsok.repository.RucsokRepository;
 import com.rucsok.request.RucsokCheckRequest;
 import com.rucsok.request.RucsokInsertRequest;
+import com.rucsok.response.GetRucsokResponse;
 import com.rucsok.response.RucsokDeleteResponse;
+import com.rucsok.transform.RucsokToGetRucsokResponse;
 
 @RestController
 public class RucsokController {
@@ -23,12 +26,21 @@ public class RucsokController {
 	private RucsokRepository repo;
 
 	@Autowired
+	private RucsokToGetRucsokResponse transformer;
+	
+	@Autowired
 	private RucsokService rService;
 	
 	@RequestMapping(name = "getrucsok", path = "/rucsok", method = RequestMethod.GET)
 	public List<Rucsok> getRucsok() {
 		return repo.getAllRucsok();
 	}
+
+	@RequestMapping(name = "getSingleRucsok", path = "/rucsok/{id}", method = RequestMethod.GET)
+	public GetRucsokResponse getRucsok(@PathVariable("id") int id) {
+		return transformer.transform(repo.findById(id));
+	}
+	
 
 	@RequestMapping(name = "checkrucsok", path = "/check-rucsok", method = RequestMethod.POST)
 	public Rucsok checkRucsok(@RequestBody RucsokCheckRequest request) {

@@ -18,6 +18,11 @@ define([
           url: '/dashboard',
           templateUrl: 'app/templates/dashboard.html',
           controller: 'rucsokController'
+        }) 
+        .state('single', {
+            url: '/single/{id}',
+            templateUrl: 'app/templates/single.html',
+            controller: 'singleController'
         });
     }
   ]);

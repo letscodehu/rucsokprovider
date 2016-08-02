@@ -17,12 +17,24 @@ define([], function() {
 				resp.data.forEach(function(item) {
 					data.push({
 						'src' : item.image,
-						'sub' : item.title
+						'sub' : item.title,
+						"link" : item.link,
+						'id' : item.id,
 					})
 				});
 
 				
 				deferred.resolve(data);
+			});
+			
+			return deferred.promise;
+		}
+		
+		function getItem(id) {
+			var deferred = $q.defer();
+
+			$http.get("/rucsok/" + id).then(function(resp) {
+				deferred.resolve(resp.data);
 			});
 			
 			return deferred.promise;
@@ -58,6 +70,7 @@ define([], function() {
 				
 		return {
 			addRucsok : addRucsok,
+			getItem : getItem,
 			checkRucsok : checkRucsok,
 			getRucsok : getRucsok
 		}

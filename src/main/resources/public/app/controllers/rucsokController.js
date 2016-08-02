@@ -3,9 +3,9 @@ define(
 		 "jquery"
 		 ], function($) {
 
-			rucsokController.$inject = ["$scope","rucsokService"]		
+			rucsokController.$inject = ["$scope","rucsokService", "$state"]		
 
-			function rucsokController($scope, rucsokService) {
+			function rucsokController($scope, rucsokService, $state) {
 				var vm = this;
 
 				$scope.rucsoks = [];
@@ -18,6 +18,7 @@ define(
 				vm.showAddModal = showAddModal;
 				vm.rucsok = rucsok;
 				vm.login = executeLogin;
+				$scope.showRucsok = showRucsok;
 				vm.showLoginModal = showLoginModal;
 				vm.hideLoginModal = hideLoginModal;
 				vm.invalidlogin = false; 
@@ -112,6 +113,10 @@ define(
 
 				function closeAddModal() {
 					$("#rucsok-modal").modal("hide");
+				}
+				
+				function showRucsok(item) {
+					$state.go('single', {id: item.id});
 				}
 
 				function rucsok() {

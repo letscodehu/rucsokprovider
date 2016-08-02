@@ -1,35 +1,36 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8" />
-<title>Rücsökprovider - amikor eljön a vég</title>
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
-	integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
-	crossorigin="anonymous"></link>
-<link rel="shortcut icon" th:href="@{/images/favicon.ico}"></link>
-<!-- Optional theme -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
-	integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r"
-	crossorigin="anonymous"></link>
-<link th:href="@{/css/cover.css}" rel="stylesheet"></link>
+  <head>
+    <meta charset="utf-8"></meta>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width"></meta>
+    <title>Rücsökprovider - amikor eljő a vég</title>
 
-<!-- Latest compiled and minified JavaScript -->
-</head>
-<body>
+    <link th:href="@{lib/ionic/css/ionic.css}" rel="stylesheet"></link>
+    <link th:href="@{lib/ion-gallery/dist/ion-gallery.css}" rel="stylesheet"></link>
+    <link th:href="@{css/style.css}" rel="stylesheet"></link>
 
-	<div class="container">
-		<rucsok></rucsok>
-		<login></login>
-		<footer class="footer col-md-12">
-			<p>Minden rücsök fenntartva &copy; 2016.</p>
-		</footer>
-	</div>
-	<input type="hidden" th:name="${_csrf.parameterName}"
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link th:href="@{css/ionic.app.css}" rel="stylesheet"></link>
+    -->
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script th:src="@{/cordova.js}"></script>
+
+    <!-- load requirejs config -->
+    <script th:src="@{/main.js}"></script>
+    <!-- load requirejs -->
+    <script th:src="@{lib/requirejs/require.min.js}"></script>
+    <!-- load boot-script - it loads configs, routes, runs and bootstraps the app -->
+    <script th:src="@{app/boot.js}"></script>
+  </head>
+  <body>
+    <!-- The nav bar that will be updated as we navigate -->
+    <ion-nav-bar class="bar-positive">
+    </ion-nav-bar>
+
+    <ion-nav-view>
+    </ion-nav-view>
+    <input type="hidden" th:name="${_csrf.parameterName}"
 		th:value="${_csrf.token}" />
-	<script th:src="@{/js/lib/requirejs/require.js}" data-main="/js/main"></script>
-
-</body>
+  </body>
 </html>

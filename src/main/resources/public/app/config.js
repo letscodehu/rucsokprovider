@@ -13,7 +13,6 @@ define([
 	                return {
 	                    'request': function(config) {	                    	
 	                        config.headers = config.headers || {};	  
-	                        console.log(config.headers)
 	                        config.headers['X-CSRF-TOKEN'] = csrf;	                       
 	                        return config;
 	                    },
