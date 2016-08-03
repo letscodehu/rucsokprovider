@@ -11,11 +11,19 @@ import com.rucsok.rucsok.repository.domain.RucsokEntity;
 
 @Component
 public class RucsokServiceTransform {
-	
+
 	public List<Rucsok> transformToRucsok(List<RucsokEntity> rucsoks) {
-		return rucsoks.stream().map(r->transformToRucsok(r)).collect(Collectors.toList());
+		return rucsoks.stream().map(r -> transformToRucsok(r)).collect(Collectors.toList());
 	}
-	
+
+	public RucsokEntity transformToRucsokEntity(Rucsok rucsok) {
+		RucsokEntity result = new RucsokEntity();
+		result.setImage(rucsok.getImage());
+		result.setLink(rucsok.getLink());
+		result.setTitle(rucsok.getTitle());
+		return result;
+	}
+
 	public Rucsok transformToRucsok(RucsokEntity rucsok) {
 		Rucsok result = new Rucsok();
 		result.setId(rucsok.getId());
@@ -24,7 +32,7 @@ public class RucsokServiceTransform {
 		result.setLink(rucsok.getLink());
 		return result;
 	}
-	
+
 	public SingleRucsok transformToSingleRucsok(List<RucsokEntity> rucsoks) {
 		SingleRucsok result = new SingleRucsok();
 		result.setCurrent(transformToRucsok(rucsoks.get(1)));

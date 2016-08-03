@@ -44,25 +44,35 @@ public class ListRucsokControllerIntegrationTest {
 
 	@Test
 	public void statusShouldOk() throws Exception {
+		// Given
+		// When
+		// Then
 		mockMvc.perform(get(ListRucsokController.REQUEST_MAPPING)).andExpect(status().isOk());
 	}
 
 	@Test
 	public void contentShouldBeJson() throws Exception {
+		// Given		
+		// When
+		// Then
 		mockMvc.perform(get(ListRucsokController.REQUEST_MAPPING))
 				.andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON));
 	}
 
 	@Test
 	public void contentShouldContainsSameAmountOfDataThatCreatedInTheTestDatabase() throws Exception {
-		mockMvc.perform(get(ListRucsokController.REQUEST_MAPPING))
-				.andExpect((jsonPath("$", hasSize(TEST_DATA_SIZE))));
+		// Given		
+		// When
+		// Then
+		mockMvc.perform(get(ListRucsokController.REQUEST_MAPPING)).andExpect((jsonPath("$", hasSize(TEST_DATA_SIZE))));
 	}
 
 	@Test
 	public void contentShouldContainCorrectProperties() throws Exception {
-		mockMvc.perform(get(ListRucsokController.REQUEST_MAPPING))
-		.andExpect(jsonPath("$[0].title", is("rucsok01")))
-		.andExpect(jsonPath("$[0].link", is("http://rucsok.com/01.gif")));
+		// Given		
+		// When
+		// Then
+		mockMvc.perform(get(ListRucsokController.REQUEST_MAPPING)).andExpect(jsonPath("$[0].title", is("rucsok01")))
+				.andExpect(jsonPath("$[0].link", is("http://rucsok.com/01.gif")));
 	}
 }

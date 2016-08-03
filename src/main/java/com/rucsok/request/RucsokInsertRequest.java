@@ -1,9 +1,17 @@
 package com.rucsok.request;
 
-import com.rucsok.rucsok.repository.domain.RucsokEntity;
+import com.rucsok.rucsok.view.model.RucsokPost;
 
 public class RucsokInsertRequest {
 
-	public RucsokEntity rucsok;
-	
+	private RucsokPost rucsok;
+
+	public RucsokPost getRucsok() {
+		return rucsok;
+	}
+
+	public void setRucsok(RucsokPost rucsok) {
+		this.rucsok = rucsok;
+	}
+
 }
