@@ -1,4 +1,4 @@
-package com.rucsok.entity;
+package com.rucsok.rucsok.repository.domain;
 
 import java.io.Serializable;
 
@@ -8,16 +8,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 
-@Entity
-public class Rucsok implements Serializable {
+@Entity(name="Rucsok")
+public class RucsokEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	public Rucsok() {
+	public RucsokEntity() {
 		
 	}
 	
-	public Rucsok(String title, String link, String image) {
+	public RucsokEntity(String title, String link, String image) {
 		super();
 		this.title = title;
 		this.link = link;

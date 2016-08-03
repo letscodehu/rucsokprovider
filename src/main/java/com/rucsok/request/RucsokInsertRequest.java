@@ -1,9 +1,9 @@
 package com.rucsok.request;
 
-import com.rucsok.entity.Rucsok;
+import com.rucsok.rucsok.repository.domain.RucsokEntity;
 
 public class RucsokInsertRequest {
 
-	public Rucsok rucsok;
+	public RucsokEntity rucsok;
 	
 }

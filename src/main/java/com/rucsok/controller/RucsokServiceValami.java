@@ -12,29 +12,29 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 
-import com.rucsok.entity.Rucsok;
+import com.rucsok.rucsok.repository.domain.RucsokEntity;
 
 
 @Service
-public class RucsokService {
+public class RucsokServiceValami {
 
 	
 	@PersistenceContext
 	private EntityManager em;
 
 	@Transactional()
-	public boolean save(Rucsok r) {
+	public boolean save(RucsokEntity r) {
 		em.persist(r);
 		em.flush();
 		return true;
 	}
 	
 	
-	public Rucsok crawl(String url) throws IOException {
+	public RucsokEntity crawl(String url) throws IOException {
 		if (!url.contains("http://") && !url.contains("https://")) {
 			url = "http://" + url;
 		}
-		Rucsok r = new Rucsok();
+		RucsokEntity r = new RucsokEntity();
 		r.setLink(url);
 		try {
 			Document doc = Jsoup.connect(url).get();

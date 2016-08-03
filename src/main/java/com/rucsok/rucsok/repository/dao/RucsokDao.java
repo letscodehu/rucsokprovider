@@ -1,4 +1,4 @@
-package com.rucsok.repository;
+package com.rucsok.rucsok.repository.dao;
 
 import java.util.List;
 
@@ -7,17 +7,17 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.rucsok.entity.Rucsok;
+import com.rucsok.rucsok.repository.domain.RucsokEntity;
 
 @Repository
-public interface RucsokRepository extends CrudRepository<Rucsok, Long> {
+public interface RucsokDao extends CrudRepository<RucsokEntity, Long> {
 
 	@Query("SELECT r FROM Rucsok r")
-	public List<Rucsok> getAllRucsok();
+	public List<RucsokEntity> getAllRucsok();
 
-	public Rucsok findByLink(String link);
+	public RucsokEntity findByLink(String link);
 	
 	@Query("SELECT r FROM Rucsok r WHERE id BETWEEN (:id -1) AND (:id + 1)")
-	public List<Rucsok> findById( @Param("id") int id);
+	public List<RucsokEntity> findById(@Param("id") int id);
 	
 }

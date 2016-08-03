@@ -11,40 +11,29 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.rucsok.entity.Rucsok;
-import com.rucsok.repository.RucsokRepository;
 import com.rucsok.request.RucsokCheckRequest;
 import com.rucsok.request.RucsokInsertRequest;
 import com.rucsok.response.GetRucsokResponse;
 import com.rucsok.response.RucsokDeleteResponse;
+import com.rucsok.rucsok.repository.dao.RucsokDao;
+import com.rucsok.rucsok.repository.domain.RucsokEntity;
 import com.rucsok.transform.RucsokToGetRucsokResponse;
 
 @RestController
 public class RucsokController {
 
 	@Autowired
-	private RucsokRepository repo;
+	private RucsokDao repo;
 
 	@Autowired
 	private RucsokToGetRucsokResponse transformer;
 	
 	@Autowired
-	private RucsokService rService;
-	
-	@RequestMapping(name = "getrucsok", path = "/rucsok", method = RequestMethod.GET)
-	public List<Rucsok> getRucsok() {
-		return repo.getAllRucsok();
-	}
-
-	@RequestMapping(name = "getSingleRucsok", path = "/rucsok/{id}", method = RequestMethod.GET)
-	public GetRucsokResponse getRucsok(@PathVariable("id") int id) {
-		return transformer.transform(repo.findById(id));
-	}
-	
+	private RucsokServiceValami rService;
 
 	@RequestMapping(name = "checkrucsok", path = "/check-rucsok", method = RequestMethod.POST)
-	public Rucsok checkRucsok(@RequestBody RucsokCheckRequest request) {
-		Rucsok r = null;
+	public RucsokEntity checkRucsok(@RequestBody RucsokCheckRequest request) {
+		RucsokEntity r = null;
 		try {
 			r = rService.crawl(request.url);
 		} catch (IOException e) {
@@ -55,7 +44,7 @@ public class RucsokController {
 	}
 
 	@RequestMapping(name = "postrucsok", path = "/rucsok", method = RequestMethod.POST)
-	public Rucsok putRucsok(@RequestBody RucsokInsertRequest request) {
+	public RucsokEntity putRucsok(@RequestBody RucsokInsertRequest request) {
 		if (null == repo.findByLink(request.rucsok.getLink())) {
 			repo.save(request.rucsok);
 		}

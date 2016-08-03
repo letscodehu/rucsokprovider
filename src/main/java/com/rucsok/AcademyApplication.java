@@ -9,7 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @SpringBootApplication
-@ImportResource(locations = "/context.xml")
+@ImportResource(locations = "classpath:context.xml")
 public class AcademyApplication {
 
 	public static void main(String[] args) {
