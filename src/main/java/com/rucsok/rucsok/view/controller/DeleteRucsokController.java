@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.rucsok.request.RucsokInsertRequest;
 import com.rucsok.response.RucsokDeleteResponse;
-import com.rucsok.rucsok.service.AlreadyExistsRucsokException;
 import com.rucsok.rucsok.service.RucsokService;
+import com.rucsok.rucsok.service.exception.AlreadyExistsRucsokException;
 import com.rucsok.rucsok.view.model.RucsokView;
 import com.rucsok.rucsok.view.transform.RucsokTransformer;
 

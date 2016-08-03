@@ -10,6 +10,8 @@ import com.rucsok.rucsok.domain.Rucsok;
 import com.rucsok.rucsok.domain.SingleRucsok;
 import com.rucsok.rucsok.repository.dao.RucsokDao;
 import com.rucsok.rucsok.repository.domain.RucsokEntity;
+import com.rucsok.rucsok.service.exception.AlreadyExistsRucsokException;
+import com.rucsok.rucsok.service.exception.IllegalRucsokArgumentException;
 import com.rucsok.rucsok.service.transform.RucsokServiceTransform;
 
 @Service
