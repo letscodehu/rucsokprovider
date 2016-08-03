@@ -35,6 +35,14 @@ public class RucsokService {
 		repo.save(rucsokServiceTransform.transformToRucsokEntity((rucsok)));
 	}
 
+	public Optional<RucsokEntity> findByLink(String url) {
+		return Optional.ofNullable(repo.findByLink(url));
+	}
+
+	public void deleteById(long id) {
+		repo.delete(repo.findOne(id));
+	}
+
 	private void checkIfUrlAlreadyAdded(Rucsok rucsok) {
 		if (findByLink(rucsok.getLink()).isPresent()) {
 			throw new AlreadyExistsRucsokException(rucsok);
@@ -45,10 +53,6 @@ public class RucsokService {
 		if (null == rucsok.getLink() || null == rucsok.getImage()) {
 			throw new IllegalRucsokArgumentException();
 		}
-	}
-
-	public Optional<RucsokEntity> findByLink(String url) {
-		return Optional.ofNullable(repo.findByLink(url));
 	}
 
 }

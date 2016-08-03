@@ -43,19 +43,12 @@ public class RucsokController {
 		return r;
 	}
 
-//	@RequestMapping(name = "postrucsok", path = "/rucsok", method = RequestMethod.POST)
-//	public RucsokEntity putRucsok(@RequestBody RucsokInsertRequest request) {
-//		if (null == repo.findByLink(request.rucsok.getLink())) {
-//			repo.save(request.rucsok);
-//		}
-//		return request.rucsok;
-//	}
 
-	@RequestMapping(name = "delete-rucsok", path = "/rucsok", method = RequestMethod.DELETE)
-	public RucsokDeleteResponse removeRucsok(@RequestParam long id) {
-		repo.delete(repo.findOne(id));
-		return new RucsokDeleteResponse(true);
-	}
+//	@RequestMapping(name = "delete-rucsok", path = "/rucsok", method = RequestMethod.DELETE)
+//	public RucsokDeleteResponse removeRucsok(@RequestParam long id) {
+//		repo.delete(repo.findOne(id));
+//		return new RucsokDeleteResponse(true);
+//	}
 	
 
 }
