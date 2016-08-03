@@ -1,4 +1,4 @@
-package com.rucsok.security;
+package com.rucsok.authenticaiton.config;
 
 import java.io.IOException;
 
@@ -11,7 +11,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
 
-import com.rucsok.repository.UserRepository;
+import com.rucsok.user.repository.UserRepository;
 
 @Component
 public class AuthFailureHandler extends SimpleUrlAuthenticationFailureHandler {

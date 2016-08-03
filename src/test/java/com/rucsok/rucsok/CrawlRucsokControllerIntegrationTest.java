@@ -26,10 +26,10 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.rucsok.request.RucsokCheckRequest;
 import com.rucsok.rucsok.domain.Rucsok;
 import com.rucsok.rucsok.service.RucsokCrawlerService;
 import com.rucsok.rucsok.view.controller.CrawlRucsokController;
+import com.rucsok.rucsok.view.model.RucsokCheckRequest;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:test-context.xml" })

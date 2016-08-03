@@ -1,4 +1,4 @@
-package com.rucsok.controller;
+package com.rucsok.home.view.controller;
 
 import org.springframework.boot.autoconfigure.web.ErrorController;
 import org.springframework.http.HttpStatus;

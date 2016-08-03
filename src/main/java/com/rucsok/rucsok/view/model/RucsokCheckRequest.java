@@ -1,4 +1,4 @@
-package com.rucsok.request;
+package com.rucsok.rucsok.view.model;
 
 public class RucsokCheckRequest {
 

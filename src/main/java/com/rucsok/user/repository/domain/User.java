@@ -1,4 +1,4 @@
-package com.rucsok.entity;
+package com.rucsok.user.repository.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

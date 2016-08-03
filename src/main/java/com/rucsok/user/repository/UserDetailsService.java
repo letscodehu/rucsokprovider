@@ -1,4 +1,4 @@
-package com.rucsok.repository;
+package com.rucsok.user.repository;
 
 import java.util.Collection;
 
@@ -7,7 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.rucsok.entity.User;
+import com.rucsok.user.repository.domain.User;
 
 @Service
 public class UserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService {

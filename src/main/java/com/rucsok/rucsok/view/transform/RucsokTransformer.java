@@ -5,9 +5,9 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
-import com.rucsok.request.RucsokInsertRequest;
 import com.rucsok.rucsok.domain.Rucsok;
 import com.rucsok.rucsok.domain.SingleRucsok;
+import com.rucsok.rucsok.view.model.RucsokInsertRequest;
 import com.rucsok.rucsok.view.model.RucsokView;
 import com.rucsok.rucsok.view.model.SingleRucsokView;
 

@@ -16,12 +16,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.rucsok.request.RucsokInsertRequest;
 import com.rucsok.rucsok.repository.dao.RucsokDao;
 import com.rucsok.rucsok.repository.domain.RucsokEntity;
 import com.rucsok.rucsok.view.controller.DeleteRucsokController;
-import com.rucsok.rucsok.view.controller.PostRucsokController;
-import com.rucsok.rucsok.view.model.RucsokPost;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:test-context.xml" })

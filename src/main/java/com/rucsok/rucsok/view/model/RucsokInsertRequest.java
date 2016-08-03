@@ -1,6 +1,4 @@
-package com.rucsok.request;
-
-import com.rucsok.rucsok.view.model.RucsokPost;
+package com.rucsok.rucsok.view.model;
 
 public class RucsokInsertRequest {
 

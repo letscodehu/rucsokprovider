@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.rucsok.request.RucsokCheckRequest;
 import com.rucsok.rucsok.service.RucsokCrawlerService;
+import com.rucsok.rucsok.view.model.RucsokCheckRequest;
 import com.rucsok.rucsok.view.model.RucsokView;
 import com.rucsok.rucsok.view.transform.RucsokTransformer;
 
