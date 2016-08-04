@@ -1,0 +1,28 @@
+<style>
+#add-rucsok-modal {
+	z-index: 1000;
+}
+</style>
+<ion-modal-view id="#add-rucsok-modal" ng-if="showAddRucsokForm()"> 
+	<ion-header-bar>
+        <h1 class="title">Contribute to the Rücsök</h1>
+        <button class="button button-clear button-primary" ng-click="hideAddRucsokForm()">
+        	Cancel
+        </button>      
+	</ion-header-bar> 
+	<ion-content>	
+	
+		<div class="list">
+		   <label class="item item-input">
+		   <input type="text" placeholder="Placeholder 1">
+		   </label>
+		
+		   <label class="item item-input">
+		   <input type="text" placeholder="Placeholder 2">
+		   </label>
+		</div>
+			
+	</ion-content> 
+</ion-modal-view>
+
+
