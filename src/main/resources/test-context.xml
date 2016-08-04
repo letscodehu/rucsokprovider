@@ -14,7 +14,14 @@
    	 	http://www.springframework.org/schema/jdbc 
    	 	http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd">
 
-	<context:component-scan base-package="com.rucsok" />
+	<context:component-scan base-package="com.rucsok">
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.context.annotation.Configuration" />
+	</context:component-scan>
+
+<!-- 	<bean id="urlFetchHelper" class="org.mockito.Mockito" factory-method="mock"> -->
+<!-- 		<constructor-arg value="com.rucsok.rucsok.service.helper.UrlFetchHelper" /> -->
+<!-- 	</bean> -->
 
 	<jpa:repositories base-package="com.rucsok" />
 

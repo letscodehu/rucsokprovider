@@ -21,7 +21,7 @@ public class RucsokEntity implements Serializable {
 		super();
 		this.title = title;
 		this.link = link;
-		this.image = image;
+		this.imageUrl = image;
 	}
 
 	@Id
@@ -29,7 +29,8 @@ public class RucsokEntity implements Serializable {
 	private long id;
 	private String title;
 	private String link;
-	private String image;
+	private String imageUrl;
+	private String videoUrl;
 	
 	public String getTitle() {
 		return title;
@@ -47,12 +48,12 @@ public class RucsokEntity implements Serializable {
 		this.link = link;
 	}
 
-	public String getImage() {
-		return image;
+	public String getImageUrl() {
+		return imageUrl;
 	}
 
-	public void setImage(String image) {
-		this.image = image;
+	public void setImageUrl(String image) {
+		this.imageUrl = image;
 	}
 
 	public long getId() {
@@ -62,6 +63,15 @@ public class RucsokEntity implements Serializable {
 	public void setId(long id) {
 		this.id = id;
 	}
+
+	public String getVideoUrl() {
+		return videoUrl;
+	}
+
+	public void setVideoUrl(String videoUrl) {
+		this.videoUrl = videoUrl;
+	}
+	
 	
 }
  

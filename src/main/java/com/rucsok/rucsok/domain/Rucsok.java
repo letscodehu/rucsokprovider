@@ -1,10 +1,12 @@
 package com.rucsok.rucsok.domain;
 
 public class Rucsok {
+
 	private long id;
 	private String title;
 	private String link;
-	private String image;
+	private String imageUrl;
+	private String videoUrl;
 
 	public long getId() {
 		return id;
@@ -30,12 +32,20 @@ public class Rucsok {
 		this.link = link;
 	}
 
-	public String getImage() {
-		return image;
+	public String getImageUrl() {
+		return imageUrl;
 	}
 
-	public void setImage(String image) {
-		this.image = image;
+	public void setImageUrl(String image) {
+		this.imageUrl = image;
+	}
+
+	public String getVideoUrl() {
+		return videoUrl;
+	}
+
+	public void setVideoUrl(String videoUrl) {
+		this.videoUrl = videoUrl;
 	}
 
 }

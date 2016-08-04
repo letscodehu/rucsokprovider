@@ -4,7 +4,8 @@ public class RucsokView {
 
 	private String title;
 	private String link;
-	private String image;
+	private String imageUrl;
+	private String videoUrl;
 
 	public String getTitle() {
 		return title;
@@ -22,12 +23,20 @@ public class RucsokView {
 		this.link = link;
 	}
 
-	public String getImage() {
-		return image;
+	public String getImageUrl() {
+		return imageUrl;
 	}
 
-	public void setImage(String image) {
-		this.image = image;
+	public void setImageUrl(String image) {
+		this.imageUrl = image;
+	}
+
+	public String getVideoUrl() {
+		return videoUrl;
+	}
+
+	public void setVideoUrl(String videoUrl) {
+		this.videoUrl = videoUrl;
 	}
 
 }

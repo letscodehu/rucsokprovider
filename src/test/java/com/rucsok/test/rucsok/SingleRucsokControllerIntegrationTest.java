@@ -1,4 +1,4 @@
-package com.rucsok.rucsok;
+package com.rucsok.test.rucsok;
 
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;

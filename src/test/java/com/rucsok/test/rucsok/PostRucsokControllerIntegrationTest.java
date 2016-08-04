@@ -1,4 +1,4 @@
-package com.rucsok.rucsok;
+package com.rucsok.test.rucsok;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -89,7 +89,7 @@ public class PostRucsokControllerIntegrationTest {
 		// Given
 		
 		RucsokPost rucsok = createRucsokPostHelper();
-		rucsok.setImage(null);
+		rucsok.setImageUrl(null);
 		rucsok.setLink("http://asdasdasd.asd");
 		RucsokInsertRequest request = createRucsokInsertRequestHelper(rucsok);
 		
@@ -121,7 +121,7 @@ public class PostRucsokControllerIntegrationTest {
 
 		Assert.assertNotNull("Entity should'nt be null", entity);
 		Assert.assertEquals("Link should match", entity.getLink(), rucsok.getLink());
-		Assert.assertEquals("Image should match", entity.getImage(), rucsok.getImage());
+		Assert.assertEquals("Image should match", entity.getImageUrl(), rucsok.getImageUrl());
 		Assert.assertEquals("Title should match", entity.getTitle(), rucsok.getTitle());
 	}
 
@@ -161,7 +161,7 @@ public class PostRucsokControllerIntegrationTest {
 		String title = TEST_TITLE;
 
 		RucsokPost rucsok = new RucsokPost();
-		rucsok.setImage(image);
+		rucsok.setImageUrl(image);
 		rucsok.setLink(link);
 		rucsok.setTitle(title);
 		return rucsok;

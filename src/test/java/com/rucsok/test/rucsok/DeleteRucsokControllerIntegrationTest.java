@@ -1,4 +1,4 @@
-package com.rucsok.rucsok;
+package com.rucsok.test.rucsok;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;

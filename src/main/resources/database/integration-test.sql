@@ -3,8 +3,10 @@ create table rucsok (
     , title varchar(255)
     , link varchar(255)
     , image varchar(500)
+    , videourl varchar(500)
     , primary key (id)
 );
-insert into rucsok(id, title,  link, image) values (default, 'rucsok01', 'http://rucsok.com/01.gif','img01');
-insert into rucsok(id, title,  link, image) values (default, 'rucsok02', 'http://rucsok.com/02.gif','img02');
-insert into rucsok(id, title,  link, image) values (default, 'rucsok03', 'http://rucsok.com/03.gif','img03');
+insert into rucsok(id, title,  link, image, videourl) values (default, 'rucsok01', 'http://rucsok.com/01.gif','img01', null);
+insert into rucsok(id, title,  link, image, videourl) values (default, 'rucsok02', 'http://rucsok.com/02.gif','img02', null);
+insert into rucsok(id, title,  link, image, videourl) values (default, 'rucsok03', 'http://rucsok.com/03.gif','img03', null);
+insert into rucsok(id, title,  link, image, videourl) values (default, 'rucsok04', 'http://rucsok.com/04.gif','img04', 'http://rucsok.com/rucsok.mp4');

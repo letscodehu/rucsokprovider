@@ -1,4 +1,4 @@
-package com.rucsok.rucsok;
+package com.rucsok.test.rucsok;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -72,7 +72,7 @@ public class CrawlRucsokControllerIntegrationTest {
 
 		// When
 
-		when(rucsok.getImage()).thenReturn(MOCK_IMAGE);
+		when(rucsok.getImageUrl()).thenReturn(MOCK_IMAGE);
 		when(rucsok.getLink()).thenReturn(MOCK_LINK);
 		when(rucsok.getTitle()).thenReturn(MOCK_TITLE);
 		when(rucsokService.crawl(TEST_URL)).thenReturn(rucsok);

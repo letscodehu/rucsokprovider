@@ -16,7 +16,8 @@ define([], function() {
 				var data = [];
 				resp.data.forEach(function(item) {
 					data.push({
-						'src' : item.image,
+						'src' : item.imageUrl,
+						'video-src' : item.videoUrl,
 						'sub' : item.title,
 						"link" : item.link,
 						'id' : item.id,

@@ -16,28 +16,38 @@ public class RucsokCrawlHelper {
 	private static final String HTTP = "http://";
 
 	@Autowired
-	private UrlFetchHelper urlFetchHelper;
+	private DocumentParseHelper documentParser;
+
+	@Autowired
+	private UrlFetchHelper urlFetcher;
 
 	public Rucsok createRucsokFromUrl(String url) throws IOException {
 		Rucsok rucsok = new Rucsok();
-		Optional<Document> documentFromUrl = urlFetchHelper.fetchUrl(checkHttpPrefix(url));
+		Optional<Document> documentFromUrl = urlFetcher.fetchUrl(checkHttpPrefix(url));
 		setRucsokUrl(url, rucsok);
-		setRucsokImage(url, rucsok, documentFromUrl);
-		setRucsokTitle(url, rucsok, documentFromUrl);
+		setRucsokImageUrl(url, rucsok, documentFromUrl);
+		setRucsokTitle(rucsok, documentFromUrl);
+		setRucsokVideoUrl(rucsok, documentFromUrl);
 		return rucsok;
 	}
-
-	private void setRucsokImage(String url, Rucsok rucsok, Optional<Document> documentFromUrl) throws IOException {
+	
+	private void setRucsokImageUrl(String url, Rucsok rucsok, Optional<Document> documentFromUrl) throws IOException {
 		if (documentFromUrl.isPresent()) {
-			rucsok.setImage(urlFetchHelper.getImage(documentFromUrl.get()));
+			rucsok.setImageUrl(documentParser.getImage(documentFromUrl.get()));
 		} else {
-			rucsok.setImage(checkHttpPrefix(url));
+			rucsok.setImageUrl(checkHttpPrefix(url));
 		}
 	}
 
-	private void setRucsokTitle(String url, Rucsok rucsok, Optional<Document> documentFromUrl) throws IOException {
+	private void setRucsokTitle(Rucsok rucsok, Optional<Document> documentFromUrl) throws IOException {
 		if (documentFromUrl.isPresent()) {
-			rucsok.setImage(urlFetchHelper.getTitle(documentFromUrl.get()));
+			rucsok.setTitle(documentParser.getTitle(documentFromUrl.get()));
+		}
+	}
+	
+	private void setRucsokVideoUrl(Rucsok rucsok, Optional<Document> documentFromUrl) throws IOException {
+		if (documentFromUrl.isPresent()) {
+			rucsok.setVideoUrl(documentParser.getVideoUrl(documentFromUrl.get()));
 		}
 	}
 

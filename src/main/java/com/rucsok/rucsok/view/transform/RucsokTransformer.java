@@ -21,8 +21,9 @@ public class RucsokTransformer {
 	public RucsokView transformToView(Rucsok rucsok) {
 		RucsokView result = new RucsokView();
 		result.setTitle(rucsok.getTitle());
-		result.setImage(rucsok.getImage());
+		result.setImageUrl(rucsok.getImageUrl());
 		result.setLink(rucsok.getLink());
+		result.setVideoUrl(rucsok.getVideoUrl());
 		return result;
 	}
 	
@@ -37,8 +38,9 @@ public class RucsokTransformer {
 	public Rucsok transformToRucsok(RucsokInsertRequest request) {
 		Rucsok result = new Rucsok();
 		result.setTitle(request.getRucsok().getTitle());
-		result.setImage(request.getRucsok().getImage());
+		result.setImageUrl(request.getRucsok().getImageUrl());
 		result.setLink(request.getRucsok().getLink());
+		result.setVideoUrl(request.getRucsok().getVideoUrl());
 		return result;
 	}
 }

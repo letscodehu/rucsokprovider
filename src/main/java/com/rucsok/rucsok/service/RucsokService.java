@@ -52,7 +52,7 @@ public class RucsokService {
 	}
 
 	private void checkArguments(Rucsok rucsok) {
-		if (null == rucsok.getLink() || null == rucsok.getImage()) {
+		if (null == rucsok.getLink() || null == rucsok.getImageUrl()) {
 			throw new IllegalRucsokArgumentException();
 		}
 	}

@@ -1,4 +1,4 @@
-package com.rucsok.rucsok;
+package com.rucsok.test.rucsok;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -6,6 +6,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.isEmptyOrNullString;
 
 import org.hamcrest.Matchers;
 
@@ -30,7 +31,7 @@ import com.rucsok.rucsok.view.controller.ListRucsokController;
 @WebIntegrationTest
 public class ListRucsokControllerIntegrationTest {
 
-	private static final int TEST_DATA_SIZE = 3;
+	private static final int TEST_DATA_SIZE = 4;
 
 	@Autowired
 	private ListRucsokController listRucsokController;
@@ -72,7 +73,13 @@ public class ListRucsokControllerIntegrationTest {
 		// Given		
 		// When
 		// Then
-		mockMvc.perform(get(ListRucsokController.REQUEST_MAPPING)).andExpect(jsonPath("$[0].title", is("rucsok01")))
-				.andExpect(jsonPath("$[0].link", is("http://rucsok.com/01.gif")));
+		mockMvc.perform(get(ListRucsokController.REQUEST_MAPPING))
+				.andExpect(jsonPath("$[0].title", is("rucsok01")))
+				.andExpect(jsonPath("$[0].imageUrl", is("img01")))
+				.andExpect(jsonPath("$[0].link", is("http://rucsok.com/01.gif")))
+				.andExpect(jsonPath("$[0].videoUrl", isEmptyOrNullString()))
+				.andExpect(jsonPath("$[3].title", is("rucsok04")))
+				.andExpect(jsonPath("$[3].videoUrl", is("http://rucsok.com/rucsok.mp4")))
+				.andExpect(jsonPath("$[3].imageUrl", is("img04")));
 	}
 }

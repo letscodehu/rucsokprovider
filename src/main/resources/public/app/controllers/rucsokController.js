@@ -12,7 +12,7 @@ define(
 
 				vm.dirty = true;
 				vm.preload = false;
-				vm.addRucsok = addRucsok;
+				$scope.addRucsok = addRucsok;
 				vm.checkRucsok = checkRucsok;
 				vm.visit = visit;
 				vm.showAddModal = showAddModal;
@@ -70,6 +70,7 @@ define(
 				}
 
 				function addRucsok() {
+					console.log('rücsök add')
 					vm.preload = true;
 					rucsokService.addRucsok(vm.rucsok).then(function(){
 						vm.preload = false;

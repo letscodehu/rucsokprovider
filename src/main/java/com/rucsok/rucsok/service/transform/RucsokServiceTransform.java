@@ -18,9 +18,10 @@ public class RucsokServiceTransform {
 
 	public RucsokEntity transformToRucsokEntity(Rucsok rucsok) {
 		RucsokEntity result = new RucsokEntity();
-		result.setImage(rucsok.getImage());
+		result.setImageUrl(rucsok.getImageUrl());
 		result.setLink(rucsok.getLink());
 		result.setTitle(rucsok.getTitle());
+		result.setVideoUrl(rucsok.getVideoUrl());
 		return result;
 	}
 
@@ -28,8 +29,9 @@ public class RucsokServiceTransform {
 		Rucsok result = new Rucsok();
 		result.setId(rucsok.getId());
 		result.setTitle(rucsok.getTitle());
-		result.setImage(rucsok.getImage());
+		result.setImageUrl(rucsok.getImageUrl());
 		result.setLink(rucsok.getLink());
+		result.setVideoUrl(rucsok.getVideoUrl());
 		return result;
 	}
 
