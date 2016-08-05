@@ -7,8 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.rucsok.rucsok.repository.dao.RucsokDao;
-import com.rucsok.rucsok.repository.domain.RucsokEntity;
 import com.rucsok.rucsok.service.RucsokService;
 import com.rucsok.rucsok.view.model.RucsokView;
 import com.rucsok.rucsok.view.transform.RucsokTransformer;

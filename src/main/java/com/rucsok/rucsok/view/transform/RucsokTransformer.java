@@ -27,7 +27,8 @@ public class RucsokTransformer {
 		result.setVideoUrl(rucsok.getVideoUrl());
 		return result;
 	}
-
+	
+	
 	public SingleRucsokView transformToSingleView(SingleRucsok rucsok) {
 		SingleRucsokView result = new SingleRucsokView();
 		if (null != rucsok.getCurrent()) {
