@@ -21,6 +21,7 @@ public class RucsokTransformer {
 	public RucsokView transformToView(Rucsok rucsok) {
 		RucsokView result = new RucsokView();
 		result.setTitle(rucsok.getTitle());
+		result.setId(rucsok.getId());
 		result.setImageUrl(rucsok.getImageUrl());
 		result.setLink(rucsok.getLink());
 		result.setVideoUrl(rucsok.getVideoUrl());

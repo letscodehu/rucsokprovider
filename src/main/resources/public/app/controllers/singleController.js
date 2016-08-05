@@ -29,14 +29,12 @@ define([], function() {
 		
 		
 		function init() {
-			console.log($stateParams);
 			getItem($stateParams.id);
 		}
 		
 		function getItem(id) {
 			rucsokService.getItem(id)
 			.then(function(data) {
-				console.log("getItem", id, data);
 				$scope.item = data.current;
 				$scope.next = data.next;
 				$scope.prev = data.previous;
