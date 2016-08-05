@@ -74,6 +74,7 @@ public class ListRucsokControllerIntegrationTest {
 		// When
 		// Then
 		mockMvc.perform(get(ListRucsokController.REQUEST_MAPPING))
+				.andExpect(jsonPath("$[0].id", is(1)))
 				.andExpect(jsonPath("$[0].title", is("rucsok01")))
 				.andExpect(jsonPath("$[0].imageUrl", is("img01")))
 				.andExpect(jsonPath("$[0].link", is("http://rucsok.com/01.gif")))
