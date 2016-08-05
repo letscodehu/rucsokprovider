@@ -37,9 +37,39 @@ public class RucsokServiceTransform {
 
 	public SingleRucsok transformToSingleRucsok(List<RucsokEntity> rucsoks) {
 		SingleRucsok result = new SingleRucsok();
-		result.setCurrent(transformToRucsok(rucsoks.get(1)));
-		result.setPrevious(transformToRucsok(rucsoks.get(0)));
-		result.setNext(transformToRucsok(rucsoks.get(2)));
+		if (containsOnlyOneRucsok(rucsoks)) {
+			setFirstElementToCurrentRucsok(rucsoks, result);
+		} else {
+			setFirstToPreviousRucsok(rucsoks, result);
+			setSecondToCurrentRucsok(rucsoks, result);
+			setThirdToNextRucsok(rucsoks, result);
+		}
 		return result;
+	}
+
+	private void setFirstElementToCurrentRucsok(List<RucsokEntity> rucsoks, SingleRucsok result) {
+		result.setCurrent(transformToRucsok(rucsoks.get(0)));
+	}
+
+	private boolean containsOnlyOneRucsok(List<RucsokEntity> rucsoks) {
+		return 1 == rucsoks.size();
+	}
+
+	private void setSecondToCurrentRucsok(List<RucsokEntity> rucsoks, SingleRucsok result) {
+		if (rucsoks.size() > 0) {
+			result.setCurrent(transformToRucsok(rucsoks.get(1)));
+		}
+	}
+
+	private void setThirdToNextRucsok(List<RucsokEntity> rucsoks, SingleRucsok result) {
+		if (rucsoks.size() > 2) {
+			result.setNext(transformToRucsok(rucsoks.get(2)));
+		}
+	}
+
+	private void setFirstToPreviousRucsok(List<RucsokEntity> rucsoks, SingleRucsok result) {
+		if (rucsoks.size() > 1) {
+			result.setPrevious(transformToRucsok(rucsoks.get(0)));
+		}
 	}
 }

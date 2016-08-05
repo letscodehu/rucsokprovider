@@ -6,8 +6,6 @@ define([ "jquery" ], function($) {
 	function rucsokController($scope, rucsokService, addRucsokFormService,
 			$state) {
 		var vm = this;
-		
-		console.log('asdaskdopas')
 
 		$scope.rucsoks = [];
 

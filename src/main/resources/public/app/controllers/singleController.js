@@ -9,10 +9,8 @@ define([], function() {
 		$scope.onKeyUp = onKeyUp;
 		$scope.swipeLeft = swipeLeft;
 		$scope.swipeRight = swipeRight;
-		
-		
+				
 		function onKeyUp($event) {
-			console.log("befut");
 			switch ($event.keyCode) {
 			case '37' : swipeLeft();
 				break;
@@ -31,13 +29,15 @@ define([], function() {
 		
 		
 		function init() {
+			console.log($stateParams);
 			getItem($stateParams.id);
 		}
 		
 		function getItem(id) {
 			rucsokService.getItem(id)
 			.then(function(data) {
-				$scope.item = data.rucsok;
+				console.log("getItem", id, data);
+				$scope.item = data.current;
 				$scope.next = data.next;
 				$scope.prev = data.previous;
 			});

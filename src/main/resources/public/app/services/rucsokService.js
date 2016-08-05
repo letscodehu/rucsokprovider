@@ -5,7 +5,6 @@ define([], function() {
 	function rucsokService($http, $q) {
 
 		var vm = this;
-
 		
 		function getRucsok() {
 			
@@ -23,7 +22,6 @@ define([], function() {
 						'id' : item.id,
 					})
 				});
-
 				
 				deferred.resolve(data);
 			});
@@ -40,24 +38,8 @@ define([], function() {
 			
 			return deferred.promise;
 		}
-
-		
-		function addRucsok(rucsok) {
-			var deferred = $q.defer();
-			// viva la promise, peti
-			$http({
-				"url" : "/rucsok", 
-				"method" : "POST",
-				"data" : {"rucsok" : rucsok},
-			}).then(function(resp) {
-				deferred.resolve(resp.data);
-			});
-			
-			return deferred.promise;
-		}
 				
 		return {
-			addRucsok : addRucsok,
 			getItem : getItem,
 			getRucsok : getRucsok
 		}

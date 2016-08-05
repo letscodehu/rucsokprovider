@@ -1,5 +1,12 @@
 <ion-view view-title="{{item.title}}">
   <ion-content ng-keyup="onKeyUp($event)" on-swipe-left="swipeLeft()" on-swipe-right="swipeRight()">
-  <img class="centered" ng-src="{{item.image}}" alt="{{item.title}}"/>
+  	<div class="row">
+	  	<a ng-href={{item.src}}>
+	  		<img class="centered" ng-src="{{item.imageUrl}}" alt="{{item.title}}"/>
+	  	</a>
+  	</div>
+  	<div class="row">
+  		<span>metadata</span>
+  	</div>
   </ion-content>
 </ion-view>

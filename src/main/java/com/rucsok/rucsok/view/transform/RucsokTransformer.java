@@ -15,9 +15,9 @@ import com.rucsok.rucsok.view.model.SingleRucsokView;
 public class RucsokTransformer {
 
 	public List<RucsokView> transformToView(List<Rucsok> rucsoks) {
-		return rucsoks.stream().map(r->transformToView(r)).collect(Collectors.toList());
+		return rucsoks.stream().map(r -> transformToView(r)).collect(Collectors.toList());
 	}
-	
+
 	public RucsokView transformToView(Rucsok rucsok) {
 		RucsokView result = new RucsokView();
 		result.setTitle(rucsok.getTitle());
@@ -26,12 +26,18 @@ public class RucsokTransformer {
 		result.setVideoUrl(rucsok.getVideoUrl());
 		return result;
 	}
-	
+
 	public SingleRucsokView transformToSingleView(SingleRucsok rucsok) {
 		SingleRucsokView result = new SingleRucsokView();
-		result.setCurrent(transformToView(rucsok.getCurrent()));
-		result.setPreviousId(rucsok.getPrevious().getId());
-		result.setNextId(rucsok.getNext().getId());
+		if (null != rucsok.getCurrent()) {
+			result.setCurrent(transformToView(rucsok.getCurrent()));
+		}
+		if (null != rucsok.getPrevious()) {
+			result.setPreviousId(rucsok.getPrevious().getId());
+		}
+		if (null != rucsok.getNext()) {
+			result.setNextId(rucsok.getNext().getId());
+		}
 		return result;
 	}
 
