@@ -23,13 +23,13 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.rucsok.rucsok.domain.Rucsok;
 import com.rucsok.rucsok.service.RucsokCrawlerService;
-import com.rucsok.rucsok.service.helper.DocumentParseHelper;
+import com.rucsok.rucsok.service.helper.GeneralDocumentParser;
 import com.rucsok.rucsok.service.helper.RucsokCrawlHelper;
 import com.rucsok.rucsok.service.helper.UrlFetchHelper;
 import com.rucsok.test.rucsok.service.config.RucsokCrawlServiceConfig;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = { RucsokCrawlerService.class, RucsokCrawlHelper.class, DocumentParseHelper.class,
+@ContextConfiguration(classes = { RucsokCrawlerService.class, RucsokCrawlHelper.class, GeneralDocumentParser.class,
 		RucsokCrawlServiceConfig.class })
 public class RucsokCrawlerServiceIntegrationTest implements ApplicationContextAware {
 

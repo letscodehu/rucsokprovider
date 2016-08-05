@@ -16,7 +16,7 @@ public class RucsokCrawlHelper {
 	private static final String HTTP = "http://";
 
 	@Autowired
-	private DocumentParseHelper documentParser;
+	private DocumentParser documentParser;
 
 	@Autowired
 	private UrlFetchHelper urlFetcher;
@@ -33,7 +33,7 @@ public class RucsokCrawlHelper {
 	
 	private void setRucsokImageUrl(String url, Rucsok rucsok, Optional<Document> documentFromUrl) throws IOException {
 		if (documentFromUrl.isPresent()) {
-			rucsok.setImageUrl(documentParser.getImage(documentFromUrl.get()));
+			rucsok.setImageUrl(documentParser.getImageUrl(documentFromUrl.get()));
 		} else {
 			rucsok.setImageUrl(checkHttpPrefix(url));
 		}
