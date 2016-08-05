@@ -1,33 +1,53 @@
 define([], function() {
-		
-	function addRucsokFormService() {
+
+	addRucsokFormService.$inject = [ "$http", "$q" ];
+
+	function addRucsokFormService($http, $q) {
 
 		var vm = this;
 		vm.show = false;
-		
-		function toggleView(){
+
+		function toggleView() {
 			vm.show = !vm.show;
 		}
-			
-		function hideView(){
+
+		function hideView() {
 			vm.show = false;
 		}
-		
-		function showView(){
+
+		function showView() {
 			vm.show = true;
 		}
-		
-		function isShow(){
+
+		function isShow() {
 			return vm.show;
 		}
-			
+
+		function addRucsok(rucsok) {
+			var deferred = $q.defer();
+
+			$http({
+				"url" : "/rucsok",
+				"method" : "POST",
+				"data" : {
+					"rucsok" : rucsok
+				},
+			}).then(function(resp) {
+				deferred.resolve(resp.data);
+			});
+
+			return deferred.promise;
+		}
+
 		return {
 			toggleView : toggleView,
 			hideView : hideView,
 			showView : showView,
-			isShow: isShow
+			isShow : isShow,
+			addRucsok : addRucsok
 		}
-	};
-	
+	}
+	;
+
 	return addRucsokFormService;
 });

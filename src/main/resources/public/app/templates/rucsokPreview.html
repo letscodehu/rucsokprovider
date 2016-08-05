@@ -16,16 +16,15 @@
 	<div class="col">
 		<div class="row">
 			{{ rucsok.title }}
-		</div>
-		
+		</div>		
 		
 		<div class="row" ng-if="!rucsok.hasVideo()">
-			<img src="{{ rucsok.imageUrl }}"/>
+			<img ng-src="{{ rucsok.imageUrl }}"/>
 		</div>
 		
 		<div class="row" ng-if="rucsok.hasVideo()">
 			<video preload="auto" autoplay="autoplay" muted="muted" loop="loop" webkit-playsinline="">
-                <source src="{{ rucsok.videoUrl }}" type="video/mp4">
+                <source ng-src="{{ rucsok.videoUrl }}" type="video/mp4">
             </video>
 		</div>
             
