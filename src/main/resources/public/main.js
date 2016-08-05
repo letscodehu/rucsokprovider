@@ -8,7 +8,10 @@ var require = {
   shim : {
 	  'ionic-gallery' : {
 		  'deps' : ['ionic']
-	  }	 
-  }
-  
+	  },
+	  "app" : {
+		  "deps" : ["ionic"]
+	  }
+  },
+  deps : ["app"]
 };

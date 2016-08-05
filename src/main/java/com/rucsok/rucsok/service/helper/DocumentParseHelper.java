@@ -1,10 +1,5 @@
 package com.rucsok.rucsok.service.helper;
 
-import java.io.IOException;
-import java.util.Optional;
-
-import org.jsoup.Jsoup;
-import org.jsoup.UnsupportedMimeTypeException;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Component;

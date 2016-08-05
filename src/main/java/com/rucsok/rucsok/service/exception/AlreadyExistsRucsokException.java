@@ -8,6 +8,8 @@ import com.rucsok.rucsok.domain.Rucsok;
 @ResponseStatus(value=HttpStatus.CONFLICT)
 public class AlreadyExistsRucsokException extends RuntimeException {
 
+	
+	private static final long serialVersionUID = 7360787821756679340L;
 	public static final String ALREADY_EXISTS = "already exists!";
 
 	public AlreadyExistsRucsokException(Rucsok rucsok) {

@@ -16,14 +16,13 @@ import com.rucsok.user.repository.UserRepository;
 @Component
 public class AuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
-    @Autowired
+    @SuppressWarnings("unused")
+	@Autowired
     private UserRepository userRepository;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication) throws ServletException, IOException {
-
-        //userMapper.updateUserOnAuthSuccess(request.getParameter("sec-user"));
 
         response.setStatus(HttpServletResponse.SC_OK);
         response.getWriter().print("{\"success\": true}");
