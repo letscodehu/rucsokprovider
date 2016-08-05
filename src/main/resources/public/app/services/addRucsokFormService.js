@@ -6,16 +6,25 @@ define([], function() {
 		vm.show = false;
 		
 		function toggleView(){
-			console.log(vm.show)
 			vm.show = !vm.show;
 		}
-				
+			
+		function hideView(){
+			vm.show = false;
+		}
+		
+		function showView(){
+			vm.show = true;
+		}
+		
 		function isShow(){
 			return vm.show;
 		}
 			
 		return {
 			toggleView : toggleView,
+			hideView : hideView,
+			showView : showView,
 			isShow: isShow
 		}
 	};

@@ -71,9 +71,7 @@ define([ "jquery" ], function($) {
 		}
 
 		function addRucsok() {
-			console.log('rücsök add')
-			addRucsokFormService.toggleView();
-			return;
+			addRucsokFormService.showView();
 		}
 
 		function showLoginModal() {
@@ -99,7 +97,7 @@ define([ "jquery" ], function($) {
 					vm.rucsok = data;
 				});
 			} else {
-				vm.urlErrorClass = 'alert-danger';
+				$scope.urlErrorClass = 'alert-danger';
 			}
 		}
 

@@ -15,7 +15,8 @@ public class DocumentParseHelper {
 	private static final String CONTENT = "content";
 	private static final String META_PROPERTY_OG_IMAGE = "meta[property=og:image]";
 	private static final String META_PROPERTY_OG_TITLE = "meta[property=og:title]";
-	private static final String META_PROPERTY_OG_VIDEO = "meta[property=og:video:url]";
+	private static final String META_PROPERTY_OG_VIDEO = "meta[property=og:video]";
+	private static final String META_PROPERTY_OG_VIDEO_URL = "meta[property=og:video:url]";
 	
 	public String getTitle(Document doc) {
 		String title;
@@ -40,6 +41,9 @@ public class DocumentParseHelper {
 	public String getVideoUrl(Document doc) {
 		String imageUrl = null;
 		Elements metaOgImage = doc.select(META_PROPERTY_OG_VIDEO);
+		if (metaOgImage == null) {
+			metaOgImage = doc.select(META_PROPERTY_OG_VIDEO_URL);
+		}
 		if (metaOgImage != null) {
 			imageUrl = metaOgImage.attr(CONTENT);
 		}

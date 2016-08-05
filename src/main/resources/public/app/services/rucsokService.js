@@ -40,20 +40,7 @@ define([], function() {
 			
 			return deferred.promise;
 		}
-		
-		function checkRucsok(url) {
-			var deferred = $q.defer();
-			// viva la promise, peti
-			$http({
-				"url" : "/check-rucsok", 
-				"method" : "POST",
-				"data" : {"url": url},
-			}).then(function(resp) {
-				deferred.resolve(resp.data);
-			});
-			
-			return deferred.promise;
-		}
+
 		
 		function addRucsok(rucsok) {
 			var deferred = $q.defer();
@@ -72,7 +59,6 @@ define([], function() {
 		return {
 			addRucsok : addRucsok,
 			getItem : getItem,
-			checkRucsok : checkRucsok,
 			getRucsok : getRucsok
 		}
 	};

@@ -2,26 +2,39 @@
 #add-rucsok-modal {
 	z-index: 1000;
 }
+.alert-danger{
+	color: red;
+}
 </style>
-<ion-modal-view id="#add-rucsok-modal" ng-if="showAddRucsokForm()"> 
+<ion-modal-view id="#add-rucsok-modal" class="modal-wrapper" ng-if="showAddRucsokForm()"> 
 	<ion-header-bar>
+	
         <h1 class="title">Contribute to the Rücsök</h1>
         <button class="button button-clear button-primary" ng-click="hideAddRucsokForm()">
         	Cancel
         </button>      
+        
 	</ion-header-bar> 
 	<ion-content>	
 	
 		<div class="list">
 		   <label class="item item-input">
-		   <input type="text" placeholder="Placeholder 1">
+		   		<input type="text" ng-class="urlErrorClass" ng-model="formData.url" placeholder="URL here" name="url" required>
 		   </label>
-		
-		   <label class="item item-input">
-		   <input type="text" placeholder="Placeholder 2">
-		   </label>
+		   <div class = "row">
+			   <div class = "col">
+			  	   <button class="button button-full button-negative" ng-click="crawlNewRucsok()">
+				   	Check
+				   </button>
+			   </div>
+			   <div class = "col">
+			   	   <button class="button button-full button-positive" ng-click="createNewRucsok()">
+				   	Create
+				   </button>
+			   </div>
+			</div>	
 		</div>
-			
+		<rucsok-preview></rucsok-preview>
 	</ion-content> 
 </ion-modal-view>
 

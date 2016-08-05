@@ -5,7 +5,7 @@ define([
   "services/services",
   "controllers/controllers",
   "directives/directives",
-  'ionic-gallery'
+  'ionic-gallery',
 ], function () {
   'use strict';
 
