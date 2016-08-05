@@ -79,6 +79,7 @@ public class ListRucsokControllerIntegrationTest {
 				.andExpect(jsonPath("$[0].imageUrl", is("img01")))
 				.andExpect(jsonPath("$[0].link", is("http://rucsok.com/01.gif")))
 				.andExpect(jsonPath("$[0].videoUrl", isEmptyOrNullString()))
+				.andExpect(jsonPath("$[3].id", is(4)))
 				.andExpect(jsonPath("$[3].title", is("rucsok04")))
 				.andExpect(jsonPath("$[3].videoUrl", is("http://rucsok.com/rucsok.mp4")))
 				.andExpect(jsonPath("$[3].imageUrl", is("img04")));
