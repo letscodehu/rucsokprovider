@@ -34,7 +34,7 @@ public class GeneralDocumentParser implements DocumentParser{
 	@Override
 	public String getVideoUrl(Document doc) {
 		String video = getMetaProperty(doc, META_PROPERTY_OG_VIDEO);
-		if(null == video){
+		if(null == video || 0 == video.length()){
 			video = getMetaProperty(doc, META_PROPERTY_OG_VIDEO_URL);
 		}
 		if(null == video){
