@@ -2,6 +2,9 @@ package com.rucsok.test.rucsok;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.List;
+
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 import static org.hamcrest.Matchers.hasSize;
@@ -24,6 +27,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import com.rucsok.rucsok.repository.dao.RucsokDao;
+import com.rucsok.rucsok.repository.domain.RucsokEntity;
 import com.rucsok.rucsok.view.controller.ListRucsokController;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -31,7 +36,8 @@ import com.rucsok.rucsok.view.controller.ListRucsokController;
 @WebIntegrationTest
 public class ListRucsokControllerIntegrationTest {
 
-	private static final int TEST_DATA_SIZE = 4;
+	@Autowired
+	private RucsokDao rucsokDao;
 
 	@Autowired
 	private ListRucsokController listRucsokController;
@@ -53,7 +59,7 @@ public class ListRucsokControllerIntegrationTest {
 
 	@Test
 	public void contentShouldBeJson() throws Exception {
-		// Given		
+		// Given
 		// When
 		// Then
 		mockMvc.perform(get(ListRucsokController.REQUEST_MAPPING))
@@ -62,26 +68,29 @@ public class ListRucsokControllerIntegrationTest {
 
 	@Test
 	public void contentShouldContainsSameAmountOfDataThatCreatedInTheTestDatabase() throws Exception {
-		// Given		
+		// Given
+		int numberOfItems = (int) rucsokDao.count();
 		// When
 		// Then
-		mockMvc.perform(get(ListRucsokController.REQUEST_MAPPING)).andExpect((jsonPath("$", hasSize(TEST_DATA_SIZE))));
+		mockMvc.perform(get(ListRucsokController.REQUEST_MAPPING)).andDo(print())
+				.andExpect((jsonPath("$", hasSize(numberOfItems))));
 	}
 
 	@Test
 	public void contentShouldContainCorrectProperties() throws Exception {
-		// Given		
+		// Given
+		List<RucsokEntity> allRucsok = rucsokDao.getAllRucsok();
 		// When
 		// Then
-		mockMvc.perform(get(ListRucsokController.REQUEST_MAPPING))
-				.andExpect(jsonPath("$[0].id", is(1)))
-				.andExpect(jsonPath("$[0].title", is("rucsok01")))
-				.andExpect(jsonPath("$[0].imageUrl", is("img01")))
-				.andExpect(jsonPath("$[0].link", is("http://rucsok.com/01.gif")))
+		mockMvc.perform(get(ListRucsokController.REQUEST_MAPPING)).andDo(print())
+				.andExpect(jsonPath("$[0].id", is((int) allRucsok.get(0).getId())))
+				.andExpect(jsonPath("$[0].title", is(allRucsok.get(0).getTitle())))
+				.andExpect(jsonPath("$[0].imageUrl", is(allRucsok.get(0).getImageUrl())))
+				.andExpect(jsonPath("$[0].link", is(allRucsok.get(0).getLink())))
 				.andExpect(jsonPath("$[0].videoUrl", isEmptyOrNullString()))
-				.andExpect(jsonPath("$[3].id", is(4)))
-				.andExpect(jsonPath("$[3].title", is("rucsok04")))
-				.andExpect(jsonPath("$[3].videoUrl", is("http://rucsok.com/rucsok.mp4")))
-				.andExpect(jsonPath("$[3].imageUrl", is("img04")));
+				.andExpect(jsonPath("$[3].id", is((int) allRucsok.get(3).getId())))
+				.andExpect(jsonPath("$[3].title", is(allRucsok.get(3).getTitle())))
+				.andExpect(jsonPath("$[3].videoUrl", is(allRucsok.get(3).getVideoUrl())))
+				.andExpect(jsonPath("$[3].imageUrl", is(allRucsok.get(3).getImageUrl())));
 	}
 }

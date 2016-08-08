@@ -7,10 +7,10 @@ create table rucsok (
     , primary key (id)
 );
 insert into rucsok(id, title,  link, imageUrl, videourl) 
-values (default, 'rucsok01', 'http://rucsok.com/01.gif','img01', null);
+values (1, 'rucsok01', 'http://rucsok.com/01.gif','img01', null);
 insert into rucsok(id, title,  link, imageUrl, videourl) 
-values (default, 'rucsok02', 'http://rucsok.com/02.gif','img02', null);
+values (2, 'rucsok02', 'http://rucsok.com/02.gif','img02', null);
 insert into rucsok(id, title,  link, imageUrl, videourl) 
-values (default, 'rucsok03', 'http://rucsok.com/03.gif','img03', null);
+values (3, 'rucsok03', 'http://rucsok.com/03.gif','img03', null);
 insert into rucsok(id, title,  link, imageUrl, videourl)
-values (default, 'rucsok04', 'http://rucsok.com/04.gif','img04', 'http://rucsok.com/rucsok.mp4');
+values (4, 'rucsok04', 'http://rucsok.com/04.gif','img04', 'http://rucsok.com/rucsok.mp4');

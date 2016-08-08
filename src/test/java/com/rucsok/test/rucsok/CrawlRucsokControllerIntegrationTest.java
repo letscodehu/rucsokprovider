@@ -8,6 +8,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.isEmptyOrNullString;
 import java.util.Optional;
 
 import org.jsoup.nodes.Document;
@@ -77,15 +78,22 @@ public class CrawlRucsokControllerIntegrationTest {
 		when(rucsok.getTitle()).thenReturn(MOCK_TITLE);
 		when(rucsokService.crawl(TEST_URL)).thenReturn(rucsok);
 
-		mockMvc.perform(post(CrawlRucsokController.REQUEST_MAPPING).contentType(MediaType.APPLICATION_JSON)
-				.content(mapper.writeValueAsString(request))).andExpect(status().isOk()).andDo(print())
+		mockMvc.perform(post(CrawlRucsokController.REQUEST_MAPPING)
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(mapper.writeValueAsString(request)))
+				.andExpect(status().isOk()).andDo(print())
 				.andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-				.andExpect(jsonPath("$.title", is(MOCK_TITLE))).andExpect(jsonPath("$.link", is(MOCK_LINK)))
-				.andExpect(jsonPath("$.image", is(MOCK_IMAGE)));
+				.andExpect(jsonPath("$.title", is(MOCK_TITLE)))
+				.andExpect(jsonPath("$.link", is(MOCK_LINK)))
+				.andExpect(jsonPath("$.imageUrl", is(MOCK_IMAGE)))
+				.andExpect(jsonPath("$.videoUrl", isEmptyOrNullString()));
 
 		// Then
 
 		verify(rucsokService).crawl(TEST_URL);
+		verify(rucsok).getImageUrl();
+		verify(rucsok).getLink();
+		verify(rucsok).getTitle();
 
 	}
 
