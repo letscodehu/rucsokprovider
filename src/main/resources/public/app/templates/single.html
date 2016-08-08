@@ -1,12 +1,24 @@
-<ion-view view-title="{{item.title}}">
-  <ion-content ng-keyup="onKeyUp($event)" on-swipe-left="swipeLeft()" on-swipe-right="swipeRight()">
+
+<ion-view>
+  <ion-nav-title>{{item.title}}</ion-nav-title>  
+  <ion-content ng-keyup="onKeyUp($event)" tabindex="1" on-swipe-left="swipeLeft()" on-swipe-right="swipeRight()">
+  	<div class="row">	  
+	  <img class="centered" ng-src="{{item.imageUrl}}" alt="{{item.title}}"/>
+	</div>
   	<div class="row">
-	  	<a ng-href={{item.src}}>
-	  		<img class="centered" ng-src="{{item.imageUrl}}" alt="{{item.title}}"/>
-	  	</a>
+  		<span></span>
   	</div>
   	<div class="row">
-  		<span>metadata</span>
+  		<span>
+  			<a href={{item.src}} target="_blank">
+  				Source
+  			</a>
+  		</span>  		
   	</div>
   </ion-content>
+      <ion-nav-buttons side="primary">
+	      <button class="button btn-danger" ng-click="backButton()">
+	        <i class="ion-arrow-left-c"></i> Back
+	      </button>
+    </ion-nav-buttons>
 </ion-view>

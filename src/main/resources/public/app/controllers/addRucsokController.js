@@ -22,11 +22,19 @@ define([ "jquery" ], function($) {
 		function showAddRucsokForm() {
 			return addRucsokFormService.isShow();
 		}
+		
+		function resetAddRucsokFormUrl(){
+			$scope.formData.url = "";
+		}
+		
+		function resetCurrentRucsok(){
+			currentRucsok = null;
+		}
 
 		function hideAddRucsokForm() {
 			addRucsokFormService.hideView();
 			if (!addRucsokFormService.isShow()) {
-				$scope.url = "";
+				resetAddRucsokFormUrl();
 			}
 		}
 
@@ -41,8 +49,10 @@ define([ "jquery" ], function($) {
 		function addNewRucsok() {
 			createRucsok().then(function(newRucsok) {
 				addRucsokFormService.addRucsok(newRucsok).then(function() {
-					 currentRucsok = null;
+					$scope.$broadcast('rucsok.added');
+					 resetCurrentRucsok();
 					 hideAddRucsokForm();
+					 resetAddRucsokFormUrl();
 					 // redirect
 				}, showError());
 			});
@@ -52,8 +62,8 @@ define([ "jquery" ], function($) {
 			var deferred = $q.defer();
 
 			if (null === currentRucsok) {
-				crawlRucsokService.crawlUrl($scope.formData.url).then(
-						deferred.resolve, showError('fos url'));
+				crawlRucsokService.crawlUrl($scope.formData.url)
+					.then(deferred.resolve, showError('fos url'));
 			} else {
 				deferred.resolve(currentRucsok);
 			}

@@ -4,6 +4,7 @@ encoding//src/main/resources=UTF-8
 encoding//src/main/resources/public/app/templates/addRucsok.html=UTF-8
 encoding//src/main/resources/public/app/templates/dashboard.html=UTF-8
 encoding//src/main/resources/public/app/templates/rucsokPreview.html=UTF-8
+encoding//src/main/resources/public/app/templates/single.html=UTF-8
 encoding//src/main/resources/static/js/templates/error.html=UTF-8
 encoding//src/main/resources/static/js/templates/login.html=UTF-8
 encoding//src/main/resources/static/js/templates/rucsok.html=UTF-8
