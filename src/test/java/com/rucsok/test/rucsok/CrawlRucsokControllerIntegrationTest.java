@@ -31,9 +31,11 @@ import com.rucsok.rucsok.domain.Rucsok;
 import com.rucsok.rucsok.service.RucsokCrawlerService;
 import com.rucsok.rucsok.view.controller.CrawlRucsokController;
 import com.rucsok.rucsok.view.model.RucsokCheckRequest;
+import com.rucsok.test.config.RepositoryConfig;
+import com.rucsok.test.config.TestConfig;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:test-context.xml" })
+@ContextConfiguration(classes = {RepositoryConfig.class, TestConfig.class})
 @WebIntegrationTest
 public class CrawlRucsokControllerIntegrationTest {
 

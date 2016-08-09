@@ -22,9 +22,11 @@ import com.rucsok.rucsok.repository.domain.RucsokEntity;
 import com.rucsok.rucsok.view.controller.PostRucsokController;
 import com.rucsok.rucsok.view.model.RucsokInsertRequest;
 import com.rucsok.rucsok.view.model.RucsokPost;
+import com.rucsok.test.config.RepositoryConfig;
+import com.rucsok.test.config.TestConfig;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:test-context.xml" })
+@ContextConfiguration(classes = {RepositoryConfig.class, TestConfig.class})
 @WebIntegrationTest
 public class PostRucsokControllerIntegrationTest {
 

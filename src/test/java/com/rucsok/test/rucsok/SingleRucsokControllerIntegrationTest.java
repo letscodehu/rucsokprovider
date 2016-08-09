@@ -18,9 +18,11 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.rucsok.rucsok.view.controller.SingleRucsokController;
+import com.rucsok.test.config.RepositoryConfig;
+import com.rucsok.test.config.TestConfig;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:test-context.xml" })
+@ContextConfiguration(classes = {RepositoryConfig.class, TestConfig.class})
 @WebIntegrationTest
 public class SingleRucsokControllerIntegrationTest {
 

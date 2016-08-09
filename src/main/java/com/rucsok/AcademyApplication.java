@@ -7,7 +7,6 @@ import org.springframework.context.annotation.FilterType;
 import org.springframework.context.annotation.ImportResource;
 
 @SpringBootApplication
-@ImportResource(locations = "classpath:context.xml")
 @ComponentScan(basePackages = { "com.rucsok" },
 excludeFilters = @ComponentScan.Filter(type = FilterType.ASPECTJ, pattern = "com.rucsok.test.*"))
 public class AcademyApplication {

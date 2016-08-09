@@ -15,6 +15,11 @@ define([
 
       $stateProvider
         // app states
+      	.state('login', {
+          url: '/login',
+          templateUrl: 'app/templates/login.html',
+          controller: 'loginController'
+        }) 
         .state('dashboard', {
           url: '/dashboard',
           templateUrl: 'app/templates/dashboard.html',

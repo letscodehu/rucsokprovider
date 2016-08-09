@@ -1,20 +1,15 @@
 package com.rucsok.test.rucsok;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import java.util.List;
-
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.isEmptyOrNullString;
-
-import org.hamcrest.Matchers;
-
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -29,10 +24,13 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.rucsok.rucsok.repository.dao.RucsokDao;
 import com.rucsok.rucsok.repository.domain.RucsokEntity;
+import com.rucsok.rucsok.service.helper.UrlFetchHelper;
 import com.rucsok.rucsok.view.controller.ListRucsokController;
+import com.rucsok.test.config.RepositoryConfig;
+import com.rucsok.test.config.TestConfig;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:test-context.xml" })
+@ContextConfiguration(classes = {RepositoryConfig.class, TestConfig.class})
 @WebIntegrationTest
 public class ListRucsokControllerIntegrationTest {
 
@@ -82,15 +80,16 @@ public class ListRucsokControllerIntegrationTest {
 		List<RucsokEntity> allRucsok = rucsokDao.getAllRucsok();
 		// When
 		// Then
-		mockMvc.perform(get(ListRucsokController.REQUEST_MAPPING)).andDo(print())
-				.andExpect(jsonPath("$[0].id", is((int) allRucsok.get(0).getId())))
-				.andExpect(jsonPath("$[0].title", is(allRucsok.get(0).getTitle())))
-				.andExpect(jsonPath("$[0].imageUrl", is(allRucsok.get(0).getImageUrl())))
-				.andExpect(jsonPath("$[0].link", is(allRucsok.get(0).getLink())))
-				.andExpect(jsonPath("$[0].videoUrl", isEmptyOrNullString()))
-				.andExpect(jsonPath("$[3].id", is((int) allRucsok.get(3).getId())))
-				.andExpect(jsonPath("$[3].title", is(allRucsok.get(3).getTitle())))
-				.andExpect(jsonPath("$[3].videoUrl", is(allRucsok.get(3).getVideoUrl())))
-				.andExpect(jsonPath("$[3].imageUrl", is(allRucsok.get(3).getImageUrl())));
+		mockMvc.perform(get(ListRucsokController.REQUEST_MAPPING))
+				.andDo(print())
+				.andExpect(jsonPath("$[:1].id[0]", is((int) allRucsok.get(0).getId())))
+				.andExpect(jsonPath("$[:1].title[0]", is(allRucsok.get(0).getTitle())))
+				.andExpect(jsonPath("$[:1].imageUrl[0]", is(allRucsok.get(0).getImageUrl())))
+				.andExpect(jsonPath("$[:1].link[0]", is(allRucsok.get(0).getLink())))
+				.andExpect(jsonPath("$[:1].videoUrl[0]", isEmptyOrNullString()))
+				.andExpect(jsonPath("$[-1:].id[0]", is((int) allRucsok.get(3).getId())))
+				.andExpect(jsonPath("$[-1:].title[0]", is(allRucsok.get(3).getTitle())))
+				.andExpect(jsonPath("$[-1:].videoUrl[0]", is(allRucsok.get(3).getVideoUrl())))
+				.andExpect(jsonPath("$[-1:].imageUrl[0]", is(allRucsok.get(3).getImageUrl())));
 	}
 }

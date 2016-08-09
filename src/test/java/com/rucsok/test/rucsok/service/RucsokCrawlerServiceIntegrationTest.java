@@ -26,7 +26,7 @@ import com.rucsok.rucsok.service.RucsokCrawlerService;
 import com.rucsok.rucsok.service.helper.GeneralDocumentParser;
 import com.rucsok.rucsok.service.helper.RucsokCrawlHelper;
 import com.rucsok.rucsok.service.helper.UrlFetchHelper;
-import com.rucsok.test.rucsok.service.config.RucsokCrawlServiceConfig;
+import com.rucsok.test.config.RucsokCrawlServiceConfig;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { RucsokCrawlerService.class, RucsokCrawlHelper.class, GeneralDocumentParser.class,
