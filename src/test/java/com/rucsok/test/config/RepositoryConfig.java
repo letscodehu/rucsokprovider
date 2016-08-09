@@ -52,7 +52,7 @@ public class RepositoryConfig {
 	@Bean
 	public HibernateJpaVendorAdapter jpaVendorAdapter(){
 		HibernateJpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
-		jpaVendorAdapter.setShowSql(false);
+		jpaVendorAdapter.setShowSql(true);
 		jpaVendorAdapter.setGenerateDdl(false);
 		return jpaVendorAdapter;
 	}

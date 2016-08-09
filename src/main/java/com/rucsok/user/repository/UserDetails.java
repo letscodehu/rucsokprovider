@@ -10,7 +10,7 @@ public class UserDetails implements org.springframework.security.core.userdetail
 	private String password;
 	private String username;
 
-	public UserDetails(String password, String username) {
+	public UserDetails(String username, String password) {
 		super();
 		this.password = password;
 		this.username = username;

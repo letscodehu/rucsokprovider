@@ -2,10 +2,10 @@ package com.rucsok.user.repository;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.rucsok.user.repository.domain.User;
+import com.rucsok.user.repository.domain.UserEntity;
 
-public interface UserRepository extends CrudRepository<User, Long> {
+public interface UserRepository extends CrudRepository<UserEntity, Long> {
 
-	public User findByName(String name);
+	UserEntity findByName(String name);
 	
 }
