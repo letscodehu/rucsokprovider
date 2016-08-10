@@ -3,6 +3,7 @@ package com.rucsok.rucsok.view.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,6 +23,7 @@ public class ListRucsokController {
 	@Autowired
 	private RucsokTransformer rucsokTransformer;
 
+	@PreAuthorize("#oauth2.hasScope('read')")
 	@RequestMapping(name = "getrucsok", path = REQUEST_MAPPING, method = RequestMethod.GET)
 	public List<RucsokView> getRucsok() {
 		return rucsokTransformer.transformToView(rucsokService.findAll());

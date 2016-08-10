@@ -2,8 +2,8 @@ define([
   'app', 
 ], function (app) {
   'use strict';
-   app.config(["$httpProvider", "ionGalleryConfigProvider", '$localStorage',
-     function ($httpProvider, ionGalleryConfigProvider, '$localStorage' ) {
+   app.config(["$httpProvider", "ionGalleryConfigProvider",
+     function ($httpProvider, ionGalleryConfigProvider ) {
     	 //Authorization
 	        $httpProvider.interceptors.push(['$q', '$location',
 	            function($q,  $location) {	  

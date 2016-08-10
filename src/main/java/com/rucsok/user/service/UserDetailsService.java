@@ -1,10 +1,12 @@
-package com.rucsok.user.repository;
+package com.rucsok.user.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.rucsok.rucsok.service.transform.UserToUserDetailsTransformer;
+import com.rucsok.user.domain.UserDetails;
+import com.rucsok.user.repository.dao.UserRepository;
 
 @Service
 public class UserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService {

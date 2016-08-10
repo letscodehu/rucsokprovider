@@ -1,4 +1,4 @@
-package com.rucsok.user.repository;
+package com.rucsok.user.repository.dao;
 
 import org.springframework.data.repository.CrudRepository;
 

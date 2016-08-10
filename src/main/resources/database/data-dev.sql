@@ -25,3 +25,7 @@ insert into rucsok(id, title,  link, image_url, video_url)
 values (12, 'rucsok12', 'http://letscode.hu','http://localhost:8080/images/test/12.jpg', null);
 insert into rucsok(id, title,  link, image_url, video_url) 
 values (13, 'rucsok13', 'http://imgur.com/gallery/QelEIx3','http://localhost:8080/images/rucsi.png', null);
+
+truncate table user;
+insert into user(id, email,  password, name, failedLogin)
+values (1, 'rucsok', '$2a$06$0RA1mDUlDAvOh5V9a0R01.POVFn1/Dvc5ggJ9xhXLiDAjG3o6NiNG', 'rucsok', 0);

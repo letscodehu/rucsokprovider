@@ -1,27 +1,36 @@
-define([], function() {
+define([ 'jquery' ], function($) {
 
-	loginService.$inject = [ "$http", "$q" ];
+	loginService.$inject = [ '$http', '$q' ];
 
 	function loginService($http, $q) {
 
-		function loginUser(name, pw) {
+		function loginUser(username, password) {
 			var deferred = $q.defer();
-			var promise = deferred.promise;
 
-			if (name == 'user' && pw == 'secret') {
-				deferred.resolve('Welcome ' + name + '!');
-			} else {
-				deferred.reject('Wrong credentials.');
-			}
-			promise.success = function(fn) {
-				promise.then(fn);
-				return promise;
-			}
-			promise.error = function(fn) {
-				promise.then(null, fn);
-				return promise;
-			}
-			return promise;
+			var csrfToken = $("[name='_csrf']").val();
+
+			$http({
+				'url' : '/login',
+				'method' : 'POST',
+				'data' : {
+					'sec-user' : username,
+					'sec-password' : password,
+					'_csrf' : csrfToken
+				},
+				transformRequest: function(obj) {
+			        var str = [];
+			        for(var p in obj)
+			        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+			        return str.join("&");
+			    },
+				headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+			}).then(function(resp) {
+				deferred.resolve(resp.data);
+			}, function(err) {
+				deferred.reject(err);
+			});
+
+			return deferred.promise;
 		}
 
 		return {
