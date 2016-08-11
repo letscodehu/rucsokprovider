@@ -25,6 +25,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+import org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers;
 
 import com.rucsok.test.config.RepositoryConfig;
 import com.rucsok.test.config.TestConfig;
@@ -61,9 +62,9 @@ public class UserProfileIntegrationTest {
 	public void setUp() {
 		mockMvc = MockMvcBuilders
 				.webAppContextSetup(context)
-//				.apply(springSecurity())
+				.apply(SecurityMockMvcConfigurers.springSecurity())
 				.build();
-		user = userDao.findOne(Long.valueOf(1));
+		user = userDao.findByName("rucsok");
 	}
 
 	@Test
@@ -76,6 +77,7 @@ public class UserProfileIntegrationTest {
 	}
 
 	@Test
+	@WithUserDetails("rucsok")
 	public void contentShouldBeJson() throws Exception {
 		// Given
 
@@ -87,6 +89,7 @@ public class UserProfileIntegrationTest {
 	}
 
 	@Test
+	@WithUserDetails("rucsok")
 	public void contentShouldContainsCorrectData() throws Exception {
 		// Given
 		// When
