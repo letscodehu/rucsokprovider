@@ -12,10 +12,12 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.WebIntegrationTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
 import com.rucsok.rucsok.view.controller.SingleRucsokController;
 import com.rucsok.test.config.RepositoryConfig;
@@ -29,15 +31,18 @@ public class SingleRucsokControllerIntegrationTest {
 	private static final int TEST_DATA_SIZE = 1;
 	
 	private static final String REQUEST_MAPPING = "/rucsok/2";
-
+	
 	@Autowired
-	private SingleRucsokController singleRucsokController;
+	private WebApplicationContext context;
 
 	private MockMvc mockMvc;
 
 	@Before
 	public void setUp() {
-		mockMvc = MockMvcBuilders.standaloneSetup(singleRucsokController).build();
+		mockMvc = MockMvcBuilders
+				.webAppContextSetup(context)
+				.apply(SecurityMockMvcConfigurers.springSecurity())
+				.build();
 	}
 
 	@Test

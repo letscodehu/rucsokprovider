@@ -17,10 +17,12 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.WebIntegrationTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
 import com.rucsok.rucsok.repository.dao.RucsokDao;
 import com.rucsok.rucsok.repository.domain.RucsokEntity;
@@ -38,13 +40,19 @@ public class ListRucsokControllerIntegrationTest {
 	private RucsokDao rucsokDao;
 
 	@Autowired
-	private ListRucsokController listRucsokController;
+	private ListRucsokController listRucsokController;	
+	
+	@Autowired
+	private WebApplicationContext context;
 
 	private MockMvc mockMvc;
 
 	@Before
 	public void setUp() {
-		mockMvc = MockMvcBuilders.standaloneSetup(listRucsokController).build();
+		mockMvc = MockMvcBuilders
+				.webAppContextSetup(context)
+				.apply(SecurityMockMvcConfigurers.springSecurity())
+				.build();
 	}
 
 	@Test
@@ -80,6 +88,7 @@ public class ListRucsokControllerIntegrationTest {
 		List<RucsokEntity> allRucsok = rucsokDao.getAllRucsok();
 		// When
 		// Then
+		int lastIndex = allRucsok.size()-1;
 		mockMvc.perform(get(ListRucsokController.REQUEST_MAPPING))
 				.andDo(print())
 				.andExpect(jsonPath("$[:1].id[0]", is((int) allRucsok.get(0).getId())))
@@ -87,9 +96,9 @@ public class ListRucsokControllerIntegrationTest {
 				.andExpect(jsonPath("$[:1].imageUrl[0]", is(allRucsok.get(0).getImageUrl())))
 				.andExpect(jsonPath("$[:1].link[0]", is(allRucsok.get(0).getLink())))
 				.andExpect(jsonPath("$[:1].videoUrl[0]", isEmptyOrNullString()))
-				.andExpect(jsonPath("$[-1:].id[0]", is((int) allRucsok.get(3).getId())))
-				.andExpect(jsonPath("$[-1:].title[0]", is(allRucsok.get(3).getTitle())))
-				.andExpect(jsonPath("$[-1:].videoUrl[0]", is(allRucsok.get(3).getVideoUrl())))
-				.andExpect(jsonPath("$[-1:].imageUrl[0]", is(allRucsok.get(3).getImageUrl())));
+				.andExpect(jsonPath("$[-1:].id[0]", is((int) allRucsok.get(lastIndex).getId())))
+				.andExpect(jsonPath("$[-1:].title[0]", is(allRucsok.get(lastIndex).getTitle())))
+				.andExpect(jsonPath("$[-1:].videoUrl[0]", is(allRucsok.get(lastIndex).getVideoUrl())))
+				.andExpect(jsonPath("$[-1:].imageUrl[0]", is(allRucsok.get(lastIndex).getImageUrl())));
 	}
 }

@@ -1,18 +1,16 @@
 package com.rucsok.test.rucsok;
 
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.isEmptyOrNullString;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.isEmptyOrNullString;
-import java.util.Optional;
 
-import org.jsoup.nodes.Document;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,11 +18,13 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.WebIntegrationTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithUserDetails;
+import org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rucsok.rucsok.domain.Rucsok;
@@ -46,6 +46,9 @@ public class CrawlRucsokControllerIntegrationTest {
 	private static final String MOCK_IMAGE = "mockImage";
 
 	private static final String TEST_URL = "http://test.test";
+	
+	@Autowired
+	private WebApplicationContext context;
 
 	@Autowired
 	private CrawlRucsokController crawlRucsokController;
@@ -58,13 +61,18 @@ public class CrawlRucsokControllerIntegrationTest {
 
 	@Before
 	public void setUp() {
-		mockMvc = MockMvcBuilders.standaloneSetup(crawlRucsokController).build();
+		mockMvc = MockMvcBuilders
+				.webAppContextSetup(context)
+				.apply(SecurityMockMvcConfigurers.springSecurity())
+				.build();
+		
 		rucsokService = Mockito.mock(RucsokCrawlerService.class);
 		crawlRucsokController.setRucsokService(rucsokService);
 		mapper = new ObjectMapper();
 	}
 
 	@Test
+	@WithUserDetails("rucsok")
 	public void crawlerShouldReturnCorrectCrawledObject() throws Exception {
 
 		// Given
@@ -81,9 +89,10 @@ public class CrawlRucsokControllerIntegrationTest {
 		when(rucsokService.crawl(TEST_URL)).thenReturn(rucsok);
 
 		mockMvc.perform(post(CrawlRucsokController.REQUEST_MAPPING)
+				.with(csrf())
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(mapper.writeValueAsString(request)))
-				.andExpect(status().isOk()).andDo(print())
+				.andExpect(status().isOk())
 				.andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
 				.andExpect(jsonPath("$.title", is(MOCK_TITLE)))
 				.andExpect(jsonPath("$.link", is(MOCK_LINK)))
@@ -96,6 +105,24 @@ public class CrawlRucsokControllerIntegrationTest {
 		verify(rucsok).getImageUrl();
 		verify(rucsok).getLink();
 		verify(rucsok).getTitle();
+
+	}
+	
+
+	@Test
+	public void crawlerShouldReturnFoundWhenUserNotLoggedIn() throws Exception {
+
+		// Given
+
+		// When
+
+		// Then
+		
+		mockMvc.perform(post(CrawlRucsokController.REQUEST_MAPPING)
+				.with(csrf())
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(""))
+				.andExpect(status().isFound());				
 
 	}
 

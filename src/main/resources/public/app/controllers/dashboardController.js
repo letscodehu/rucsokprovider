@@ -10,6 +10,7 @@ define([ 'jquery' ], function($) {
 		$scope.addRucsok = addRucsok;
 		$scope.showRucsok = showRucsok;
 		$scope.isLoggedIn = userProfileService.isLoggedIn();
+		$scope.isLoggedIn = true;
 		$scope.goToLogin = goToLogin;
 
 		refresh();

@@ -1,5 +1,6 @@
 package com.rucsok.test.rucsok;
 
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -11,10 +12,13 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.WebIntegrationTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithUserDetails;
+import org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rucsok.rucsok.repository.dao.RucsokDao;
@@ -26,7 +30,7 @@ import com.rucsok.test.config.RepositoryConfig;
 import com.rucsok.test.config.TestConfig;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {RepositoryConfig.class, TestConfig.class})
+@ContextConfiguration(classes = { RepositoryConfig.class, TestConfig.class })
 @WebIntegrationTest
 public class PostRucsokControllerIntegrationTest {
 
@@ -37,9 +41,9 @@ public class PostRucsokControllerIntegrationTest {
 	private static final String TEST_URL = "http://rucsok.com/epic-rucsok";
 
 	private static final String TEST_UNIQUE_URL = "http://rucsok.com/epic-url-rucsok";
-
+	
 	@Autowired
-	private PostRucsokController postRucsokController;
+	private WebApplicationContext context;
 
 	@Autowired
 	private RucsokDao rucsokDao;
@@ -50,11 +54,34 @@ public class PostRucsokControllerIntegrationTest {
 
 	@Before
 	public void setUp() {
-		mockMvc = MockMvcBuilders.standaloneSetup(postRucsokController).build();
+		mockMvc = MockMvcBuilders
+				.webAppContextSetup(context)
+				.apply(SecurityMockMvcConfigurers.springSecurity())
+				.build();
+		
 		mapper = new ObjectMapper();
+	}
+	
+	@Test
+	public void postShouldReturnFoundWhenUserNotLoggedIn() throws Exception {
+
+		// Given
+
+		// When
+
+		// Then
+
+		mockMvc.perform(post(PostRucsokController.REQUEST_MAPPING)
+				.with(csrf())
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(""))
+				.andExpect(status()
+				.isFound());
+
 	}
 
 	@Test
+	@WithUserDetails("rucsok")
 	public void postShouldReturnBadGatewayWhenRequestIsNull() throws Exception {
 
 		// Given
@@ -63,50 +90,64 @@ public class PostRucsokControllerIntegrationTest {
 
 		// Then
 
-		mockMvc.perform(post(PostRucsokController.REQUEST_MAPPING).contentType(MediaType.APPLICATION_JSON)
-				.content(mapper.writeValueAsString(null))).andExpect(status().isBadRequest());
+		mockMvc.perform(post(PostRucsokController.REQUEST_MAPPING)
+				.with(csrf())
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(mapper.writeValueAsString(null)))
+				.andExpect(status()
+				.isBadRequest());
 
 	}
 
 	@Test
+	@WithUserDetails("rucsok")
 	public void postShouldReturnBadGatewayWhenLinkIsNull() throws Exception {
 
 		// Given
-		
+
 		RucsokPost rucsok = createRucsokPostHelper();
 		rucsok.setLink(null);
 		RucsokInsertRequest request = createRucsokInsertRequestHelper(rucsok);
-		
+
 		// When
 
 		// Then
-		
-		mockMvc.perform(post(PostRucsokController.REQUEST_MAPPING).contentType(MediaType.APPLICATION_JSON)
-				.content(mapper.writeValueAsString(request))).andExpect(status().isBadRequest());
+
+		mockMvc.perform(post(PostRucsokController.REQUEST_MAPPING)
+				.with(csrf())
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(mapper.writeValueAsString(request)))
+				.andExpect(status().isBadRequest());
 
 	}
-	
+
 	@Test
+	@WithUserDetails("rucsok")
 	public void postShouldReturnBadGatewayWhenImageIsNull() throws Exception {
 
 		// Given
-		
+
 		RucsokPost rucsok = createRucsokPostHelper();
 		rucsok.setImageUrl(null);
 		rucsok.setLink("http://asdasdasd.asd");
 		RucsokInsertRequest request = createRucsokInsertRequestHelper(rucsok);
-		
+
 		// When
 
 		// Then
-		
-		mockMvc.perform(post(PostRucsokController.REQUEST_MAPPING).contentType(MediaType.APPLICATION_JSON)
-				.content(mapper.writeValueAsString(request))).andExpect(status().isBadRequest());
+
+		mockMvc.perform(post(PostRucsokController.REQUEST_MAPPING)
+				.with(csrf())
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(mapper.writeValueAsString(request)))
+				.andExpect(status()
+				.isBadRequest());
 
 	}
 
 	@Test
-	public void postShouldSaveTheNewEntity() throws Exception {
+	@WithUserDetails("rucsok")
+	public void postShouldCreateNewEntity() throws Exception {
 
 		// Given
 
@@ -115,8 +156,12 @@ public class PostRucsokControllerIntegrationTest {
 
 		// When
 
-		mockMvc.perform(post(PostRucsokController.REQUEST_MAPPING).contentType(MediaType.APPLICATION_JSON)
-				.content(mapper.writeValueAsString(request))).andExpect(status().isCreated());
+		mockMvc.perform(post(PostRucsokController.REQUEST_MAPPING)
+				.with(csrf())
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(mapper.writeValueAsString(request)))
+				.andExpect(status()
+				.isCreated());
 
 		RucsokEntity entity = rucsokDao.findByLink(TEST_URL);
 
@@ -129,6 +174,7 @@ public class PostRucsokControllerIntegrationTest {
 	}
 
 	@Test
+	@WithUserDetails("rucsok")
 	public void postShouldNotSaveTheSameUrlAgain() throws Exception {
 
 		// Given
@@ -139,11 +185,18 @@ public class PostRucsokControllerIntegrationTest {
 
 		// When
 
-		mockMvc.perform(post(PostRucsokController.REQUEST_MAPPING).contentType(MediaType.APPLICATION_JSON)
-				.content(mapper.writeValueAsString(request))).andExpect(status().isCreated());
+		mockMvc.perform(post(PostRucsokController.REQUEST_MAPPING)
+				.with(csrf())
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(mapper.writeValueAsString(request)))
+				.andExpect(status().isCreated());
 
-		mockMvc.perform(post(PostRucsokController.REQUEST_MAPPING).contentType(MediaType.APPLICATION_JSON)
-				.content(mapper.writeValueAsString(request))).andExpect(status().isConflict());
+		mockMvc.perform(post(PostRucsokController.REQUEST_MAPPING)
+				.with(csrf())
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(mapper.writeValueAsString(request)))
+				.andExpect(status()
+				.isConflict());
 
 		RucsokEntity entity = rucsokDao.findByLink(TEST_UNIQUE_URL);
 
