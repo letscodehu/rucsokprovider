@@ -4,6 +4,7 @@ define([ "controllers/rucsokController",
          "controllers/singleController",
          "controllers/addRucsokController",
          "controllers/rucsokPreviewController",
+         "controllers/dashboardController",
          "ionic"
         ], function(
         		rucsokController, 
@@ -11,7 +12,9 @@ define([ "controllers/rucsokController",
         		errorController, 
         		singleController,
         		addRucsokController, 
-        		rucsokPreviewController) {
+        		rucsokPreviewController,
+        		dashboardController
+        		) {
 	
 	var controllers = angular.module("controllers", []);	
 	
@@ -19,6 +22,7 @@ define([ "controllers/rucsokController",
 	controllers.controller("rucsokPreviewController", rucsokPreviewController);
 	controllers.controller("singleController", singleController);
 	controllers.controller("loginController", loginController);
+	controllers.controller("dashboardController", dashboardController);
 	controllers.controller("rucsokController", rucsokController);
 	controllers.controller("errorController", errorController);
 	

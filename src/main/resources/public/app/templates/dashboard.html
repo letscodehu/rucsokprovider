@@ -3,8 +3,11 @@
   	<ion-gallery ion-gallery-items="rucsoks" ion-item-callback="showRucsok(item)"></ion-gallery>
   </ion-content>
     <ion-nav-buttons side="primary">
-      <button class="button btn-danger" ng-click="addRucsok()">
+      <button class="button btn-danger" ng-click="addRucsok()"  ng-if="isLoggedIn == true">
         Add rücsök
+      </button>
+      <button class="button btn-danger" ng-click="goToLogin()"  ng-if="isLoggedIn != true">
+        Login
       </button>
     </ion-nav-buttons>
     <add-rucsok></add-rucsok>

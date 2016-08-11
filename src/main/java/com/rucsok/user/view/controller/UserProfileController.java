@@ -1,5 +1,7 @@
 package com.rucsok.user.view.controller;
 
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,7 +14,7 @@ import com.rucsok.user.view.transform.UserProfileTransform;
 @RestController
 public class UserProfileController {
 	
-	public static final String REQUEST_MAPPING = "/profile/{id}";
+	public static final String REQUEST_MAPPING = "/profile";
 	
 	@Autowired
 	private UserProfileService userProfileService;
@@ -21,8 +23,8 @@ public class UserProfileController {
 	private UserProfileTransform userProfileTransformer;
 
 	@RequestMapping(name = "profile", path = REQUEST_MAPPING)
-	public UserProfileView userProfileView(@PathVariable String id) {
-		return userProfileTransformer.transformToUserProfileView(userProfileService.getUserByName(id));
+	public UserProfileView userProfileView(Principal principal) {
+		return userProfileTransformer.transformToUserProfileView(userProfileService.getUserByName(principal.getName()));
 	}
 
 }

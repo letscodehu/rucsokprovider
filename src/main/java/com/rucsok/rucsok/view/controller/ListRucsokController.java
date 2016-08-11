@@ -23,7 +23,6 @@ public class ListRucsokController {
 	@Autowired
 	private RucsokTransformer rucsokTransformer;
 
-	@PreAuthorize("#oauth2.hasScope('read')")
 	@RequestMapping(name = "getrucsok", path = REQUEST_MAPPING, method = RequestMethod.GET)
 	public List<RucsokView> getRucsok() {
 		return rucsokTransformer.transformToView(rucsokService.findAll());

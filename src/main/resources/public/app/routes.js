@@ -2,14 +2,20 @@ define([
   'app',
   // Load Controllers here
   'controllers/rucsokController',
-  'controllers/addRucsokController'
+  'controllers/addRucsokController',
+//  'services/authResolverFactory'
 ], function (app) {
   'use strict';
   // definition of routes
   app.config([
     '$stateProvider',
     '$urlRouterProvider',
-    function ($stateProvider, $urlRouterProvider) {
+//    'authResolverFactory',
+    function (
+    		$stateProvider, 
+    		$urlRouterProvider
+//    		authResolverFactory
+    		) {
       // url routes/states
       $urlRouterProvider.otherwise('dashboard');
 
@@ -23,7 +29,7 @@ define([
         .state('dashboard', {
           url: '/dashboard',
           templateUrl: 'app/templates/dashboard.html',
-          controller: 'rucsokController'
+          controller: 'dashboardController'
         }) 
         .state('single', {
             url: '/single/{id}',

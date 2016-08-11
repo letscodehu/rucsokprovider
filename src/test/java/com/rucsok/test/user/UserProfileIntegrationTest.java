@@ -1,23 +1,30 @@
 package com.rucsok.test.user;
 
+import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.Matchers.is;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.WebIntegrationTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.authentication.TestingAuthenticationToken;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.security.test.context.support.WithUserDetails;
+import org.springframework.security.web.FilterChainProxy;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
 import com.rucsok.test.config.RepositoryConfig;
 import com.rucsok.test.config.TestConfig;
@@ -30,11 +37,19 @@ import com.rucsok.user.view.controller.UserProfileController;
 @WebIntegrationTest
 public class UserProfileIntegrationTest {
 
+	private static final String REQUEST_MAPPING = "/profile/";
+
 	@Autowired
 	private UserRepository userDao;
 
 	@Autowired
 	private UserProfileController profileController;
+	
+	@Autowired
+	private WebApplicationContext context;
+
+	@Autowired
+	private FilterChainProxy filterChainProxy;
 
 	private MockMvc mockMvc;
 
@@ -44,43 +59,47 @@ public class UserProfileIntegrationTest {
 
 	@Before
 	public void setUp() {
-		mockMvc = MockMvcBuilders.standaloneSetup(profileController).build();
+		mockMvc = MockMvcBuilders
+				.webAppContextSetup(context)
+//				.apply(springSecurity())
+				.build();
 		user = userDao.findOne(Long.valueOf(1));
-		requestMapping = "/profile/" + user.getName();
 	}
 
 	@Test
+	@WithUserDetails("rucsok")
 	public void statusShouldOk() throws Exception {
 		// Given
 		// When
 		// Then
-		mockMvc.perform(get(requestMapping)).andExpect(status().isOk());
+		mockMvc.perform(get(REQUEST_MAPPING)).andExpect(status().isOk());
 	}
 
 	@Test
 	public void contentShouldBeJson() throws Exception {
 		// Given
+
 		// When
 		// Then
-		mockMvc.perform(get(requestMapping)).andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON));
+		mockMvc.perform(get(REQUEST_MAPPING))
+					.andExpect(content()
+					.contentTypeCompatibleWith(MediaType.APPLICATION_JSON));
 	}
 
 	@Test
 	public void contentShouldContainsCorrectData() throws Exception {
-		 // Given
-		 // When
-		 // Then
-		 mockMvc.perform(get(requestMapping))
-		 		.andExpect(jsonPath("$.username", is(user.getName())));
+		// Given
+		// When
+		// Then
+		mockMvc.perform(get(REQUEST_MAPPING)).andExpect(jsonPath("$.username", is(user.getName())));
 	}
-	
+
 	@Test
-	public void contentShouldReturn() throws Exception {
-		 // Given
-		 // When
-		 // Then
-		 mockMvc.perform(get("/profile/asdqwe"))
-		 		.andExpect(status().isBadRequest());
+	public void contentShouldReturnBadRequestWhenUserNotLoggedIn() throws Exception {
+		// Given
+		// When
+		// Then
+		mockMvc.perform(get(REQUEST_MAPPING)).andExpect(status().isFound());
 	}
 
 }

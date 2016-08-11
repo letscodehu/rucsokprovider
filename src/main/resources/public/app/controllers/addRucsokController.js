@@ -1,11 +1,13 @@
 define([ "jquery" ], function($) {
 
-	addRucsokController.$inject = [ "$scope", "rucsokService", "addRucsokFormService", "crawlRucsokService", "$state", '$q' ]
+	addRucsokController.$inject = [ "$scope", "rucsokService",
+			"addRucsokFormService", "crawlRucsokService", "$state", '$q',
+			'authResolverFactory' ]
 
 	function addRucsokController($scope, rucsokService, addRucsokFormService,
-			crawlRucsokService, $state, $q) {
-		
-		// public 
+			crawlRucsokService, $state, $q, authResolverFactory) {
+
+		// public
 
 		$scope.showAddRucsokForm = showAddRucsokForm;
 		$scope.hideAddRucsokForm = hideAddRucsokForm;
@@ -14,7 +16,7 @@ define([ "jquery" ], function($) {
 		$scope.formData = {
 			url : ""
 		};
-		
+
 		// private
 		
 		var currentRucsok = null;
@@ -22,12 +24,12 @@ define([ "jquery" ], function($) {
 		function showAddRucsokForm() {
 			return addRucsokFormService.isShow();
 		}
-		
-		function resetAddRucsokFormUrl(){
+
+		function resetAddRucsokFormUrl() {
 			$scope.formData.url = "";
 		}
-		
-		function resetCurrentRucsok(){
+
+		function resetCurrentRucsok() {
 			currentRucsok = null;
 		}
 
@@ -38,7 +40,11 @@ define([ "jquery" ], function($) {
 			}
 		}
 
-		function crawlNewRucsok() {
+		function resolveAuthentication() {
+			return authResolverFactory.resolve();
+		}
+
+		function crawlNewRucsok() {		
 			crawlRucsokService.crawlUrl($scope.formData.url).then(
 					function(data) {
 						$scope.$broadcast('rucsok.preview', data);
@@ -50,10 +56,10 @@ define([ "jquery" ], function($) {
 			createRucsok().then(function(newRucsok) {
 				addRucsokFormService.addRucsok(newRucsok).then(function() {
 					$scope.$broadcast('rucsok.added');
-					 resetCurrentRucsok();
-					 hideAddRucsokForm();
-					 resetAddRucsokFormUrl();
-					 // redirect
+					resetCurrentRucsok();
+					hideAddRucsokForm();
+					resetAddRucsokFormUrl();
+					// redirect
 				}, showError());
 			});
 		}
@@ -62,8 +68,8 @@ define([ "jquery" ], function($) {
 			var deferred = $q.defer();
 
 			if (null === currentRucsok) {
-				crawlRucsokService.crawlUrl($scope.formData.url)
-					.then(deferred.resolve, showError('fos url'));
+				crawlRucsokService.crawlUrl($scope.formData.url).then(
+						deferred.resolve, showError('fos url'));
 			} else {
 				deferred.resolve(currentRucsok);
 			}

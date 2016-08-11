@@ -2,6 +2,7 @@ package com.rucsok.rucsok.view.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,6 +24,7 @@ public class PostRucsokController {
 	@Autowired
 	private RucsokTransformer rucsokTransformer;
 
+	@Secured ({"ROLE_USER"})
 	@RequestMapping(name = "postrucsok", path = REQUEST_MAPPING, method = RequestMethod.POST)
 	@ResponseStatus(value = HttpStatus.CREATED)
 	public RucsokView putRucsok(@RequestBody RucsokInsertRequest request) {
