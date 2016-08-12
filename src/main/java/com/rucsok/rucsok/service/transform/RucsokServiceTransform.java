@@ -9,12 +9,17 @@ import org.springframework.stereotype.Component;
 import com.rucsok.rucsok.domain.Rucsok;
 import com.rucsok.rucsok.domain.SingleRucsok;
 import com.rucsok.rucsok.repository.domain.RucsokEntity;
+import com.rucsok.user.repository.domain.UserEntity;
+import com.rucsok.user.transform.UserTransformer;
 
 @Component
 public class RucsokServiceTransform {
-	
+
 	@Autowired
 	private RucsokTypeTransform rucsokTypeTransform;
+
+	@Autowired
+	private UserTransformer userTransformer;
 
 	public List<Rucsok> transformToRucsok(List<RucsokEntity> rucsoks) {
 		return rucsoks.stream().map(r -> transformToRucsok(r)).collect(Collectors.toList());
@@ -29,14 +34,19 @@ public class RucsokServiceTransform {
 		return result;
 	}
 
-	public Rucsok transformToRucsok(RucsokEntity rucsok) {
+	public Rucsok transformToRucsok(RucsokEntity rucsokEntity) {
 		Rucsok result = new Rucsok();
-		result.setId(rucsok.getId());
-		result.setTitle(rucsok.getTitle());
-		result.setImageUrl(rucsok.getImageUrl());
-		result.setLink(rucsok.getLink());
-		result.setVideoUrl(rucsok.getVideoUrl());
-		result.setType(rucsokTypeTransform.getRucsokTypeFromEntity(rucsok));
+		result.setId(rucsokEntity.getId());
+		result.setTitle(rucsokEntity.getTitle());
+		result.setImageUrl(rucsokEntity.getImageUrl());
+		result.setLink(rucsokEntity.getLink());
+		result.setVideoUrl(rucsokEntity.getVideoUrl());
+		result.setType(rucsokTypeTransform.getRucsokTypeFromEntity(rucsokEntity));
+		UserEntity user = rucsokEntity.getUser();
+		if(user==null){
+			System.out.println("dafug");
+		}
+		result.setUser(userTransformer.transformEntityToUser(user));
 		return result;
 	}
 

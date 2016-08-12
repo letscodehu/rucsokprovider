@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.rucsok.rucsok.domain.Rucsok;
 import com.rucsok.rucsok.domain.SingleRucsok;
@@ -26,6 +27,7 @@ public class RucsokTransformer {
 		result.setLink(rucsok.getLink());
 		result.setVideoUrl(rucsok.getVideoUrl());
 		result.setType(rucsok.getType().toString().toLowerCase());
+		result.setUsername(rucsok.getUser().getUsername());
 		return result;
 	}
 	

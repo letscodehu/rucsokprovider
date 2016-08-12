@@ -1,14 +1,19 @@
 package com.rucsok.user.repository.domain;
 
 import java.util.Collection;
+import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-@Entity(name="user")
+import com.rucsok.rucsok.repository.domain.RucsokEntity;
+
+@Entity(name = "User")
 public class UserEntity implements UserDetails {
 
 	@Id
@@ -17,6 +22,9 @@ public class UserEntity implements UserDetails {
 	private String email;
 	private String password;
 	private int failedlogin;
+
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+	private Set<RucsokEntity> rucsoks;
 
 	public long getId() {
 		return id;

@@ -9,6 +9,7 @@ define([], function() {
 				videoUrl : "",
 				link : "",
 				type: "",
+				username: "",
 				hasVideo : function() {
 					return typeof this.videoUrl !== 'undefined'
 							&& this.videoUrl.length > 0;
@@ -24,6 +25,7 @@ define([], function() {
 			newRucsok.videoUrl = data.videoUrl || "";
 			newRucsok.link = data.link || "";
 			newRucsok.type = data.type || "";
+			newRucsok.username = data.username || "";
 			return newRucsok;
 		}
 

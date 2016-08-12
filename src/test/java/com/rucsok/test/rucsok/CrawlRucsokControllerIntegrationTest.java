@@ -34,12 +34,17 @@ import com.rucsok.rucsok.view.controller.CrawlRucsokController;
 import com.rucsok.rucsok.view.model.RucsokCheckRequest;
 import com.rucsok.test.config.RepositoryConfig;
 import com.rucsok.test.config.TestConfig;
+import com.rucsok.user.domain.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {RepositoryConfig.class, TestConfig.class})
 @WebIntegrationTest
 public class CrawlRucsokControllerIntegrationTest {
 
+	private static final String TEST_USERNAME = "rucsok";
+
+	private static final String MOCK_USERNAME = "darudesandstorm";
+	
 	private static final String MOCK_TITLE = "rucsokTitle";
 
 	private static final String MOCK_LINK = "rucsokLink";
@@ -73,7 +78,7 @@ public class CrawlRucsokControllerIntegrationTest {
 	}
 
 	@Test
-	@WithUserDetails("rucsok")
+	@WithUserDetails(TEST_USERNAME)
 	public void crawlerShouldReturnCorrectCrawledObject() throws Exception {
 
 		// Given
@@ -81,7 +86,8 @@ public class CrawlRucsokControllerIntegrationTest {
 		RucsokCheckRequest request = new RucsokCheckRequest();
 		request.setUrl(TEST_URL);
 		Rucsok rucsok = Mockito.mock(Rucsok.class);
-
+		User user = Mockito.mock(User.class);
+		
 		// When
 
 		when(rucsok.getImageUrl()).thenReturn(MOCK_IMAGE);
@@ -89,7 +95,9 @@ public class CrawlRucsokControllerIntegrationTest {
 		when(rucsok.getTitle()).thenReturn(MOCK_TITLE);
 		when(rucsok.getVideoUrl()).thenReturn(null);
 		when(rucsok.getType()).thenReturn(RucsokType.IMAGE);
-		when(rucsokService.crawl(TEST_URL)).thenReturn(rucsok);
+		when(rucsok.getUser()).thenReturn(user);
+		when(user.getUsername()).thenReturn(MOCK_USERNAME);
+		when(rucsokService.crawl(TEST_URL, TEST_USERNAME)).thenReturn(rucsok);
 
 		mockMvc.perform(post(CrawlRucsokController.REQUEST_MAPPING)
 				.with(csrf())
@@ -98,18 +106,21 @@ public class CrawlRucsokControllerIntegrationTest {
 				.andExpect(status().isOk())
 				.andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
 				.andExpect(jsonPath("$.title", is(MOCK_TITLE)))
+				.andExpect(jsonPath("$.username", is(MOCK_USERNAME)))
 				.andExpect(jsonPath("$.link", is(MOCK_LINK)))
 				.andExpect(jsonPath("$.imageUrl", is(MOCK_IMAGE)))
 				.andExpect(jsonPath("$.videoUrl", isEmptyOrNullString()));
 
 		// Then
 
-		verify(rucsokService).crawl(TEST_URL);
+		verify(rucsokService).crawl(TEST_URL, TEST_USERNAME);
 		verify(rucsok).getImageUrl();
 		verify(rucsok).getLink();
 		verify(rucsok).getTitle();
 		verify(rucsok).getVideoUrl();
 		verify(rucsok).getType();
+		verify(rucsok).getUser();
+		verify(user).getUsername();
 
 	}
 	

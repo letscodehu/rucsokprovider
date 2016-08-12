@@ -32,8 +32,12 @@ public class RucsokCrawlHelper {
 		setRucsokImageUrl(url, rucsok, documentFromUrl);
 		setRucsokTitle(rucsok, documentFromUrl);
 		setRucsokVideoUrl(rucsok, documentFromUrl);
-		rucsok.setType(rucsokTypeTransformer.getRucsokTypeFromString(rucsok.getVideoUrl()));
+		setRucsokType(rucsok);
 		return rucsok;
+	}
+
+	private void setRucsokType(Rucsok rucsok) {
+		rucsok.setType(rucsokTypeTransformer.getRucsokTypeFromString(rucsok.getVideoUrl()));
 	}
 	
 	private void setRucsokImageUrl(String url, Rucsok rucsok, Optional<Document> documentFromUrl) throws IOException {

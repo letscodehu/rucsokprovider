@@ -8,7 +8,7 @@ import com.rucsok.user.repository.domain.UserEntity;
 @Component
 public class UserTransformer {
 
-	public User transformToUser(UserEntity userEntity) {
+	public User transformEntityToUser(UserEntity userEntity) {
 		User result = new User();
 		result.setEmail(userEntity.getEmail());
 		result.setUsername(userEntity.getName());

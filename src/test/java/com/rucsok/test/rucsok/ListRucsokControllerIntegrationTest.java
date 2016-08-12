@@ -22,6 +22,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.rucsok.rucsok.domain.RucsokType;
@@ -61,6 +62,7 @@ public class ListRucsokControllerIntegrationTest {
 	}
 
 	@Test
+	@Transactional
 	public void statusShouldOk() throws Exception {
 		// Given
 		// When
@@ -69,6 +71,7 @@ public class ListRucsokControllerIntegrationTest {
 	}
 
 	@Test
+	@Transactional
 	public void contentShouldBeJson() throws Exception {
 		// Given
 		// When
@@ -78,6 +81,7 @@ public class ListRucsokControllerIntegrationTest {
 	}
 
 	@Test
+	@Transactional
 	public void contentShouldContainsSameAmountOfDataThatCreatedInTheTestDatabase() throws Exception {
 		// Given
 		int numberOfItems = (int) rucsokDao.count();
@@ -88,6 +92,7 @@ public class ListRucsokControllerIntegrationTest {
 	}
 
 	@Test
+	@Transactional
 	public void contentShouldContainCorrectProperties() throws Exception {
 		// Given
 		List<RucsokEntity> allRucsok = rucsokDao.getAllRucsok();
@@ -102,6 +107,7 @@ public class ListRucsokControllerIntegrationTest {
 				.andExpect(jsonPath("$[:1].link[0]", is(allRucsok.get(0).getLink())))
 				.andExpect(jsonPath("$[:1].videoUrl[0]", isEmptyOrNullString()))
 				.andExpect(jsonPath("$[:1].type[0]", is(IMAGE)))
+				.andExpect(jsonPath("$[:1].username[0]", is(allRucsok.get(0).getUser().getName())))
 				.andExpect(jsonPath("$[:2].id[1]", is((int) allRucsok.get(1).getId())))
 				.andExpect(jsonPath("$[:2].title[1]", is(allRucsok.get(1).getTitle())))
 				.andExpect(jsonPath("$[:2].videoUrl[1]", is(allRucsok.get(1).getVideoUrl())))
@@ -111,6 +117,7 @@ public class ListRucsokControllerIntegrationTest {
 				.andExpect(jsonPath("$[:3].title[2]", is(allRucsok.get(2).getTitle())))
 				.andExpect(jsonPath("$[:3].videoUrl[2]", is(allRucsok.get(2).getVideoUrl())))
 				.andExpect(jsonPath("$[:3].imageUrl[2]", is(allRucsok.get(2).getImageUrl())))
-				.andExpect(jsonPath("$[:3].type[2]", is(HTML5VIDEO)));
+				.andExpect(jsonPath("$[:3].type[2]", is(HTML5VIDEO)))
+				.andExpect(jsonPath("$[:3].username[2]", is(allRucsok.get(2).getUser().getName())));
 	}
 }

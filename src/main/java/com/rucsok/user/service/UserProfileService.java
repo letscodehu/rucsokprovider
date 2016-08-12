@@ -25,7 +25,7 @@ public class UserProfileService {
 		if(!findUserByName.isPresent()){
 			throw new UserNotFoundException("User with name " + username + " not found.");
 		}
-		return userTranformer.transformToUser(findUserByName.get());
+		return userTranformer.transformEntityToUser(findUserByName.get());
 	}
 
 	private Optional<UserEntity> findUserByName(String username) {

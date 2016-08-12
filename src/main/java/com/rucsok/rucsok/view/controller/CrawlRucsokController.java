@@ -1,6 +1,7 @@
 package com.rucsok.rucsok.view.controller;
 
 import java.io.IOException;
+import java.security.Principal;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
@@ -9,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.rucsok.rucsok.domain.Rucsok;
 import com.rucsok.rucsok.service.RucsokCrawlerService;
 import com.rucsok.rucsok.view.model.RucsokCheckRequest;
 import com.rucsok.rucsok.view.model.RucsokView;
@@ -32,8 +32,8 @@ public class CrawlRucsokController {
 
 	@RequestMapping(name = "createrucsok", path = REQUEST_MAPPING, method = RequestMethod.POST)
 	@Secured ({"ROLE_ADMIN","ROLE_USER"})
-	public RucsokView crawlRucsok(@RequestBody RucsokCheckRequest request) throws IOException {
-		return rucsokTransformer.transformToView(rucsokService.crawl(request.getUrl()));
+	public RucsokView crawlRucsok(@RequestBody RucsokCheckRequest request, Principal principal) throws IOException {
+		return rucsokTransformer.transformToView(rucsokService.crawl(request.getUrl(), principal.getName()));
 	}
 
 }
