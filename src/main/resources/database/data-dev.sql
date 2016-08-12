@@ -8,7 +8,7 @@ values (3, 'rucsok03', 'http://letscode.hu','http://localhost:8080/images/test/0
 insert into rucsok(id, title,  link, image_url, video_url) 
 values (4, 'rucsok04', 'http://letscode.hu','http://localhost:8080/images/test/04.jpg', 'https://www.youtube.com/watch?v=2fccc1AAqco');
 insert into rucsok(id, title,  link, image_url, video_url) 
-values (5, 'rucsok05', 'http://letscode.hu','http://localhost:8080/images/test/05.jpg', 'https://www.youtube.com/watch?v=PiiBega5ucQ');
+values (5, 'rucsok05', 'http://letscode.hu','http://localhost:8080/images/test/05.jpg', 'http://localhost:8080/images/test/rucsokteszt.mp4');
 insert into rucsok(id, title,  link, image_url, video_url) 
 values (6, 'rucsok06', 'http://letscode.hu','http://localhost:8080/images/test/06.jpg', null);
 insert into rucsok(id, title,  link, image_url, video_url) 
@@ -24,7 +24,7 @@ values (11, 'rucsok11', 'http://letscode.hu','http://localhost:8080/images/test/
 insert into rucsok(id, title,  link, image_url, video_url) 
 values (12, 'rucsok12', 'http://letscode.hu','http://localhost:8080/images/test/12.jpg', null);
 insert into rucsok(id, title,  link, image_url, video_url) 
-values (13, 'rucsok13', 'http://imgur.com/gallery/QelEIx3','http://localhost:8080/images/rucsi.png', null);
+values (13, 'rucsok13', 'http://imgur.com/gallery/QelEIx3','http://localhost:8080/images/rucsi.png', 'http://localhost:8080/images/test/lYPDaKO.mp4');
 
 truncate table user;
 insert into user(id, email,  password, name, failedLogin)

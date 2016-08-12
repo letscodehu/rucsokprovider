@@ -7,6 +7,7 @@ public class Rucsok {
 	private String link;
 	private String imageUrl;
 	private String videoUrl;
+	private RucsokType type;
 
 	public long getId() {
 		return id;
@@ -46,6 +47,14 @@ public class Rucsok {
 
 	public void setVideoUrl(String videoUrl) {
 		this.videoUrl = videoUrl;
+	}
+
+	public RucsokType getType() {
+		return type;
+	}
+
+	public void setType(RucsokType type) {
+		this.type = type;
 	}
 
 }

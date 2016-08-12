@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.rucsok.rucsok.domain.Rucsok;
+import com.rucsok.rucsok.service.transform.RucsokTypeTransform;
 
 @Component
 public class RucsokCrawlHelper {
@@ -20,6 +21,9 @@ public class RucsokCrawlHelper {
 
 	@Autowired
 	private UrlFetchHelper urlFetcher;
+	
+	@Autowired
+	private RucsokTypeTransform rucsokTypeTransformer;
 
 	public Rucsok createRucsokFromUrl(String url) throws IOException {
 		Rucsok rucsok = new Rucsok();
@@ -28,6 +32,7 @@ public class RucsokCrawlHelper {
 		setRucsokImageUrl(url, rucsok, documentFromUrl);
 		setRucsokTitle(rucsok, documentFromUrl);
 		setRucsokVideoUrl(rucsok, documentFromUrl);
+		rucsok.setType(rucsokTypeTransformer.getRucsokTypeFromString(rucsok.getVideoUrl()));
 		return rucsok;
 	}
 	

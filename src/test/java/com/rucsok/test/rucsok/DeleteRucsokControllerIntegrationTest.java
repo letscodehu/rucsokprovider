@@ -31,7 +31,7 @@ import com.rucsok.test.config.TestConfig;
 @WebIntegrationTest
 public class DeleteRucsokControllerIntegrationTest {
 
-	private static final String DELETE_ID = "1";
+	private static final String DELETE_ID = "4";
 
 	@Autowired
 	private WebApplicationContext context;

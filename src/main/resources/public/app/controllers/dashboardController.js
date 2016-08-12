@@ -16,7 +16,7 @@ define([ 'jquery' ], function($) {
 		refresh();
 
 		var updateListener = $scope.$on('rucsok.added', function(event) {
-			vm.refresh();
+			refresh();
 		});
 
 		$scope.$on('$destroy', function() {

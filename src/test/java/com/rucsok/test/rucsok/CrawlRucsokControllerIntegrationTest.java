@@ -28,6 +28,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rucsok.rucsok.domain.Rucsok;
+import com.rucsok.rucsok.domain.RucsokType;
 import com.rucsok.rucsok.service.RucsokCrawlerService;
 import com.rucsok.rucsok.view.controller.CrawlRucsokController;
 import com.rucsok.rucsok.view.model.RucsokCheckRequest;
@@ -86,6 +87,8 @@ public class CrawlRucsokControllerIntegrationTest {
 		when(rucsok.getImageUrl()).thenReturn(MOCK_IMAGE);
 		when(rucsok.getLink()).thenReturn(MOCK_LINK);
 		when(rucsok.getTitle()).thenReturn(MOCK_TITLE);
+		when(rucsok.getVideoUrl()).thenReturn(null);
+		when(rucsok.getType()).thenReturn(RucsokType.IMAGE);
 		when(rucsokService.crawl(TEST_URL)).thenReturn(rucsok);
 
 		mockMvc.perform(post(CrawlRucsokController.REQUEST_MAPPING)
@@ -105,6 +108,8 @@ public class CrawlRucsokControllerIntegrationTest {
 		verify(rucsok).getImageUrl();
 		verify(rucsok).getLink();
 		verify(rucsok).getTitle();
+		verify(rucsok).getVideoUrl();
+		verify(rucsok).getType();
 
 	}
 	

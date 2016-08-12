@@ -25,6 +25,7 @@ public class RucsokTransformer {
 		result.setImageUrl(rucsok.getImageUrl());
 		result.setLink(rucsok.getLink());
 		result.setVideoUrl(rucsok.getVideoUrl());
+		result.setType(rucsok.getType().toString().toLowerCase());
 		return result;
 	}
 	

@@ -3,6 +3,7 @@ package com.rucsok.rucsok.service.transform;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.rucsok.rucsok.domain.Rucsok;
@@ -11,6 +12,9 @@ import com.rucsok.rucsok.repository.domain.RucsokEntity;
 
 @Component
 public class RucsokServiceTransform {
+	
+	@Autowired
+	private RucsokTypeTransform rucsokTypeTransform;
 
 	public List<Rucsok> transformToRucsok(List<RucsokEntity> rucsoks) {
 		return rucsoks.stream().map(r -> transformToRucsok(r)).collect(Collectors.toList());
@@ -32,6 +36,7 @@ public class RucsokServiceTransform {
 		result.setImageUrl(rucsok.getImageUrl());
 		result.setLink(rucsok.getLink());
 		result.setVideoUrl(rucsok.getVideoUrl());
+		result.setType(rucsokTypeTransform.getRucsokTypeFromEntity(rucsok));
 		return result;
 	}
 
