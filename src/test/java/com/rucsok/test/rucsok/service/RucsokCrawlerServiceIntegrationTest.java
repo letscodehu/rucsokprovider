@@ -14,10 +14,12 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -29,11 +31,13 @@ import com.rucsok.rucsok.service.helper.UrlFetchHelper;
 import com.rucsok.rucsok.service.transform.RucsokTypeTransform;
 import com.rucsok.test.config.RucsokCrawlServiceConfig;
 import com.rucsok.user.repository.dao.UserRepository;
+import com.rucsok.user.repository.domain.UserEntity;
 import com.rucsok.user.service.UserService;
+import com.rucsok.user.transform.UserTransformer;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { RucsokCrawlerService.class, RucsokCrawlHelper.class, GeneralDocumentParser.class,
-		RucsokCrawlServiceConfig.class, RucsokTypeTransform.class })
+		RucsokCrawlServiceConfig.class, RucsokTypeTransform.class, UserTransformer.class })
 public class RucsokCrawlerServiceIntegrationTest implements ApplicationContextAware {
 	
 	private static final String TEST_USERNAME = "rucsok";
@@ -61,8 +65,12 @@ public class RucsokCrawlerServiceIntegrationTest implements ApplicationContextAw
 	public void testYoutubeCrawlShouldReturnCorrectRucsok() throws IOException {
 		// Given
 		String url = "http://youtube";
+		UserEntity userEntity = Mockito.mock(UserEntity.class);
 		when(urlFetcher.fetchUrl(url)).thenReturn(getDocumentFromHtmlString(readHtmlFromFile(TEST_PAGE_YOUTUBE)));
 		when(userService.isUserExists(TEST_USERNAME)).thenReturn(true);
+		when(userService.findUserByName(TEST_USERNAME)).thenReturn(userEntity);
+		when(userEntity.getEmail()).thenReturn("rucsok@letscode.hu");
+		when(userEntity.getName()).thenReturn("rucsok");
 		// When
 		Rucsok result = underTest.crawl(url, TEST_USERNAME);
 		// Then
@@ -76,8 +84,12 @@ public class RucsokCrawlerServiceIntegrationTest implements ApplicationContextAw
 	public void testImgurCrawlShouldReturnCorrectRucsok() throws IOException {
 		// Given
 		String url = "http://imgur";
+		UserEntity userEntity = Mockito.mock(UserEntity.class);
 		when(urlFetcher.fetchUrl(url)).thenReturn(getDocumentFromHtmlString(readHtmlFromFile(TEST_PAGE_IMGUR)));
 		when(userService.isUserExists(TEST_USERNAME)).thenReturn(true);
+		when(userService.findUserByName(TEST_USERNAME)).thenReturn(userEntity);
+		when(userEntity.getEmail()).thenReturn("rucsok@letscode.hu");
+		when(userEntity.getName()).thenReturn("rucsok");
 		// When
 		Rucsok result = underTest.crawl(url, TEST_USERNAME);
 		// Then
