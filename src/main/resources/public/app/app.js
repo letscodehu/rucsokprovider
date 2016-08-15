@@ -5,14 +5,16 @@ define([
   "services/services",
   "controllers/controllers",
   "directives/directives",
+  "filters/filters",
   'ionic-gallery',
   'angular-http-auth',
+  'spring-token-interceptor'
 ], function () {
   'use strict';
 
   // the app with its used plugins
   var app = angular.module('app', [
-    'ionic', "services", "controllers", "directives", 'ion-gallery', 'http-auth-interceptor'
+    'ionic', "services", "controllers", "directives", 'filters', 'ion-gallery',  'http-auth-interceptor', /* 'spring-security-csrf-token-interceptor' */
   ]);
   // return the app so you can require it in other components
   return app;

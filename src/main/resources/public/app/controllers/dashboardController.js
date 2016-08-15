@@ -1,15 +1,17 @@
 define([ 'jquery' ], function($) {
 
 	rucsokController.$inject = [ '$scope', 'rucsokService',
-			'addRucsokFormService', '$state', 'authResolverFactory', 'userProfileService' ]
+			'addRucsokFormService', '$state', 'userProfileService', 'loginService']
 
 	function rucsokController($scope, rucsokService, addRucsokFormService,
-			$state, authResolverFactory, userProfileService) {
+			$state, userProfileService, loginService) {
 
 		$scope.rucsoks = [];
 		$scope.addRucsok = addRucsok;
 		$scope.showRucsok = showRucsok;
+		$scope.logout = logout;
 		$scope.isLoggedIn = userProfileService.isLoggedIn;
+		$scope.getUsername = userProfileService.getUsername;
 		$scope.goToLogin = goToLogin;
 
 		refresh();
@@ -47,6 +49,11 @@ define([ 'jquery' ], function($) {
 			$state.go('login');
 		}
 
+		function logout() {
+			loginService.logout();
+		}
+
+		
 	}
 
 	return rucsokController;

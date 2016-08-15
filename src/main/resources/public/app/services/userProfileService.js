@@ -16,12 +16,27 @@ define([], function() {
 			return null !== userProfile;
 		}
 		
+		function onNotify() {
+			 loadUserProfile().then(function(data){
+				 userProfile = data;
+			 }, function() {
+				 userProfile = null;
+			 });
+		}
+		
+		function getUsername() {
+			if (typeof userProfile != null) {
+				return userProfile.username;
+			}
+			return null;
+		}
+		
 		function loadUserProfile(){
 			var deferred = $q.defer();
-			
 			$http.get("/profile/").then(function(resp) {
-				console.log(resp);
-				deferred.resolve(resp);
+				deferred.resolve(resp.data);
+			}, function(resp) {
+				deferred.reject(resp.data);
 			});
 			
 			return deferred.promise;			
@@ -29,7 +44,9 @@ define([], function() {
 		
 		return {
 			loadUserProfile : loadUserProfile,
-			isLoggedIn: isLoggedIn
+			isLoggedIn: isLoggedIn,
+			onNotify : onNotify,
+			getUsername : getUsername
 		}
 	}
 

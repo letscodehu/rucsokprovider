@@ -4,7 +4,7 @@ define([ "app/services/rucsokService.js",
          "app/services/loginService.js",
          "app/services/authResolverFactory.js",
          "app/services/userProfileService.js",
-         "app/services/csrfRefreshService.js",
+         "app/services/rucsokModelService.js",
          "ionic"], function(
         		 rucsokService, 
         		 addRucsokFormService, 
@@ -12,18 +12,17 @@ define([ "app/services/rucsokService.js",
         		 loginService,
         		 authResolverFactory,
         		 userProfileService,
-        		 csrfRefreshService
+        		 rucsokModelService
         		 ) {
 	
 	var services = angular.module("services", []);
-	
+	services.factory("rucsokModelService", rucsokModelService);
 	services.factory("rucsokService", rucsokService);
 	services.factory("addRucsokFormService", addRucsokFormService);
 	services.factory("crawlRucsokService", crawlRucsokService);
 	services.factory("loginService", loginService);
 	services.factory("authResolverFactory", authResolverFactory);
 	services.factory("userProfileService", userProfileService);
-	services.factory("csrfRefreshService", csrfRefreshService);
 	return services;
 	
 });
