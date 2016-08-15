@@ -19,6 +19,8 @@ define([], function() {
 		function onNotify() {
 			 loadUserProfile().then(function(data){
 				 userProfile = data;
+			 }, function() {
+				 userProfile = null;
 			 });
 		}
 		
@@ -33,6 +35,8 @@ define([], function() {
 			var deferred = $q.defer();
 			$http.get("/profile/").then(function(resp) {
 				deferred.resolve(resp.data);
+			}, function(resp) {
+				deferred.reject(resp.data);
 			});
 			
 			return deferred.promise;			
