@@ -55,7 +55,7 @@ define([ "jquery" ], function($) {
 				cache : false,
 				dataType : "json",
 				crossDomain : false,
-				success : function(response) {
+				success : function loginuccess(response) {
 					if (response.success == true) {
 						console.info("Authentication Success!");
 						window.location.href = "/";
@@ -64,7 +64,7 @@ define([ "jquery" ], function($) {
 						vm.invalidlogin = true;
 					}
 				},
-				error : function(data) {
+				error : function loginError(data) {
 					console.log(data);
 					vm.invalidlogin = true;
 				}

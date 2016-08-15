@@ -10,10 +10,9 @@ define([], function() {
 
 		function login() {
 			loginService.loginUser($scope.data.username, $scope.data.password)
-					.then(function(data) {
+					.then(function success(data) {
 						$state.go('dashboard');
-						console.log(123)
-					}, function(data) {
+					}, function failure(data) {
 						$state.go('login');
 						var alertPopup = $ionicPopup.alert({
 							title : 'Login failed!',

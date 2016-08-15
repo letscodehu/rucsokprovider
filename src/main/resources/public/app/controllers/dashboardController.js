@@ -9,13 +9,13 @@ define([ 'jquery' ], function($) {
 		$scope.rucsoks = [];
 		$scope.addRucsok = addRucsok;
 		$scope.showRucsok = showRucsok;
-		$scope.isLoggedIn = userProfileService.isLoggedIn();
+		$scope.isLoggedIn = userProfileService.isLoggedIn;
 		$scope.goToLogin = goToLogin;
 
 		refresh();
 
 		var updateListener = $scope.$on('rucsok.added', function(event) {
-			vm.refresh();
+			refresh();
 		});
 
 		$scope.$on('$destroy', function() {

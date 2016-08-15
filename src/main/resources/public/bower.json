@@ -1,0 +1,6 @@
+{
+	"name" : "Rücsökprovider",
+	"devDependencies" : {
+		"jasmine-core" : "2.4.*"
+	}
+}

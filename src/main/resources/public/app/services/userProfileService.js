@@ -12,7 +12,7 @@ define([], function() {
 			 });
 		}
 		
-		function isLoggedIn(){
+		function isLoggedIn() {
 			return null !== userProfile;
 		}
 		

@@ -19,6 +19,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.WebIntegrationTest;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -35,6 +36,7 @@ import com.rucsok.test.config.RepositoryConfig;
 import com.rucsok.test.config.TestConfig;
 
 @RunWith(SpringJUnit4ClassRunner.class)
+
 @ContextConfiguration(classes = {RepositoryConfig.class, TestConfig.class})
 @WebIntegrationTest
 public class CrawlRucsokControllerIntegrationTest {

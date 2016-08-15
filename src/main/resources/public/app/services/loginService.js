@@ -4,6 +4,8 @@ define([ 'jquery' ], function($) {
 
 	function loginService($http, $q) {
 
+		var vm = this;
+		
 		function loginUser(username, password) {
 			var deferred = $q.defer();
 
