@@ -49,14 +49,9 @@ public class UserProfileIntegrationTest {
 	@Autowired
 	private WebApplicationContext context;
 
-	@Autowired
-	private FilterChainProxy filterChainProxy;
-
 	private MockMvc mockMvc;
 
 	private UserEntity user;
-
-	private String requestMapping;
 
 	@Before
 	public void setUp() {

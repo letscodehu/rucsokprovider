@@ -4,6 +4,7 @@ create table rucsok (
     , link varchar(255)
     , imageUrl varchar(500)
     , videourl varchar(500)
+    , user_id int
     , primary key (id)
 );
 create table user (
@@ -11,19 +12,26 @@ create table user (
     , email varchar(255) not null
     , password varchar(255) not null
     , name varchar(255) not null
-    , failedLogin boolean
+    , failedLogin int
     , primary key (id)
 );
-insert into rucsok(id, title,  link, imageUrl, videourl) 
-values (1, 'rucsok01', 'http://rucsok.com/01.gif','img01', null);
-insert into rucsok(id, title,  link, imageUrl, videourl) 
-values (2, 'rucsok02', 'http://rucsok.com/02.gif','img02', null);
-insert into rucsok(id, title,  link, imageUrl, videourl) 
-values (3, 'rucsok03', 'http://rucsok.com/03.gif','img03', null);
-insert into rucsok(id, title,  link, imageUrl, videourl)
-values (4, 'rucsok04', 'http://rucsok.com/04.gif','img04', 'http://rucsok.com/rucsok.mp4');
 
 insert into user(id, email,  password, name, failedLogin)
 values (1, 'rucsok', '$2a$06$0RA1mDUlDAvOh5V9a0R01.POVFn1/Dvc5ggJ9xhXLiDAjG3o6NiNG', 'rucsok', 0);
+
 insert into user(id, email,  password, name, failedLogin)
-values (2, 'asd', '123', 'kecske', 0);
+values (2, 'asd', '$2a$06$0RA1mDUlDAvOh5V9a0R01.POVFn1/Dvc5ggJ9xhXLiDAjG3o6NiNG', 'kecske', 0);
+
+
+
+insert into rucsok(id, title,  link, imageUrl, videourl, user_id) 
+values (1, 'rucsok01', 'http://rucsok.com/01.gif','img01', null, 1);
+
+insert into rucsok(id, title,  link, imageUrl, videourl, user_id) 
+values (2, 'rucsok02', 'http://rucsok.com/02.gif','img02', 'https://www.youtube.com/watch?v=buXwBr9H3VY', 1);
+
+insert into rucsok(id, title,  link, imageUrl, videourl, user_id) 
+values (3, 'rucsok03', 'http://rucsok.com/03.gif','img03', 'http://rucsok.com/rucsok.mp4', 2);
+
+insert into rucsok(id, title,  link, imageUrl, videourl, user_id) 
+values (4, 'rucsok04', 'http://rucsok.com/04.gif','img04', null, 2);

@@ -10,6 +10,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.WebIntegrationTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers;
 import org.springframework.security.web.FilterChainProxy;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -33,9 +34,6 @@ public class LoginIntegrationTest {
 	@Autowired
 	private WebApplicationContext context;
 
-	@Autowired
-	private FilterChainProxy filterChainProxy;
-
 	private MockMvc mockMvc;
 
 	private ObjectMapper mapper;
@@ -43,10 +41,9 @@ public class LoginIntegrationTest {
 	@Before
 	public void setUp() {
 		mockMvc = MockMvcBuilders
-					.webAppContextSetup(context)
-					.dispatchOptions(true)
-					.addFilters(filterChainProxy)
-					.build();
+				.webAppContextSetup(context)
+				.apply(SecurityMockMvcConfigurers.springSecurity())
+				.build();
 		mapper = new ObjectMapper();
 	}
 

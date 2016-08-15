@@ -2,17 +2,30 @@
 <ion-view>
   <ion-nav-title>{{item.title}}</ion-nav-title>  
   <ion-content ng-keyup="onKeyUp($event)" tabindex="1" on-swipe-left="swipeLeft()" on-swipe-right="swipeRight()">
-  	<div class="row">	  
-	  <img class="centered" ng-src="{{item.imageUrl}}" alt="{{item.title}}"/>
+
+	<div ng-switch="item.type">
+		<div ng-switch-when="embedvideo">
+			<embedvideo-rucsok>
+		</div>
+		<div ng-switch-when="html5video">
+			<html5video-rucsok>
+		</div>
+		<div ng-switch-default>
+			<image-rucsok>
+		</div>
 	</div>
+	
   	<div class="row">
   		<span></span>
   	</div>
   	<div class="row">
-  		<span>
-  			<a href={{item.src}} target="_blank">
+  		<span class="col">
+  			<a href={{item.link}} target="_blank">
   				Source
   			</a>
+  		</span>  
+  		<span class="col">
+  			Posted by {{item.username}}
   		</span>  		
   	</div>
   </ion-content>

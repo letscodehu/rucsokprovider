@@ -7,6 +7,8 @@ public class RucsokView {
 	private long id;
 	private String imageUrl;
 	private String videoUrl;
+	private String type;
+	private String username;
 
 	public long getId() {
 		return id;
@@ -16,7 +18,6 @@ public class RucsokView {
 		this.id = id;
 	}
 
-	
 	public String getTitle() {
 		return title;
 	}
@@ -47,6 +48,22 @@ public class RucsokView {
 
 	public void setVideoUrl(String videoUrl) {
 		this.videoUrl = videoUrl;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String rucsokType) {
+		this.type = rucsokType;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String userName) {
+		this.username = userName;
 	}
 
 }
