@@ -62,7 +62,7 @@ public class PostRucsokControllerIntegrationTest {
 				.apply(SecurityMockMvcConfigurers.springSecurity())
 				.build();
 		
-		mapper = new ObjectMapper();
+		mapper = new ObjectMapper();		
 	}
 	
 	@Test

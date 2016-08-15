@@ -44,9 +44,6 @@ public class ListRucsokControllerIntegrationTest {
 
 	@Autowired
 	private RucsokDao rucsokDao;
-
-	@Autowired
-	private ListRucsokController listRucsokController;	
 	
 	@Autowired
 	private WebApplicationContext context;

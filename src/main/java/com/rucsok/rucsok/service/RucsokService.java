@@ -1,5 +1,6 @@
 package com.rucsok.rucsok.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -53,7 +54,8 @@ public class RucsokService {
 	}
 
 	private void createNewRucsok(Rucsok rucsok, String username) {
-		RucsokEntity rucsokEntity = rucsokServiceTransform.transformToRucsokEntity((rucsok));
+		rucsok.setCreatedAt(LocalDateTime.now());
+		RucsokEntity rucsokEntity = rucsokServiceTransform.transformToRucsokEntity(rucsok);
 		setUser(rucsokEntity, username);
 		rucsokRepo.save(rucsokEntity);
 	}

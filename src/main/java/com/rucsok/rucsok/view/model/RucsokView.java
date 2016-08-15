@@ -1,6 +1,14 @@
 package com.rucsok.rucsok.view.model;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 public class RucsokView {
+
+	public static final String DATEFORMAT = "yyyy.MM.dd HH:mm";
 
 	private String title;
 	private String link;
@@ -9,6 +17,10 @@ public class RucsokView {
 	private String videoUrl;
 	private String type;
 	private String username;
+
+	private LocalDateTime createdAt;
+
+	private DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATEFORMAT);
 
 	public long getId() {
 		return id;
@@ -64,6 +76,18 @@ public class RucsokView {
 
 	public void setUsername(String userName) {
 		this.username = userName;
+	}
+
+	public String getCreatedAt() {
+		String result = "";
+		if (null != createdAt) {
+			result = createdAt.format(formatter);
+		}
+		return result;
+	}
+
+	public void setCreatedAt(LocalDateTime createdDateTime) {
+		this.createdAt = createdDateTime;
 	}
 
 }

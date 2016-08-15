@@ -43,7 +43,7 @@ public class RepositoryConfig {
 	@Bean
 	public DataSource rucsokDataSource(){
 		EmbeddedDatabase db = new EmbeddedDatabaseBuilder().
-				              setType(EmbeddedDatabaseType.HSQL).
+				              setType(EmbeddedDatabaseType.H2).
 				              addScript(DATABASE_SCRIPT).
 				              build();
 			

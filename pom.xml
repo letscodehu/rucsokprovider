@@ -36,6 +36,7 @@
 		<!-- Database -->
 		<mysql.version>6.0.3</mysql.version>
 		<hsqldb.version>2.3.2</hsqldb.version>
+		<h2db.version>1.4.192</h2db.version>
 		<jdbc.version>4.0.5.RELEASE</jdbc.version>
 
 		<!-- Testing -->
@@ -103,9 +104,9 @@
 			<version>${mysql.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.hsqldb</groupId>
-			<artifactId>hsqldb</artifactId>
-			<version>${hsqldb.version}</version>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.4.192</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>

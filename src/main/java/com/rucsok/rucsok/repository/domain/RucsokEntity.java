@@ -1,6 +1,8 @@
 package com.rucsok.rucsok.repository.domain;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.rucsok.user.repository.domain.UserEntity;
 
@@ -35,6 +39,9 @@ public class RucsokEntity implements Serializable {
 	private String link;
 	private String imageUrl;
 	private String videoUrl;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date createdAt;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "user_id")
@@ -86,6 +93,14 @@ public class RucsokEntity implements Serializable {
 
 	public void setUser(UserEntity user) {
 		this.user = user;
+	}
+
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Timestamp createdDateTime) {
+		this.createdAt = createdDateTime;
 	}
 
 }

@@ -1,5 +1,11 @@
 package com.rucsok.rucsok.domain;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+
+import org.mockito.internal.creation.instance.InstantationException;
+
 import com.rucsok.user.domain.User;
 
 public class Rucsok {
@@ -11,6 +17,7 @@ public class Rucsok {
 	private String videoUrl;
 	private RucsokType type;
 	private User user;
+	private LocalDateTime createdAt;
 
 	public long getId() {
 		return id;
@@ -66,6 +73,14 @@ public class Rucsok {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
 	}
 
 }

@@ -28,21 +28,15 @@ public class RucsokTransformer {
 		result.setVideoUrl(rucsok.getVideoUrl());
 		result.setType(rucsok.getType().toString().toLowerCase());
 		result.setUsername(rucsok.getUser().getUsername());
+		result.setCreatedAt(rucsok.getCreatedAt());
 		return result;
 	}
-	
-	
+
 	public SingleRucsokView transformToSingleView(SingleRucsok rucsok) {
 		SingleRucsokView result = new SingleRucsokView();
-		if (null != rucsok.getCurrent()) {
-			result.setCurrent(transformToView(rucsok.getCurrent()));
-		}
-		if (null != rucsok.getPrevious()) {
-			result.setPreviousId(rucsok.getPrevious().getId());
-		}
-		if (null != rucsok.getNext()) {
-			result.setNextId(rucsok.getNext().getId());
-		}
+		setCurrentRucsokView(rucsok, result);
+		setPreviousRucsokView(rucsok, result);
+		setNextRucsokView(rucsok, result);
 		return result;
 	}
 
@@ -54,4 +48,23 @@ public class RucsokTransformer {
 		result.setVideoUrl(request.getRucsok().getVideoUrl());
 		return result;
 	}
+
+	private void setNextRucsokView(SingleRucsok rucsok, SingleRucsokView result) {
+		if (null != rucsok.getNext()) {
+			result.setNextId(rucsok.getNext().getId());
+		}
+	}
+
+	private void setPreviousRucsokView(SingleRucsok rucsok, SingleRucsokView result) {
+		if (null != rucsok.getPrevious()) {
+			result.setPreviousId(rucsok.getPrevious().getId());
+		}
+	}
+
+	private void setCurrentRucsokView(SingleRucsok rucsok, SingleRucsokView result) {
+		if (null != rucsok.getCurrent()) {
+			result.setCurrent(transformToView(rucsok.getCurrent()));
+		}
+	}
+
 }

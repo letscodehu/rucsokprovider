@@ -16,6 +16,7 @@ CREATE TABLE rucsok (
   title varchar(255) DEFAULT NULL,
   video_url varchar(255) DEFAULT NULL,
   user_id bigint(20) NOT NULL, 
+  created_at datetime NOT NULL, 
   PRIMARY KEY (id),
   FOREIGN KEY (user_id) REFERENCES user(id)
 ) AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;

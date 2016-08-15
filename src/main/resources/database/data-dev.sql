@@ -11,8 +11,8 @@ values (3, 'rucs@master.com', '$2a$06$0RA1mDUlDAvOh5V9a0R01.POVFn1/Dvc5ggJ9xhXLi
 SET FOREIGN_KEY_CHECKS = 0; 
 truncate table rucsok;
 SET FOREIGN_KEY_CHECKS = 1;
-insert into rucsok(id, title,  link, image_url, video_url, user_id) 
-values (1, 'rucsok01', 'http://letscode.hu','http://localhost:8080/images/test/01.jpg', null, 1);
+insert into rucsok(id, title,  link, image_url, video_url, user_id, created_at) 
+values (1, 'rucsok01', 'http://letscode.hu','http://localhost:8080/images/test/01.jpg', null, 1, STR_TO_DATE('2016-08-08 11:11:11', '%Y-%m-%d %H:%i:%s'));
 insert into rucsok(id, title,  link, image_url, video_url, user_id) 
 values (2, 'rucsok02', 'http://letscode.hu','http://localhost:8080/images/test/02.jpg', null, 1);
 insert into rucsok(id, title,  link, image_url, video_url, user_id) 

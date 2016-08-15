@@ -6,12 +6,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import org.hibernate.Hibernate;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.WebIntegrationTest;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers;
 import org.springframework.test.context.ContextConfiguration;
@@ -24,6 +28,7 @@ import org.springframework.web.context.WebApplicationContext;
 import com.rucsok.rucsok.repository.dao.RucsokDao;
 import com.rucsok.rucsok.repository.domain.RucsokEntity;
 import com.rucsok.rucsok.service.transform.RucsokTypeTransform;
+import com.rucsok.rucsok.view.model.RucsokView;
 import com.rucsok.test.config.RepositoryConfig;
 import com.rucsok.test.config.TestConfig;
 
@@ -77,6 +82,8 @@ public class SingleRucsokControllerIntegrationTest {
 	@Transactional
 	public void contentShouldContainCorrectProperties() throws Exception {
 		// Given	
+		LocalDateTime createdAt = LocalDateTime.of(2016, 8, 8, 11, 11, 11);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(RucsokView.DATEFORMAT);
 		RucsokEntity rucsok = rucsokDao.findById(TEST_DATA_ID).get(1);
 		String rucsokType = rucsokTypeTransform.getRucsokTypeFromEntity(rucsok).toString().toLowerCase();
 		// When
@@ -87,6 +94,7 @@ public class SingleRucsokControllerIntegrationTest {
 				.andExpect(jsonPath("$.current.type", is(rucsokType)))
 				.andExpect(jsonPath("$.current.username", is(rucsok.getUser().getName())))
 				.andExpect(jsonPath("$.previousId", is(1)))
-				.andExpect(jsonPath("$.nextId", is(3)));
+				.andExpect(jsonPath("$.nextId", is(3)))
+				.andExpect(jsonPath("$.current.createdAt", is(createdAt.format(formatter))));
 	}
 }

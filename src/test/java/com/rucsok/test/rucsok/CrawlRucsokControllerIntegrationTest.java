@@ -11,6 +11,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.time.LocalDateTime;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -98,6 +100,7 @@ public class CrawlRucsokControllerIntegrationTest {
 		when(rucsok.getVideoUrl()).thenReturn(null);
 		when(rucsok.getType()).thenReturn(RucsokType.IMAGE);
 		when(rucsok.getUser()).thenReturn(user);
+		when(rucsok.getCreatedAt()).thenReturn(LocalDateTime.now());
 		when(user.getUsername()).thenReturn(MOCK_USERNAME);
 		when(rucsokService.crawl(TEST_URL, TEST_USERNAME)).thenReturn(rucsok);
 
