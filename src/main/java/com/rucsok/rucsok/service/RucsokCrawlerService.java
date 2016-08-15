@@ -11,6 +11,7 @@ import com.rucsok.rucsok.domain.Rucsok;
 import com.rucsok.rucsok.service.exception.IllegalRucsokArgumentException;
 import com.rucsok.rucsok.service.helper.RucsokCrawlHelper;
 import com.rucsok.rucsok.view.transform.RucsokTransformer;
+import com.rucsok.user.repository.domain.UserEntity;
 import com.rucsok.user.service.UserService;
 import com.rucsok.user.transform.UserTransformer;
 
@@ -50,7 +51,8 @@ public class RucsokCrawlerService {
 	}
 
 	private void setRucsokUser(Rucsok crawledRucsok, String username) {
-		crawledRucsok.setUser(userTransformer.transformEntityToUser(userService.findUserByName(username)));
+		UserEntity findUserByName = userService.findUserByName(username);
+		crawledRucsok.setUser(userTransformer.transformEntityToUser(findUserByName));
 	}
 
 	private void checkIfUserExists(String username) {
