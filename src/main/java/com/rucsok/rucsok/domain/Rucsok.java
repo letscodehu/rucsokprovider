@@ -1,11 +1,6 @@
 package com.rucsok.rucsok.domain;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
-
-import org.mockito.internal.creation.instance.InstantationException;
-
 import com.rucsok.user.domain.User;
 
 public class Rucsok {

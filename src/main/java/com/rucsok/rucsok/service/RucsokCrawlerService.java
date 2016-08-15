@@ -1,7 +1,5 @@
 package com.rucsok.rucsok.service;
 
-import static org.mockito.Mockito.when;
-
 import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +8,6 @@ import org.springframework.stereotype.Service;
 import com.rucsok.rucsok.domain.Rucsok;
 import com.rucsok.rucsok.service.exception.IllegalRucsokArgumentException;
 import com.rucsok.rucsok.service.helper.RucsokCrawlHelper;
-import com.rucsok.rucsok.view.transform.RucsokTransformer;
 import com.rucsok.user.repository.domain.UserEntity;
 import com.rucsok.user.service.UserService;
 import com.rucsok.user.transform.UserTransformer;
