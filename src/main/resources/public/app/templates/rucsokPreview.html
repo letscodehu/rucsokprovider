@@ -1,16 +1,3 @@
-<style>
-#rucsok{
-	display:block;
-	margin:auto;
-	max-width:300px;
-	text-align:center;
-}
-
-#rucsok img{
-	max-width:300px;
-	max-height: 200px;
-}
-</style>
 <div id="rucsok" ng-if="showRucsokPreview()">
 
 	<div class="col">
@@ -18,16 +5,10 @@
 			{{ rucsok.title }}
 		</div>		
 		
-		<div class="row" ng-if="!rucsok.hasVideo()">
+		<div class="row">
 			<img ng-src="{{ rucsok.imageUrl }}"/>
 		</div>
-		
-<!-- 		<div class="row" ng-if="rucsok.hasVideo()"> -->
-<!-- 			<video preload="auto" autoplay="autoplay" muted="muted" loop="loop" webkit-playsinline=""> -->
-<!--                 <source ng-src="{{ rucsok.videoUrl }}" type="video/mp4"> -->
-<!--             </video> -->
-<!-- 		</div> -->
-            
+		            
 		<div class="row">
 			<a href="{{ rucsok.link }}">{{ rucsok.link }}</a>
 		</div>			

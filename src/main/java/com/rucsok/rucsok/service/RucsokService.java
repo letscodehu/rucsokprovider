@@ -13,41 +13,66 @@ import com.rucsok.rucsok.repository.domain.RucsokEntity;
 import com.rucsok.rucsok.service.exception.AlreadyExistsRucsokException;
 import com.rucsok.rucsok.service.exception.IllegalRucsokArgumentException;
 import com.rucsok.rucsok.service.transform.RucsokServiceTransform;
+import com.rucsok.user.service.UserService;
 
 @Service
 public class RucsokService {
 
 	@Autowired
-	private RucsokDao repo;
+	private RucsokDao rucsokRepo;
+
+	@Autowired
+	private UserService userService;
 
 	@Autowired
 	private RucsokServiceTransform rucsokServiceTransform;
 
 	public List<Rucsok> findAll() {
-		return rucsokServiceTransform.transformToRucsok(repo.getAllRucsok());
-	}
-
-	public SingleRucsok findRucsokById(int id) {
-		return rucsokServiceTransform.transformToSingleRucsok(repo.findById(id));
-	}
-
-	public void saveRucsok(Rucsok rucsok) {
-		checkArguments(rucsok);
-		checkIfUrlAlreadyAdded(rucsok);
-		repo.save(rucsokServiceTransform.transformToRucsokEntity((rucsok)));
-	}
-
-	public Optional<RucsokEntity> findByLink(String url) {
-		return Optional.ofNullable(repo.findByLink(url));
+		return rucsokServiceTransform.transformToRucsok(rucsokRepo.getAllRucsok());
 	}
 
 	public void deleteById(long id) {
-		repo.delete(repo.findOne(id));
+		rucsokRepo.delete(rucsokRepo.findOne(id));
+	}
+
+	public Optional<RucsokEntity> findByLink(String url) {
+		return Optional.ofNullable(rucsokRepo.findByLink(url));
+	}
+
+	public SingleRucsok findRucsokById(int id) {
+		return rucsokServiceTransform.transformToSingleRucsok(rucsokRepo.findById(id));
+	}
+
+	public void saveRucsok(Rucsok rucsok, String username) {
+		checkCreateRucsokPreconditions(rucsok, username);
+		createNewRucsok(rucsok, username);
+	}
+
+	private void setUser(RucsokEntity rucsokEntity, String username) {
+		rucsokEntity.setUser(userService.findUserByName(username));
+	}
+
+	private void createNewRucsok(Rucsok rucsok, String username) {
+		RucsokEntity rucsokEntity = rucsokServiceTransform.transformToRucsokEntity((rucsok));
+		setUser(rucsokEntity, username);
+		rucsokRepo.save(rucsokEntity);
+	}
+
+	private void checkCreateRucsokPreconditions(Rucsok rucsok, String username) {
+		checkUser(username);
+		checkArguments(rucsok);
+		checkIfUrlAlreadyAdded(rucsok);
 	}
 
 	private void checkIfUrlAlreadyAdded(Rucsok rucsok) {
 		if (findByLink(rucsok.getLink()).isPresent()) {
 			throw new AlreadyExistsRucsokException(rucsok);
+		}
+	}
+
+	private void checkUser(String username) {
+		if (!userService.isUserExists(username)) {
+			throw new IllegalRucsokArgumentException("Rucsok cannot be create without user.");
 		}
 	}
 

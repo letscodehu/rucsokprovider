@@ -1,10 +1,10 @@
 define([], function() {
 
 	singleController.$inject = [ "$scope", "$state", "rucsokService",
-			"$stateParams", '$ionicHistory', '$document' ];
+			"$stateParams", '$ionicHistory', '$document',  'rucsokModelService' ];
 
 	function singleController($scope, $state, rucsokService, $stateParams,
-			$ionicHistory, $document) {
+			$ionicHistory, $document, rucsokModelService) {
 		var vm = this;
 		$scope.item = {};
 
@@ -73,10 +73,10 @@ define([], function() {
 		}
 
 		function assignRucsokToScope(data) {
-			$scope.raw = data;
-			$scope.item = data.current;
+			$scope.item = rucsokModelService.createRucsokFromRequest(data.current);
 			$scope.next = data.nextId;
 			$scope.prev = data.previousId;
+			console.log($scope.item.hasVideo())
 		}
 
 		init();

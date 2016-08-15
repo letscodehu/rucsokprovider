@@ -1,5 +1,7 @@
 package com.rucsok.rucsok.domain;
 
+import com.rucsok.user.domain.User;
+
 public class Rucsok {
 
 	private long id;
@@ -7,6 +9,8 @@ public class Rucsok {
 	private String link;
 	private String imageUrl;
 	private String videoUrl;
+	private RucsokType type;
+	private User user;
 
 	public long getId() {
 		return id;
@@ -46,6 +50,22 @@ public class Rucsok {
 
 	public void setVideoUrl(String videoUrl) {
 		this.videoUrl = videoUrl;
+	}
+
+	public RucsokType getType() {
+		return type;
+	}
+
+	public void setType(RucsokType type) {
+		this.type = type;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }

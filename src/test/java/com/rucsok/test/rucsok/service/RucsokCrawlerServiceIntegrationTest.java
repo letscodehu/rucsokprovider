@@ -26,12 +26,17 @@ import com.rucsok.rucsok.service.RucsokCrawlerService;
 import com.rucsok.rucsok.service.helper.GeneralDocumentParser;
 import com.rucsok.rucsok.service.helper.RucsokCrawlHelper;
 import com.rucsok.rucsok.service.helper.UrlFetchHelper;
+import com.rucsok.rucsok.service.transform.RucsokTypeTransform;
 import com.rucsok.test.config.RucsokCrawlServiceConfig;
+import com.rucsok.user.repository.dao.UserRepository;
+import com.rucsok.user.service.UserService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { RucsokCrawlerService.class, RucsokCrawlHelper.class, GeneralDocumentParser.class,
-		RucsokCrawlServiceConfig.class })
+		RucsokCrawlServiceConfig.class, RucsokTypeTransform.class })
 public class RucsokCrawlerServiceIntegrationTest implements ApplicationContextAware {
+	
+	private static final String TEST_USERNAME = "rucsok";
 
 	private static final String TEST_PAGE_IMGUR = "src/main/resources/test/html-pages/imgur.html";
 	private static final String TEST_PAGE_YOUTUBE = "src/main/resources/test/html-pages/youtube.html";
@@ -40,10 +45,12 @@ public class RucsokCrawlerServiceIntegrationTest implements ApplicationContextAw
 	private RucsokCrawlerService underTest;
 
 	private UrlFetchHelper urlFetcher;
+	private UserService userService;
 
 	@Override
 	public void setApplicationContext(ApplicationContext context) throws BeansException {
 		urlFetcher = context.getBean(UrlFetchHelper.class);
+		userService = context.getBean(UserService.class);
 	}
 
 	@Before
@@ -55,8 +62,9 @@ public class RucsokCrawlerServiceIntegrationTest implements ApplicationContextAw
 		// Given
 		String url = "http://youtube";
 		when(urlFetcher.fetchUrl(url)).thenReturn(getDocumentFromHtmlString(readHtmlFromFile(TEST_PAGE_YOUTUBE)));
+		when(userService.isUserExists(TEST_USERNAME)).thenReturn(true);
 		// When
-		Rucsok result = underTest.crawl(url);
+		Rucsok result = underTest.crawl(url, TEST_USERNAME);
 		// Then
 		Assert.assertEquals("Image", "https://i.ytimg.com/vi/VIep9sqtQSY/hqdefault.jpg", result.getImageUrl());
 		Assert.assertEquals("Title", "Project fit interviews", result.getTitle());
@@ -69,8 +77,9 @@ public class RucsokCrawlerServiceIntegrationTest implements ApplicationContextAw
 		// Given
 		String url = "http://imgur";
 		when(urlFetcher.fetchUrl(url)).thenReturn(getDocumentFromHtmlString(readHtmlFromFile(TEST_PAGE_IMGUR)));
+		when(userService.isUserExists(TEST_USERNAME)).thenReturn(true);
 		// When
-		Rucsok result = underTest.crawl(url);
+		Rucsok result = underTest.crawl(url, TEST_USERNAME);
 		// Then
 		Assert.assertEquals("Image", "http://i.imgur.com/bio5rS3.jpg?fb", result.getImageUrl());
 		Assert.assertEquals("Title", "Home Design Styles (Pixels!)", result.getTitle());

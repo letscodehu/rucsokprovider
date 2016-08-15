@@ -1,4 +1,4 @@
-define([], function() {
+define(['jquery'], function($) {
 
 	crawlRucsokService.$inject = [ "$http", "$q" ];
 
@@ -17,11 +17,15 @@ define([], function() {
 		}
 
 		function postUrl(deferred, url) {
+			
+			var csrfToken = $("[name='_csrf']").val();
+			
 			$http({
 				"url" : "/check-rucsok",
 				"method" : "POST",
 				"data" : {
-					"url" : url
+					"url" : url,
+					'_csrf' : csrfToken
 				},
 			}).then(function(resp) {
 				deferred.resolve(resp.data);

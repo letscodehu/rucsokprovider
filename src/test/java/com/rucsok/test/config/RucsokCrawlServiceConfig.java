@@ -2,18 +2,19 @@ package com.rucsok.test.config;
 
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 
 import com.rucsok.rucsok.service.helper.UrlFetchHelper;
+import com.rucsok.user.service.UserService;
 
 //@Configuration removed to prevent component scan
 public class RucsokCrawlServiceConfig {
 
 	@Mock
 	UrlFetchHelper urlFetchHelper;
+	
+	@Mock
+	UserService userService;
 
 	public RucsokCrawlServiceConfig() {
 		MockitoAnnotations.initMocks(this);
@@ -22,5 +23,10 @@ public class RucsokCrawlServiceConfig {
 	@Bean
 	public UrlFetchHelper getUrlFetchHelper() {
 		return urlFetchHelper;
+	}
+	
+	@Bean
+	public UserService getUserService() {
+		return userService;
 	}
 }
