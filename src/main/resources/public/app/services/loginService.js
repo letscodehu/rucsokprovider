@@ -1,8 +1,8 @@
 define([ 'jquery' ], function($) {
 
-	loginService.$inject = [ '$http', '$q' ];
+	loginService.$inject = [ '$http', '$q', 'userProfileService'];
 
-	function loginService($http, $q) {
+	function loginService($http, $q, userProfileService) {
 
 		var vm = this;
 		
@@ -28,14 +28,26 @@ define([ 'jquery' ], function($) {
 				headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 			}).then(function(resp) {
 				deferred.resolve(resp.data);
+				userProfileService.onNotify();
 			}, function(err) {
 				deferred.reject(err);
 			});
 
 			return deferred.promise;
 		}
+		
+		function logout() {
+			$http({
+				'url' : '/logout',
+				'method' : 'POST'
+			}).then(function() {
+				userProfileService.onNotify();	
+			})
+			
+		}
 
 		return {
+			logout : logout,
 			loginUser : loginUser
 		}
 	}
