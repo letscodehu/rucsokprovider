@@ -1,0 +1,5 @@
+language: java
+install: true
+script: 
+- jdk_switcher use oraclejdk8
+- mvn test
