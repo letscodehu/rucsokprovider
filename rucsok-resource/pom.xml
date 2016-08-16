@@ -8,7 +8,7 @@
 	</parent>
 	<artifactId>rucsok-resource</artifactId>
 
-	<name>academy</name>
+	<name>resource-server</name>
 	<description>Hey kid, want some monad?</description>
 
 	<properties>
