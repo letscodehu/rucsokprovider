@@ -31,7 +31,6 @@ public class CrawlRucsokController {
 
 
 	@RequestMapping(name = "createrucsok", path = REQUEST_MAPPING, method = RequestMethod.POST)
-	@Secured ({"ROLE_ADMIN","ROLE_USER"})
 	public RucsokView crawlRucsok(@RequestBody RucsokCheckRequest request, Principal principal) throws IOException {
 		return rucsokTransformer.transformToView(rucsokService.crawl(request.getUrl(), principal.getName()));
 	}

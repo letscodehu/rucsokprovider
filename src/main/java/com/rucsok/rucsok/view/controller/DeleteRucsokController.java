@@ -18,7 +18,6 @@ public class DeleteRucsokController {
 	@Autowired
 	private RucsokService rucsokService;
 
-	@Secured ({"ROLE_USER"})
 	@RequestMapping(name = "delete-rucsok", path = REQUEST_MAPPING, method = RequestMethod.DELETE)
 	@ResponseStatus(value = HttpStatus.ACCEPTED)
 	public void removeRucsok(@RequestParam long id) {

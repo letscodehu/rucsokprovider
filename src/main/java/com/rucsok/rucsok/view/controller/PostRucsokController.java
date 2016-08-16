@@ -27,7 +27,6 @@ public class PostRucsokController {
 	private RucsokTransformer rucsokTransformer;
 
 	@ResponseBody
-	@Secured ({"ROLE_ADMIN", "ROLE_USER"})
 	@RequestMapping(name = "postrucsok", path = REQUEST_MAPPING, method = RequestMethod.POST)
 	@ResponseStatus(value = HttpStatus.CREATED)
 	public void putRucsok(@RequestBody RucsokInsertRequest request, Principal principal) {		

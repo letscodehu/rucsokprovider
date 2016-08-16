@@ -26,6 +26,7 @@ import com.rucsok.rucsok.repository.domain.RucsokEntity;
 import com.rucsok.rucsok.view.controller.PostRucsokController;
 import com.rucsok.rucsok.view.model.RucsokInsertRequest;
 import com.rucsok.rucsok.view.model.RucsokPost;
+import com.rucsok.test.TokenHelper;
 import com.rucsok.test.config.RepositoryConfig;
 import com.rucsok.test.config.TestConfig;
 import com.rucsok.user.repository.domain.UserEntity;
@@ -55,18 +56,23 @@ public class PostRucsokControllerIntegrationTest {
 
 	private ObjectMapper mapper;
 
+	private String accessToken;
+
 	@Before
-	public void setUp() {
+	public void setUp() throws Exception {
 		mockMvc = MockMvcBuilders
 				.webAppContextSetup(context)
 				.apply(SecurityMockMvcConfigurers.springSecurity())
 				.build();
 		
-		mapper = new ObjectMapper();		
+		mapper = new ObjectMapper();	
+
+		accessToken = TokenHelper.getAccessToken("rucsok", "123", mockMvc);
+
 	}
 	
 	@Test
-	public void postShouldReturnFoundWhenUserNotLoggedIn() throws Exception {
+	public void postShouldReturnUnauthorizedWhenUserNotLoggedIn() throws Exception {
 
 		// Given
 
@@ -75,16 +81,14 @@ public class PostRucsokControllerIntegrationTest {
 		// Then
 
 		mockMvc.perform(post(PostRucsokController.REQUEST_MAPPING)
-				.with(csrf())
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(""))
 				.andExpect(status()
-				.isFound());
+				.isUnauthorized());
 
 	}
 
 	@Test
-	@WithUserDetails(TEST_USER_NAME)
 	public void postShouldReturnBadGatewayWhenRequestIsNull() throws Exception {
 
 		// Given
@@ -94,7 +98,7 @@ public class PostRucsokControllerIntegrationTest {
 		// Then
 
 		mockMvc.perform(post(PostRucsokController.REQUEST_MAPPING)
-				.with(csrf())
+				.header("Authorization", "Bearer " + accessToken)
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(mapper.writeValueAsString(null)))
 				.andExpect(status()
@@ -103,7 +107,6 @@ public class PostRucsokControllerIntegrationTest {
 	}
 
 	@Test
-	@WithUserDetails(TEST_USER_NAME)
 	public void postShouldReturnBadGatewayWhenLinkIsNull() throws Exception {
 
 		// Given
@@ -117,7 +120,7 @@ public class PostRucsokControllerIntegrationTest {
 		// Then
 
 		mockMvc.perform(post(PostRucsokController.REQUEST_MAPPING)
-				.with(csrf())
+				.header("Authorization", "Bearer " + accessToken)
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(mapper.writeValueAsString(request)))
 				.andExpect(status().isBadRequest());
@@ -125,7 +128,6 @@ public class PostRucsokControllerIntegrationTest {
 	}
 
 	@Test
-	@WithUserDetails(TEST_USER_NAME)
 	public void postShouldReturnBadGatewayWhenImageIsNull() throws Exception {
 
 		// Given
@@ -140,7 +142,7 @@ public class PostRucsokControllerIntegrationTest {
 		// Then
 
 		mockMvc.perform(post(PostRucsokController.REQUEST_MAPPING)
-				.with(csrf())
+				.header("Authorization", "Bearer " + accessToken)
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(mapper.writeValueAsString(request)))
 				.andExpect(status()
@@ -149,19 +151,18 @@ public class PostRucsokControllerIntegrationTest {
 	}
 
 	@Test
-	@WithUserDetails(TEST_USER_NAME)
 	@Transactional
 	public void postShouldCreateNewEntity() throws Exception {
 
 		// Given
-
+		
 		RucsokPost rucsok = createRucsokPostHelper();
 		RucsokInsertRequest request = createRucsokInsertRequestHelper(rucsok);
 
 		// When
 
 		mockMvc.perform(post(PostRucsokController.REQUEST_MAPPING)
-				.with(csrf())
+				.header("Authorization", "Bearer " + accessToken)
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(mapper.writeValueAsString(request)))
 				.andExpect(status()
@@ -181,7 +182,6 @@ public class PostRucsokControllerIntegrationTest {
 	}
 
 	@Test
-	@WithUserDetails(TEST_USER_NAME)
 	public void postShouldNotSaveTheSameUrlAgain() throws Exception {
 
 		// Given
@@ -193,13 +193,13 @@ public class PostRucsokControllerIntegrationTest {
 		// When
 
 		mockMvc.perform(post(PostRucsokController.REQUEST_MAPPING)
-				.with(csrf())
+				.header("Authorization", "Bearer " + accessToken)
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(mapper.writeValueAsString(request)))
 				.andExpect(status().isCreated());
 
 		mockMvc.perform(post(PostRucsokController.REQUEST_MAPPING)
-				.with(csrf())
+				.header("Authorization", "Bearer " + accessToken)
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(mapper.writeValueAsString(request)))
 				.andExpect(status()

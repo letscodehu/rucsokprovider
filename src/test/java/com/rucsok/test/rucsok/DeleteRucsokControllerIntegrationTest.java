@@ -23,6 +23,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rucsok.rucsok.repository.dao.RucsokDao;
 import com.rucsok.rucsok.repository.domain.RucsokEntity;
 import com.rucsok.rucsok.view.controller.DeleteRucsokController;
+import com.rucsok.test.TokenHelper;
 import com.rucsok.test.config.RepositoryConfig;
 import com.rucsok.test.config.TestConfig;
 
@@ -42,29 +43,32 @@ public class DeleteRucsokControllerIntegrationTest {
 	private MockMvc mockMvc;
 
 	private ObjectMapper mapper;
+	
+	private String accessToken;
 
 	@Before
-	public void setUp() {
+	public void setUp() throws Exception {
 		mockMvc = MockMvcBuilders
 				.webAppContextSetup(context)
 				.apply(SecurityMockMvcConfigurers.springSecurity())
 				.build();
 		
 		mapper = new ObjectMapper();
+		
+		accessToken = TokenHelper.getAccessToken("rucsok", "123", mockMvc);
 	}
 	
 
 	@Test
-	public void deleteShouldReturnFoundWhenUserNotLoggedIn() throws Exception {
+	public void deleteShouldReturnUnauthorizedWhenUserNotLoggedIn() throws Exception {
 
 		// Given
 		
 		// When
 		
 		mockMvc.perform(delete(DeleteRucsokController.REQUEST_MAPPING)		
-				 .with(csrf())
 				 .contentType(MediaType.APPLICATION_JSON))
-		 		 .andExpect(status().isFound());
+		 		 .andExpect(status().isUnauthorized());
 		
 		// Then
 
@@ -82,7 +86,7 @@ public class DeleteRucsokControllerIntegrationTest {
 		// When
 		
 		mockMvc.perform(delete(DeleteRucsokController.REQUEST_MAPPING)		
-				 .with(csrf())
+				 .header("Authorization", "Bearer " + accessToken)
 				 .contentType(MediaType.APPLICATION_JSON)
 				 .param("id", nullParam))
 		 		 .andExpect(status().isBadRequest());
@@ -102,7 +106,7 @@ public class DeleteRucsokControllerIntegrationTest {
 		// When
 		
 		mockMvc.perform(delete(DeleteRucsokController.REQUEST_MAPPING)		
-				.with(csrf())
+				.header("Authorization", "Bearer " + accessToken)
 				.contentType(MediaType.APPLICATION_JSON)
 				.param("id", nullParam))
 		        .andExpect(status()
@@ -121,7 +125,7 @@ public class DeleteRucsokControllerIntegrationTest {
 		// When
 		
 		mockMvc.perform(delete(DeleteRucsokController.REQUEST_MAPPING)
-				.with(csrf())
+				.header("Authorization", "Bearer " + accessToken)
 				.contentType(MediaType.APPLICATION_JSON)
 				.param("id", DELETE_ID))
 		        .andExpect(status()

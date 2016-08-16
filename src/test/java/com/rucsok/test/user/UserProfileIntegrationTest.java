@@ -27,6 +27,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers;
 
+import com.rucsok.test.TokenHelper;
 import com.rucsok.test.config.RepositoryConfig;
 import com.rucsok.test.config.TestConfig;
 import com.rucsok.user.repository.dao.UserRepository;
@@ -53,32 +54,36 @@ public class UserProfileIntegrationTest {
 
 	private UserEntity user;
 
+	private String accessToken;
+
 	@Before
-	public void setUp() {
+	public void setUp() throws Exception {
 		mockMvc = MockMvcBuilders
 				.webAppContextSetup(context)
 				.apply(SecurityMockMvcConfigurers.springSecurity())
 				.build();
 		user = userDao.findByName("rucsok");
+		accessToken = TokenHelper.getAccessToken("rucsok", "123", mockMvc);
 	}
 
 	@Test
-	@WithUserDetails("rucsok")
 	public void statusShouldOk() throws Exception {
 		// Given
 		// When
 		// Then
-		mockMvc.perform(get(REQUEST_MAPPING)).andExpect(status().isOk());
+		mockMvc.perform(get(REQUEST_MAPPING)
+				.header("Authorization", "Bearer " + accessToken))
+				.andExpect(status().isOk());
 	}
 
 	@Test
-	@WithUserDetails("rucsok")
 	public void contentShouldBeJson() throws Exception {
 		// Given
 
 		// When
 		// Then
-		mockMvc.perform(get(REQUEST_MAPPING))
+		mockMvc.perform(get(REQUEST_MAPPING)
+					.header("Authorization", "Bearer " + accessToken))
 					.andExpect(content()
 					.contentTypeCompatibleWith(MediaType.APPLICATION_JSON));
 	}
@@ -89,15 +94,18 @@ public class UserProfileIntegrationTest {
 		// Given
 		// When
 		// Then
-		mockMvc.perform(get(REQUEST_MAPPING)).andExpect(jsonPath("$.username", is(user.getName())));
+		mockMvc.perform(get(REQUEST_MAPPING)
+				.header("Authorization", "Bearer " + accessToken))
+				.andExpect(jsonPath("$.username", is(user.getName())));
 	}
 
 	@Test
-	public void contentShouldReturnBadRequestWhenUserNotLoggedIn() throws Exception {
+	public void contentShouldReturnUnauthorizedWhenUserNotLoggedIn() throws Exception {
 		// Given
 		// When
 		// Then
-		mockMvc.perform(get(REQUEST_MAPPING)).andExpect(status().isFound());
+		mockMvc.perform(get(REQUEST_MAPPING))
+				.andExpect(status().isUnauthorized());
 	}
 
 }

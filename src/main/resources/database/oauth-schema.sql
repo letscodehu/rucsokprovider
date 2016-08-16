@@ -1,27 +1,3 @@
-DROP TABLE IF EXISTS rucsok;
-DROP TABLE IF EXISTS user;
-
-CREATE TABLE user (
-  id bigint(20) NOT NULL AUTO_INCREMENT,
-  email varchar(255) DEFAULT NULL,
-  name varchar(255) DEFAULT NULL,
-  password varchar(255) DEFAULT NULL,
-  failedLogin int(20) DEFAULT NULL,
-  PRIMARY KEY (id)
-) DEFAULT CHARSET=utf8;
-
-CREATE TABLE rucsok (
-  id bigint(20) NOT NULL AUTO_INCREMENT,
-  image_url varchar(255) DEFAULT NULL,
-  link varchar(255) DEFAULT NULL,
-  title varchar(255) DEFAULT NULL,
-  video_url varchar(500) DEFAULT NULL,
-  user_id bigint(20) NOT NULL, 
-  created_at datetime NOT NULL, 
-  PRIMARY KEY (id),
-  FOREIGN KEY (user_id) REFERENCES user(id)
-) AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
-
 drop table if exists oauth_client_details;
 create table oauth_client_details (
   client_id VARCHAR(255) PRIMARY KEY,

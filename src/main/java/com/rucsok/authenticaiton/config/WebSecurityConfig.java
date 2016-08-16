@@ -1,17 +1,15 @@
 package com.rucsok.authenticaiton.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
-import org.springframework.security.web.csrf.CsrfTokenRepository;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -19,7 +17,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	UserDetailsService userDetailsService;
-	
+
 	@Autowired
 	AuthFailureHandler authFailureHandler;
 
@@ -27,35 +25,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	AuthSuccessHandler authSuccessHandler;
 
 	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
-		
-		http
-		.authorizeRequests()
-		.antMatchers(HttpMethod.HEAD).permitAll()
-		.antMatchers(HttpMethod.GET, "/","/profile", "/check-rucsok", "/rucsok/**","/**/*.js", "/app/**/*.html", "/**/*.js.map" , "/**/*.css", "/images/**").permitAll().antMatchers(HttpMethod.HEAD,  "/").permitAll()		
-		.anyRequest().authenticated()
-		.and()
-		.formLogin()
-		.loginPage("/login")
-		.usernameParameter("sec-user")
-		.passwordParameter("sec-password")
-		.failureHandler(authFailureHandler)
-		.successHandler(authSuccessHandler)
-		.permitAll()
-		.and()
-		.logout()
-		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-		.logoutSuccessUrl("/")
-		.deleteCookies("remember-me", "JSESSIONID")
-		.permitAll()
-		.and()
-		.rememberMe();
+	@Bean
+	public AuthenticationManager authenticationManagerBean() throws Exception {
+		return super.authenticationManagerBean();
 	}
-	
+
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http.authorizeRequests().antMatchers("/login").permitAll().anyRequest().authenticated().and().formLogin()
+				.permitAll();
+	}
+
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth
-		.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
+		auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
 	}
 }
