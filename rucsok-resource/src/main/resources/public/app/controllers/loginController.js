@@ -11,9 +11,9 @@ define([], function() {
 		function login() {
 			loginService.loginUser($scope.data.username, $scope.data.password)
 					.then(function success(data) {
-						$state.go('dashboard');
+						$state.go('app.dashboard');
 					}, function failure(data) {
-						$state.go('login');
+						$state.go('app.login');
 						var alertPopup = $ionicPopup.alert({
 							title : 'Login failed!',
 							template : 'Please check your credentials!'

@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.rucsok.user.service.UserProfileService;
 import com.rucsok.user.view.model.UserProfileView;
 import com.rucsok.user.view.transform.UserProfileTransform;

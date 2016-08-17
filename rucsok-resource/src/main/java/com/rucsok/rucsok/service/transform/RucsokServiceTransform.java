@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
 import com.rucsok.rucsok.domain.Rucsok;
 import com.rucsok.rucsok.domain.SingleRucsok;
 import com.rucsok.rucsok.repository.domain.RucsokEntity;
-import com.rucsok.user.repository.domain.UserEntity;
 import com.rucsok.user.transform.UserTransformer;
 
 @Component
@@ -56,7 +55,10 @@ public class RucsokServiceTransform {
 		return result;
 	}
 
-	private LocalDateTime getCreatedAt(Date createdAt) {		
+	private LocalDateTime getCreatedAt(Date createdAt) {
+		if (createdAt == null) {
+			return new Timestamp(0).toLocalDateTime();
+		}
 		return new Timestamp(createdAt.getTime()).toLocalDateTime();
 	}
 

@@ -1,18 +1,14 @@
 define([ 'jquery' ], function($) {
 
-	rucsokController.$inject = [ '$scope', 'rucsokService',
-			'addRucsokFormService', '$state', 'userProfileService', 'loginService']
+	dashboardController.$inject = [ '$scope', 'rucsokService',
+			'addRucsokFormService', '$state']
 
-	function rucsokController($scope, rucsokService, addRucsokFormService,
-			$state, userProfileService, loginService) {
+	function dashboardController($scope, rucsokService, addRucsokFormService,
+			$state) {
 
 		$scope.rucsoks = [];
 		$scope.addRucsok = addRucsok;
 		$scope.showRucsok = showRucsok;
-		$scope.logout = logout;
-		$scope.isLoggedIn = userProfileService.isLoggedIn;
-		$scope.getUsername = userProfileService.getUsername;
-		$scope.goToLogin = goToLogin;
 
 		refresh();
 
@@ -23,38 +19,25 @@ define([ 'jquery' ], function($) {
 		$scope.$on('$destroy', function() {
 			updateListener();
 		});
-
+		
+				
 		function refresh() {
 			rucsokService.getRucsok().then(function(data) {
 				$scope.rucsoks = data;
 			});
 		}
 
-		function visit(url) {
-			var win = window.open(url, '_blank');
-			win.focus();
-		}
-
 		function addRucsok() {
-			addRucsokFormService.showView();
+			$state.go('app.add');
 		}
 
 		function showRucsok(item) {
-			$state.go('single', {
+			$state.go('app.single', {
 				id : item.id
 			});
 		}
-
-		function goToLogin() {
-			$state.go('login');
-		}
-
-		function logout() {
-			loginService.logout();
-		}
-
 		
 	}
 
-	return rucsokController;
+	return dashboardController;
 })

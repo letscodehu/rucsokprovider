@@ -19,12 +19,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	UserDetailsService userDetailsService;
 
-	@Autowired
-	AuthFailureHandler authFailureHandler;
-
-	@Autowired
-	AuthSuccessHandler authSuccessHandler;
-
 	@Override
 	@Bean
 	public AuthenticationManager authenticationManagerBean() throws Exception {

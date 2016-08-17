@@ -1,8 +1,8 @@
 define([], function() {
 
-	userProfile.$inject = [ '$q', '$rootScope', '$state', '$http', 'authService' ];
+	userProfile.$inject = [ '$q', '$rootScope', '$state', '$http' ];
 
-	function userProfile($q, $rootScope, $state, $http, authService) {
+	function userProfile($q, $rootScope, $state, $http) {
 		
 		var userProfile = null;
 		

@@ -3,9 +3,6 @@ package com.rucsok.rucsok.view.model;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-
 public class RucsokView {
 
 	public static final String DATEFORMAT = "yyyy.MM.dd HH:mm";

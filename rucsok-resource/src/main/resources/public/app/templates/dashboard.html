@@ -1,15 +1,11 @@
 <ion-view view-title="Dashboard">
-<ion-nav-buttons
-	side="primary">
-<button class="button btn-danger" ng-click="addRucsok()"
-	ng-if="isLoggedIn() == true">Add rücsök</button>
-	<button class="button btn-danger" ng-click="logout()"
-	ng-if="isLoggedIn() == true">Logout</button>
-<button class="button btn-danger" ng-click="goToLogin()"
-	ng-if="isLoggedIn() != true">Login</button>
-</ion-nav-buttons>
- <ion-content>
-<ion-gallery ion-gallery-items="rucsoks"
-	ion-item-callback="showRucsok(item)">
-	</ion-gallery> 
-</ion-content> <add-rucsok></add-rucsok> </ion-view>
+		<!-- Content --> 
+		<ion-content> 
+			<ion-spinner ng-if="rucsoks.length == 0" icon="spiral">
+			</ion-spinner>
+			<ion-gallery ion-gallery-items="rucsoks" ion-item-callback="showRucsok(item)">
+			</ion-gallery> 
+			<ion-floating-button ng-if="isLoggedIn() == true" ng-click="addRucsok()" has-footer="false" button-color="#2AC9AA" icon="ion-plus" iconColor="#fff">
+			</ion-floating-button>
+		</ion-content> 
+</ion-view>

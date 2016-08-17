@@ -1,15 +1,6 @@
-<style>
-#add-rucsok-modal {
-	z-index: 1000;
-}
-.alert-danger{
-	color: red;
-}
-</style>
-<ion-modal-view id="#add-rucsok-modal" class="modal-wrapper" ng-if="showAddRucsokForm()"> 
+<ion-view view-title="Contribute to da Rücsök">
 	<ion-header-bar>
-	
-        <h1 class="title">Contribute to the Rücsök</h1>
+
         <button class="button button-clear button-primary" ng-click="hideAddRucsokForm()">
         	Cancel
         </button>      
@@ -36,6 +27,4 @@
 		</div>
 		<rucsok-preview></rucsok-preview>
 	</ion-content> 
-</ion-modal-view>
-
-
+</ion-view>

@@ -6,8 +6,9 @@ define([], function() {
 
 		var vm = this;
 		
+		vm.lofasz = 5;
+		
 		function getRucsok() {
-			
 			var deferred = $q.defer();
 			// viva la promise, peti
 			$http.get("/rucsok").then(function(resp) {
@@ -46,4 +47,5 @@ define([], function() {
 	};
 	
 	return rucsokService;
+
 });

@@ -43,7 +43,6 @@ define([ "jquery" ], function($) {
 
 		function executeLogin(username, password) {
 			var csrf = $("[name='_csrf']").val();
-			console.log(csrf)
 			$.ajax({
 				type : 'POST',
 				url : '/login',
@@ -105,14 +104,6 @@ define([ "jquery" ], function($) {
 			} else {
 				$scope.urlErrorClass = 'alert-danger';
 			}
-		}
-
-		function showAddModal() {
-			$("#rucsok-modal").modal("show");
-		}
-
-		function closeAddModal() {
-			$("#rucsok-modal").modal("hide");
 		}
 
 		function showRucsok(item) {
