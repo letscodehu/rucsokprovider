@@ -40,10 +40,6 @@ define([ "jquery" ], function($) {
 			}
 		}
 
-		function resolveAuthentication() {
-			return authResolverFactory.resolve();
-		}
-
 		function crawlNewRucsok() {		
 			crawlRucsokService.crawlUrl($scope.formData.url).then(
 					function(data) {
@@ -57,8 +53,8 @@ define([ "jquery" ], function($) {
 				addRucsokFormService.addRucsok(newRucsok).then(function() {
 					$scope.$broadcast('rucsok.added');
 					resetCurrentRucsok();
-					hideAddRucsokForm();
-					resetAddRucsokFormUrl();
+					
+					$state.go("app.dashboard");
 					// redirect
 				}, showError());
 			});
