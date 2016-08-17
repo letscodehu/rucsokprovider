@@ -37,6 +37,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 		.authorizeRequests()
 			.antMatchers(HttpMethod.GET, "/","/profile", "/check-rucsok", "/rucsok/**","/**/*.js", "/app/**/*.html", "/**/*.js.map" , "/**/*.css", "/images/**").permitAll() 
+			.antMatchers(HttpMethod.POST, "/login").permitAll()
 			.antMatchers("/users").hasRole("ADMIN")
 			.antMatchers(HttpMethod.POST, "/rucsok/**").authenticated()
 			.antMatchers(HttpMethod.DELETE, "/rucsok/**").authenticated();

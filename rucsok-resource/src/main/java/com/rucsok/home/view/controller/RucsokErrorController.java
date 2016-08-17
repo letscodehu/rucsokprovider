@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @Controller
 public class RucsokErrorController implements ErrorController {
-
+	
 	private final static String ERROR_PATH = "/error";
 
 	@Override
