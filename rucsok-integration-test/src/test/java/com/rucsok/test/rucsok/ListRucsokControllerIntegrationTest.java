@@ -19,6 +19,7 @@ import org.springframework.boot.test.WebIntegrationTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -28,7 +29,6 @@ import org.springframework.web.context.WebApplicationContext;
 import com.rucsok.rucsok.domain.RucsokType;
 import com.rucsok.rucsok.repository.dao.RucsokDao;
 import com.rucsok.rucsok.repository.domain.RucsokEntity;
-import com.rucsok.rucsok.service.helper.UrlFetchHelper;
 import com.rucsok.rucsok.view.controller.ListRucsokController;
 import com.rucsok.test.config.RepositoryConfig;
 import com.rucsok.test.config.TestConfig;
@@ -36,6 +36,7 @@ import com.rucsok.test.config.TestConfig;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {RepositoryConfig.class, TestConfig.class})
 @WebIntegrationTest
+@TestPropertySource("classpath:/application.properties")
 public class ListRucsokControllerIntegrationTest {
 
 	private static final String IMAGE = RucsokType.IMAGE.toString().toLowerCase();
