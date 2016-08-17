@@ -7,6 +7,7 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>rucsok-resource</artifactId>
+	<packaging>jar</packaging>
 
 	<name>resource-server</name>
 	<description>Hey kid, want some monad?</description>
@@ -155,5 +156,5 @@
 			</plugin>
 		</plugins>
 	</build>
-
+	
 </project>

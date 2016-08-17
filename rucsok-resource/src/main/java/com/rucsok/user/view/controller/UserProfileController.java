@@ -4,14 +4,10 @@ import java.security.Principal;
 
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-<<<<<<< HEAD:src/main/java/com/rucsok/user/view/controller/UserProfileController.java
-=======
 import org.springframework.http.HttpStatus;
->>>>>>> 1c79e552ee1440f71e7c7f00ac6e56896288a3e9:rucsok-resource/src/main/java/com/rucsok/user/view/controller/UserProfileController.java
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.rucsok.user.service.UserProfileService;
 import com.rucsok.user.view.model.UserProfileView;
 import com.rucsok.user.view.transform.UserProfileTransform;

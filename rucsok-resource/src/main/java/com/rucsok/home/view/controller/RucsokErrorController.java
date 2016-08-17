@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class RucsokErrorController implements ErrorController {
@@ -18,7 +19,9 @@ public class RucsokErrorController implements ErrorController {
 
 	@RequestMapping(value = ERROR_PATH)
 	@ResponseStatus(code=HttpStatus.BAD_REQUEST)
-	public String index() {
-		return "rucskoverflow";
+	public ModelAndView index(Exception ex) {
+		ModelAndView mav = new ModelAndView("rucskoverflow");
+		mav.addObject("exception", ex);
+		return mav;
 	}
 }

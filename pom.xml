@@ -6,8 +6,8 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<modules>
-		<module>rucsok-resource</module>
 		<module>rucsok-authserver</module>
+		<module>rucsok-resource</module>
 		<module>rucsok-integration-test</module>
 	</modules>
 
