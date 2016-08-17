@@ -1,8 +1,8 @@
 define([ 'jquery' ], function($) {
 
-	loginService.$inject = [ '$http', '$q', 'userProfileService'];
+	loginService.$inject = [ '$http', '$q', 'userProfileService', '$state'];
 
-	function loginService($http, $q, userProfileService) {
+	function loginService($http, $q, userProfileService, $state) {
 
 		var vm = this;
 		
@@ -37,13 +37,16 @@ define([ 'jquery' ], function($) {
 		}
 		
 		function logout() {
+			var deferred = $q.defer();
 			$http({
 				'url' : '/logout',
 				'method' : 'POST'
 			}).then(function() {
-				userProfileService.onNotify();	
+				userProfileService.onNotify();
+				deferred.resolve();
 			})
 			
+			return deferred.promise;
 		}
 
 		return {

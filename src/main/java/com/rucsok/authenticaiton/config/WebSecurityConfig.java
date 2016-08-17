@@ -10,7 +10,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
-import org.springframework.security.web.csrf.CsrfTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
@@ -33,7 +32,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 		.authorizeRequests()
 		.antMatchers(HttpMethod.HEAD).permitAll()
-		.antMatchers(HttpMethod.GET, "/","/profile", "/check-rucsok", "/rucsok/**","/**/*.js", "/app/**/*.html", "/**/*.js.map" , "/**/*.css", "/images/**").permitAll().antMatchers(HttpMethod.HEAD,  "/").permitAll()		
+		.antMatchers(HttpMethod.GET, "/","/profile", "/check-rucsok", "/rucsok/**","/**/*.js", "/app/**/*.html", "/**/*.js.map", "/**/*.woff" , "/**/*.css", "/images/**").permitAll().antMatchers(HttpMethod.HEAD,  "/").permitAll()		
 		.anyRequest().authenticated()
 		.and()
 		.formLogin()

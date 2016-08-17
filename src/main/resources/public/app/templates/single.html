@@ -1,6 +1,7 @@
-
 <ion-view>
-  <ion-nav-title>{{item.title}}</ion-nav-title>  
+<ion-nav-bar>
+<ion-nav-title>{{item.title}}</ion-nav-title>
+</ion-nav-bar>
   <ion-content ng-keyup="onKeyUp($event)" tabindex="1" on-swipe-left="swipeLeft()" on-swipe-right="swipeRight()">
 
 	<div ng-switch="item.type">

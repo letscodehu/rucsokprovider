@@ -3,35 +3,44 @@ define([
   // Load Controllers here
   'controllers/rucsokController',
   'controllers/addRucsokController',
-//  'services/authResolverFactory'
 ], function (app) {
   'use strict';
   // definition of routes
   app.config([
     '$stateProvider',
     '$urlRouterProvider',
-//    'authResolverFactory',
     function (
     		$stateProvider, 
     		$urlRouterProvider
-//    		authResolverFactory
     		) {
       // url routes/states
-      $urlRouterProvider.otherwise('dashboard');
+      $urlRouterProvider.otherwise('app/dashboard');
 
       $stateProvider
+      .state('app', {
+          url: '/app',
+          templateUrl: 'app/templates/menu.html',
+          abstract: true,
+          controller : 'menuController'
+        }) 
         // app states
-      	.state('login', {
+      	.state('app.login', {
           url: '/login',
           templateUrl: 'app/templates/login.html',
           controller: 'loginController'
         }) 
-        .state('dashboard', {
-          url: '/dashboard',
-          templateUrl: 'app/templates/dashboard.html',
-          controller: 'dashboardController'
+         // app states
+      	.state('app.add', {
+          url: '/add',
+          templateUrl: 'app/templates/addRucsok.html',
+          controller: 'addRucsokController'
         }) 
-        .state('single', {
+        .state('app.dashboard', {
+          url: '/dashboard',
+    		  templateUrl : 'app/templates/dashboard.html',
+    		  controller: 'dashboardController'
+        }) 
+        .state('app.single', {
             url: '/single/{id}',
             templateUrl: 'app/templates/single.html',
             controller: 'singleController'
