@@ -1,6 +1,7 @@
 package com.rucsok.rucsok.domain;
 
 import java.time.LocalDateTime;
+
 import com.rucsok.user.domain.User;
 
 public class Rucsok {
