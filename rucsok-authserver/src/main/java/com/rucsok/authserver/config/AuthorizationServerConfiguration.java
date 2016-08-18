@@ -18,6 +18,7 @@ import org.springframework.security.oauth2.provider.token.store.InMemoryTokenSto
 
 import com.rucsok.authenticaiton.config.ResourceServerConfiguration;
 
+
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationServerConfiguration extends

@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -23,7 +22,7 @@ public class LoginServiceConfig {
 	private static final String CLIENT_ID = "client_id";
 	private static final String GRANT_TYPE = "grant_type";
 	private static final String AUTH_HEADER = "Authorization";
-	private static final String AUTH_TYPE = "Basic ";
+	private static final String AUTH_TYPE = "Basic";
 
 	@Value("${oauth2.grant.type}")
 	private String grantType;
@@ -59,10 +58,12 @@ public class LoginServiceConfig {
 	@Bean
 	public String getAuthorizationHeader() {
 		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append(AUTH_TYPE);
+		stringBuilder.append(" ");
 		stringBuilder.append(clientId);
 		stringBuilder.append(AUTH_HEADER_DELIMITER);
 		stringBuilder.append(clientSecret);
-		return AUTH_TYPE + new String(Base64Utils.encode(stringBuilder.toString().getBytes()));
+		return new String(Base64Utils.encode(stringBuilder.toString().getBytes()));
 	}
 
 	@Bean

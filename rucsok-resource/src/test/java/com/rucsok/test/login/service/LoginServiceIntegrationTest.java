@@ -6,6 +6,7 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 
 import java.io.IOException;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,7 +18,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.web.client.RestTemplate;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rucsok.login.service.LoginService;
 import com.rucsok.login.service.config.LoginServiceConfig;
 
@@ -38,14 +41,16 @@ public class LoginServiceIntegrationTest {
 	private RestTemplate accessTokenRestTemplate;
 
 	private MockRestServiceServer mockServer;
+	private ObjectMapper mapper;
 
 	@Before
 	public void setUp() throws IOException {
 		mockServer = MockRestServiceServer.createServer(accessTokenRestTemplate);
+		mapper = new ObjectMapper();
 	}
 
 	@Test
-	public void wat() {
+	public void tokenAccessUriShouldReturnAccessToken() throws JsonProcessingException, IOException {
 		
 		// Given		
 		String accessToken = "{\"access_token\":\"afd810a0-0ef5-464a-9356-080637692184\",\"token_type\":\"bearer\",\"refresh_token\":\"d18fbb5a-9861-46b7-b7d0-b9d9db5d0373\",\"expires_in\":38366,\"scope\":\"read\"}";
@@ -54,13 +59,14 @@ public class LoginServiceIntegrationTest {
 		
 		mockServer.expect(requestTo(oauth2TokenUri))
 			.andExpect(method(HttpMethod.POST))
-			.andRespond(withSuccess(accessToken, MediaType.TEXT_PLAIN));
+			.andRespond(withSuccess(accessToken, MediaType.APPLICATION_JSON_UTF8));
 		
-		JsonNode node = underTest.accessToken(USERNAME, PASSWORD);
+		JsonNode responseJson = underTest.accessToken(USERNAME, PASSWORD);		
+		JsonNode accessTokenAsJsonNode = mapper.readTree(accessToken);
 
 		// Then
 		
-		System.out.println(node);
+		Assert.assertEquals(accessTokenAsJsonNode, responseJson);
 	}
 
 }

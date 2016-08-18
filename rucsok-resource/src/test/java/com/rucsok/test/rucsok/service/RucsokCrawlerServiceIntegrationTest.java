@@ -19,7 +19,6 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -30,7 +29,6 @@ import com.rucsok.rucsok.service.helper.RucsokCrawlHelper;
 import com.rucsok.rucsok.service.helper.UrlFetchHelper;
 import com.rucsok.rucsok.service.transform.RucsokTypeTransform;
 import com.rucsok.test.config.RucsokCrawlServiceConfig;
-import com.rucsok.user.repository.dao.UserRepository;
 import com.rucsok.user.repository.domain.UserEntity;
 import com.rucsok.user.service.UserService;
 import com.rucsok.user.transform.UserTransformer;

@@ -27,8 +27,8 @@ public class LoginService {
 
 	@Autowired
 	private String oauth2TokenUri;
-	
-	public JsonNode accessToken(String username, String password){
+
+	public JsonNode accessToken(String username, String password) {
 		loginFormMap.add(USERNAME_PARAM, username);
 		loginFormMap.add(PASSWORD_PARAM, password);
 		return accessTokenRestTemplate.postForObject(oauth2TokenUri,
