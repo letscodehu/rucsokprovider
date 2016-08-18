@@ -1,9 +1,9 @@
 define([ 'jquery' ], function($) {
 
-	dashboardController.$inject = [ '$scope', 'rucsokService',
+	hotController.$inject = [ '$scope', 'rucsokService',
 			'addRucsokFormService', '$state', '$rootScope']
 
-	function dashboardController($scope, rucsokService, addRucsokFormService,
+	function hotController($scope, rucsokService, addRucsokFormService,
 			$state, $rootScope) {
 
 		$scope.rucsoks = [];
@@ -39,5 +39,5 @@ define([ 'jquery' ], function($) {
 		
 	}
 
-	return dashboardController;
+	return hotController;
 })
