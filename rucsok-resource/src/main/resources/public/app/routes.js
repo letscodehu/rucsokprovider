@@ -1,8 +1,5 @@
 define([
-  'app',
-  // Load Controllers here
-  'controllers/rucsokController',
-  'controllers/addRucsokController',
+  'app'
 ], function (app) {
   'use strict';
   // definition of routes

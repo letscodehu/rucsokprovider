@@ -1,5 +1,4 @@
-define([ "controllers/rucsokController",
-         "controllers/loginController", 
+define([ "controllers/loginController", 
          "controllers/errorController", 
          "controllers/singleController",
          "controllers/addRucsokController",
@@ -8,7 +7,6 @@ define([ "controllers/rucsokController",
          "controllers/menuController",
          "ionic"
         ], function(
-        		rucsokController, 
         		loginController, 
         		errorController, 
         		singleController,
@@ -25,7 +23,6 @@ define([ "controllers/rucsokController",
 	controllers.controller("singleController", singleController);
 	controllers.controller("loginController", loginController);
 	controllers.controller("dashboardController", dashboardController);
-	controllers.controller("rucsokController", rucsokController);
 	controllers.controller("errorController", errorController);
 	controllers.controller("menuController", menuController);
 
