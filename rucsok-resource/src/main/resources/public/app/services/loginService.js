@@ -35,14 +35,8 @@ define([ 'jquery' ], function($) {
 		
 		function logout() {
 			var deferred = $q.defer();
-			$http({
-				'url' : '/logout',
-				'method' : 'POST'
-			}).then(function() {
-				$rootScope.$emit("logout");
-				deferred.resolve();
-			})
-			
+			$rootScope.$emit("logout");
+			deferred.resolve();
 			return deferred.promise;
 		}
 
