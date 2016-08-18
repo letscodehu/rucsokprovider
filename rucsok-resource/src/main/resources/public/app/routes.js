@@ -11,7 +11,7 @@ define([
     		$urlRouterProvider
     		) {
       // url routes/states
-      $urlRouterProvider.otherwise('app/dashboard');
+      $urlRouterProvider.otherwise('app/tabs');
 
       $stateProvider
       .state('app', {
@@ -31,16 +31,36 @@ define([
           url: '/add',
           templateUrl: 'app/templates/addRucsok.html',
           controller: 'addRucsokController'
-        }) 
-        .state('app.dashboard', {
-          url: '/dashboard',
-    		  templateUrl : 'app/templates/dashboard.html',
-    		  controller: 'dashboardController'
-        }) 
+        }) .
+        state('app.tabs', {
+        	url : '/tabs',
+        	views: {
+        		'' : {
+        			templateUrl : 'app/templates/tabs.html',		
+        		},
+        		'fresh-tab@app.tabs' : {
+        			templateUrl : 'app/templates/dashboard/tab-fresh.html',
+        			controller: 'freshController'
+        		},
+        		'hot-tab@app.tabs' : {
+        			templateUrl : 'app/templates/dashboard/tab-hot.html',
+        			controller: 'hotController'
+        		},
+        		'dailyjoke-tab@app.tabs' : {
+        			templateUrl : 'app/templates/dashboard/tab-jokes.html',
+        			controller: 'jokeController'
+        		}
+        	}
+        })
         .state('app.single', {
             url: '/single/{id}',
             templateUrl: 'app/templates/single.html',
             controller: 'singleController'
+        })  
+        .state('app.profile', {
+            url: '/profile',
+            templateUrl: 'app/templates/profile.html',
+            controller: 'profileController'
         });
     }
   ]);

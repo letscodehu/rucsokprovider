@@ -11,7 +11,7 @@ define([], function() {
 		function login() {
 			loginService.loginUser($scope.data.username, $scope.data.password)
 					.then(function success(data) {
-						$state.go('app.dashboard');
+						$state.go('app.tabs');
 					}, function failure(data) {
 						$state.go('app.login');
 						var alertPopup = $ionicPopup.alert({

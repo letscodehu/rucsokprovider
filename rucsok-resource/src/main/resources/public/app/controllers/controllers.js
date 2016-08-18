@@ -3,7 +3,10 @@ define([ "controllers/loginController",
          "controllers/singleController",
          "controllers/addRucsokController",
          "controllers/rucsokPreviewController",
-         "controllers/dashboardController",
+         "controllers/freshController",
+         "controllers/hotController",
+         "controllers/jokeController",
+         "controllers/profileController",
          "controllers/menuController",
          "ionic"
         ], function(
@@ -12,7 +15,10 @@ define([ "controllers/loginController",
         		singleController,
         		addRucsokController, 
         		rucsokPreviewController,
-        		dashboardController,
+        		freshController,
+        		hotController,
+        		jokeController,
+        		profileController,
         		menuController
         		) {
 	
@@ -22,8 +28,11 @@ define([ "controllers/loginController",
 	controllers.controller("rucsokPreviewController", rucsokPreviewController);
 	controllers.controller("singleController", singleController);
 	controllers.controller("loginController", loginController);
-	controllers.controller("dashboardController", dashboardController);
+	controllers.controller("freshController", freshController);
+	controllers.controller("hotController", hotController);
+	controllers.controller("jokeController", jokeController);
 	controllers.controller("errorController", errorController);
+	controllers.controller("profileController", profileController);
 	controllers.controller("menuController", menuController);
 
 })

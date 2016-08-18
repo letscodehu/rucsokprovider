@@ -17,8 +17,10 @@
     </ion-header-bar>
     <ion-content>
       <ion-list>
-        <ion-item ng-click="logout()" ng-if="isLoggedIn() == true" menu-close >Logout</ion-item> 
-			<ion-item ng-click="goToLogin()" ng-if="isLoggedIn() != true" menu-close >Login</ion-item> 
+      <ion-item ng-click="home()" ng-if="!isDashboard()" menu-toggle >Home</ion-item>
+        <ion-item ng-click="profile()" ng-if="isLoggedIn()" menu-close >Profile</ion-item>
+		<ion-item ng-click="goToLogin()" ng-if="!isLoggedIn()" menu-close >Login</ion-item>
+		<ion-item ng-click="logout()" ng-if="isLoggedIn()" menu-close >Logout</ion-item> 
       </ion-list>
     </ion-content>
   </ion-side-menu>
