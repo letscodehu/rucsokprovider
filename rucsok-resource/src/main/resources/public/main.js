@@ -4,6 +4,7 @@ var require = {
     'ionic': '../lib/ionic/js/ionic.bundle.min',
     'ionic-gallery' : '../lib/ion-gallery/dist/ion-gallery.min',
     'jquery' : '../lib/jquery/dist/jquery.min',
+    'localforage' : '../lib/localforage/dist/localforage.min',
     "ion-floating-menu" : '../lib/ion-floating-menu/dist/ion-floating-menu',
     'spring-token-interceptor' : '../lib/spring-security-csrf-token-interceptor/dist/spring-security-csrf-token-interceptor.min',
     'angular-http-auth' : '../lib/angular-http-auth-master/http-auth-interceptor',
@@ -19,7 +20,7 @@ var require = {
 		  'deps' : ['ionic']
 	  },
 	  "app" : {
-		  "deps" : ["ionic"]
+		  "deps" : ["ionic", "localforage"]
 	  },
 	  "angular-http-auth" : {
 		  "deps" : ["ionic"]

@@ -1,10 +1,10 @@
 define([ 'jquery' ], function($) {
 
 	dashboardController.$inject = [ '$scope', 'rucsokService',
-			'addRucsokFormService', '$state']
+			'addRucsokFormService', '$state', '$rootScope']
 
 	function dashboardController($scope, rucsokService, addRucsokFormService,
-			$state) {
+			$state, $rootScope) {
 
 		$scope.rucsoks = [];
 		$scope.addRucsok = addRucsok;
@@ -12,7 +12,7 @@ define([ 'jquery' ], function($) {
 
 		refresh();
 
-		var updateListener = $scope.$on('rucsok.added', function(event) {
+		var updateListener = $rootScope.$on('rucsok.added', function(event) {
 			refresh();
 		});
 

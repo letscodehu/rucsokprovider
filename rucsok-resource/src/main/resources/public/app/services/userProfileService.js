@@ -6,23 +6,27 @@ define([], function() {
 		
 		var userProfile = null;
 		
-		if(!isLoggedIn()){
-			 loadUserProfile().then(function(data){
-				 userProfile = data;
-			 });
-		}
-		
-		function isLoggedIn() {
-			return null !== userProfile;
-		}
-		
-		function onNotify() {
+		$rootScope.$on("tokenchecked", function(){
 			 loadUserProfile().then(function(data){
 				 userProfile = data;
 			 }, function() {
 				 userProfile = null;
 			 });
+		});
+		
+		function isLoggedIn() {
+			return null !== userProfile;
 		}
+		
+		var onLogin = $rootScope.$on('loggedin', function(event) {
+			 loadUserProfile().then(function(data){
+				 userProfile = data;
+			 });
+		});
+		
+		var onLogout = $rootScope.$on('logout', function() {
+			 userProfile = null;
+		});
 		
 		function getUsername() {
 			if (typeof userProfile != null) {
@@ -45,7 +49,6 @@ define([], function() {
 		return {
 			loadUserProfile : loadUserProfile,
 			isLoggedIn: isLoggedIn,
-			onNotify : onNotify,
 			getUsername : getUsername
 		}
 	}

@@ -1,13 +1,11 @@
 define([ 'jquery' ], function($) {
 
-	loginService.$inject = [ '$http', '$q', 'userProfileService', '$state'];
+	loginService.$inject = [ '$http', '$q', '$rootScope'];
 
-	function loginService($http, $q, userProfileService, $state) {
+	function loginService($http, $q, $rootScope) {
 
 		var vm = this;
-		vm.access_token = null;
-		vm.refresh_token = null;
-		
+				
 		function loginUser(username, password) {
 			var deferred = $q.defer();
 
@@ -26,12 +24,8 @@ define([ 'jquery' ], function($) {
 			    },
 				headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 			}).then(function(resp) {
-				vm.access_token = resp.data.access_token;
-				vm.refresh_token = resp.data.refresh_token;
-				$http.defaults.headers.common.Authorization = 
-			          'Bearer ' + vm.access_token;
+				$rootScope.$emit('loggedin', resp.data);
 				deferred.resolve();
-				userProfileService.onNotify();
 			}, function(err) {
 				deferred.reject(err);
 			});
@@ -41,14 +35,8 @@ define([ 'jquery' ], function($) {
 		
 		function logout() {
 			var deferred = $q.defer();
-			$http({
-				'url' : '/logout',
-				'method' : 'POST'
-			}).then(function() {
-				userProfileService.onNotify();
-				deferred.resolve();
-			})
-			
+			$rootScope.$emit("logout");
+			deferred.resolve();
 			return deferred.promise;
 		}
 

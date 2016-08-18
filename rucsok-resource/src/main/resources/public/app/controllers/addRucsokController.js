@@ -2,10 +2,10 @@ define([ "jquery" ], function($) {
 
 	addRucsokController.$inject = [ "$scope", "rucsokService",
 			"addRucsokFormService", "crawlRucsokService", "$state", '$q',
-			'authResolverFactory' ]
+			'$rootScope' ]
 
 	function addRucsokController($scope, rucsokService, addRucsokFormService,
-			crawlRucsokService, $state, $q, authResolverFactory) {
+			crawlRucsokService, $state, $q, $rootScope) {
 
 		// public
 
@@ -51,7 +51,7 @@ define([ "jquery" ], function($) {
 		function addNewRucsok() {
 			createRucsok().then(function(newRucsok) {
 				addRucsokFormService.addRucsok(newRucsok).then(function() {
-					$scope.$broadcast('rucsok.added');
+					$rootScope.$broadcast('rucsok.added');
 					resetCurrentRucsok();
 					
 					$state.go("app.dashboard");
