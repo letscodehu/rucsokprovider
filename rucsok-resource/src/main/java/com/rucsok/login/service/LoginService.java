@@ -9,6 +9,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.rucsok.login.service.config.LoginServiceConfig.LoginFormMapFactory;
 
 @Service
 public class LoginService {
@@ -20,7 +21,7 @@ public class LoginService {
 	private RestTemplate accessTokenRestTemplate;
 
 	@Autowired
-	private LinkedMultiValueMap<String, String> loginFormMap;
+	private LoginFormMapFactory loginFormMapFactory;
 
 	@Autowired
 	private HttpHeaders loginHeader;
@@ -29,6 +30,7 @@ public class LoginService {
 	private String oauth2TokenUri;
 
 	public JsonNode accessToken(String username, String password) {
+		LinkedMultiValueMap<String, String> loginFormMap = loginFormMapFactory.create();
 		loginFormMap.add(USERNAME_PARAM, username);
 		loginFormMap.add(PASSWORD_PARAM, password);
 		return accessTokenRestTemplate.postForObject(oauth2TokenUri,

@@ -15,7 +15,7 @@ import org.springframework.web.client.RestTemplate;
 
 @Configuration
 public class LoginServiceConfig {
-	
+
 	private static final String AUTH_HEADER_DELIMITER = ":";
 	private static final String SCOPE = "scope";
 	private static final String CLIENT_SECRET = "client_secret";
@@ -45,14 +45,8 @@ public class LoginServiceConfig {
 	}
 
 	@Bean
-	@Scope("prototype")
-	public LinkedMultiValueMap<String, String> loginFormMap() {
-		LinkedMultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
-		map.add(GRANT_TYPE, grantType);
-		scopes.forEach(s -> map.add(SCOPE, s));
-		map.add(CLIENT_ID, clientId);
-		map.add(CLIENT_SECRET, clientSecret);
-		return map;
+	public LoginFormMapFactory loginFormMapFactory() {
+		return new LoginFormMapFactory();
 	}
 
 	@Bean
@@ -60,6 +54,13 @@ public class LoginServiceConfig {
 		StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append(AUTH_TYPE);
 		stringBuilder.append(" ");
+		stringBuilder.append(getHeaderTokenAsBase64());
+		return stringBuilder.toString();
+	}
+
+	@Bean
+	public String getHeaderTokenAsBase64() {
+		StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append(clientId);
 		stringBuilder.append(AUTH_HEADER_DELIMITER);
 		stringBuilder.append(clientSecret);
@@ -71,5 +72,18 @@ public class LoginServiceConfig {
 		RestTemplate restTemplate = new RestTemplate();
 		restTemplate.getMessageConverters().add(new FormHttpMessageConverter());
 		return restTemplate;
+	}
+
+	public class LoginFormMapFactory {
+
+		public LinkedMultiValueMap<String, String> create() {
+			LinkedMultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
+			map.add(GRANT_TYPE, grantType);
+			scopes.forEach(s -> map.add(SCOPE, s));
+			map.add(CLIENT_ID, clientId);
+			map.add(CLIENT_SECRET, clientSecret);
+			return map;
+		}
+
 	}
 }
