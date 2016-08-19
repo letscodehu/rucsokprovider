@@ -3,9 +3,7 @@ package com.rucsok.test.rucsok.service;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Node;
 import org.jsoup.select.Elements;
 import org.junit.Assert;
 import org.junit.Before;
