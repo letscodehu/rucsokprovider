@@ -74,14 +74,18 @@ public class RucsokView {
 	public void setUsername(String userName) {
 		this.username = userName;
 	}
-
-	public String getCreatedAt() {
-		String result = "";
-		if (null != createdAt) {
-			result = createdAt.format(formatter);
-		}
-		return result;
+	
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
 	}
+
+//	public String getCreatedAtAsString() {
+//		String result = "";
+//		if (null != createdAt) {
+//			result = createdAt.format(formatter);
+//		}
+//		return result;
+//	}
 
 	public void setCreatedAt(LocalDateTime createdDateTime) {
 		this.createdAt = createdDateTime;

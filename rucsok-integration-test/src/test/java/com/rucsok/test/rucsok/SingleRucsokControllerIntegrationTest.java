@@ -80,8 +80,6 @@ public class SingleRucsokControllerIntegrationTest {
 	@Transactional
 	public void contentShouldContainCorrectProperties() throws Exception {
 		// Given	
-		LocalDateTime createdAt = LocalDateTime.of(2016, 8, 8, 11, 11, 11);
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(RucsokView.DATEFORMAT);
 		RucsokEntity rucsok = rucsokDao.findById(TEST_DATA_ID).get(1);
 		String rucsokType = rucsokTypeTransform.getRucsokTypeFromEntity(rucsok).toString().toLowerCase();
 		// When
@@ -93,6 +91,11 @@ public class SingleRucsokControllerIntegrationTest {
 				.andExpect(jsonPath("$.current.username", is(rucsok.getUser().getName())))
 				.andExpect(jsonPath("$.previousId", is(1)))
 				.andExpect(jsonPath("$.nextId", is(3)))
-				.andExpect(jsonPath("$.current.createdAt", is(createdAt.format(formatter))));
+				.andExpect(jsonPath("$.current.createdAt[0]", is(2016)))
+				.andExpect(jsonPath("$.current.createdAt[1]", is(8)))
+				.andExpect(jsonPath("$.current.createdAt[2]", is(8)))
+				.andExpect(jsonPath("$.current.createdAt[3]", is(11)))
+				.andExpect(jsonPath("$.current.createdAt[4]", is(11)))
+				.andExpect(jsonPath("$.current.createdAt[5]", is(11)));
 	}
 }
