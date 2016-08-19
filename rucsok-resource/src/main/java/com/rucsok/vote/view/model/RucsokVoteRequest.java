@@ -5,10 +5,6 @@ public class RucsokVoteRequest {
 	private long rucsokid;
 	private String voteType;
 
-	public String getType() {
-		return voteType;
-	}
-
 	public long getRucsokid() {
 		return rucsokid;
 	}
@@ -29,7 +25,6 @@ public class RucsokVoteRequest {
 	}
 
 	public RucsokVoteRequest(long rucsokid, String type) {
-		super();
 		this.rucsokid = rucsokid;
 		this.voteType = type;
 	}

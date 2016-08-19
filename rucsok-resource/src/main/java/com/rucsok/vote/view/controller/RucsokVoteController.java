@@ -4,23 +4,17 @@ import java.security.Principal;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
-import com.rucsok.user.domain.UserDetails;
-import com.rucsok.user.repository.domain.UserEntity;
-import com.rucsok.user.service.UserDetailsService;
-import com.rucsok.user.service.UserService;
 import com.rucsok.vote.service.VoteService;
 import com.rucsok.vote.service.transform.VoteTransformer;
 import com.rucsok.vote.view.model.RucsokVoteRequest;
-import com.rucsok.vote.view.model.RucsokVoteResponse;
 
-@Controller
+@RestController
 public class RucsokVoteController {
 
 	public static final String REQUEST_MAPPING = "/vote";

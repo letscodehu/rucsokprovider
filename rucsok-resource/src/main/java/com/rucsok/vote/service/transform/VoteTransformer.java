@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 import com.rucsok.rucsok.repository.domain.RucsokEntity;
 import com.rucsok.rucsok.repository.domain.VoteEntity;
 import com.rucsok.rucsok.repository.domain.VotePK;
-import com.rucsok.user.domain.User;
 import com.rucsok.user.repository.domain.UserEntity;
 import com.rucsok.vote.domain.Vote;
 import com.rucsok.vote.domain.VoteType;
@@ -34,7 +33,7 @@ public class VoteTransformer {
 		Vote vote = new Vote();
 		vote.setRucsokId(request.getRucsokid());
 		vote.setUsername(username);
-		vote.setVoteType(VoteType.valueOf(request.getType().toUpperCase()));
+		vote.setVoteType(VoteType.valueOf(request.getVoteType().toUpperCase()));
 		return vote;
 	}
 

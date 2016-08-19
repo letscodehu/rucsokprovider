@@ -1,6 +1,5 @@
 package com.rucsok.vote.service;
 
-import java.security.Principal;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -13,8 +12,6 @@ import com.rucsok.rucsok.repository.domain.RucsokEntity;
 import com.rucsok.rucsok.service.exception.IllegalRucsokArgumentException;
 import com.rucsok.user.repository.dao.UserRepository;
 import com.rucsok.user.repository.domain.UserEntity;
-import com.rucsok.user.service.UserProfileService;
-import com.rucsok.user.service.exception.UserHasNoRightException;
 import com.rucsok.vote.domain.Vote;
 import com.rucsok.vote.service.transform.VoteTransformer;
 
@@ -33,14 +30,11 @@ public class VoteService {
 	private UserRepository userRepository;
 
 	@Autowired
-	private UserProfileService userProfileService;
-
-	@Autowired
 	private RucsokDao rucsokRepository;
 
 	public void createVote(Vote vote) {
 		Optional<RucsokEntity> rucsok = getRucsokById(vote);
-		Optional<UserEntity> user = getUserById(vote);
+		Optional<UserEntity> user = getUserByName(vote);
 		checkIfUserExist(user);
 		checkIfRucsokExist(rucsok);
 		saveVote(vote, rucsok.get(), user.get());
@@ -62,7 +56,7 @@ public class VoteService {
 		}
 	}
 
-	private Optional<UserEntity> getUserById(Vote vote) {
+	private Optional<UserEntity> getUserByName(Vote vote) {
 		return Optional.ofNullable(userRepository.findByName(vote.getUsername()));
 	}
 
