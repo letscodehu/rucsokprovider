@@ -11,6 +11,7 @@ define([], function() {
 				 userProfile = data;
 			 }, function() {
 				 userProfile = null;
+				 $rootScope.$emit("logout");
 			 });
 		});
 		

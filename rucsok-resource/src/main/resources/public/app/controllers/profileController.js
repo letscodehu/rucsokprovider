@@ -4,6 +4,9 @@ define([], function() {
 	
 	function profileController($scope, userProfileService, $state) {
 		
+		
+		
+		
 	}
 
 	return profileController;

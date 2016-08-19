@@ -36,7 +36,7 @@ define([
         	url : '/tabs',
         	views: {
         		'' : {
-        			templateUrl : 'app/templates/tabs.html',		
+        			templateUrl : 'app/templates/dashboard.html',		
         		},
         		'fresh-tab@app.tabs' : {
         			templateUrl : 'app/templates/dashboard/tab-fresh.html',
@@ -57,10 +57,32 @@ define([
             templateUrl: 'app/templates/single.html',
             controller: 'singleController'
         })  
+          .state('app.about', {
+            url: '/about',
+            templateUrl: 'app/templates/about.html',
+            controller : function() {
+            }
+        })  
         .state('app.profile', {
             url: '/profile',
-            templateUrl: 'app/templates/profile.html',
-            controller: 'profileController'
+            views: {
+        		'' : {
+        			templateUrl : 'app/templates/profile.html',
+        			controller: 'profileController'
+        		},
+        		'posts-tab@app.profile' : {
+        			templateUrl : 'app/templates/profile/tab-posts.html',
+        			controller: 'profilePostController'
+        		},
+        		'comments-tab@app.profile' : {
+        			templateUrl : 'app/templates/profile/tab-comments.html',
+        			controller: 'profileCommentController'
+        		},
+        		'upvote-tab@app.profile' : {
+        			templateUrl : 'app/templates/profile/tab-upvotes.html',
+        			controller: 'profileUpvoteController'
+        		}
+        	}
         });
     }
   ]);

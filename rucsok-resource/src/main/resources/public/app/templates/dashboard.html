@@ -1,11 +1,15 @@
-<ion-view view-title="Dashboard">
-		<!-- Content --> 
-		<ion-content> 
-			<ion-spinner ng-if="rucsoks.length == 0" icon="spiral">
-			</ion-spinner>
-			<ion-gallery ion-gallery-items="rucsoks" ion-item-callback="showRucsok(item)">
-			</ion-gallery> 
-			<ion-floating-button ng-if="isLoggedIn() == true" ng-click="addRucsok()" has-footer="false" button-color="#2AC9AA" icon="ion-plus" iconColor="#fff">
-			</ion-floating-button>
-		</ion-content> 
-</ion-view>
+  <ion-tabs delegate-handle="dashboard" class="tabs-icon-top tabs-positive">
+
+        <ion-tab title="Fresh" icon="ion-home" href="#/app/tabs">
+          <ion-nav-view name="fresh-tab"></ion-nav-view>
+        </ion-tab>
+
+        <ion-tab title="Hot" icon="ion-information" >
+          <ion-nav-view name="hot-tab"></ion-nav-view>
+        </ion-tab>
+
+        <ion-tab title="Jokes" icon="ion-world" href="#/app/tabs/hot">
+          <ion-nav-view name="dailyjoke-tab"></ion-nav-view>
+        </ion-tab>
+
+      </ion-tabs>
