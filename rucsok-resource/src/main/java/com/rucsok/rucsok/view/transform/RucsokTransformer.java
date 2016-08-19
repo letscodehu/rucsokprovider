@@ -28,6 +28,7 @@ public class RucsokTransformer {
 		result.setType(rucsok.getType().toString().toLowerCase());
 		result.setUsername(rucsok.getUser().getUsername());
 		result.setCreatedAt(rucsok.getCreatedAt());
+		result.setVote(rucsok.getVote());
 		return result;
 	}
 

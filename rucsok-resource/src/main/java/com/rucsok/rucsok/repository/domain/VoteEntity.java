@@ -2,6 +2,7 @@ package com.rucsok.rucsok.repository.domain;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -24,7 +25,7 @@ public class VoteEntity {
 	@JoinColumn(name = "user_id", referencedColumnName = "id", insertable = false, updatable = false)
 	private UserEntity user;
 
-	@Enumerated
+	@Enumerated(EnumType.STRING)
 	private VoteType vote;
 
 	public VotePK getKey() {

@@ -14,6 +14,7 @@ public class RucsokView {
 	private String videoUrl;
 	private String type;
 	private String username;
+	private int vote;
 
 	private LocalDateTime createdAt;
 
@@ -74,21 +75,21 @@ public class RucsokView {
 	public void setUsername(String userName) {
 		this.username = userName;
 	}
-	
+
 	public LocalDateTime getCreatedAt() {
 		return createdAt;
 	}
 
-//	public String getCreatedAtAsString() {
-//		String result = "";
-//		if (null != createdAt) {
-//			result = createdAt.format(formatter);
-//		}
-//		return result;
-//	}
-
 	public void setCreatedAt(LocalDateTime createdDateTime) {
 		this.createdAt = createdDateTime;
+	}
+
+	public int getVote() {
+		return vote;
+	}
+
+	public void setVote(int vote) {
+		this.vote = vote;
 	}
 
 }

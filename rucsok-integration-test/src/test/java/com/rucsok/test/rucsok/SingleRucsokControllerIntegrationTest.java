@@ -85,6 +85,7 @@ public class SingleRucsokControllerIntegrationTest {
 		// When
 		// Then
 		mockMvc.perform(get(REQUEST_MAPPING))
+				.andExpect(jsonPath("$.current.vote", is(1)))
 				.andExpect(jsonPath("$.current.title", is(rucsok.getTitle())))
 				.andExpect(jsonPath("$.current.link", is(rucsok.getLink())))
 				.andExpect(jsonPath("$.current.type", is(rucsokType)))

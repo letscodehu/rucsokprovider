@@ -107,5 +107,4 @@ public class RucsokEntity implements Serializable {
 	public void setCreatedAt(Timestamp createdDateTime) {
 		this.createdAt = createdDateTime;
 	}
-
 }

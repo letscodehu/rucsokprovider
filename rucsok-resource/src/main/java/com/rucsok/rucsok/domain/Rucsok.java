@@ -14,6 +14,7 @@ public class Rucsok {
 	private RucsokType type;
 	private User user;
 	private LocalDateTime createdAt;
+	private int vote;
 
 	public long getId() {
 		return id;
@@ -77,6 +78,14 @@ public class Rucsok {
 
 	public void setCreatedAt(LocalDateTime createdAt) {
 		this.createdAt = createdAt;
+	}
+
+	public int getVote() {
+		return vote;
+	}
+
+	public void setVote(int vote) {
+		this.vote = vote;
 	}
 
 }

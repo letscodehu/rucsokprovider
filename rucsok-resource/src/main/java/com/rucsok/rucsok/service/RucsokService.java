@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.rucsok.rucsok.domain.Rucsok;
 import com.rucsok.rucsok.domain.SingleRucsok;
 import com.rucsok.rucsok.repository.dao.RucsokDao;
+import com.rucsok.rucsok.repository.dao.VoteDao;
 import com.rucsok.rucsok.repository.domain.RucsokEntity;
 import com.rucsok.rucsok.service.exception.AlreadyExistsRucsokException;
 import com.rucsok.rucsok.service.exception.IllegalRucsokArgumentException;
@@ -21,6 +22,9 @@ public class RucsokService {
 
 	@Autowired
 	private RucsokDao rucsokRepo;
+
+	@Autowired
+	private VoteDao voteDao;
 
 	@Autowired
 	private UserService userService;
@@ -41,7 +45,18 @@ public class RucsokService {
 	}
 
 	public SingleRucsok findRucsokById(int id) {
+		SingleRucsok rucsok = getTransformetRucsok(id);
+		setVoteNumber(rucsok.getCurrent());
+		return rucsok;
+	}
+
+	private SingleRucsok getTransformetRucsok(int id) {
 		return rucsokServiceTransform.transformToSingleRucsok(rucsokRepo.findById(id));
+	}
+
+	private void setVoteNumber(Rucsok rucsok) {
+		Long voteNumber = voteDao.countByRucsokId(rucsok.getId());
+		rucsok.setVote(voteNumber.intValue());
 	}
 
 	public Rucsok saveRucsok(Rucsok rucsok, String username) {
