@@ -1,6 +1,11 @@
 <ion-view view-title="Fresh">
 		<!-- Content --> 
-		<ion-content class="padding"> 
+		<ion-content class="padding">
+		<ion-refresher
+    pulling-text="Pull to refresh..."
+    on-refresh="doRefresh()">
+  </ion-refresher>
+		 
 			<ion-spinner ng-if="rucsoks.length == 0" icon="spiral">
 			</ion-spinner>
 			<ion-gallery ion-gallery-items="rucsoks" ion-item-callback="showRucsok(item)">

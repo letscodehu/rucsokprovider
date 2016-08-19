@@ -76,7 +76,6 @@ define([], function() {
 			$scope.item = rucsokModelService.createRucsokFromRequest(data.current);
 			$scope.next = data.nextId;
 			$scope.prev = data.previousId;
-			console.log($scope.item.hasVideo())
 		}
 
 		init();

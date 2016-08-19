@@ -8,6 +8,8 @@ define([], function() {
 				imageUrl : "",
 				videoUrl : "",
 				link : "",
+				upvotes : 0,
+				comments : [],
 				type: "",
 				username: "",
 				hasVideo : function() {
@@ -22,6 +24,8 @@ define([], function() {
 			var newRucsok = createEmptyRucsok();
 			newRucsok.title = data.title || "";
 			newRucsok.imageUrl = data.imageUrl || "";
+			newRucsok.comments = data.comments = [];
+			newRucsok.upvotes = data.upvotes || 0;
 			newRucsok.videoUrl = data.videoUrl || "";
 			newRucsok.link = data.link || "";
 			newRucsok.type = data.type || "";

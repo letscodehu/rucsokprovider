@@ -9,6 +9,7 @@ define([ 'jquery' ], function($) {
 		$scope.rucsoks = [];
 		$scope.addRucsok = addRucsok;
 		$scope.showRucsok = showRucsok;
+		$scope.doRefresh = refresh;
 
 		refresh();
 
@@ -24,6 +25,7 @@ define([ 'jquery' ], function($) {
 		function refresh() {
 			rucsokService.getRucsok().then(function(data) {
 				$scope.rucsoks = data;
+				$scope.$broadcast('scroll.refreshComplete');
 			});
 		}
 
