@@ -19,6 +19,7 @@ define([ "jquery" ], function($) {
 
 		// private
 		
+		var urlErrorMessage = 'Hiba az url-ben van.';
 		var currentRucsok = null;
 
 		function showAddRucsokForm() {
@@ -45,19 +46,25 @@ define([ "jquery" ], function($) {
 					function(data) {
 						$scope.$broadcast('rucsok.preview', data);
 						currentRucsok = data;
-					}, showError('fos url'));
+					}, showError(urlErrorMessage));
 		}
 
 		function addNewRucsok() {
 			createRucsok().then(function(newRucsok) {
-				addRucsokFormService.addRucsok(newRucsok).then(function() {
+				addRucsokFormService.addRucsok(newRucsok).then(function(data) {
 					$rootScope.$broadcast('rucsok.added');
 					resetCurrentRucsok();
-					
-					$state.go("app.dashboard");
-					// redirect
+					redirectToRucsok(data);
 				}, showError());
 			});
+		}
+		
+		function redirectToRucsok(data){
+			if(null!==data){
+				$state.go('app.single', {
+					id : data.id
+				});
+			}
 		}
 
 		function createRucsok() {
@@ -65,7 +72,7 @@ define([ "jquery" ], function($) {
 
 			if (null === currentRucsok) {
 				crawlRucsokService.crawlUrl($scope.formData.url).then(
-						deferred.resolve, showError('fos url'));
+						deferred.resolve, showError(urlErrorMessage));
 			} else {
 				deferred.resolve(currentRucsok);
 			}

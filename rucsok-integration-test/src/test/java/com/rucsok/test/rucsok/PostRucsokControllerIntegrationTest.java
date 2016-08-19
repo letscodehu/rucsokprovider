@@ -19,11 +19,13 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.rucsok.rucsok.repository.dao.RucsokDao;
 import com.rucsok.rucsok.repository.domain.RucsokEntity;
 import com.rucsok.rucsok.view.controller.PostRucsokController;
 import com.rucsok.rucsok.view.model.RucsokInsertRequest;
 import com.rucsok.rucsok.view.model.RucsokPost;
+import com.rucsok.rucsok.view.model.RucsokView;
 import com.rucsok.test.TokenHelper;
 import com.rucsok.test.config.RepositoryConfig;
 import com.rucsok.test.config.TestConfig;
@@ -43,7 +45,7 @@ public class PostRucsokControllerIntegrationTest {
 	private static final String TEST_URL = "http://rucsok.com/epic-rucsok";
 
 	private static final String TEST_UNIQUE_URL = "http://rucsok.com/epic-url-rucsok";
-	
+
 	@Autowired
 	private WebApplicationContext context;
 
@@ -58,17 +60,15 @@ public class PostRucsokControllerIntegrationTest {
 
 	@Before
 	public void setUp() throws Exception {
-		mockMvc = MockMvcBuilders
-				.webAppContextSetup(context)
-				.apply(SecurityMockMvcConfigurers.springSecurity())
+		mockMvc = MockMvcBuilders.webAppContextSetup(context).apply(SecurityMockMvcConfigurers.springSecurity())
 				.build();
-		
-		mapper = new ObjectMapper();	
 
+		mapper = new ObjectMapper();
+		mapper.registerModule(new JavaTimeModule());
 		accessToken = TokenHelper.getAccessToken("rucsok", "123", mockMvc);
 
 	}
-	
+
 	@Test
 	public void postShouldReturnUnauthorizedWhenUserNotLoggedIn() throws Exception {
 
@@ -78,11 +78,8 @@ public class PostRucsokControllerIntegrationTest {
 
 		// Then
 
-		mockMvc.perform(post(PostRucsokController.REQUEST_MAPPING)
-				.contentType(MediaType.APPLICATION_JSON)
-				.content(""))
-				.andExpect(status()
-				.isUnauthorized());
+		mockMvc.perform(post(PostRucsokController.REQUEST_MAPPING).contentType(MediaType.APPLICATION_JSON).content(""))
+				.andExpect(status().isUnauthorized());
 
 	}
 
@@ -95,12 +92,9 @@ public class PostRucsokControllerIntegrationTest {
 
 		// Then
 
-		mockMvc.perform(post(PostRucsokController.REQUEST_MAPPING)
-				.header("Authorization", "Bearer " + accessToken)
-				.contentType(MediaType.APPLICATION_JSON)
-				.content(mapper.writeValueAsString(null)))
-				.andExpect(status()
-				.isBadRequest());
+		mockMvc.perform(post(PostRucsokController.REQUEST_MAPPING).header("Authorization", "Bearer " + accessToken)
+				.contentType(MediaType.APPLICATION_JSON).content(mapper.writeValueAsString(null)))
+				.andExpect(status().isBadRequest());
 
 	}
 
@@ -117,10 +111,8 @@ public class PostRucsokControllerIntegrationTest {
 
 		// Then
 
-		mockMvc.perform(post(PostRucsokController.REQUEST_MAPPING)
-				.header("Authorization", "Bearer " + accessToken)
-				.contentType(MediaType.APPLICATION_JSON)
-				.content(mapper.writeValueAsString(request)))
+		mockMvc.perform(post(PostRucsokController.REQUEST_MAPPING).header("Authorization", "Bearer " + accessToken)
+				.contentType(MediaType.APPLICATION_JSON).content(mapper.writeValueAsString(request)))
 				.andExpect(status().isBadRequest());
 
 	}
@@ -139,12 +131,9 @@ public class PostRucsokControllerIntegrationTest {
 
 		// Then
 
-		mockMvc.perform(post(PostRucsokController.REQUEST_MAPPING)
-				.header("Authorization", "Bearer " + accessToken)
-				.contentType(MediaType.APPLICATION_JSON)
-				.content(mapper.writeValueAsString(request)))
-				.andExpect(status()
-				.isBadRequest());
+		mockMvc.perform(post(PostRucsokController.REQUEST_MAPPING).header("Authorization", "Bearer " + accessToken)
+				.contentType(MediaType.APPLICATION_JSON).content(mapper.writeValueAsString(request)))
+				.andExpect(status().isBadRequest());
 
 	}
 
@@ -153,24 +142,24 @@ public class PostRucsokControllerIntegrationTest {
 	public void postShouldCreateNewEntity() throws Exception {
 
 		// Given
-		
+
 		RucsokPost rucsok = createRucsokPostHelper();
 		RucsokInsertRequest request = createRucsokInsertRequestHelper(rucsok);
 
 		// When
 
-		mockMvc.perform(post(PostRucsokController.REQUEST_MAPPING)
-				.header("Authorization", "Bearer " + accessToken)
-				.contentType(MediaType.APPLICATION_JSON)
-				.content(mapper.writeValueAsString(request)))
-				.andExpect(status()
-				.isCreated());
+		String resultAsString = mockMvc
+				.perform(post(PostRucsokController.REQUEST_MAPPING).header("Authorization", "Bearer " + accessToken)
+						.contentType(MediaType.APPLICATION_JSON).content(mapper.writeValueAsString(request)))
+				.andExpect(status().isCreated()).andReturn().getResponse().getContentAsString();
 
 		RucsokEntity rucsokEntity = rucsokDao.findByLink(TEST_URL);
 		UserEntity userEntity = rucsokEntity.getUser();
+		RucsokView result = mapper.readValue(resultAsString, RucsokView.class);
 
 		// Then
 
+		Assert.assertEquals("Result id should match", rucsokEntity.getId(), result.getId());
 		Assert.assertNotNull("Entity should'nt be null", rucsokEntity);
 		Assert.assertEquals("Link should match", rucsokEntity.getLink(), rucsok.getLink());
 		Assert.assertEquals("Image should match", rucsokEntity.getImageUrl(), rucsok.getImageUrl());
@@ -190,18 +179,13 @@ public class PostRucsokControllerIntegrationTest {
 
 		// When
 
-		mockMvc.perform(post(PostRucsokController.REQUEST_MAPPING)
-				.header("Authorization", "Bearer " + accessToken)
-				.contentType(MediaType.APPLICATION_JSON)
-				.content(mapper.writeValueAsString(request)))
+		mockMvc.perform(post(PostRucsokController.REQUEST_MAPPING).header("Authorization", "Bearer " + accessToken)
+				.contentType(MediaType.APPLICATION_JSON).content(mapper.writeValueAsString(request)))
 				.andExpect(status().isCreated());
 
-		mockMvc.perform(post(PostRucsokController.REQUEST_MAPPING)
-				.header("Authorization", "Bearer " + accessToken)
-				.contentType(MediaType.APPLICATION_JSON)
-				.content(mapper.writeValueAsString(request)))
-				.andExpect(status()
-				.isConflict());
+		mockMvc.perform(post(PostRucsokController.REQUEST_MAPPING).header("Authorization", "Bearer " + accessToken)
+				.contentType(MediaType.APPLICATION_JSON).content(mapper.writeValueAsString(request)))
+				.andExpect(status().isConflict());
 
 		RucsokEntity entity = rucsokDao.findByLink(TEST_UNIQUE_URL);
 

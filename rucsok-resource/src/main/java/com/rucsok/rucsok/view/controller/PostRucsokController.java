@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.rucsok.rucsok.service.RucsokService;
 import com.rucsok.rucsok.view.model.RucsokInsertRequest;
+import com.rucsok.rucsok.view.model.RucsokView;
 import com.rucsok.rucsok.view.transform.RucsokTransformer;
 
 @RestController
@@ -25,11 +26,10 @@ public class PostRucsokController {
 	@Autowired
 	private RucsokTransformer rucsokTransformer;
 
-	@ResponseBody
 	@RequestMapping(name = "postrucsok", path = REQUEST_MAPPING, method = RequestMethod.POST)
 	@ResponseStatus(value = HttpStatus.CREATED)
-	public void putRucsok(@RequestBody RucsokInsertRequest request, Principal principal) {		
-		rucsokService.saveRucsok(rucsokTransformer.transformToRucsok(request), principal.getName());
+	public RucsokView putRucsok(@RequestBody RucsokInsertRequest request, Principal principal) {		
+		return rucsokTransformer.transformToView(rucsokService.saveRucsok(rucsokTransformer.transformToRucsok(request), principal.getName()));
 	}
 
 }

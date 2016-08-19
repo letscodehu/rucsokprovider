@@ -44,20 +44,24 @@ public class RucsokService {
 		return rucsokServiceTransform.transformToSingleRucsok(rucsokRepo.findById(id));
 	}
 
-	public void saveRucsok(Rucsok rucsok, String username) {
+	public Rucsok saveRucsok(Rucsok rucsok, String username) {
 		checkCreateRucsokPreconditions(rucsok, username);
-		createNewRucsok(rucsok, username);
+		return rucsokServiceTransform.transformToRucsok(createNewRucsok(rucsok, username));
 	}
 
 	private void setUser(RucsokEntity rucsokEntity, String username) {
 		rucsokEntity.setUser(userService.findUserByName(username));
 	}
 
-	private void createNewRucsok(Rucsok rucsok, String username) {
+	private RucsokEntity createNewRucsok(Rucsok rucsok, String username) {
+		return rucsokRepo.save(transformToRucsokEntity(rucsok, username));
+	}
+
+	private RucsokEntity transformToRucsokEntity(Rucsok rucsok, String username) {
 		rucsok.setCreatedAt(LocalDateTime.now());
 		RucsokEntity rucsokEntity = rucsokServiceTransform.transformToRucsokEntity(rucsok);
 		setUser(rucsokEntity, username);
-		rucsokRepo.save(rucsokEntity);
+		return rucsokEntity;
 	}
 
 	private void checkCreateRucsokPreconditions(Rucsok rucsok, String username) {
