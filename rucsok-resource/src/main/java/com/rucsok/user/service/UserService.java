@@ -19,7 +19,7 @@ public class UserService {
 	public UserEntity findUserByName(String username) {
 		return userRepo.findByName(username);
 	}
-
+	
 	public boolean isUserExists(String username) {
 		return null != findUserByName(username);
 	}

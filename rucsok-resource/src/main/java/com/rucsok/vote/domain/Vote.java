@@ -2,16 +2,16 @@ package com.rucsok.vote.domain;
 
 public class Vote {
 
-	private Long userId;
+	private String username;
 	private Long rucsokId;
 	private VoteType voteType;
 
-	public Long getUserId() {
-		return userId;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setUserId(Long userId) {
-		this.userId = userId;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public Long getRucsokId() {

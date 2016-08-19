@@ -34,7 +34,7 @@ public class WebSecurityAuthServerConfig extends WebSecurityConfigurerAdapter {
 		.authorizeRequests()
 			.antMatchers(HttpMethod.GET, "/","/profile", "/check-rucsok", "/rucsok/**","/**/*.js", "/app/**/*.html", "/**/*.js.map" , "/**/*.css", "/images/**").permitAll() 
 			.antMatchers("/users").hasRole("ADMIN")
-			.antMatchers(HttpMethod.POST, "/rucsok/**").authenticated()
+			.antMatchers(HttpMethod.POST, "/rucsok/**", "/vote").authenticated()
 			.antMatchers(HttpMethod.DELETE, "/rucsok/**").authenticated();
 		
 	}

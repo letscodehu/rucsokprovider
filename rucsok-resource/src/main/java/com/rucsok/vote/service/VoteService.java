@@ -38,20 +38,12 @@ public class VoteService {
 	@Autowired
 	private RucsokDao rucsokRepository;
 
-	public void createVote(Vote vote, Principal principal) {
+	public void createVote(Vote vote) {
 		Optional<RucsokEntity> rucsok = getRucsokById(vote);
 		Optional<UserEntity> user = getUserById(vote);
 		checkIfUserExist(user);
 		checkIfRucsokExist(rucsok);
-		checkIfUserCanMakeAVote(user.get(), principal);
 		saveVote(vote, rucsok.get(), user.get());
-	}
-
-	private void checkIfUserCanMakeAVote(UserEntity userEntity, Principal principal) {
-		if (!userEntity.getName().equals(principal.getName())) {
-			LOGGER.error("User: " + principal.getName() + " tried to create vote with: " + userEntity.getName());
-			throw new UserHasNoRightException();
-		}
 	}
 
 	private void saveVote(Vote vote, RucsokEntity rucsok, UserEntity user) {
@@ -71,7 +63,7 @@ public class VoteService {
 	}
 
 	private Optional<UserEntity> getUserById(Vote vote) {
-		return Optional.ofNullable(userRepository.findOne(vote.getUserId()));
+		return Optional.ofNullable(userRepository.findByName(vote.getUsername()));
 	}
 
 	private Optional<RucsokEntity> getRucsokById(Vote vote) {

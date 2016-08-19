@@ -40,14 +40,10 @@ public class VoteServiceIntegrationTest {
 	private VoteService underTest;
 
 	@Mock
-	private Principal principal;
-
-	@Mock
 	private Vote vote;
 	
 	@Before
 	public void setUp(){
-		principal = Mockito.mock(Principal.class);
 		vote = Mockito.mock(Vote.class);
 	}
 
@@ -65,11 +61,11 @@ public class VoteServiceIntegrationTest {
 		
 		// When
 		
-		when(principal.getName()).thenReturn(username);
 		when(vote.getRucsokId()).thenReturn(rucsokId);
-		when(vote.getUserId()).thenReturn(userId);
+		when(vote.getUsername()).thenReturn(username);
 		when(vote.getVoteType()).thenReturn(voteType);
-		underTest.createVote(vote, principal);
+		
+		underTest.createVote(vote);
 		
 		VoteEntity persistedVote =  voteRepository.findOne(new VotePK(userId, rucsokId));
 		
@@ -77,10 +73,11 @@ public class VoteServiceIntegrationTest {
 		
 		Assert.assertEquals("Vote should be presisted.", count + 1, voteRepository.count());
 		Assert.assertEquals("Votetype should be the same.", voteType, persistedVote.getVoteType());
+		Assert.assertEquals("Rucsok Id should be the same.", rucsokId.longValue(), persistedVote.getRucsok().getId());
+		Assert.assertEquals("UserId Id should be the same.", userId.longValue(), persistedVote.getUser().getId());
 		
-		verify(principal).getName();
 		verify(vote).getRucsokId();
-		verify(vote).getUserId();
+		verify(vote).getUsername();
 		verify(vote).getVoteType();
 	}
 }

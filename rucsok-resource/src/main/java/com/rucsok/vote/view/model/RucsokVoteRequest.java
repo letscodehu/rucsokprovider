@@ -1,31 +1,37 @@
 package com.rucsok.vote.view.model;
 
-import com.rucsok.vote.domain.VoteType;
-
 public class RucsokVoteRequest {
 
-	private long userid;
 	private long rucsokid;
-	private VoteType type;
-	
-	public VoteType getType() {
-		return type;
-	}
+	private String voteType;
 
-	public long getUserid() {
-		return userid;
-	}	
+	public String getType() {
+		return voteType;
+	}
 
 	public long getRucsokid() {
 		return rucsokid;
 	}
 
-
-	public RucsokVoteRequest(long userid, long rucsokid, VoteType type) {
-		super();
-		this.userid = userid;
-		this.rucsokid = rucsokid;
-		this.type = type;
+	public String getVoteType() {
+		return voteType;
 	}
-	
+
+	public void setVoteType(String voteType) {
+		this.voteType = voteType;
+	}
+
+	public void setRucsokid(long rucsokid) {
+		this.rucsokid = rucsokid;
+	}
+
+	public RucsokVoteRequest() {
+	}
+
+	public RucsokVoteRequest(long rucsokid, String type) {
+		super();
+		this.rucsokid = rucsokid;
+		this.voteType = type;
+	}
+
 }
