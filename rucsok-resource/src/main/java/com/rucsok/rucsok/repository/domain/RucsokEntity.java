@@ -3,6 +3,7 @@ package com.rucsok.rucsok.repository.domain;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -46,6 +48,9 @@ public class RucsokEntity implements Serializable {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "user_id")
 	private UserEntity user;
+	
+	@OneToMany(mappedBy = "vote", fetch = FetchType.LAZY)
+	private Set<VoteEntity> votes;
 
 	public String getTitle() {
 		return title;

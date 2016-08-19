@@ -12,6 +12,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.rucsok.rucsok.repository.domain.RucsokEntity;
+import com.rucsok.rucsok.repository.domain.VoteEntity;
 
 @Entity(name = "User")
 public class UserEntity implements UserDetails {
@@ -25,6 +26,9 @@ public class UserEntity implements UserDetails {
 
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	private Set<RucsokEntity> rucsoks;
+	
+	@OneToMany(mappedBy = "vote", fetch = FetchType.LAZY)
+	private Set<VoteEntity> votes;
 
 	public long getId() {
 		return id;

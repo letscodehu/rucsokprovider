@@ -12,5 +12,4 @@ public class UserToUserDetailsTransformer {
 		return new UserDetails(user.getName(), user.getPassword());
 	}
 	
-	
 }

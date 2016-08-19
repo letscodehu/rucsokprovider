@@ -2,8 +2,17 @@ package com.rucsok.user.domain;
 
 public class User {
 
+	private long id;
 	private String email;
 	private String username;
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
 
 	public String getEmail() {
 		return email;
