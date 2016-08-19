@@ -41,7 +41,7 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
 		http.authorizeRequests()
 				.antMatchers(HttpMethod.GET, "/", "/login", "/profile", "/check-rucsok", "/rucsok/**", "/**/*.js",
 						"/app/**/*.html", "/**/*.js.map", "/**/*.css", "/images/**")
-				.permitAll().antMatchers("/users").hasRole("ADMIN").antMatchers(HttpMethod.POST, "/rucsok/**")
+				.permitAll().antMatchers("/users").hasRole("ADMIN").antMatchers(HttpMethod.POST, "/rucsok/**", "/vote/**")
 				.authenticated().antMatchers(HttpMethod.DELETE, "/rucsok/**").authenticated();
 
 	}

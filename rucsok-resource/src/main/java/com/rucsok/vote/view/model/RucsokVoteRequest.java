@@ -4,7 +4,6 @@ import com.rucsok.vote.domain.VoteType;
 
 public class RucsokVoteRequest {
 
-	private long userid;
 	private long rucsokid;
 	private VoteType type;
 	
@@ -12,18 +11,15 @@ public class RucsokVoteRequest {
 		return type;
 	}
 
-	public long getUserid() {
-		return userid;
-	}	
 
 	public long getRucsokid() {
 		return rucsokid;
 	}
+	
+	public RucsokVoteRequest() {}
 
-
-	public RucsokVoteRequest(long userid, long rucsokid, VoteType type) {
+	public RucsokVoteRequest(long rucsokid, VoteType type) {
 		super();
-		this.userid = userid;
 		this.rucsokid = rucsokid;
 		this.type = type;
 	}

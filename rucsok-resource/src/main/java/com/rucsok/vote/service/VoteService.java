@@ -13,7 +13,6 @@ import com.rucsok.rucsok.repository.domain.RucsokEntity;
 import com.rucsok.rucsok.service.exception.IllegalRucsokArgumentException;
 import com.rucsok.user.repository.dao.UserRepository;
 import com.rucsok.user.repository.domain.UserEntity;
-import com.rucsok.user.service.UserProfileService;
 import com.rucsok.user.service.exception.UserHasNoRightException;
 import com.rucsok.vote.domain.Vote;
 import com.rucsok.vote.service.transform.VoteTransformer;
@@ -33,14 +32,11 @@ public class VoteService {
 	private UserRepository userRepository;
 
 	@Autowired
-	private UserProfileService userProfileService;
-
-	@Autowired
 	private RucsokDao rucsokRepository;
 
 	public void createVote(Vote vote, Principal principal) {
 		Optional<RucsokEntity> rucsok = getRucsokById(vote);
-		Optional<UserEntity> user = getUserById(vote);
+		Optional<UserEntity> user = getUserByName(principal);
 		checkIfUserExist(user);
 		checkIfRucsokExist(rucsok);
 		checkIfUserCanMakeAVote(user.get(), principal);
@@ -70,8 +66,8 @@ public class VoteService {
 		}
 	}
 
-	private Optional<UserEntity> getUserById(Vote vote) {
-		return Optional.ofNullable(userRepository.findOne(vote.getUserId()));
+	private Optional<UserEntity> getUserByName(Principal principal) {
+		return Optional.ofNullable(userRepository.findByName(principal.getName()));
 	}
 
 	private Optional<RucsokEntity> getRucsokById(Vote vote) {
