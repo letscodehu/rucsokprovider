@@ -7,6 +7,8 @@ import com.rucsok.rucsok.repository.domain.VoteEntity;
 import com.rucsok.rucsok.repository.domain.VotePK;
 import com.rucsok.user.repository.domain.UserEntity;
 import com.rucsok.vote.domain.Vote;
+import com.rucsok.vote.domain.VoteType;
+import com.rucsok.vote.view.model.RucsokVoteRequest;
 
 @Component
 public class VoteTransformer {
@@ -25,6 +27,14 @@ public class VoteTransformer {
 		result.setRucsokId(rucsokEntity.getId());
 		result.setUserId(userEntity.getId());
 		return result;
+	}
+	
+	public Vote transformFromRucsokVoteRequest(RucsokVoteRequest request) {
+		Vote vote = new Vote();
+		vote.setRucsokId(request.getRucsokid());
+		vote.setUserId(request.getUserid());
+		vote.setVoteType(request.getType());
+		return vote;
 	}
 
 }
