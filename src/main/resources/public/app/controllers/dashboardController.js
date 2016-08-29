@@ -1,53 +1,61 @@
 define([ 'jquery' ], function($) {
 
-	rucsokController.$inject = [ '$scope', 'rucsokService',
-			'addRucsokFormService', '$state', 'authResolverFactory', 'userProfileService' ]
+    rucsokController.$inject = [ '$scope', 'rucsokService',
+    'addRucsokFormService', '$ionicHistory', '$state', 'authResolverFactory', 'userProfileService']
 
-	function rucsokController($scope, rucsokService, addRucsokFormService,
-			$state, authResolverFactory, userProfileService) {
+    function rucsokController($scope, rucsokService, addRucsokFormService,
+        $ionicHistory, $state, authResolverFactory, userProfileService) {
 
-		$scope.rucsoks = [];
-		$scope.addRucsok = addRucsok;
-		$scope.showRucsok = showRucsok;
-		$scope.isLoggedIn = userProfileService.isLoggedIn;
-		$scope.goToLogin = goToLogin;
+        $scope.rucsoks = [];
+        $scope.addRucsok = addRucsok;
+        $scope.showRucsok = showRucsok;
+        $scope.isLoggedIn = userProfileService.isLoggedIn();
+        $scope.goToLogin = goToLogin;
+        $scope.goToProfile = goToProfile;
 
-		refresh();
+        // Sim
+        $scope.isLoggedIn = true;
 
-		var updateListener = $scope.$on('rucsok.added', function(event) {
-			refresh();
-		});
+        refresh();
 
-		$scope.$on('$destroy', function() {
-			updateListener();
-		});
+        var updateListener = $scope.$on('rucsok.added', function(event) {
+            refresh();
+        });
 
-		function refresh() {
-			rucsokService.getRucsok().then(function(data) {
-				$scope.rucsoks = data;
-			});
-		}
+        $scope.$on('$destroy', function() {
+            updateListener();
+        });
 
-		function visit(url) {
-			var win = window.open(url, '_blank');
-			win.focus();
-		}
+        function refresh() {
+            rucsokService.getRucsok().then(function(data) {
+                $scope.rucsoks = data;
+            });
+        }
 
-		function addRucsok() {
-			addRucsokFormService.showView();
-		}
+        function visit(url) {
+            var win = window.open(url, '_blank');
+            win.focus();
+        }
 
-		function showRucsok(item) {
-			$state.go('single', {
-				id : item.id
-			});
-		}
+        function addRucsok() {
+            addRucsokFormService.showView();
+        }
 
-		function goToLogin() {
-			$state.go('login');
-		}
+        function showRucsok(item) {
+            $state.go('single', {
+                id : item.id
+            });
+        }
 
-	}
+        function goToLogin() {
+            $state.go('login');
+        }
 
-	return rucsokController;
+        function goToProfile() {
+            $state.go('profile');
+        }
+
+    }
+
+    return rucsokController;
 })
