@@ -1,6 +1,7 @@
 package com.rucsok.login.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
@@ -26,7 +27,7 @@ public class LoginService {
 	@Autowired
 	private HttpHeaders loginHeader;
 
-	@Autowired
+	@Value("${oauth2.token.uri}")
 	private String oauth2TokenUri;
 
 	public JsonNode accessToken(String username, String password) {

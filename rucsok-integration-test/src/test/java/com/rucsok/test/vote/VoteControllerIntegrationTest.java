@@ -58,29 +58,30 @@ public class VoteControllerIntegrationTest {
 	@Test
 	public void voteWithoutLoginShouldReturnUnauthorizedWhenNotLoggedIn() throws Exception {
 
-		// Given
+		// Given in setup
 		
 		// When
-		
-		// Then
-
+	
 		mockMvc.perform(post(RucsokVoteController.REQUEST_MAPPING)
 				.contentType(MediaType.APPLICATION_JSON).content(mapper.writeValueAsString(null)))
+		
+		// Then		
 				.andExpect(status().isUnauthorized());
 	}
 	
 	@Test
 	public void voteShouldReturnBadRequestWhenRequestIsNull() throws Exception {
 
-		// Given
+		// Given in setup
 		
 		// When
 		
-		// Then
-
 		mockMvc.perform(post(RucsokVoteController.REQUEST_MAPPING)
 				.header("Authorization", "Bearer " + accessToken)
 				.contentType(MediaType.APPLICATION_JSON).content(mapper.writeValueAsString(null)))
+		
+		// Then
+		
 				.andExpect(status().isBadRequest());
 	}
 	

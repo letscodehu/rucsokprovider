@@ -1,4 +1,4 @@
-define([], function() {
+	define([], function() {
 
 	singleController.$inject = [ "$scope", "$state", "rucsokService",
 			"$stateParams", '$ionicHistory', '$document',  'rucsokModelService' ];

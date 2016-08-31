@@ -1,6 +1,7 @@
 package com.rucsok.login.service.config;
 
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -84,5 +85,10 @@ public class LoginServiceConfig {
 			return map;
 		}
 
+	}
+	
+	@Bean
+	public Random random() {
+		return new Random();
 	}
 }
