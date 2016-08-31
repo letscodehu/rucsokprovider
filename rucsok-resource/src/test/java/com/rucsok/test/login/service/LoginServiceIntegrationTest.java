@@ -21,6 +21,7 @@ import org.springframework.web.client.RestTemplate;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.rucsok.authenticaiton.config.ResourceServerConfiguration;
 import com.rucsok.login.service.LoginService;
 import com.rucsok.login.service.config.LoginServiceConfig;
 

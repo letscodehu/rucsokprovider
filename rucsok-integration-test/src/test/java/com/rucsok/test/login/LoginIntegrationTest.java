@@ -28,21 +28,18 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.rucsok.rucsok.repository.dao.RucsokDao;
+import com.rucsok.login.service.config.LoginServiceConfig;
 import com.rucsok.test.config.RepositoryConfig;
 import com.rucsok.test.config.TestConfig;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = { RepositoryConfig.class, TestConfig.class })
+@ContextConfiguration(classes = { RepositoryConfig.class, TestConfig.class, LoginServiceConfig.class })
 @WebIntegrationTest
 public class LoginIntegrationTest {
 
 	private static final String USERNAME = "username";
 	private static final String PASSWORD = "password";
-
-	@Autowired
-	private RucsokDao rucsokDao;
 
 	@Autowired
 	private WebApplicationContext context;

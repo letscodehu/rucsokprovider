@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.FormHttpMessageConverter;
@@ -13,6 +15,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 @Configuration
+@PropertySource("classpath:application.properties")
 public class LoginServiceConfig {
 
 	private static final String AUTH_HEADER_DELIMITER = ":";
@@ -34,6 +37,14 @@ public class LoginServiceConfig {
 
 	@Value("${oauth2.client.secret}")
 	private String clientSecret;
+
+	@Value("${oauth2.token.uri}")
+	private String tokenUri;
+
+	@Bean
+	public String oauth2TokenUri() {
+		return tokenUri;
+	}
 
 	@Bean
 	public HttpHeaders loginHeaderFactory() {
@@ -71,6 +82,11 @@ public class LoginServiceConfig {
 		RestTemplate restTemplate = new RestTemplate();
 		restTemplate.getMessageConverters().add(new FormHttpMessageConverter());
 		return restTemplate;
+	}
+	
+	@Bean
+	public static PropertySourcesPlaceholderConfigurer propertyConfigInDev() {
+		return new PropertySourcesPlaceholderConfigurer();
 	}
 
 	public class LoginFormMapFactory {
