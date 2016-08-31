@@ -37,3 +37,5 @@ insert into rucsok(id, title,  link, image_url, video_url, user_id, created_at)
 values (12, 'rucsok12', 'http://letscode.hu','http://localhost:8080/images/test/12.jpg', null, 1, STR_TO_DATE('2016-08-08 11:11:11', '%Y-%m-%d %H:%i:%s'));
 insert into rucsok(id, title,  link, image_url, video_url, user_id, created_at) 
 values (13, 'rucsok13', 'http://imgur.com/gallery/QelEIx3','http://localhost:8080/images/rucsi.png', 'http://localhost:8080/images/test/lYPDaKO.mp4', 1, STR_TO_DATE('2016-08-08 11:11:11', '%Y-%m-%d %H:%i:%s'));
+
+INSERT INTO `pun` (`id`, `text`, `user_id`) VALUES (NULL, 'Did you hear about the guy whose whole left side was cut off? He''s all right now.', '1'), (NULL, ' I wasn''t originally going to get a brain transplant, but then I changed my mind.', '2')

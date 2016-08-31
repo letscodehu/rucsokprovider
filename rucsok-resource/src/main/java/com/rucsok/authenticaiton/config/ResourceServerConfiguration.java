@@ -1,5 +1,7 @@
 package com.rucsok.authenticaiton.config;
 
+import java.util.Random;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -62,6 +64,7 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
 		restTemplate.getMessageConverters().add(new FormOAuth2ExceptionHttpMessageConverter());
 		return restTemplate;
 	}
+
 
 	@Bean
 	public RemoteTokenServices remoteTokenServices(final @Value("${oauth2.token.check}") String checkTokenUrl,

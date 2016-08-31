@@ -33,6 +33,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers(HttpMethod.GET, 
 					"/",
 					"/profile", 
+					"/pun/random",
 					"/check-rucsok",
 					"/rucsok/**",
 					"/**/*.js",

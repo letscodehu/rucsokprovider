@@ -22,7 +22,7 @@ public class VoteTransformer {
 		return result;
 	}
 
-	public VotePK tranformToVotePK(RucsokEntity rucsokEntity, UserEntity userEntity) {
+	private VotePK tranformToVotePK(RucsokEntity rucsokEntity, UserEntity userEntity) {
 		VotePK result = new VotePK();
 		result.setRucsokId(rucsokEntity.getId());
 		result.setUserId(userEntity.getId());

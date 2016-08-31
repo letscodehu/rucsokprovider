@@ -12,7 +12,5 @@ public class RucsokVoteResponse {
 		super();
 		this.success = success;
 	}
-	
-	
-	
+
 }
