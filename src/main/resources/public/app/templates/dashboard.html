@@ -1,14 +1,26 @@
 <ion-view view-title="Dashboard">
-  <ion-content>
-  	<ion-gallery ion-gallery-items="rucsoks" ion-item-callback="showRucsok(item)"></ion-gallery>
-  </ion-content>
     <ion-nav-buttons side="primary">
-      <button class="button btn-danger" ng-click="addRucsok()"  ng-if="isLoggedIn() == true">
-        Add rücsök
-      </button>
-      <button class="button btn-danger" ng-click="goToLogin()"  ng-if="isLoggedIn() != true">
-        Login
-      </button>
+        <button class="button btn-danger" data-ng-click="addRucsok()" data-ng-if="isLoggedIn">
+            Add rücsök
+        </button>
+        <button class="button btn-danger" data-ng-click="goToProfile()" data-ng-if="isLoggedIn">
+            Profile
+        </button>
+        <button class="button btn-danger" data-ng-click="goToLogin()" data-ng-if="!isLoggedIn">
+            Login
+        </button>
     </ion-nav-buttons>
+
     <add-rucsok></add-rucsok>
+    
+    <ion-tabs class="tabs-positive tabs-icon-top">
+        <ion-tab title="Top" href="#/dashboard/top" icon-on="ion-social-html5" icon-off="ion-social-html5-outline">
+            <ion-nav-view name="dashboard-top">
+            </ion-nav-view>
+        </ion-tab>
+        <ion-tab title="New" href="#/dashboard/new" icon-on="ion-social-angular" icon-off="ion-social-angular-outline">
+            <ion-nav-view name="dashboard-new">
+            </ion-nav-view>
+        </ion-tab>
+    </ion-tabs>
 </ion-view>

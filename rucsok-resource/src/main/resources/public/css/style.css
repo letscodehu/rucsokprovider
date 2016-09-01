@@ -1,0 +1,27 @@
+.centered {
+	max-width: 100%;
+	max-height: 100%;
+	vertical-align : middle;
+}
+#rucsok{
+	display:block;
+	margin:auto;
+	max-width:300px;
+	text-align:center;
+}
+
+#rucsok img{
+	max-width:300px;
+	max-height: 200px;
+}
+
+#add-rucsok-modal {
+	z-index: 1000;
+}
+.alert-danger{
+	color: red;
+}
+/* HACK - veryyyyy baaad, on emulated android tabs bar disappears without this */
+.nav-bar-tabs-top.hide ~ .view-container .tabs-top .tabs {
+	top: 44px;
+}

@@ -10,26 +10,29 @@ define([
   app.config([
     '$stateProvider',
     '$urlRouterProvider',
-//    'authResolverFactory',
     function (
     		$stateProvider, 
     		$urlRouterProvider
-//    		authResolverFactory
     		) {
       // url routes/states
       $urlRouterProvider.otherwise('dashboard');
 
       $stateProvider
         // app states
-      	.state('login', {
-          url: '/login',
-          templateUrl: 'app/templates/login.html',
-          controller: 'loginController'
-        }) 
+        .state('profile', {
+          url: "/profile",
+          templateUrl: 'app/templates/profile.html',
+          controller: 'userProfileController'
+        })
         .state('dashboard', {
           url: '/dashboard',
           templateUrl: 'app/templates/dashboard.html',
           controller: 'dashboardController'
+        })
+      	.state('login', {
+          url: '/login',
+          templateUrl: 'app/templates/login.html',
+          controller: 'loginController'
         }) 
         .state('single', {
             url: '/single/{id}',
