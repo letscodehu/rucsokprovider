@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.rucsok.rucsok.repository.domain.RucsokEntity;
 import com.rucsok.rucsok.repository.domain.VoteEntity;
 import com.rucsok.rucsok.repository.domain.VoteTypeEntity;
+import com.rucsok.test.config.RucsokVoteServiceConifig;
 import com.rucsok.user.repository.domain.UserEntity;
 import com.rucsok.vote.domain.Vote;
 import com.rucsok.vote.transform.VoteTransformer;
@@ -20,7 +21,7 @@ import com.rucsok.vote.view.transform.VoteRequestTransformer;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = { VoteTransformer.class })
+@ContextConfiguration(classes = { VoteTransformer.class, VoteRequestTransformer.class })
 public class VoteTransformerTest {
 
 	@Autowired

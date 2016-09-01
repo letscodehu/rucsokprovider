@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 
 import com.rucsok.vote.service.VoteService;
 import com.rucsok.vote.transform.VoteTransformer;
+import com.rucsok.vote.view.transform.VoteRequestTransformer;
 
 public class RucsokVoteServiceConifig {
 
@@ -13,6 +14,9 @@ public class RucsokVoteServiceConifig {
 	
 	@Mock
 	private VoteTransformer voteTransformer;
+	
+	@Mock
+	private VoteRequestTransformer voteRequestTransformer;
 	
 		
 	@Bean
@@ -25,4 +29,8 @@ public class RucsokVoteServiceConifig {
 		return voteTransformer;
 	}
 			
+	@Bean
+	public VoteRequestTransformer voteRequestTransformer() {
+		return voteRequestTransformer;
+	}
 }
