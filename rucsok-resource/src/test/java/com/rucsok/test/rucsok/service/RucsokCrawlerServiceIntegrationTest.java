@@ -27,7 +27,7 @@ import com.rucsok.rucsok.service.RucsokCrawlerService;
 import com.rucsok.rucsok.service.helper.GeneralDocumentParser;
 import com.rucsok.rucsok.service.helper.RucsokCrawlHelper;
 import com.rucsok.rucsok.service.helper.UrlFetchHelper;
-import com.rucsok.rucsok.service.transform.RucsokTypeTransform;
+import com.rucsok.rucsok.transform.RucsokTypeTransform;
 import com.rucsok.test.config.RucsokCrawlServiceConfig;
 import com.rucsok.user.repository.domain.UserEntity;
 import com.rucsok.user.service.UserService;
