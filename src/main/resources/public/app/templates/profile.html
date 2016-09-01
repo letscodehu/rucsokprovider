@@ -1,0 +1,19 @@
+<ion-view view-title="Profile">
+    <ion-nav-buttons side="primary">
+        <button class="button btn-danger" ng-click="backButton()">
+            <i class="ion-arrow-left-c"></i> Back
+        </button>
+    </ion-nav-buttons>
+    <ion-tabs class="tabs-positive tabs-icon-top">
+        <ion-tab title="Posts" icon-on="ion-ios-filing" icon-off="ion-ios-filing-outline">
+            <ion-nav-view>
+                This is posts tab
+            </ion-nav-view>
+        </ion-tab>
+        <ion-tab title="Voted" icon-on="ion-eye" icon-off="ion-eye-disabled">
+            <ion-nav-view>
+                This is voted tab
+            </ion-nav-view>
+        </ion-tab>
+    </ion-tabs>
+</ion-view>

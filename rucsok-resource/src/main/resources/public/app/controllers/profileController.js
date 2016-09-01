@@ -1,12 +1,11 @@
 define([], function() {
 
-	profileController.$inject = ["$scope", "userProfileService", "$state"];
+	profileController.$inject = ["$rootScope", "$scope", "userProfileService", "$ionicHistory", "$ionicTabsDelegate", "$timeout"];
 	
-	function profileController($scope, userProfileService, $state) {
-		
-		
-		
-		
+	function profileController($rootScope, $scope, userProfileService, $ionicHistory, $ionicTabsDelegate, $timeout) {
+        $timeout(function() {
+            $ionicTabsDelegate.select($rootScope.activeProfileTabIndex);
+        }, 100);
 	}
 
 	return profileController;
