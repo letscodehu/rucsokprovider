@@ -67,8 +67,7 @@ define([
             url: '/profile',
             views: {
         		'' : {
-        			templateUrl : 'app/templates/profile.html',
-        			controller: 'profileController'
+        			templateUrl : 'app/templates/profile.html'
         		},
         		'posts-tab@app.profile' : {
         			templateUrl : 'app/templates/profile/tab-posts.html',
