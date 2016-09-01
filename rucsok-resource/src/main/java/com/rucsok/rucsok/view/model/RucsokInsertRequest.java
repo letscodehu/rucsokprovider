@@ -1,7 +1,5 @@
 package com.rucsok.rucsok.view.model;
 
-import org.springframework.stereotype.Component;
-
 public class RucsokInsertRequest {
 
 	private RucsokPost rucsok;

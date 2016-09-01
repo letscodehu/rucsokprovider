@@ -19,11 +19,11 @@ import com.rucsok.rucsok.view.transform.RucsokTransformer;
 public class CrawlRucsokController {
 	public static final String REQUEST_MAPPING = "/check-rucsok";
 
-	private RucsokCrawlerService rucsokCrawlerService;
+	private RucsokCrawlerService rucsokService;
 
 	@Autowired
 	public void setRucsokService(RucsokCrawlerService rucsokService) {
-		this.rucsokCrawlerService = rucsokService;
+		this.rucsokService = rucsokService;
 	}	
 
 	@Autowired
@@ -33,7 +33,7 @@ public class CrawlRucsokController {
 	@CrossOrigin(origins = "*")
 	@RequestMapping(name = "createrucsok", path = REQUEST_MAPPING, method = RequestMethod.POST)
 	public RucsokView crawlRucsok(@RequestBody RucsokCheckRequest request, Principal principal) throws IOException {
-		return rucsokTransformer.transformToView(rucsokCrawlerService.crawl(request.getUrl(), principal.getName()));
+		return rucsokTransformer.transformToView(rucsokService.crawl(request.getUrl(), principal.getName()));
 	}
 
 }

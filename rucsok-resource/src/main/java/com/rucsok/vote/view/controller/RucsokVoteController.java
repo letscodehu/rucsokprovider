@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rucsok.vote.service.VoteService;
-import com.rucsok.vote.service.transform.VoteTransformer;
 import com.rucsok.vote.view.model.RucsokVoteRequest;
+import com.rucsok.vote.view.transform.VoteRequestTransformer;
 
 @RestController
 public class RucsokVoteController {
@@ -20,7 +20,7 @@ public class RucsokVoteController {
 	public static final String REQUEST_MAPPING = "/vote";
 
 	@Autowired
-	private VoteTransformer transformer;
+	private VoteRequestTransformer transformer;
 
 	@Autowired
 	private VoteService voteService;

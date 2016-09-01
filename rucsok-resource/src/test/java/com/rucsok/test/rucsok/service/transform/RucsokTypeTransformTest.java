@@ -13,7 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.rucsok.rucsok.domain.RucsokType;
 import com.rucsok.rucsok.repository.domain.RucsokEntity;
-import com.rucsok.rucsok.service.transform.RucsokTypeTransform;
+import com.rucsok.rucsok.transform.RucsokTypeTransform;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)

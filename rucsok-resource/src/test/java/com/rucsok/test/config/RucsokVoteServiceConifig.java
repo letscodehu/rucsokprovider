@@ -4,7 +4,7 @@ import org.mockito.Mock;
 import org.springframework.context.annotation.Bean;
 
 import com.rucsok.vote.service.VoteService;
-import com.rucsok.vote.service.transform.VoteTransformer;
+import com.rucsok.vote.transform.VoteTransformer;
 
 public class RucsokVoteServiceConifig {
 

@@ -4,7 +4,7 @@ create table rucsok (
     , title varchar(255)
     , link varchar(255)
     , imageUrl varchar(500)
-    , videourl varchar(500)
+    , videoUrl varchar(500)
     , user_id int
     , createdAt timestamp
     , primary key (id)
@@ -37,16 +37,16 @@ insert into user(id, email,  password, name, failedLogin)
 values (2, 'asd', '$2a$06$0RA1mDUlDAvOh5V9a0R01.POVFn1/Dvc5ggJ9xhXLiDAjG3o6NiNG', 'kecske', 0);
 
 
-insert into rucsok(id, title,  link, imageUrl, videourl, user_id, createdAt) 
+insert into rucsok(id, title,  link, imageUrl, videoUrl, user_id, createdAt) 
 values (1, 'rucsok01', 'http://rucsok.com/01.gif','img01', null, 1, '2016-08-08 11:11:11');
 
-insert into rucsok(id, title,  link, imageUrl, videourl, user_id, createdAt) 
+insert into rucsok(id, title,  link, imageUrl, videoUrl, user_id, createdAt) 
 values (2, 'rucsok02', 'http://rucsok.com/02.gif','img02', 'https://www.youtube.com/watch?v=buXwBr9H3VY', 1, '2016-08-08 11:11:11');
 
-insert into rucsok(id, title,  link, imageUrl, videourl, user_id, createdAt) 
+insert into rucsok(id, title,  link, imageUrl, videoUrl, user_id, createdAt) 
 values (3, 'rucsok03', 'http://rucsok.com/03.gif','img03', 'http://rucsok.com/rucsok.mp4', 2, '2016-08-08 11:11:11');
 
-insert into rucsok(id, title,  link, imageUrl, videourl, user_id, createdAt) 
+insert into rucsok(id, title,  link, imageUrl, videoUrl, user_id, createdAt) 
 values (4, 'rucsok04', 'http://rucsok.com/04.gif','img04', null, 2, '2016-08-08 11:11:11');
 
 insert into vote(user_id, rucsok_id, vote)
