@@ -10,7 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.WebIntegrationTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers;
@@ -25,20 +25,16 @@ import com.rucsok.config.RepositoryConfig;
 import com.rucsok.config.TestConfig;
 import com.rucsok.user.repository.dao.UserRepository;
 import com.rucsok.user.repository.domain.UserEntity;
-import com.rucsok.user.view.controller.UserProfileController;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { RepositoryConfig.class, TestConfig.class })
-@WebIntegrationTest
+@SpringBootTest
 public class UserProfileIntegrationTest {
 
 	private static final String REQUEST_MAPPING = "/profile/";
 
 	@Autowired
 	private UserRepository userDao;
-
-	@Autowired
-	private UserProfileController profileController;
 	
 	@Autowired
 	private WebApplicationContext context;

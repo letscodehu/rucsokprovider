@@ -8,7 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.WebIntegrationTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers;
@@ -28,7 +28,7 @@ import com.rucsok.rucsok.view.controller.DeleteRucsokController;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {RepositoryConfig.class, TestConfig.class})
-@WebIntegrationTest
+@SpringBootTest
 public class DeleteRucsokControllerIntegrationTest {
 
 	private static final String DELETE_ID = "4";
