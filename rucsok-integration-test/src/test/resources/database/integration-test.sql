@@ -30,6 +30,15 @@ create table vote (
     , primary key (user_id, rucsok_id)
 );
 
+drop table if exists pun;
+create table pun (
+      id bigint not null
+    , user_id bigint not null
+    , text varchar(500) not null   
+    , foreign key (user_id)  references user(id)
+    , primary key (id)
+);
+
 insert into user(id, email,  password, name, failedLogin)
 values (1, 'rucsok', '$2a$06$0RA1mDUlDAvOh5V9a0R01.POVFn1/Dvc5ggJ9xhXLiDAjG3o6NiNG', 'rucsok', 0);
 
@@ -55,3 +64,8 @@ insert into vote(user_id, rucsok_id, vote)
 values (1,3, 'UP');
 insert into vote(user_id, rucsok_id, vote)
 values (2,1, 'UP');
+
+INSERT INTO pun(id, text, user_id) 
+VALUES 
+(1, 'lol1', '1'), 
+(2, 'lol2', '2')
