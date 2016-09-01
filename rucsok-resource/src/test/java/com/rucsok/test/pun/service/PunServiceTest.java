@@ -34,8 +34,8 @@ public class PunServiceTest {
 		final Long id = 5L;
 		
 		Mockito.when(punRepository.count()).thenReturn(max);
-		Mockito.when(random.nextLong(max)).thenReturn(id);
-		Mockito.when(punRepository.findOne(id)).thenReturn(new PunEntity());
+		Mockito.when(random.nextLong(max - 1)).thenReturn(id);
+		Mockito.when(punRepository.findOne(id + 1)).thenReturn(new PunEntity());
 		
 		// WHEN
 		
@@ -43,7 +43,8 @@ public class PunServiceTest {
 		
 		// THEN
 		
-		Mockito.verify(punRepository).findOne(id);
+		Mockito.verify(random).nextLong(max - 1);
+		Mockito.verify(punRepository).findOne(id + 1);
 	}
 	
 	@Test

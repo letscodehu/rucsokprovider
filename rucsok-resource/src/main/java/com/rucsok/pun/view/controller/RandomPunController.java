@@ -11,7 +11,7 @@ import com.rucsok.pun.view.transform.PunViewTransformer;
 @RestController
 public class RandomPunController {
 
-	private static final String RANDOM_PUN_REQUEST_MAPPING = "/pun/random"; 
+	public static final String RANDOM_PUN_REQUEST_MAPPING = "/pun/random"; 
 	
 	@Autowired
 	private PunService punService;
