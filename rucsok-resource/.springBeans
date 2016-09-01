@@ -7,7 +7,7 @@
 	</configSuffixes>
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
-		<config>java:com.rucsok.RucsokResourceServerApp</config>
+		<config>java:com.rucsok.test.RucsokResourceServerApp</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>

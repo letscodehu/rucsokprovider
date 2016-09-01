@@ -16,13 +16,12 @@ import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
 
-import com.rucsok.authenticaiton.config.ResourceServerConfiguration;
-
-
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationServerConfiguration extends
 		AuthorizationServerConfigurerAdapter {
+	
+	public static final String RESOURCE_ID = "restservice";
 
 	private TokenStore tokenStore = new InMemoryTokenStore();
 
@@ -59,7 +58,7 @@ public class AuthorizationServerConfiguration extends
 					.authorizedGrantTypes("password", "refresh_token")
 					.authorities("USER")
 					.scopes("read", "write")
-					.resourceIds(ResourceServerConfiguration.RESOURCE_ID)
+					.resourceIds(RESOURCE_ID)
 					.secret("123456");
 		
 	}

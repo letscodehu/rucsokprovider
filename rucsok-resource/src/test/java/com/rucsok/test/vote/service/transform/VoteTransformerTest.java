@@ -11,11 +11,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.rucsok.rucsok.repository.domain.RucsokEntity;
 import com.rucsok.rucsok.repository.domain.VoteEntity;
+import com.rucsok.rucsok.repository.domain.VoteTypeEntity;
 import com.rucsok.user.repository.domain.UserEntity;
 import com.rucsok.vote.domain.Vote;
-import com.rucsok.vote.domain.VoteType;
-import com.rucsok.vote.service.transform.VoteTransformer;
+import com.rucsok.vote.transform.VoteTransformer;
 import com.rucsok.vote.view.model.RucsokVoteRequest;
+import com.rucsok.vote.view.transform.VoteRequestTransformer;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -24,6 +25,10 @@ public class VoteTransformerTest {
 
 	@Autowired
 	private VoteTransformer transformer;
+	
+	@Autowired
+	private VoteRequestTransformer requestTransformer;
+	
 	private RucsokEntity rucsok;
 	private UserEntity user;
 	
@@ -38,7 +43,7 @@ public class VoteTransformerTest {
 		//GIVEN in setup
 		
 		final Vote vote = new Vote();
-		vote.setVoteType(VoteType.UP);
+		vote.setVoteType(VoteTypeEntity.UP);
 		
 			
 		//WHEN
@@ -48,7 +53,7 @@ public class VoteTransformerTest {
 		
 		Assert.assertEquals(voteEntity.getRucsok(), rucsok);
 		Assert.assertEquals(voteEntity.getUser(), user);
-		Assert.assertEquals(voteEntity.getVoteType(), VoteType.UP);
+		Assert.assertEquals(voteEntity.getVoteType(), VoteTypeEntity.UP);
 		Assert.assertEquals(voteEntity.getKey().getRucsokId(), rucsok.getId());
 		Assert.assertEquals(voteEntity.getKey().getUserId(), user.getId());
 		
@@ -69,13 +74,13 @@ public class VoteTransformerTest {
 		
 		// WHEN
 		
-		Vote vote = transformer.transformFromRucsokVoteRequest(request, username);
+		Vote vote = requestTransformer.transformFromRucsokVoteRequest(request, username);
 		
 		// THEN
 		
 		Assert.assertEquals(username, vote.getUsername());
 		Assert.assertEquals(rucsokId, vote.getRucsokId());
-		Assert.assertEquals(VoteType.DOWN, vote.getVoteType());
+		Assert.assertEquals(VoteTypeEntity.DOWN, vote.getVoteType());
 	}
 	
 }

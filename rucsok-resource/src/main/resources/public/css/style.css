@@ -21,3 +21,7 @@
 .alert-danger{
 	color: red;
 }
+/* HACK - veryyyyy baaad, on emulated android tabs bar disappears without this */
+.nav-bar-tabs-top.hide ~ .view-container .tabs-top .tabs {
+	top: 44px;
+}

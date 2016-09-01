@@ -10,10 +10,12 @@ define([
 		storeName : 'rucsok-store'
 	});
 	
-	app.config(["ionGalleryConfigProvider", 
-	            function (ionGalleryConfigProvider) {
+	app.config(["ionGalleryConfigProvider", "$ionicConfigProvider" 
+	            function (ionGalleryConfigProvider, $ionicConfigProvider) {
 
-						
+		// Disable global view caching, caused a state-not-change-but-url-does anomaly
+        $ionicConfigProvider.views.maxCache(0);
+
 		// ion gallery config 
 		ionGalleryConfigProvider.setGalleryConfig({
 			action_label: 'Close',

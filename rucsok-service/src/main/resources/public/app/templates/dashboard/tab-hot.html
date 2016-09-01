@@ -1,0 +1,15 @@
+<ion-view view-title="Hot as fuck">
+		<!-- Content --> 
+		<ion-content class="padding"> 
+		<ion-refresher
+    pulling-text="Pull to refresh..."
+    on-refresh="doRefresh()">
+  </ion-refresher>
+			<ion-spinner ng-if="rucsoks.length == 0" icon="spiral">
+			</ion-spinner>
+			<ion-gallery ion-gallery-items="rucsoks" ion-item-callback="showRucsok(item)">
+			</ion-gallery> 
+			<ion-floating-button ng-if="isLoggedIn() == true" ng-click="addRucsok()" has-footer="false" button-color="#2AC9AA" icon="ion-plus" iconColor="#fff">
+			</ion-floating-button>
+		</ion-content> 
+</ion-view>
