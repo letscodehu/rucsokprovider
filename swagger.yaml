@@ -1,0 +1,222 @@
+# this is an example of the Uber API
+# as a demonstration of an API spec in YAML
+swagger: '2.0'
+info:
+  title: RucsokProvider API
+  description: How about slacking around with Rucsokprovider API?
+  version: "1.0.0"
+# the domain of the service
+host: localhost
+# array of all schemes that your API supports
+schemes:
+  - http
+# will be prefixed to all paths
+basePath: /
+produces:
+  - application/json
+paths:
+  /pun/random:
+    get:
+      summary: Random pun
+      description: |
+        The Endpoint serves a random pun from the database in order to pun-ish the ones who aren't rucsking for several minutes
+      tags:
+        - Pun
+      responses:
+        200:
+          description: A single pun
+          schema:
+            $ref: '#/definitions/Pun'
+  /vote:
+    post:
+      summary: Vote for a Rucsok
+      description: |
+        The endpoint lets you vote for a rucsok given in the parameters
+      parameters:
+        - name: rucsokid
+          in: query
+          description: The ID of the rucsok to vote for
+          required: true
+          type: number
+          format: double
+        - name: voteType
+          in: query
+          description: The type of the vote. Valid types are UP and DOWN
+          required: true
+          type: string
+      tags:
+        - Vote
+      responses:
+        201:
+          description: Empty response with 201 Created header.
+        401:
+          description : Unauthorized response if the provided token is expired or not valid
+          
+  /login:
+    post:
+      summary: Login
+      description: Login with user credentials to the application
+      parameters:
+        - name: username
+          in: query
+          description: Username of the Rucsokprovider user
+          required: true
+          type: string
+        - name: password
+          in: query
+          description: Password of the Rucsokprovider user
+          required: true
+          type: string
+      tags:
+        - Login
+      responses:
+        200:
+          description: Login response from the OAuth
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/LoginResponse'
+        401:
+          description: Invalid credentials
+  /profile:
+    get:
+      summary: User Profile
+      description: The User Profile endpoint returns information about the Rucsokprovider user that has authorized with the application.
+      tags:
+        - User
+      responses:
+        200:
+          description: Profile information for a user
+          schema:
+            $ref: '#/definitions/Profile'
+        401:
+          description:  Unauthorized response if the provided token is expired or not valid
+  /check-rucsok:
+    post:
+      summary: URL check
+      description: Check if a given URL has processable meta tags to provide a preview representation
+      parameters:
+        - name: url
+          in: query
+          type: string
+          description: The URL where the content should be crawled from
+      tags:
+        - Rucsok
+      responses:
+        200:
+          description: The processed representation of the Rucsok
+          schema:
+            $ref: '#/definitions/Rucsok'
+  /rucsok:
+    delete:
+      summary: Delete rucsok
+      description: Deletes the rucsok by its ID
+      parameters:
+        - name: id
+          in: query
+          type: number
+          description: The unique identifier of the deletable rucsok
+      tags:
+        - Rucsok
+      responses:
+        200:
+          description: Empty response
+    get:
+      summary: List Rucsok
+      description: Lists all the posted rucsok
+      tags:
+        - Rucsok
+      responses:
+        200:
+          description: A list of rucsoks
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Rucsok'
+    post:
+      summary: Contribute to da Rucsok
+      description: Inserts a new rucsok into the collection
+      tags:
+        - Rucsok
+      responses:
+        200:
+          description: A list of rucsoks
+          schema:
+            $ref: '#/definitions/RucsokPost'              
+  /rucsok/{id}:
+    get:
+      summary: Single rucsok
+      description: Returns a single rucsok by its ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: number
+          description: The unique identifier of the retreivable rucsok
+      tags:
+        - Rucsok
+      responses:
+        200:
+          description: A single rucsok
+          schema:
+            $ref: '#/definitions/Rucsok'
+definitions:
+  LoginResponse:
+    type: object
+    properties:
+      access_token:
+        type: string
+        description: The access token provided by OAuth
+      refresh_token:
+        type: string
+        description: The refresh token provided by OAuth
+      expires:
+        type: number
+        description: Display name of product.
+  Profile:
+    type: object
+    properties:
+      username:
+        type: string
+        description: First username of the Rucsokprovider user.
+  RucsokPost:
+    type: object
+    properties:
+      rucsok:
+        $ref: '#/definitions/Rucsok'
+  Rucsok:
+    type: object
+    properties:
+      id:
+        type: number
+        description: The identifier of the Rucsok
+      title:
+        type: string
+        description: The title of the rucsok, crawled from the site meta tags/title tag.
+      link:
+        type: string
+        description: The source the rucsok got crawled from.
+      imageUrl:
+        type: string
+        description: The image URL if present
+      videoUrl:
+        type: string
+        description: The video URL if present
+      type: 
+        type: string
+        description : The type of the rucsok. Valid values are IMAGE, EMBEDVIDEO, HTML5VIDEO
+      username:
+        type: string
+        description : The user's name who posted the rucsok
+      vote:
+        type: number
+        description: The aggregated number of upvotes/downvotes
+  Pun: 
+    type : object
+    properties: 
+      id:
+        type: integer
+        description : The identifier of the pun
+      text: 
+        type: string
+        description: The content of the pun
