@@ -94,7 +94,9 @@ define([], function() {
 					$scope.item.vote--;
 					$scope.item.alreadyVoted = 'DOWN';
 					break;
-				default: break;
+				default: 
+					$scope.item.alreadyVoted = "NOT_VOTED";
+					break;
 			}
 			rucsokService.voteRucsok(voteObject).then(function(data) {
 				$scope.item.alreadyVoted = where;
