@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.rucsok.rucsok.domain.Rucsok;
@@ -19,6 +21,9 @@ import com.rucsok.user.service.UserService;
 
 @Service
 public class RucsokService {
+	
+	@Value("${rucsok.page.size}")
+	public static final int PAGINATION_SIZE = 3;
 
 	@Autowired
 	private RucsokDao rucsokRepo;
@@ -34,6 +39,10 @@ public class RucsokService {
 
 	public List<Rucsok> findAll() {
 		return rucsokServiceTransform.transformToRucsok(rucsokRepo.getAllRucsok());
+	}
+	
+	public List<Rucsok> findFresh(int page) {
+		return rucsokServiceTransform.transformToRucsok(rucsokRepo.getAllRucsokByCreatedAt(new PageRequest(page, PAGINATION_SIZE)));
 	}
 
 	public void deleteById(long id) {

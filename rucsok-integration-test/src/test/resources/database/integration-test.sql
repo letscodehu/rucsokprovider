@@ -41,12 +41,15 @@ create table pun (
     , primary key (id)
 );
 
+-- users
+
 insert into user(id, email,  password, name, failedLogin)
 values (1, 'rucsok', '$2a$06$0RA1mDUlDAvOh5V9a0R01.POVFn1/Dvc5ggJ9xhXLiDAjG3o6NiNG', 'rucsok', 0);
 
 insert into user(id, email,  password, name, failedLogin)
 values (2, 'asd', '$2a$06$0RA1mDUlDAvOh5V9a0R01.POVFn1/Dvc5ggJ9xhXLiDAjG3o6NiNG', 'kecske', 0);
 
+-- rucsoks
 
 insert into rucsok(id, title,  link, imageUrl, videoUrl, user_id, createdAt) 
 values (1, 'rucsok01', 'http://rucsok.com/01.gif','img01', null, 1, '2016-08-08 11:11:11');
@@ -60,12 +63,31 @@ values (3, 'rucsok03', 'http://rucsok.com/03.gif','img03', 'http://rucsok.com/ru
 insert into rucsok(id, title,  link, imageUrl, videoUrl, user_id, createdAt) 
 values (4, 'rucsok04', 'http://rucsok.com/04.gif','img04', null, 2, '2016-08-08 11:11:11');
 
+insert into rucsok(id, title,  link, imageUrl, videoUrl, user_id, createdAt) 
+values (5, 'justforpagination1', 'http://rucsok.com/05.gif','img05', null, 2, '2016-08-30 11:11:11');
+
+insert into rucsok(id, title,  link, imageUrl, videoUrl, user_id, createdAt) 
+values (6, 'justforpagination2', 'http://rucsok.com/05.gif','img05', null, 2, '2016-08-30 11:11:12');
+
+insert into rucsok(id, title,  link, imageUrl, videoUrl, user_id, createdAt) 
+values (7, 'justforpagination3', 'http://rucsok.com/05.gif','img05', null, 2, '2016-08-30 11:11:13');
+
+insert into rucsok(id, title,  link, imageUrl, videoUrl, user_id, createdAt) 
+values (8, 'justforpagination4', 'http://rucsok.com/05.gif','img05', null, 2, '2016-08-30 11:11:14');
+
+insert into rucsok(id, title,  link, imageUrl, videoUrl, user_id, createdAt) 
+values (9, 'justforpagination5', 'http://rucsok.com/05.gif','img05', null, 2, '2016-08-30 11:11:15');
+
+-- votes
+
 insert into vote(user_id, rucsok_id, vote)
 values (1,2, 'UP');
 insert into vote(user_id, rucsok_id, vote)
 values (1,3, 'UP');
 insert into vote(user_id, rucsok_id, vote)
 values (2,1, 'UP');
+
+-- puns
 
 INSERT INTO pun(id, text, user_id) 
 VALUES 
