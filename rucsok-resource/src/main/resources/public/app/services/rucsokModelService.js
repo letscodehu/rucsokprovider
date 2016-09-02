@@ -26,6 +26,7 @@ define([], function() {
 			newRucsok.imageUrl = data.imageUrl || "";
 			newRucsok.comments = data.comments = [];
 			newRucsok.vote = data.vote || 0;
+			newRucsok.alreadyVoted = data.alreadyVoted || "NOT_VOTED";
 			newRucsok.videoUrl = data.videoUrl || "";
 			newRucsok.link = data.link || "";
 			newRucsok.type = data.type || "";

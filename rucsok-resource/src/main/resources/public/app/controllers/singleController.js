@@ -85,21 +85,21 @@ define([], function() {
 			}
 			switch(where) {
 				case 'UP':
-					// Backend logic copy here(inc/dec value)
+					// Backend logic copy here(inc/dec vote count, set alreadyVoted to value)
 					$scope.item.vote++;
 					$scope.item.alreadyVoted = 'UP';
 					break;
 				case 'DOWN':
-					// Backend logic copy here(inc/dec value)
+					// Backend logic copy here(inc/dec vote count, set alreadyVoted to value)
 					$scope.item.vote--;
 					$scope.item.alreadyVoted = 'DOWN';
 					break;
 				default: break;
 			}
-			rucsokService.voteRucsok(voteObject).then(function() {
+			rucsokService.voteRucsok(voteObject).then(function(data) {
 				$scope.item.alreadyVoted = where;
 			}, function() {
-				$scope.item.alreadyVoted = null;
+				$scope.item.alreadyVoted = 'NOT_VOTED';
 			});
 		}
 
