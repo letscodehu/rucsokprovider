@@ -39,10 +39,21 @@ define([], function() {
 			
 			return deferred.promise;
 		}
+
+		function voteRucsok(voteObject) {
+			var deferred = $q.defer();
+
+			$http.post("/vote", voteObject).then(function(resp) {
+				deferred.resolve(resp.data);
+			});
+			
+			return deferred.promise;
+		}
 				
 		return {
 			getItem : getItem,
-			getRucsok : getRucsok
+			getRucsok : getRucsok,
+			voteRucsok: voteRucsok
 		}
 	};
 	
