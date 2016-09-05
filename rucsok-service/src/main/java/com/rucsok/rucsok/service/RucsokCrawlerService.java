@@ -9,7 +9,7 @@ import com.rucsok.rucsok.domain.Rucsok;
 import com.rucsok.rucsok.service.exception.IllegalRucsokArgumentException;
 import com.rucsok.rucsok.service.helper.RucsokCrawlHelper;
 import com.rucsok.user.repository.domain.UserEntity;
-import com.rucsok.user.service.UserService;
+import com.rucsok.user.service.UserCheckerService;
 import com.rucsok.user.transform.UserTransformer;
 
 @Service
@@ -17,7 +17,7 @@ public class RucsokCrawlerService {
 
 	private RucsokCrawlHelper crawlHelper;
 
-	private UserService userService;
+	private UserCheckerService userService;
 	
 	@Autowired
 	private UserTransformer userTransformer;
@@ -28,7 +28,7 @@ public class RucsokCrawlerService {
 	}
 
 	@Autowired
-	public void setUserService(UserService userService) {
+	public void setUserService(UserCheckerService userService) {
 		this.userService = userService;
 	}
 

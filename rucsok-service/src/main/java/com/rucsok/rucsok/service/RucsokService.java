@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.rucsok.rucsok.domain.Rucsok;
@@ -15,11 +17,13 @@ import com.rucsok.rucsok.repository.domain.RucsokEntity;
 import com.rucsok.rucsok.service.exception.AlreadyExistsRucsokException;
 import com.rucsok.rucsok.service.exception.IllegalRucsokArgumentException;
 import com.rucsok.rucsok.transform.RucsokServiceTransform;
-import com.rucsok.user.service.UserService;
-import com.rucsok.vote.service.VoteService;
+import com.rucsok.user.service.UserCheckerService;
 
 @Service
 public class RucsokService {
+	
+	@Value("${rucsok.page.size}")
+	public static final int PAGINATION_SIZE = 3;
 
 	@Autowired
 	private RucsokRepository rucsokRepository;
@@ -28,13 +32,17 @@ public class RucsokService {
 	private VoteRepository voteRepository;
 
 	@Autowired
-	private UserService userService;
+	private UserCheckerService userService;
 
 	@Autowired
 	private RucsokServiceTransform rucsokServiceTransform;
 
 	public List<Rucsok> findAll() {
 		return rucsokServiceTransform.transformToRucsok(rucsokRepository.getAllRucsok());
+	}
+	
+	public List<Rucsok> findFresh(int page) {
+		return rucsokServiceTransform.transformToRucsok(rucsokRepository.getAllRucsokByCreatedAt(new PageRequest(page, PAGINATION_SIZE)));
 	}
 
 	public void deleteById(long id) {

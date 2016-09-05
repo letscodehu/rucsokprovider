@@ -30,7 +30,7 @@ import com.rucsok.rucsok.service.helper.UrlFetchHelper;
 import com.rucsok.rucsok.transform.RucsokTypeTransform;
 import com.rucsok.test.config.RucsokCrawlServiceConfig;
 import com.rucsok.user.repository.domain.UserEntity;
-import com.rucsok.user.service.UserService;
+import com.rucsok.user.service.UserCheckerService;
 import com.rucsok.user.transform.UserTransformer;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -47,12 +47,12 @@ public class RucsokCrawlerServiceIntegrationTest implements ApplicationContextAw
 	private RucsokCrawlerService underTest;
 
 	private UrlFetchHelper urlFetcher;
-	private UserService userService;
+	private UserCheckerService userService;
 
 	@Override
 	public void setApplicationContext(ApplicationContext context) throws BeansException {
 		urlFetcher = context.getBean(UrlFetchHelper.class);
-		userService = context.getBean(UserService.class);
+		userService = context.getBean(UserCheckerService.class);
 	}
 
 	@Before

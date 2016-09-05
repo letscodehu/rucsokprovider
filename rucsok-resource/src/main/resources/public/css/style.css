@@ -2,6 +2,7 @@
 	max-width: 100%;
 	max-height: 100%;
 	vertical-align : middle;
+	text-align: center;
 }
 #rucsok{
 	display:block;
@@ -18,9 +19,19 @@
 #add-rucsok-modal {
 	z-index: 1000;
 }
+
 .alert-danger{
 	color: red;
 }
+
+.vote-up:hover, .voted-up {
+	color: #33cd5f;
+}
+
+.vote-down:hover,  .voted-down {
+	color: #ef473a;
+}
+
 /* HACK - veryyyyy baaad, on emulated android tabs bar disappears without this */
 .nav-bar-tabs-top.hide ~ .view-container .tabs-top .tabs {
 	top: 44px;
