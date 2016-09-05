@@ -16,7 +16,12 @@ define([
   // the app with its used plugins
   var app = angular.module('app', [
     'ionic', "services", "controllers", "directives", 'filters', 'ion-gallery',  'http-auth-interceptor', 'ion-floating-menu'
-  ]);
+  ])
+  // Run idle checker
+  .run(function(randomPunService) {
+    randomPunService.checkUserActivity();
+  });
+
   // return the app so you can require it in other components
   return app;
 });
