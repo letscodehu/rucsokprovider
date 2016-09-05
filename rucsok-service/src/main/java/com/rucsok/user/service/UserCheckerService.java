@@ -7,17 +7,17 @@ import com.rucsok.user.repository.dao.UserRepository;
 import com.rucsok.user.repository.domain.UserEntity;
 
 @Service
-public class UserService {
+public class UserCheckerService {
 
-	private UserRepository userRepo;
+	private UserRepository userRepository;
 
 	@Autowired
 	public void setUserRepo(UserRepository userRepo) {
-		this.userRepo = userRepo;
+		this.userRepository = userRepo;
 	}
 
 	public UserEntity findUserByName(String username) {
-		return userRepo.findByName(username);
+		return userRepository.findByName(username);
 	}
 	
 	public boolean isUserExists(String username) {

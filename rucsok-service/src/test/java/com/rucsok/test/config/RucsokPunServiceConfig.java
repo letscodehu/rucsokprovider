@@ -1,7 +1,5 @@
 package com.rucsok.test.config;
 
-import java.util.Random;
-
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.context.annotation.Bean;

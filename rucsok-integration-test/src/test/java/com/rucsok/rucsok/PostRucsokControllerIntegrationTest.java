@@ -23,7 +23,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.rucsok.TokenHelper;
 import com.rucsok.config.RepositoryConfig;
 import com.rucsok.config.TestConfig;
-import com.rucsok.rucsok.repository.dao.RucsokDao;
+import com.rucsok.rucsok.repository.dao.RucsokRepository;
 import com.rucsok.rucsok.repository.domain.RucsokEntity;
 import com.rucsok.rucsok.view.controller.PostRucsokController;
 import com.rucsok.rucsok.view.model.RucsokInsertRequest;
@@ -50,7 +50,7 @@ public class PostRucsokControllerIntegrationTest {
 	private WebApplicationContext context;
 
 	@Autowired
-	private RucsokDao rucsokDao;
+	private RucsokRepository rucsokDao;
 
 	private MockMvc mockMvc;
 

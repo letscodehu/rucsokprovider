@@ -12,8 +12,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.rucsok.config.RepositoryConfig;
 import com.rucsok.config.TestConfig;
-import com.rucsok.rucsok.repository.dao.RucsokDao;
-import com.rucsok.rucsok.repository.dao.VoteDao;
+import com.rucsok.rucsok.repository.dao.RucsokRepository;
+import com.rucsok.rucsok.repository.dao.VoteRepository;
 import com.rucsok.rucsok.repository.domain.VoteEntity;
 import com.rucsok.rucsok.repository.domain.VotePK;
 import com.rucsok.rucsok.repository.domain.VoteTypeEntity;
@@ -27,10 +27,10 @@ public class VoteDaoIntegrationTest {
 	private static final int TEST_DATA_SIZE = 3;
 
 	@Autowired
-	private VoteDao underTest;
+	private VoteRepository underTest;
 
 	@Autowired
-	private RucsokDao rucsokRepository;
+	private RucsokRepository rucsokRepository;
 
 	@Autowired
 	private UserRepository userRepository;

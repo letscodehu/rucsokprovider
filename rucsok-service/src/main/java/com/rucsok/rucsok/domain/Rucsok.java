@@ -16,6 +16,7 @@ public class Rucsok {
 	private LocalDateTime createdAt;
 	private int vote;
 
+
 	public long getId() {
 		return id;
 	}

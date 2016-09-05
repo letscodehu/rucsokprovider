@@ -22,7 +22,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import com.rucsok.config.RepositoryConfig;
 import com.rucsok.config.TestConfig;
-import com.rucsok.rucsok.repository.dao.RucsokDao;
+import com.rucsok.rucsok.repository.dao.RucsokRepository;
 import com.rucsok.rucsok.repository.domain.RucsokEntity;
 import com.rucsok.rucsok.transform.RucsokTypeTransform;
 
@@ -42,7 +42,7 @@ public class SingleRucsokControllerIntegrationTest {
 	private MockMvc mockMvc;
 	
 	@Autowired
-	private RucsokDao rucsokDao;
+	private RucsokRepository rucsokDao;
 	
 	@Autowired
 	private RucsokTypeTransform rucsokTypeTransform;

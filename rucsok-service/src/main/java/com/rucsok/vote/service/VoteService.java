@@ -6,12 +6,14 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.rucsok.rucsok.repository.dao.RucsokDao;
-import com.rucsok.rucsok.repository.dao.VoteDao;
+import com.rucsok.rucsok.repository.dao.RucsokRepository;
+import com.rucsok.rucsok.repository.dao.VoteRepository;
 import com.rucsok.rucsok.repository.domain.RucsokEntity;
+import com.rucsok.rucsok.repository.domain.VoteEntity;
 import com.rucsok.rucsok.service.exception.IllegalRucsokArgumentException;
 import com.rucsok.user.repository.dao.UserRepository;
 import com.rucsok.user.repository.domain.UserEntity;
+import com.rucsok.vote.domain.UserVoteType;
 import com.rucsok.vote.domain.Vote;
 import com.rucsok.vote.transform.VoteTransformer;
 
@@ -24,13 +26,13 @@ public class VoteService {
 	private VoteTransformer voteTransformer;
 
 	@Autowired
-	private VoteDao voteRepository;
+	private VoteRepository voteRepository;
 
 	@Autowired
 	private UserRepository userRepository;
 
 	@Autowired
-	private RucsokDao rucsokRepository;
+	private RucsokRepository rucsokRepository;
 
 	public void createVote(Vote vote) {
 		Optional<RucsokEntity> rucsok = getRucsokById(vote);
@@ -43,6 +45,7 @@ public class VoteService {
 	private void saveVote(Vote vote, RucsokEntity rucsok, UserEntity user) {
 		voteRepository.save(voteTransformer.transformToVoteEntity(vote, rucsok, user));
 	}
+	
 
 	private void checkIfUserExist(Optional<UserEntity> user) {
 		if (!user.isPresent()) {
@@ -59,8 +62,22 @@ public class VoteService {
 	private Optional<UserEntity> getUserByName(Vote vote) {
 		return Optional.ofNullable(userRepository.findByName(vote.getUsername()));
 	}
-
+	
 	private Optional<RucsokEntity> getRucsokById(Vote vote) {
 		return Optional.ofNullable(rucsokRepository.findOne(vote.getRucsokId()));
+	}
+
+	public UserVoteType getVoteStatusForSingleRucsok(String username, Long rucsokId) {
+		if (username == null) {
+			return UserVoteType.NOT_LOGGED_IN;
+		}
+		VoteEntity entity = voteRepository
+				.findByUserIdAndRucsokId(getUserIdByUsername(username), rucsokId);
+		
+		return voteTransformer.transformVoteTypeToUserVoteType(entity);
+	}
+
+	private long getUserIdByUsername(String username) {
+		return userRepository.findByName(username).getId();
 	}
 }

@@ -6,7 +6,7 @@ import com.rucsok.user.domain.User;
 import com.rucsok.user.view.model.UserProfileView;
 
 @Component
-public class UserProfileTransform {
+public class UserProfileTransformer {
 
 	public UserProfileView transformToUserProfileView(User user) {
 		UserProfileView result = new UserProfileView();
