@@ -21,6 +21,22 @@ public class UserEntity implements UserDetails {
 	private long id;
 	private String name;
 	private String email;
+	
+	public UserEntity() {
+		super();
+	}
+	
+	public UserEntity(String name, String email) {
+		super();
+		this.name = name;
+		this.email = email;
+	}
+	
+	public UserEntity(String name, String email, String password) {
+		this(name, email);
+		this.password = password;
+	}
+
 	private String password;
 	private int failedlogin;
 
