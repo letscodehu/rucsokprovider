@@ -9,11 +9,13 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.testng.Assert;
 
 import com.rucsok.test.config.UserRegistrationConfig;
+import com.rucsok.user.domain.User;
 import com.rucsok.user.domain.UserRegistration;
 import com.rucsok.user.service.UserRegistrationService;
 import com.rucsok.user.service.exception.NoUserGivenException;
 import com.rucsok.user.service.exception.UserAlreadyPresentException;
 import com.rucsok.user.view.controller.UserRegistrationController;
+import com.rucsok.user.view.model.UserProfileView;
 import com.rucsok.user.view.model.UserRegistrationError;
 import com.rucsok.user.view.model.UserRegistrationRequest;
 import com.rucsok.user.view.model.UserRegistrationResponse;
@@ -67,12 +69,18 @@ public class UserRegistrationControllerTest {
 	}
 	
 	@Test
-	public void testName() {
+	public void itShouldReturnTheUserInTheResponse() {
 		// GIVEN
-
+		final UserRegistrationRequest request = new UserRegistrationRequest(email, username, password, password);
+		final User user = new User(email, username);
+		Mockito.when(mockService.registerUser(Mockito.any(UserRegistration.class))).thenReturn(user);
 		// WHEN
-
+		UserRegistrationResponse response = controller.register(request);
+		UserProfileView userView = response.getUser();
 		// THEN
+		
+		Assert.assertEquals(userView.getUsername(), username);
+		Assert.assertEquals(userView.getEmail(), email);
 	}
 	
 }
