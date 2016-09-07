@@ -5,7 +5,7 @@ define([ 'jquery' ], function($) {
     function randomPunService($http, $q, $ionicPopup, $timeout) {
 
         var vm = this;
-        vm.idleTime = 3000; // Waiting time until idle sets in
+        vm.idleTime = 120000; // Waiting time until idle sets in
 
         function checkUserActivity() {
             var timePassed,
