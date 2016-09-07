@@ -4,8 +4,10 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.rucsok.user.view.helper.PasswordMatches;
 import com.rucsok.user.view.helper.ValidEmail;
 
+@PasswordMatches
 public class UserRegistrationRequest {
 
 	@NotNull

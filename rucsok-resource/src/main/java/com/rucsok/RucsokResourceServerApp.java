@@ -36,7 +36,7 @@ public class RucsokResourceServerApp {
         return new WebMvcConfigurerAdapter() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**/*").allowedOrigins("http://10.0.14.85:8100", "EPHUBUDW0489:8100");
+                registry.addMapping("/**/*").allowedOrigins("*");
             }
         };
     }

@@ -1648,9 +1648,9 @@ HTML5VIDEO
     <id>UMLClass</id>
     <coordinates>
       <x>800</x>
-      <y>2500</y>
+      <y>2490</y>
       <w>300</w>
-      <h>100</h>
+      <h>110</h>
     </coordinates>
     <panel_attributes>UserRegistrationService
 --
@@ -1802,9 +1802,11 @@ HTML5VIDEO
       <x>840</x>
       <y>2630</y>
       <w>240</w>
-      <h>30</h>
+      <h>60</h>
     </coordinates>
-    <panel_attributes>UserRegistrationServiceTransformer</panel_attributes>
+    <panel_attributes>UserRegistrationServiceTransformer
+--
+- passwordEncoder : BCryptPasswordEncoder</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -1816,7 +1818,7 @@ HTML5VIDEO
       <h>360</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;270.0;10.0;340.0;590.0;340.0;590.0;10.0</additional_attributes>
+    <additional_attributes>10.0;300.0;10.0;340.0;590.0;340.0;590.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -1835,9 +1837,9 @@ HTML5VIDEO
       <x>1050</x>
       <y>2200</y>
       <w>170</w>
-      <h>320</h>
+      <h>310</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;300.0;10.0;270.0;80.0;270.0;80.0;40.0;150.0;40.0;150.0;10.0</additional_attributes>
+    <additional_attributes>10.0;290.0;10.0;270.0;80.0;270.0;80.0;40.0;150.0;40.0;150.0;10.0</additional_attributes>
   </element>
 </diagram>

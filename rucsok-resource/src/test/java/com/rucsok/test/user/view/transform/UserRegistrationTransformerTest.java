@@ -4,11 +4,15 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.testng.Assert;
 
+import com.rucsok.test.config.UserRegistrationConfig;
 import com.rucsok.user.domain.User;
 import com.rucsok.user.domain.UserRegistration;
 import com.rucsok.user.service.exception.NoUserGivenException;
@@ -19,9 +23,12 @@ import com.rucsok.user.view.model.UserRegistrationResponse;
 import com.rucsok.user.view.transform.UserRegistrationTransformer;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = { UserRegistrationTransformer.class})
+@ContextConfiguration(classes = { UserRegistrationTransformer.class, UserRegistrationConfig.class})
 public class UserRegistrationTransformerTest {
 
+	@Autowired
+	private PasswordEncoder mockEncoder;
+	
 	@Autowired
 	private UserRegistrationTransformer transformer;
 	
@@ -29,21 +36,24 @@ public class UserRegistrationTransformerTest {
 	private final String testUsername = "testuser";
 	private final String testPassword = "testpass";
 	private final String testPasswordConfirmation = "testpass";
+	private final String encodedPassword = "encodedPass";
 	
 	@Rule
 	public ExpectedException expectedEx = ExpectedException.none();
+
 	
 	@Test
 	public void itShouldTransformFromUserRegistrationRequestToUserRegistration() {
 		// GIVEN
 		UserRegistrationRequest request = new UserRegistrationRequest(
 				testEmail, testUsername, testPassword, testPasswordConfirmation);
+		Mockito.when(mockEncoder.encode(testPassword)).thenReturn(encodedPassword);
 		// WHEN
 		UserRegistration user = transformer.transformToRegistration(request);
 		// THEN
 		
 		Assert.assertEquals(user.getEmail(), testEmail);
-		Assert.assertEquals(user.getPassword(), testPassword);
+		Assert.assertEquals(user.getPassword(), encodedPassword);
 		Assert.assertEquals(user.getUsername(), testUsername);
 	}
 	

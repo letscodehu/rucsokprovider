@@ -91,6 +91,39 @@ paths:
             $ref: '#/definitions/Profile'
         401:
           description:  Unauthorized response if the provided token is expired or not valid
+  /register:
+    post: 
+      summary: Registering user
+      description: The endpoint used to register a new user into the Rucsokprovider with the role of user.
+      parameters:
+        - name: email
+          in: query
+          required: true
+          type: string
+          description: The e-mail address of the user to be registered
+        - name: username
+          in: query
+          required : true
+          type: string
+          description: The username wanted
+        - name: password
+          in : query
+          required: true
+          type: string
+          description: The password used to login
+        - name: passwordConfirmation
+          in : query
+          required: true
+          type: string
+          description: The password confirmation
+      tags:
+        - User
+      responses:
+        201: 
+          description: The profile information about the user recently registered
+          schema:
+            $ref: "#/definitions/UserRegistrationResponse"
+        
   /check-rucsok:
     post:
       summary: URL check
@@ -179,11 +212,27 @@ definitions:
       username:
         type: string
         description: First username of the Rucsokprovider user.
+      email:
+        type: string
+        description: The e-mail address of the Rucsokprovider user.
   RucsokPost:
     type: object
     properties:
       rucsok:
         $ref: '#/definitions/Rucsok'
+  UserRegistrationResponse:
+    type: object
+    properties:
+      user: 
+        $ref: '#/definitions/Profile'
+      error:
+        $ref: '#/definitions/UserRegistrationError'
+  UserRegistrationError:
+    type: object
+    properties: 
+      message:
+        type: string
+        description: The cause of the error
   Rucsok:
     type: object
     properties:
