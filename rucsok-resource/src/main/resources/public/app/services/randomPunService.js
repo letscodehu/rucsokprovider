@@ -1,11 +1,11 @@
 define([ 'jquery' ], function($) {
 
-    randomPunService.$inject = [ '$http', '$q', '$ionicPopup' ];
+    randomPunService.$inject = [ '$http', '$q', '$ionicPopup', '$timeout' ];
 
-    function randomPunService($http, $q, $ionicPopup) {
+    function randomPunService($http, $q, $ionicPopup, $timeout) {
 
         var vm = this;
-        vm.idleTime = 120000; // Waiting time until idle sets in
+        vm.idleTime = 3000; // Waiting time until idle sets in
 
         function checkUserActivity() {
             var timePassed,
@@ -21,13 +21,18 @@ define([ 'jquery' ], function($) {
             // Here comes the logic
             function getRandomPun() {
                 $http.get("/pun/random").then(function(resp) {
+
                     if (punWindow && 'close' in punWindow) {
-                        punWindow.close(this);
+                        punWindow.close();
                     }
-                    punWindow = $ionicPopup.alert({
-                        title: "Shame on you!",
-                        template: "" + resp.data.text
-                    });
+                    // Workaround for multiple ionic popup windows being open
+                    // See (atm)bug here: https://github.com/driftyco/ionic/issues/3131
+                    $timeout(function(){ 
+                        punWindow = $ionicPopup.alert({
+                            title: "Shame on you!",
+                            template: "" + resp.data.text
+                        });
+                    }, 0);
                 });
             };
             // Reset the interval
