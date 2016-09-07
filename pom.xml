@@ -13,6 +13,7 @@
 		<module>rucsok-repository</module>
 		<module>rucsok-integration-test</module>
 		<module>rucsok-service</module>
+		<module>rucsok-admin</module>
 	</modules>
 
 	<properties>
