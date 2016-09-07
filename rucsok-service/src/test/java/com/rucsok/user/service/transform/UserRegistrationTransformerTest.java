@@ -1,4 +1,4 @@
-package com.rucsok.test.user.service.transform;
+package com.rucsok.user.service.transform;
 
 import org.junit.Rule;
 import org.junit.Test;

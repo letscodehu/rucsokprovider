@@ -1,4 +1,4 @@
-package com.rucsok.test.rucsok.service.transform;
+package com.rucsok.rucsok.service.transform;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;

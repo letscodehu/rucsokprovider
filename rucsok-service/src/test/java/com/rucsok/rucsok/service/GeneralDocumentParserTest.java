@@ -1,4 +1,4 @@
-package com.rucsok.test.rucsok.service;
+package com.rucsok.rucsok.service;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;

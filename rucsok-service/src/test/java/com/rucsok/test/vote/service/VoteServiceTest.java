@@ -9,10 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.rucsok.config.RucsokVoteServiceConfig;
 import com.rucsok.rucsok.repository.dao.VoteRepository;
 import com.rucsok.rucsok.repository.domain.VoteEntity;
 import com.rucsok.rucsok.repository.domain.VoteTypeEntity;
-import com.rucsok.test.config.RucsokVoteServiceConfig;
 import com.rucsok.user.repository.dao.UserRepository;
 import com.rucsok.user.repository.domain.UserEntity;
 import com.rucsok.vote.domain.UserVoteType;

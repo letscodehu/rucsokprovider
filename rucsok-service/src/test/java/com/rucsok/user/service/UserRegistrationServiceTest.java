@@ -1,4 +1,4 @@
-package com.rucsok.test.user.service;
+package com.rucsok.user.service;
 
 import org.junit.Assert;
 import org.junit.Rule;
@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.rucsok.test.config.UserRegistrationServiceConfig;
+import com.rucsok.config.UserRegistrationServiceConfig;
 import com.rucsok.user.domain.User;
 import com.rucsok.user.domain.UserRegistration;
 import com.rucsok.user.repository.dao.UserRepository;

@@ -1,4 +1,4 @@
-package com.rucsok.test.rucsok.service;
+package com.rucsok.rucsok.service;
 
 import static org.mockito.Mockito.when;
 
@@ -22,13 +22,13 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.rucsok.config.RucsokCrawlServiceConfig;
 import com.rucsok.rucsok.domain.Rucsok;
 import com.rucsok.rucsok.service.RucsokCrawlerService;
 import com.rucsok.rucsok.service.helper.GeneralDocumentParser;
 import com.rucsok.rucsok.service.helper.RucsokCrawlHelper;
 import com.rucsok.rucsok.service.helper.UrlFetchHelper;
 import com.rucsok.rucsok.transform.RucsokTypeTransform;
-import com.rucsok.test.config.RucsokCrawlServiceConfig;
 import com.rucsok.user.repository.domain.UserEntity;
 import com.rucsok.user.service.UserCheckerService;
 import com.rucsok.user.transform.UserTransformer;

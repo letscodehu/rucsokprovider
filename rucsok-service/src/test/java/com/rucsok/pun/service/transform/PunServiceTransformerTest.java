@@ -1,4 +1,4 @@
-package com.rucsok.test.pun.service.transform;
+package com.rucsok.pun.service.transform;
 
 import static org.junit.Assert.*;
 
@@ -9,9 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.rucsok.pun.service.domain.Pun;
+import com.rucsok.config.RucsokPunServiceConfig;
 import com.rucsok.pun.repository.domain.PunEntity;
 import com.rucsok.pun.service.transform.PunServiceTransformer;
-import com.rucsok.test.config.RucsokPunServiceConfig;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { RucsokPunServiceConfig.class, PunServiceTransformer.class })

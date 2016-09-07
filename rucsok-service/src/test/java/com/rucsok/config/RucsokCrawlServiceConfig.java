@@ -1,4 +1,4 @@
-package com.rucsok.test.config;
+package com.rucsok.config;
 
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
