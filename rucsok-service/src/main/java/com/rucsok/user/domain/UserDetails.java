@@ -52,4 +52,3 @@ public class UserDetails implements org.springframework.security.core.userdetail
 	}
 	
 }
-

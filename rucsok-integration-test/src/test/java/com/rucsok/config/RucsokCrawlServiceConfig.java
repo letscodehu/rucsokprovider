@@ -5,7 +5,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.context.annotation.Bean;
 
 import com.rucsok.rucsok.service.helper.UrlFetchHelper;
-import com.rucsok.user.service.UserService;
+import com.rucsok.user.service.UserCheckerService;
 
 //@Configuration removed to prevent component scan
 public class RucsokCrawlServiceConfig {
@@ -14,7 +14,7 @@ public class RucsokCrawlServiceConfig {
 	UrlFetchHelper urlFetchHelper;
 	
 	@Mock
-	UserService userService;
+	UserCheckerService userService;
 
 	public RucsokCrawlServiceConfig() {
 		MockitoAnnotations.initMocks(this);
@@ -26,7 +26,7 @@ public class RucsokCrawlServiceConfig {
 	}
 	
 	@Bean
-	public UserService getUserService() {
+	public UserCheckerService getUserService() {
 		return userService;
 	}
 }

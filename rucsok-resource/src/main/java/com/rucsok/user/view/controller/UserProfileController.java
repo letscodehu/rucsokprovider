@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.rucsok.user.service.UserProfileService;
 import com.rucsok.user.view.model.UserProfileView;
-import com.rucsok.user.view.transform.UserProfileTransform;
+import com.rucsok.user.view.transform.UserProfileTransformer;
 
 @RestController
 public class UserProfileController {
@@ -25,7 +25,7 @@ public class UserProfileController {
 	private UserProfileService userProfileService;
 
 	@Autowired
-	private UserProfileTransform userProfileTransformer;
+	private UserProfileTransformer userProfileTransformer;
 
 	@RequestMapping(name = "profile", path = REQUEST_MAPPING, method = RequestMethod.GET)
 	public UserProfileView userProfileView(Principal principal) {

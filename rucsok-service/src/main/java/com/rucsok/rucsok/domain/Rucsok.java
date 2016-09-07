@@ -15,7 +15,6 @@ public class Rucsok {
 	private User user;
 	private LocalDateTime createdAt;
 	private int vote;
-
 	private int upVote;
 	private int downVote;
 

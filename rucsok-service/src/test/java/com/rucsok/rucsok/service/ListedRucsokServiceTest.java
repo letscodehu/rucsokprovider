@@ -21,12 +21,13 @@ import com.rucsok.rucsok.domain.Rucsok;
 import com.rucsok.rucsok.repository.dao.ListedRucsokRepository;
 import com.rucsok.rucsok.transform.DateTransformer;
 import com.rucsok.rucsok.transform.ListedRucsokTransformer;
+import com.rucsok.rucsok.transform.RucsokTypeTransform;
 
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.verify;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = { ListedRucsokServiceConfig.class, ListedRucsokService.class })
+@ContextConfiguration(classes = { ListedRucsokServiceConfig.class, ListedRucsokService.class, RucsokTypeTransform.class })
 public class ListedRucsokServiceTest {
 
 	private static final String TEST_START_DATE = "2016-08-30";

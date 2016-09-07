@@ -1,8 +1,6 @@
 package com.rucsok.rucsok.repository;
 
 import java.math.BigInteger;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -18,7 +16,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.rucsok.config.RepositoryConfig;
 import com.rucsok.config.TestConfig;
 import com.rucsok.rucsok.repository.dao.ListedRucsokRepository;
-import com.rucsok.rucsok.repository.dao.VoteDao;
+import com.rucsok.rucsok.repository.dao.VoteRepository;
 import com.rucsok.rucsok.repository.domain.VoteEntity;
 import com.rucsok.rucsok.repository.domain.VotePK;
 import com.rucsok.rucsok.repository.domain.VoteTypeEntity;
@@ -48,7 +46,7 @@ public class ListedRucsokRepositoryIntegrationTest {
 	private ListedRucsokRepository listedRucsokRepository;
 
 	@Autowired
-	private VoteDao voteRepository;
+	private VoteRepository voteRepository;
 
 	@Test
 	@Transactional

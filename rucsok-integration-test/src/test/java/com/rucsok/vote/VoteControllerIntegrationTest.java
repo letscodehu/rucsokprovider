@@ -22,7 +22,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rucsok.TokenHelper;
 import com.rucsok.config.RepositoryConfig;
 import com.rucsok.config.TestConfig;
-import com.rucsok.rucsok.repository.dao.VoteDao;
+import com.rucsok.rucsok.repository.dao.VoteRepository;
 import com.rucsok.rucsok.repository.domain.VoteEntity;
 import com.rucsok.rucsok.repository.domain.VotePK;
 import com.rucsok.vote.view.controller.RucsokVoteController;
@@ -39,7 +39,7 @@ public class VoteControllerIntegrationTest {
 	private MockMvc mockMvc;
 	
 	@Autowired
-	private VoteDao voteDao;
+	private VoteRepository voteDao;
 	
 	private ObjectMapper mapper;
 

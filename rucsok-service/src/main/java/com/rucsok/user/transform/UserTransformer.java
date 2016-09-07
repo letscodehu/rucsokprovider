@@ -14,4 +14,12 @@ public class UserTransformer {
 		result.setUsername(userEntity.getName());
 		return result;
 	}
+	
+	public UserEntity transformUserToEntity(User userDTO) {
+		UserEntity result = new UserEntity();
+		result.setEmail(userDTO.getEmail());
+		result.setName(userDTO.getUsername());
+		return result;
+	}
+	
 }

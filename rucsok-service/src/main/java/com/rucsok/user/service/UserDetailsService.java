@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.rucsok.rucsok.transform.UserToUserDetailsTransformer;
 import com.rucsok.user.domain.UserDetails;
 import com.rucsok.user.repository.dao.UserRepository;
+import com.rucsok.user.transform.UserToUserDetailsTransformer;
 
 @Service
 public class UserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService {

@@ -22,7 +22,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rucsok.TokenHelper;
 import com.rucsok.config.RepositoryConfig;
 import com.rucsok.config.TestConfig;
-import com.rucsok.rucsok.repository.dao.RucsokDao;
+import com.rucsok.rucsok.repository.dao.RucsokRepository;
 import com.rucsok.rucsok.repository.domain.RucsokEntity;
 import com.rucsok.rucsok.view.controller.DeleteRucsokController;
 
@@ -37,7 +37,7 @@ public class DeleteRucsokControllerIntegrationTest {
 	private WebApplicationContext context;
 
 	@Autowired
-	private RucsokDao rucsokDao;
+	private RucsokRepository rucsokDao;
 
 	private MockMvc mockMvc;
 

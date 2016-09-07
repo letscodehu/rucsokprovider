@@ -15,7 +15,7 @@ public class PunServiceRandom extends Random {
 			throw new IllegalArgumentException("n must be positive");
 
 		if ((n & -n) == n) // i.e., n is a power of 2
-			return (int) ((n * (long) next(31)) >> 31);
+			return (int) ((n * next(31)) >> 31);
 
 		long bits, val;
 		do {

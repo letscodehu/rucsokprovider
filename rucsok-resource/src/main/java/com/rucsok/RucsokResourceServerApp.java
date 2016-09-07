@@ -1,6 +1,5 @@
 package com.rucsok;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -10,12 +9,11 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-import com.rucsok.vote.service.VoteService;
-
+import io.swagger.annotations.Api;
 import springfox.documentation.builders.ApiInfoBuilder;
-import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
+import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
@@ -35,7 +33,7 @@ public class RucsokResourceServerApp {
         return new WebMvcConfigurerAdapter() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**/*").allowedOrigins("http://10.0.14.85:8100", "EPHUBUDW0489:8100");
+                registry.addMapping("/**/*").allowedOrigins("*");
             }
         };
     }
@@ -43,9 +41,9 @@ public class RucsokResourceServerApp {
 	@Bean
     public Docket api(){
         return new Docket(DocumentationType.SWAGGER_2)
+        	.host("http://localhost:8080")
             .select()
-            .apis(RequestHandlerSelectors.any())
-            .paths(PathSelectors.regex("/.*"))
+            .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
             .build()
             .apiInfo(apiInfo());
     }
@@ -53,8 +51,9 @@ public class RucsokResourceServerApp {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
             .title("Rucsokprovider API")
-            .description("DESCRIPTION")
+            .description("How about slacking around with Rucsokprovider API?")
             .version("1.0.0")
+            .contact(new Contact("Papp Krisztián", "https://www.letscode.hu", "fejlesztes@letscode.hu"))
             .termsOfServiceUrl("http://terms-of-services.url")
             .license("LICENSE")
             .licenseUrl("http://url-to-license.com")

@@ -27,7 +27,7 @@ import org.springframework.web.context.WebApplicationContext;
 import com.rucsok.config.RepositoryConfig;
 import com.rucsok.config.TestConfig;
 import com.rucsok.rucsok.domain.RucsokType;
-import com.rucsok.rucsok.repository.dao.RucsokDao;
+import com.rucsok.rucsok.repository.dao.RucsokRepository;
 import com.rucsok.rucsok.repository.domain.RucsokEntity;
 import com.rucsok.rucsok.view.controller.ListRucsokController;
 
@@ -42,7 +42,7 @@ public class ListRucsokControllerIntegrationTest {
 	private static final String HTML5VIDEO = RucsokType.HTML5VIDEO.toString().toLowerCase();
 
 	@Autowired
-	private RucsokDao rucsokDao;
+	private RucsokRepository rucsokDao;
 
 	@Autowired
 	private WebApplicationContext context;

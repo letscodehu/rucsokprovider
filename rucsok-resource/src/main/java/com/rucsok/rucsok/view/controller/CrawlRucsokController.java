@@ -30,7 +30,6 @@ public class CrawlRucsokController {
 	private RucsokTransformer rucsokTransformer;
 
 
-	@CrossOrigin(origins = "*")
 	@RequestMapping(name = "createrucsok", path = REQUEST_MAPPING, method = RequestMethod.POST)
 	public RucsokView crawlRucsok(@RequestBody RucsokCheckRequest request, Principal principal) throws IOException {
 		return rucsokTransformer.transformToView(rucsokService.crawl(request.getUrl(), principal.getName()));

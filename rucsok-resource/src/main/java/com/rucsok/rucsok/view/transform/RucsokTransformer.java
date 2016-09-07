@@ -11,6 +11,7 @@ import com.rucsok.rucsok.view.model.ListedRucsokView;
 import com.rucsok.rucsok.view.model.RucsokInsertRequest;
 import com.rucsok.rucsok.view.model.RucsokView;
 import com.rucsok.rucsok.view.model.SingleRucsokView;
+import com.rucsok.vote.domain.UserVoteType;
 
 @Component
 public class RucsokTransformer {
@@ -50,12 +51,17 @@ public class RucsokTransformer {
 		return result;
 	}
 
-	public SingleRucsokView transformToSingleView(SingleRucsok rucsok) {
-		SingleRucsokView result = new SingleRucsokView();
-		setCurrentRucsokView(rucsok, result);
-		setPreviousRucsokView(rucsok, result);
-		setNextRucsokView(rucsok, result);
-		return result;
+	public SingleRucsokView transformToSingleView(SingleRucsok rucsok, UserVoteType userVoteType) {
+		SingleRucsokView singleRucsokView = new SingleRucsokView();
+		setCurrentRucsokView(rucsok, singleRucsokView);
+		setPreviousRucsokView(rucsok, singleRucsokView);
+		setNextRucsokView(rucsok, singleRucsokView);
+		setCurrentVoteType(userVoteType, singleRucsokView);
+		return singleRucsokView;
+	}
+
+	private void setCurrentVoteType(UserVoteType userVoteType, SingleRucsokView singleRucsokView) {
+		singleRucsokView.setCurrentVoteType(userVoteType);
 	}
 
 	public Rucsok transformToRucsok(RucsokInsertRequest request) {
