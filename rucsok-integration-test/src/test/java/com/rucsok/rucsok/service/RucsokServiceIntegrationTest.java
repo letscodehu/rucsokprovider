@@ -15,7 +15,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.rucsok.config.RepositoryConfig;
 import com.rucsok.config.TestConfig;
 import com.rucsok.rucsok.domain.Rucsok;
-import com.rucsok.rucsok.repository.dao.RucsokDao;
+import com.rucsok.rucsok.repository.dao.RucsokRepository;
 import com.rucsok.rucsok.repository.domain.RucsokEntity;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -29,7 +29,7 @@ public class RucsokServiceIntegrationTest {
 	private RucsokService underTest;
 
 	@Autowired
-	private RucsokDao rucsokRepository;
+	private RucsokRepository rucsokRepository;
 
 	@Test
 	public void itShouldReturnLimitedNumberOfRucsoksWithCorrectOrder() {
