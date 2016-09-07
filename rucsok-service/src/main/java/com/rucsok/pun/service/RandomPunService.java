@@ -10,7 +10,7 @@ import com.rucsok.pun.service.domain.PunServiceRandom;
 import com.rucsok.pun.service.transform.PunServiceTransformer;
 
 @Service
-public class PunService {
+public class RandomPunService {
 
 	@Autowired
 	private PunRepository punRepository;

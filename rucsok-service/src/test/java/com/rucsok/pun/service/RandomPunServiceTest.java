@@ -10,19 +10,18 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.rucsok.config.RucsokPunServiceConfig;
 import com.rucsok.pun.repository.PunRepository;
 import com.rucsok.pun.repository.domain.PunEntity;
-import com.rucsok.pun.service.PunService;
 import com.rucsok.pun.service.domain.PunServiceRandom;
 import com.rucsok.pun.service.transform.PunServiceTransformer;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = { RucsokPunServiceConfig.class, PunService.class, PunServiceTransformer.class})
-public class PunServiceTest {
+@ContextConfiguration(classes = { RucsokPunServiceConfig.class, RandomPunService.class, PunServiceTransformer.class})
+public class RandomPunServiceTest {
 	
 	@Autowired
 	private PunRepository punRepository;
 	
 	@Autowired
-	private PunService punService;
+	private RandomPunService punService;
 	
 	@Autowired
 	private PunServiceRandom random;
