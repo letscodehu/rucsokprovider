@@ -28,6 +28,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry combineaccessrules="false" kind="src" path="/rucsok-repository"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/rucsok-service"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/rucsok-service"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

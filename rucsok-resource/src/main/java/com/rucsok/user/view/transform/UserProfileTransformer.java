@@ -11,6 +11,7 @@ public class UserProfileTransformer {
 	public UserProfileView transformToUserProfileView(User user) {
 		UserProfileView result = new UserProfileView();
 		result.setUsername(user.getUsername());
+		result.setEmail(user.getEmail());
 		return result;
 	}
 

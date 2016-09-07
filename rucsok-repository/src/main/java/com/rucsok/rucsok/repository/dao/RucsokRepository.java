@@ -19,9 +19,14 @@ public interface RucsokRepository extends CrudRepository<RucsokEntity, Long> {
 	public RucsokEntity findByLink(String link);
 	
 	@Query("SELECT r FROM Rucsok r WHERE id BETWEEN (:id -1) AND (:id + 1)")
-	public List<RucsokEntity> findById(@Param("id") long id);
+	public List<RucsokEntity> findById(@Param("id") int id);
 	
 	@Query("from Rucsok ORDER BY CreatedAt DESC")
 	public List<RucsokEntity> getAllRucsokByCreatedAt(Pageable pageable);
+
+//	@Query(
+//			 "SELECT r FROM Rucsok r LEFT JOIN r.votes v ON r.id = v.id"
+//			)
+//	public List<RucsokEntity> hotRucsok();
 	
 }

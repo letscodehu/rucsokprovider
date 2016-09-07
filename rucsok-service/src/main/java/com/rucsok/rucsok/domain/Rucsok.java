@@ -15,7 +15,8 @@ public class Rucsok {
 	private User user;
 	private LocalDateTime createdAt;
 	private int vote;
-
+	private int upVote;
+	private int downVote;
 
 	public long getId() {
 		return id;
@@ -87,6 +88,22 @@ public class Rucsok {
 
 	public void setVote(int vote) {
 		this.vote = vote;
+	}
+
+	public int getUpVote() {
+		return upVote;
+	}
+
+	public void setUpVote(int upVote) {
+		this.upVote = upVote;
+	}
+
+	public int getDownVote() {
+		return downVote;
+	}
+
+	public void setDownVote(int downVote) {
+		this.downVote = downVote;
 	}
 
 }

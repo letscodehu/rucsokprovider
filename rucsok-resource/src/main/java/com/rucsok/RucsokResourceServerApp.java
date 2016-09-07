@@ -11,15 +11,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 import io.swagger.annotations.Api;
 import springfox.documentation.builders.ApiInfoBuilder;
-import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
-import static springfox.documentation.builders.PathSelectors.*;
-import static com.google.common.base.Predicates.*;
 
 @EnableSwagger2
 @SpringBootApplication
@@ -36,7 +33,7 @@ public class RucsokResourceServerApp {
         return new WebMvcConfigurerAdapter() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**/*").allowedOrigins("http://10.0.14.85:8100", "EPHUBUDW0489:8100");
+                registry.addMapping("/**/*").allowedOrigins("*");
             }
         };
     }

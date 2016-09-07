@@ -75,7 +75,7 @@ public class ListNewRucsokControllerIntegrationTest {
 	@Transactional
 	public void contentShouldContainsSameAmountOfDataThatCreatedInTheTestDatabase() throws Exception {
 		// Given
-		int numberOfItems = RucsokService.PAGINATION_SIZE;
+		int numberOfItems = RucsokService.FRESH_PAGINATION_SIZE;
 		// When
 		// Then
 		mockMvc.perform(get(REQUEST_MAPPING)).andExpect((jsonPath("$", hasSize(numberOfItems))));

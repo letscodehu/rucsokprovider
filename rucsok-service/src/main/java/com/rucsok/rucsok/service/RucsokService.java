@@ -21,9 +21,12 @@ import com.rucsok.user.service.UserCheckerService;
 
 @Service
 public class RucsokService {
-	
-	@Value("${rucsok.page.size}")
-	public static final int PAGINATION_SIZE = 3;
+
+	@Value("${rucsok.fresh.page.size}")
+	public static int FRESH_PAGINATION_SIZE;
+
+	@Value("${rucsok.hot.page.size}")
+	public static int HOT_PAGINATION_SIZE;
 
 	@Autowired
 	private RucsokRepository rucsokRepository;
@@ -40,9 +43,10 @@ public class RucsokService {
 	public List<Rucsok> findAll() {
 		return rucsokServiceTransform.transformToRucsok(rucsokRepository.getAllRucsok());
 	}
-	
+
 	public List<Rucsok> findFresh(int page) {
-		return rucsokServiceTransform.transformToRucsok(rucsokRepository.getAllRucsokByCreatedAt(new PageRequest(page, PAGINATION_SIZE)));
+		return rucsokServiceTransform
+				.transformToRucsok(rucsokRepository.getAllRucsokByCreatedAt(new PageRequest(page, FRESH_PAGINATION_SIZE)));
 	}
 
 	public void deleteById(long id) {

@@ -5,6 +5,7 @@ define([ "app/services/rucsokService.js",
          "app/services/authResolverFactory.js",
          "app/services/userProfileService.js",
          "app/services/rucsokModelService.js",
+         "app/services/randomPunService.js",
          "app/services/storeService.js",
          "ionic"], function(
         		 rucsokService, 
@@ -14,6 +15,7 @@ define([ "app/services/rucsokService.js",
         		 authResolverFactory,
         		 userProfileService,
         		 rucsokModelService,
+                         randomPunService,
         		 storeService
         		 ) {
 	
@@ -25,6 +27,7 @@ define([ "app/services/rucsokService.js",
 	services.factory("loginService", loginService);
 	services.factory("storeService", storeService);
 	services.factory("authResolverFactory", authResolverFactory);
+        services.factory("randomPunService", randomPunService);
 	services.factory("userProfileService", userProfileService);
 	return services;
 	

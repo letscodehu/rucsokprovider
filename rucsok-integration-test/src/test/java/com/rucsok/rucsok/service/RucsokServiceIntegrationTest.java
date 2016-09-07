@@ -15,7 +15,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.rucsok.config.RepositoryConfig;
 import com.rucsok.config.TestConfig;
 import com.rucsok.rucsok.domain.Rucsok;
-import com.rucsok.rucsok.repository.dao.RucsokDao;
+import com.rucsok.rucsok.repository.dao.RucsokRepository;
 import com.rucsok.rucsok.repository.domain.RucsokEntity;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -29,7 +29,7 @@ public class RucsokServiceIntegrationTest {
 	private RucsokService underTest;
 
 	@Autowired
-	private RucsokDao rucsokRepository;
+	private RucsokRepository rucsokRepository;
 
 	@Test
 	public void itShouldReturnLimitedNumberOfRucsoksWithCorrectOrder() {
@@ -39,7 +39,7 @@ public class RucsokServiceIntegrationTest {
 		// When
 		List<Rucsok> result = underTest.findFresh(0);
 		// Then
-		Assert.assertEquals("Limit size", RucsokService.PAGINATION_SIZE, result.size());
+		Assert.assertEquals("Limit size", RucsokService.FRESH_PAGINATION_SIZE, result.size());
 		Assert.assertEquals("Last element", lastRucsok.getId(), result.get(0).getId());
 		Assert.assertTrue("First has larger date than Second", hasLargerDate(result.get(1), result.get(0)));
 		Assert.assertTrue("Second has larger date than Third", hasLargerDate(result.get(2), result.get(1)));
