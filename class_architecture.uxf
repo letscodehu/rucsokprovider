@@ -1558,7 +1558,7 @@ HTML5VIDEO
       <x>320</x>
       <y>2480</y>
       <w>420</w>
-      <h>100</h>
+      <h>80</h>
     </coordinates>
     <panel_attributes>UserRegistrationController
 --
@@ -1626,12 +1626,12 @@ HTML5VIDEO
     <id>Relation</id>
     <coordinates>
       <x>280</x>
-      <y>2570</y>
+      <y>2550</y>
       <w>160</w>
-      <h>60</h>
+      <h>80</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>140.0;10.0;140.0;40.0;10.0;40.0</additional_attributes>
+    <additional_attributes>140.0;10.0;140.0;60.0;10.0;60.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -1655,7 +1655,7 @@ HTML5VIDEO
     <panel_attributes>UserRegistrationService
 --
 - userRepository : UserRepository
-- userRegistrationTransformer : UserRegistrationTransformer
+- userRegistrationTransformer : UserRegistrationServiceTransformer
 - userTransformer : UserTransformer
 - userCheckerService : UserCheckerService</panel_attributes>
     <additional_attributes/>
@@ -1719,12 +1719,12 @@ HTML5VIDEO
     <id>Relation</id>
     <coordinates>
       <x>550</x>
-      <y>2570</y>
+      <y>2550</y>
       <w>30</w>
-      <h>220</h>
+      <h>240</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;200.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;220.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -1804,7 +1804,7 @@ HTML5VIDEO
       <w>240</w>
       <h>30</h>
     </coordinates>
-    <panel_attributes>UserRegistrationTransformer</panel_attributes>
+    <panel_attributes>UserRegistrationServiceTransformer</panel_attributes>
     <additional_attributes/>
   </element>
   <element>

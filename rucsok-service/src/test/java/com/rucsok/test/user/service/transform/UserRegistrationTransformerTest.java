@@ -10,13 +10,13 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.rucsok.user.domain.UserRegistration;
 import com.rucsok.user.repository.domain.UserEntity;
-import com.rucsok.user.transform.UserRegistrationTransformer;
+import com.rucsok.user.transform.UserRegistrationServiceTransformer;
 
 import junit.framework.Assert;
 
 @SuppressWarnings("deprecation")
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = UserRegistrationTransformer.class)
+@ContextConfiguration(classes = UserRegistrationServiceTransformer.class)
 public class UserRegistrationTransformerTest {
 
 	private String username = "testname";
@@ -27,7 +27,7 @@ public class UserRegistrationTransformerTest {
 	public ExpectedException expectedEx = ExpectedException.none();
 	
 	@Autowired
-	private UserRegistrationTransformer transformer;
+	private UserRegistrationServiceTransformer transformer;
 	
 	
 	@Test

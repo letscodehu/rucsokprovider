@@ -1,13 +1,18 @@
 package com.rucsok.user.view.transform;
 
+import java.util.List;
+
+import org.springframework.stereotype.Component;
+import org.springframework.validation.ObjectError;
+
 import com.rucsok.user.domain.User;
 import com.rucsok.user.domain.UserRegistration;
-import com.rucsok.user.service.exception.NoUserGivenException;
 import com.rucsok.user.view.model.UserProfileView;
 import com.rucsok.user.view.model.UserRegistrationError;
 import com.rucsok.user.view.model.UserRegistrationRequest;
 import com.rucsok.user.view.model.UserRegistrationResponse;
 
+@Component
 public class UserRegistrationTransformer {
 
 	public UserRegistration transformToRegistration(UserRegistrationRequest request) {
@@ -27,6 +32,11 @@ public class UserRegistrationTransformer {
 
 	public UserRegistrationResponse transformToResponse(RuntimeException exception) {
 		return new UserRegistrationResponse(null, new UserRegistrationError(exception.getMessage()));
+	}
+
+	
+	public UserRegistrationResponse transformToResponseError(List<ObjectError> allErrors) {
+		return new UserRegistrationResponse(null, new UserRegistrationError(allErrors.get(0).getDefaultMessage()));
 	}
 
 	

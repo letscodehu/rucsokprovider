@@ -1,6 +1,9 @@
 package com.rucsok.user.view.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.common.annotations.GwtIncompatible;
@@ -26,11 +29,14 @@ public class UserRegistrationController {
 		this.userRegistrationService = userRegistrationService;
 	}
 	
-	public UserRegistrationResponse register(UserRegistrationRequest request) {
+	public UserRegistrationResponse register(@Valid UserRegistrationRequest request, BindingResult result) {
 		User user;
 		if (request == null) {
 			return userTransformer.transformToResponse(new NoUserGivenException());
 		}
+		if (result.hasErrors()) {
+			return userTransformer.transformToResponseError(result.getAllErrors());
+		}		
 		try {
 			user = userRegistrationService.registerUser(userTransformer.transformToRegistration(request));	
 		} catch (RuntimeException ex) {

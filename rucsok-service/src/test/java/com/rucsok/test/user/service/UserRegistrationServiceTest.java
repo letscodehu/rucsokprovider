@@ -20,12 +20,12 @@ import com.rucsok.user.service.UserCheckerService;
 import com.rucsok.user.service.UserRegistrationService;
 import com.rucsok.user.service.exception.NoUserGivenException;
 import com.rucsok.user.service.exception.UserAlreadyPresentException;
-import com.rucsok.user.transform.UserRegistrationTransformer;
+import com.rucsok.user.transform.UserRegistrationServiceTransformer;
 import com.rucsok.user.transform.UserTransformer;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {UserRegistrationServiceConfig.class, UserRegistrationService.class, UserTransformer.class, UserRegistrationTransformer.class })
+@ContextConfiguration(classes = {UserRegistrationServiceConfig.class, UserRegistrationService.class, UserTransformer.class, UserRegistrationServiceTransformer.class })
 public class UserRegistrationServiceTest {
 
 	private final String testEmail = "test@email.com";

@@ -1,9 +1,12 @@
 package com.rucsok.user.transform;
 
+import org.springframework.stereotype.Component;
+
 import com.rucsok.user.domain.UserRegistration;
 import com.rucsok.user.repository.domain.UserEntity;
 
-public class UserRegistrationTransformer {
+@Component
+public class UserRegistrationServiceTransformer {
 
 	public UserEntity transformFromRegistration(UserRegistration registration) {
 		if (registration == null) {
@@ -18,7 +21,5 @@ public class UserRegistrationTransformer {
 		}		
 		return new UserRegistration(entity.getEmail(), entity.getName(), entity.getPassword());
 	}
-	
-	
 
 }

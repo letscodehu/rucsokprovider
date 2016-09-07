@@ -9,20 +9,20 @@ import com.rucsok.user.repository.dao.UserRepository;
 import com.rucsok.user.repository.domain.UserEntity;
 import com.rucsok.user.service.exception.NoUserGivenException;
 import com.rucsok.user.service.exception.UserAlreadyPresentException;
-import com.rucsok.user.transform.UserRegistrationTransformer;
+import com.rucsok.user.transform.UserRegistrationServiceTransformer;
 import com.rucsok.user.transform.UserTransformer;
 
 @Service
 public class UserRegistrationService {
 	
 	private UserRepository userRepository;
-	private UserRegistrationTransformer userRegistrationTransformer;
+	private UserRegistrationServiceTransformer userRegistrationTransformer;
 	private UserTransformer userTransformer;
 	private UserCheckerService userCheckerService;
 	
 	@Autowired
 	public UserRegistrationService(UserRepository userRepository,
-			UserRegistrationTransformer userRegistrationTransformer, UserTransformer userTransformer,
+			UserRegistrationServiceTransformer userRegistrationTransformer, UserTransformer userTransformer,
 			UserCheckerService userCheckerService) {
 		super();
 		this.userRepository = userRepository;

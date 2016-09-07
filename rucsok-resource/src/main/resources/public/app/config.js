@@ -10,7 +10,7 @@ define([
 		storeName : 'rucsok-store'
 	});
 	
-	app.config(["ionGalleryConfigProvider", "$ionicConfigProvider" 
+	app.config(["ionGalleryConfigProvider", "$ionicConfigProvider", 
 	            function (ionGalleryConfigProvider, $ionicConfigProvider) {
 
 		// Disable global view caching, caused a state-not-change-but-url-does anomaly

@@ -1,11 +1,27 @@
 package com.rucsok.user.view.model;
 
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
+import com.rucsok.user.view.helper.ValidEmail;
+
 public class UserRegistrationRequest {
 
+	@NotNull
+	@NotEmpty
+	@ValidEmail
 	private String email;
+	
+	@NotNull
+	@NotEmpty
 	private String username;
+	
+	@NotNull
+	@NotEmpty
 	private String password;
 	private String passwordConfirmation;
+	
 	public String getEmail() {
 		return email;
 	}
