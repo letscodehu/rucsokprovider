@@ -23,5 +23,10 @@ public interface RucsokDao extends CrudRepository<RucsokEntity, Long> {
 	
 	@Query("from Rucsok ORDER BY CreatedAt DESC")
 	public List<RucsokEntity> getAllRucsokByCreatedAt(Pageable pageable);
+
+//	@Query(
+//			 "SELECT r FROM Rucsok r LEFT JOIN r.votes v ON r.id = v.id"
+//			)
+//	public List<RucsokEntity> hotRucsok();
 	
 }

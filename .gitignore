@@ -1,1 +1,4 @@
 .settings/
+maven.bat
+start-authserver.bat
+start-resource-server.bat

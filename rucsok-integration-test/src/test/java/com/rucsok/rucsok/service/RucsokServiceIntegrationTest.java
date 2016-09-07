@@ -39,7 +39,7 @@ public class RucsokServiceIntegrationTest {
 		// When
 		List<Rucsok> result = underTest.findFresh(0);
 		// Then
-		Assert.assertEquals("Limit size", RucsokService.PAGINATION_SIZE, result.size());
+		Assert.assertEquals("Limit size", RucsokService.FRESH_PAGINATION_SIZE, result.size());
 		Assert.assertEquals("Last element", lastRucsok.getId(), result.get(0).getId());
 		Assert.assertTrue("First has larger date than Second", hasLargerDate(result.get(1), result.get(0)));
 		Assert.assertTrue("Second has larger date than Third", hasLargerDate(result.get(2), result.get(1)));
