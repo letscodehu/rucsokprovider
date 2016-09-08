@@ -1,4 +1,6 @@
 .settings/
+.project
+swagger-codegen-cli*.jar
 maven.bat
 start-authserver.bat
 start-resource-server.bat
