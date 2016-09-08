@@ -702,6 +702,39 @@ margin-bottom: 20px;
 
   var defs = {}
 
+  defs.ListedRucsok = {
+  "type" : "object",
+  "properties" : {
+    "id" : {
+      "type" : "number",
+      "description" : "The identifier of the Rucsok"
+    },
+    "title" : {
+      "type" : "string",
+      "description" : "The title of the rucsok, crawled from the site meta tags/title tag."
+    },
+    "link" : {
+      "type" : "string",
+      "description" : "The source the rucsok got crawled from."
+    },
+    "imageUrl" : {
+      "type" : "string",
+      "description" : "The image URL if present"
+    },
+    "videoUrl" : {
+      "type" : "string",
+      "description" : "The video URL if present"
+    },
+    "type" : {
+      "type" : "string",
+      "description" : "The type of the rucsok. Valid values are IMAGE, EMBEDVIDEO, HTML5VIDEO"
+    },
+    "vote" : {
+      "type" : "number",
+      "description" : "The aggregated number of upvotes/downvotes"
+    }
+  }
+};
   defs.LoginResponse = {
   "type" : "object",
   "properties" : {
@@ -725,6 +758,10 @@ margin-bottom: 20px;
     "username" : {
       "type" : "string",
       "description" : "First username of the Rucsokprovider user."
+    },
+    "email" : {
+      "type" : "string",
+      "description" : "The e-mail address of the Rucsokprovider user."
     }
   }
 };
@@ -786,6 +823,26 @@ margin-bottom: 20px;
     }
   }
 };
+  defs.UserRegistrationError = {
+  "type" : "object",
+  "properties" : {
+    "message" : {
+      "type" : "string",
+      "description" : "The cause of the error"
+    }
+  }
+};
+  defs.UserRegistrationResponse = {
+  "type" : "object",
+  "properties" : {
+    "user" : {
+      "$ref" : "#/definitions/Profile"
+    },
+    "error" : {
+      "$ref" : "#/definitions/UserRegistrationError"
+    }
+  }
+};
   </script>
 
 <div class="container-fluid">
@@ -823,8 +880,14 @@ margin-bottom: 20px;
                                     <li data-group="Rucsok" data-name="rucsokGet" class="">
                                         <a href="#api-Rucsok-rucsokGet">rucsokGet</a>
                                     </li>
+                                    <li data-group="Rucsok" data-name="rucsokHotdateGet" class="">
+                                        <a href="#api-Rucsok-rucsokHotdateGet">rucsokHotdateGet</a>
+                                    </li>
                                     <li data-group="Rucsok" data-name="rucsokIdGet" class="">
                                         <a href="#api-Rucsok-rucsokIdGet">rucsokIdGet</a>
+                                    </li>
+                                    <li data-group="Rucsok" data-name="rucsokNewPagenumberGet" class="">
+                                        <a href="#api-Rucsok-rucsokNewPagenumberGet">rucsokNewPagenumberGet</a>
                                     </li>
                                     <li data-group="Rucsok" data-name="rucsokPost" class="">
                                         <a href="#api-Rucsok-rucsokPost">rucsokPost</a>
@@ -832,6 +895,9 @@ margin-bottom: 20px;
                                 <li class="nav-header" data-group="User"><a href="#api-User">API Methods - User</a></li>
                                     <li data-group="User" data-name="profileGet" class="">
                                         <a href="#api-User-profileGet">profileGet</a>
+                                    </li>
+                                    <li data-group="User" data-name="registerPost" class="">
+                                        <a href="#api-User-registerPost">registerPost</a>
                                     </li>
                                 <li class="nav-header" data-group="Vote"><a href="#api-Vote">API Methods - Vote</a></li>
                                     <li data-group="Vote" data-name="votePost" class="">
@@ -2765,6 +2831,379 @@ try {
 
 
 
+                                    <div id="api-Rucsok-rucsokHotdateGet">
+
+                                        <article id="api-Rucsok-rucsokHotdateGet-0" data-group="User" data-name="rucsokHotdateGet" data-version="0">
+                                            <div class="pull-left">
+                                                <h1>rucsokHotdateGet</h1>
+                                            </div>
+                                            <div class="pull-right">
+
+                                            </div>
+                                            <div class="clearfix"></div>
+
+                                            <p></p>
+                                            <p>Returns the most upvoted rucsoks of the given date</p>
+                                            <p></p>
+                                            <br />
+
+                                            <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/rucsok/hot?date&#x3D;###</span></code></pre>
+
+                                            <p>
+                                                <h3>Usage and SDK Samples</h3>
+                                            </p>
+
+                                            <ul class="nav nav-tabs nav-tabs-examples">
+                                                <li class="active">
+                                                    <a href="#examples-Rucsok-rucsokHotdateGet-0-curl">Curl</a>
+                                                </li>
+                                                <li class="">
+              <a href="#examples-Rucsok-rucsokHotdateGet-0-java">Java</a>
+            </li>
+            <li class="">
+              <a href="#examples-Rucsok-rucsokHotdateGet-0-android">Android</a>
+            </li>
+            <!--<li class="">
+              <a href="#examples-Rucsok-rucsokHotdateGet-0-groovy">Groovy</a>
+            </li>-->
+                                                <li class="">
+                                                    <a href="#examples-Rucsok-rucsokHotdateGet-0-objc">Obj-C</a>
+                                                </li>
+                                                <li class="">
+                                                    <a href="#examples-Rucsok-rucsokHotdateGet-0-javascript">JavaScript</a>
+                                                </li>
+                                                <!--<li class="">
+              <a href="#examples-Rucsok-rucsokHotdateGet-0-angular">Angular</a>
+            </li>-->
+                                                <li class="">
+                                                    <a href="#examples-Rucsok-rucsokHotdateGet-0-csharp">C#</a>
+                                                </li>
+                                                <li class="">
+              <a href="#examples-Rucsok-rucsokHotdateGet-0-php">PHP</a>
+            </li>
+                                            </ul>
+
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="examples-Rucsok-rucsokHotdateGet-0-curl">
+                                                    <pre class="prettyprint"><code class="language-bsh">
+curl -X <span style="text-transform: uppercase;">get</span> -H "apiKey: [[apiKey]]" -H "apiSecret: [[apiSecret]]" "http://localhost//rucsok/hot?date&#x3D;###?date="
+
+
+</code></pre>
+                                                </div>
+
+                                                <div class="tab-pane" id="examples-Rucsok-rucsokHotdateGet-0-java">
+                                                  <pre class="prettyprint"><code class="language-java">
+import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import .RucsokApi;
+
+import java.io.File;
+import java.util.*;
+
+public class RucsokApiExample {
+
+    public static void main(String[] args) {
+        
+        RucsokApi apiInstance = new RucsokApi();
+        String date = date_example; // String | yyyy-MM-dd format
+        try {
+            ListedRucsok result = apiInstance.rucsokHotdateGet(date);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling RucsokApi#rucsokHotdateGet");
+            e.printStackTrace();
+        }
+    }
+}
+
+                                                  </code></pre>
+          </div>
+
+
+                                                <div class="tab-pane" id="examples-Rucsok-rucsokHotdateGet-0-android">
+                                                  <pre class="prettyprint"><code class="language-java">
+import .RucsokApi;
+
+public class RucsokApiExample {
+
+    public static void main(String[] args) {
+        RucsokApi apiInstance = new RucsokApi();
+        String date = date_example; // String | yyyy-MM-dd format
+        try {
+            ListedRucsok result = apiInstance.rucsokHotdateGet(date);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling RucsokApi#rucsokHotdateGet");
+            e.printStackTrace();
+        }
+    }
+}
+
+                                                  </code></pre>
+          </div>
+
+          <!--
+          <div class="tab-pane" id="examples-Rucsok-rucsokHotdateGet-0-groovy">
+            <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+          </div> -->
+
+
+                                                <div class="tab-pane" id="examples-Rucsok-rucsokHotdateGet-0-objc">
+                                                    <pre class="prettyprint"><code class="language-cpp">
+
+String *date = date_example; // yyyy-MM-dd format
+
+RucsokApi *apiInstance = [[RucsokApi alloc] init];
+
+// Hottest rucsoks
+[apiInstance rucsokHotdateGetWith:date
+              completionHandler: ^(ListedRucsok output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+
+                                                    </code></pre>
+                                                </div>
+                                                <div class="tab-pane" id="examples-Rucsok-rucsokHotdateGet-0-javascript">
+                                                    <pre class="prettyprint"><code class="language-js">
+var  = require('');
+
+var api = new .RucsokApi()
+
+var date = date_example; // {String} yyyy-MM-dd format
+
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.rucsokHotdateGet(date, callback);
+
+                                                    </code></pre>
+                                                </div>
+
+                                                <!--<div class="tab-pane" id="examples-Rucsok-rucsokHotdateGet-0-angular">
+            <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+          </div>-->
+
+                                                <div class="tab-pane" id="examples-Rucsok-rucsokHotdateGet-0-csharp">
+                                                    <pre class="prettyprint"><code class="language-cs">
+using System;
+using System.Diagnostics;
+using .Api;
+using .Client;
+using ;
+
+namespace Example
+{
+    public class rucsokHotdateGetExample
+    {
+        public void main()
+        {
+            
+            var apiInstance = new RucsokApi();
+            var date = date_example;  // String | yyyy-MM-dd format
+
+            try
+            {
+                // Hottest rucsoks
+                ListedRucsok result = apiInstance.rucsokHotdateGet(date);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling RucsokApi.rucsokHotdateGet: " + e.Message );
+            }
+        }
+    }
+}
+
+                                                    </code></pre>
+                                                </div>
+
+
+                                                <div class="tab-pane" id="examples-Rucsok-rucsokHotdateGet-0-php">
+                                                  <pre class="prettyprint"><code class="language-php">
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$api_instance = new io.swagger.client\Api\RucsokApi();
+$date = date_example; // String | yyyy-MM-dd format
+
+try {
+    $result = $api_instance->rucsokHotdateGet($date);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling RucsokApi->rucsokHotdateGet: ', $e->getMessage(), PHP_EOL;
+}
+
+                                                  </code></pre>
+          </div>
+
+                                            </div>
+
+
+
+
+
+                                            <h2>Parameters</h2>
+
+
+
+
+
+
+
+                                                <div class="methodsubtabletitle">Query parameters</div>
+                                                <table id="methodsubtable">
+                                                    <tr>
+                                                        <th width="150px">Name</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                    <!---->
+                                                        <tr><td style="width:150px;">date*</td>
+<td>
+
+
+<script>
+												$(document).ready(function() {
+													var schemaWrapper = {
+  "name" : "date",
+  "in" : "query",
+  "description" : "yyyy-MM-dd format",
+  "required" : true,
+  "type" : "string"
+};
+													var schema = schemaWrapper;
+
+
+
+
+													var view = new JSONSchemaView(schema,0);
+													var result = $('#d2e199_rucsokHotdateGet_date');
+													result.empty();
+													result.append(view.render());
+
+
+
+
+
+												});
+												</script>
+												<div id="d2e199_rucsokHotdateGet_date"></div>
+</td>
+</tr>
+
+                                                </table>
+
+                                            <h2>Responses</h2>
+
+                                                <h3> Status: 200 - List of hottest rucsoks </h3>
+
+                                                <ul class="nav nav-tabs nav-tabs-examples" >
+
+                                                    <li class="active">
+                                                        <a href="#examples-Rucsok-rucsokHotdateGet-schema">Schema</a>
+                                                    </li>
+
+
+                                                </ul>
+
+
+
+
+
+
+
+                                                <div class="tab-content" style='margin-bottom: 10px;'>
+
+
+
+                                                    <div class="tab-pane active" id="examples-Rucsok-rucsokHotdateGet-schema">
+
+
+
+
+                                                        <div id='examples-Rucsok-rucsokHotdateGet-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+
+                                                            <script>
+                                                                $(document).ready(function() {
+                                                                    var schemaWrapper = {
+  "description" : "List of hottest rucsoks",
+  "schema" : {
+    "$ref" : "#/definitions/ListedRucsok"
+  }
+};
+                                                                    var schema = schemaWrapper.schema;
+                                                                    schemaWrapper.definitions = defs;
+                                                                    //console.log(JSON.stringify(schema))
+                                                                    JsonRefs.resolveRefs(schemaWrapper, {
+                                                                        "depth": 3,
+                                                                        "resolveRemoteRefs": false,
+                                                                        "resolveFileRefs": false
+                                                                    }, function(err, resolved, metadata) {
+
+                                                                        //console.log(JSON.stringify(resolved));
+
+
+
+                                                                        var view = new JSONSchemaView(resolved.schema, 3);
+                                                                        $('#examples-Rucsok-rucsokHotdateGet-schema-data').val(JSON.stringify(resolved.schema));
+                                                                        var result = $('#examples-Rucsok-rucsokHotdateGet-schema-200');
+                                                                        result.empty();
+                                                                        result.append(view.render());
+                                                                    });
+
+
+
+
+                                                                });
+                                                            </script>
+                                                        </div>
+                                                        <input id='examples-Rucsok-rucsokHotdateGet-schema-data' type='hidden' value=''></input>
+
+
+
+
+
+
+                                                    </div>
+
+
+
+
+                                                </div>
+
+
+
+
+
+
+
+
+
+                                        </article>
+
+                                    </div>
+
+                                    <hr>
+
+
+
+
+
+
+
+
                                     <div id="api-Rucsok-rucsokIdGet">
 
                                         <article id="api-Rucsok-rucsokIdGet-0" data-group="User" data-name="rucsokIdGet" data-version="0">
@@ -3104,6 +3543,379 @@ try {
                                                             </script>
                                                         </div>
                                                         <input id='examples-Rucsok-rucsokIdGet-schema-data' type='hidden' value=''></input>
+
+
+
+
+
+
+                                                    </div>
+
+
+
+
+                                                </div>
+
+
+
+
+
+
+
+
+
+                                        </article>
+
+                                    </div>
+
+                                    <hr>
+
+
+
+
+
+
+
+
+                                    <div id="api-Rucsok-rucsokNewPagenumberGet">
+
+                                        <article id="api-Rucsok-rucsokNewPagenumberGet-0" data-group="User" data-name="rucsokNewPagenumberGet" data-version="0">
+                                            <div class="pull-left">
+                                                <h1>rucsokNewPagenumberGet</h1>
+                                            </div>
+                                            <div class="pull-right">
+
+                                            </div>
+                                            <div class="clearfix"></div>
+
+                                            <p></p>
+                                            <p>Returns fixed number of rucsoks</p>
+                                            <p></p>
+                                            <br />
+
+                                            <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/rucsok/new/{pagenumber}</span></code></pre>
+
+                                            <p>
+                                                <h3>Usage and SDK Samples</h3>
+                                            </p>
+
+                                            <ul class="nav nav-tabs nav-tabs-examples">
+                                                <li class="active">
+                                                    <a href="#examples-Rucsok-rucsokNewPagenumberGet-0-curl">Curl</a>
+                                                </li>
+                                                <li class="">
+              <a href="#examples-Rucsok-rucsokNewPagenumberGet-0-java">Java</a>
+            </li>
+            <li class="">
+              <a href="#examples-Rucsok-rucsokNewPagenumberGet-0-android">Android</a>
+            </li>
+            <!--<li class="">
+              <a href="#examples-Rucsok-rucsokNewPagenumberGet-0-groovy">Groovy</a>
+            </li>-->
+                                                <li class="">
+                                                    <a href="#examples-Rucsok-rucsokNewPagenumberGet-0-objc">Obj-C</a>
+                                                </li>
+                                                <li class="">
+                                                    <a href="#examples-Rucsok-rucsokNewPagenumberGet-0-javascript">JavaScript</a>
+                                                </li>
+                                                <!--<li class="">
+              <a href="#examples-Rucsok-rucsokNewPagenumberGet-0-angular">Angular</a>
+            </li>-->
+                                                <li class="">
+                                                    <a href="#examples-Rucsok-rucsokNewPagenumberGet-0-csharp">C#</a>
+                                                </li>
+                                                <li class="">
+              <a href="#examples-Rucsok-rucsokNewPagenumberGet-0-php">PHP</a>
+            </li>
+                                            </ul>
+
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="examples-Rucsok-rucsokNewPagenumberGet-0-curl">
+                                                    <pre class="prettyprint"><code class="language-bsh">
+curl -X <span style="text-transform: uppercase;">get</span> -H "apiKey: [[apiKey]]" -H "apiSecret: [[apiSecret]]" "http://localhost//rucsok/new/{pagenumber}"
+
+
+</code></pre>
+                                                </div>
+
+                                                <div class="tab-pane" id="examples-Rucsok-rucsokNewPagenumberGet-0-java">
+                                                  <pre class="prettyprint"><code class="language-java">
+import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import .RucsokApi;
+
+import java.io.File;
+import java.util.*;
+
+public class RucsokApiExample {
+
+    public static void main(String[] args) {
+        
+        RucsokApi apiInstance = new RucsokApi();
+        BigDecimal pagenumber = 3.4; // BigDecimal | Pagination number
+        try {
+            Rucsok result = apiInstance.rucsokNewPagenumberGet(pagenumber);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling RucsokApi#rucsokNewPagenumberGet");
+            e.printStackTrace();
+        }
+    }
+}
+
+                                                  </code></pre>
+          </div>
+
+
+                                                <div class="tab-pane" id="examples-Rucsok-rucsokNewPagenumberGet-0-android">
+                                                  <pre class="prettyprint"><code class="language-java">
+import .RucsokApi;
+
+public class RucsokApiExample {
+
+    public static void main(String[] args) {
+        RucsokApi apiInstance = new RucsokApi();
+        BigDecimal pagenumber = 3.4; // BigDecimal | Pagination number
+        try {
+            Rucsok result = apiInstance.rucsokNewPagenumberGet(pagenumber);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling RucsokApi#rucsokNewPagenumberGet");
+            e.printStackTrace();
+        }
+    }
+}
+
+                                                  </code></pre>
+          </div>
+
+          <!--
+          <div class="tab-pane" id="examples-Rucsok-rucsokNewPagenumberGet-0-groovy">
+            <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+          </div> -->
+
+
+                                                <div class="tab-pane" id="examples-Rucsok-rucsokNewPagenumberGet-0-objc">
+                                                    <pre class="prettyprint"><code class="language-cpp">
+
+BigDecimal *pagenumber = 3.4; // Pagination number
+
+RucsokApi *apiInstance = [[RucsokApi alloc] init];
+
+// Newest rucsoks
+[apiInstance rucsokNewPagenumberGetWith:pagenumber
+              completionHandler: ^(Rucsok output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+
+                                                    </code></pre>
+                                                </div>
+                                                <div class="tab-pane" id="examples-Rucsok-rucsokNewPagenumberGet-0-javascript">
+                                                    <pre class="prettyprint"><code class="language-js">
+var  = require('');
+
+var api = new .RucsokApi()
+
+var pagenumber = 3.4; // {BigDecimal} Pagination number
+
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.rucsokNewPagenumberGet(pagenumber, callback);
+
+                                                    </code></pre>
+                                                </div>
+
+                                                <!--<div class="tab-pane" id="examples-Rucsok-rucsokNewPagenumberGet-0-angular">
+            <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+          </div>-->
+
+                                                <div class="tab-pane" id="examples-Rucsok-rucsokNewPagenumberGet-0-csharp">
+                                                    <pre class="prettyprint"><code class="language-cs">
+using System;
+using System.Diagnostics;
+using .Api;
+using .Client;
+using ;
+
+namespace Example
+{
+    public class rucsokNewPagenumberGetExample
+    {
+        public void main()
+        {
+            
+            var apiInstance = new RucsokApi();
+            var pagenumber = 3.4;  // BigDecimal | Pagination number
+
+            try
+            {
+                // Newest rucsoks
+                Rucsok result = apiInstance.rucsokNewPagenumberGet(pagenumber);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling RucsokApi.rucsokNewPagenumberGet: " + e.Message );
+            }
+        }
+    }
+}
+
+                                                    </code></pre>
+                                                </div>
+
+
+                                                <div class="tab-pane" id="examples-Rucsok-rucsokNewPagenumberGet-0-php">
+                                                  <pre class="prettyprint"><code class="language-php">
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$api_instance = new io.swagger.client\Api\RucsokApi();
+$pagenumber = 3.4; // BigDecimal | Pagination number
+
+try {
+    $result = $api_instance->rucsokNewPagenumberGet($pagenumber);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling RucsokApi->rucsokNewPagenumberGet: ', $e->getMessage(), PHP_EOL;
+}
+
+                                                  </code></pre>
+          </div>
+
+                                            </div>
+
+
+
+
+
+                                            <h2>Parameters</h2>
+
+
+
+                                                <div class="methodsubtabletitle">Path parameters</div>
+                                                <table id="methodsubtable">
+                                                    <tr>
+                                                        <th width="150px">Name</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                    <!---->
+                                                        <tr><td style="width:150px;">pagenumber*</td>
+<td>
+
+
+<script>
+												$(document).ready(function() {
+													var schemaWrapper = {
+  "name" : "pagenumber",
+  "in" : "path",
+  "description" : "Pagination number",
+  "required" : true,
+  "type" : "number"
+};
+													var schema = schemaWrapper;
+
+
+
+
+													var view = new JSONSchemaView(schema,0);
+													var result = $('#d2e199_rucsokNewPagenumberGet_pagenumber');
+													result.empty();
+													result.append(view.render());
+
+
+
+
+
+												});
+												</script>
+												<div id="d2e199_rucsokNewPagenumberGet_pagenumber"></div>
+</td>
+</tr>
+
+                                                </table>
+
+
+
+
+
+                                            <h2>Responses</h2>
+
+                                                <h3> Status: 200 - List of new rucsoks </h3>
+
+                                                <ul class="nav nav-tabs nav-tabs-examples" >
+
+                                                    <li class="active">
+                                                        <a href="#examples-Rucsok-rucsokNewPagenumberGet-schema">Schema</a>
+                                                    </li>
+
+
+                                                </ul>
+
+
+
+
+
+
+
+                                                <div class="tab-content" style='margin-bottom: 10px;'>
+
+
+
+                                                    <div class="tab-pane active" id="examples-Rucsok-rucsokNewPagenumberGet-schema">
+
+
+
+
+                                                        <div id='examples-Rucsok-rucsokNewPagenumberGet-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+
+                                                            <script>
+                                                                $(document).ready(function() {
+                                                                    var schemaWrapper = {
+  "description" : "List of new rucsoks",
+  "schema" : {
+    "$ref" : "#/definitions/Rucsok"
+  }
+};
+                                                                    var schema = schemaWrapper.schema;
+                                                                    schemaWrapper.definitions = defs;
+                                                                    //console.log(JSON.stringify(schema))
+                                                                    JsonRefs.resolveRefs(schemaWrapper, {
+                                                                        "depth": 3,
+                                                                        "resolveRemoteRefs": false,
+                                                                        "resolveFileRefs": false
+                                                                    }, function(err, resolved, metadata) {
+
+                                                                        //console.log(JSON.stringify(resolved));
+
+
+
+                                                                        var view = new JSONSchemaView(resolved.schema, 3);
+                                                                        $('#examples-Rucsok-rucsokNewPagenumberGet-schema-data').val(JSON.stringify(resolved.schema));
+                                                                        var result = $('#examples-Rucsok-rucsokNewPagenumberGet-schema-200');
+                                                                        result.empty();
+                                                                        result.append(view.render());
+                                                                    });
+
+
+
+
+                                                                });
+                                                            </script>
+                                                        </div>
+                                                        <input id='examples-Rucsok-rucsokNewPagenumberGet-schema-data' type='hidden' value=''></input>
 
 
 
@@ -3859,6 +4671,502 @@ try {
 
                                     <hr>
 
+
+
+
+
+
+
+
+                                    <div id="api-User-registerPost">
+
+                                        <article id="api-User-registerPost-0" data-group="User" data-name="registerPost" data-version="0">
+                                            <div class="pull-left">
+                                                <h1>registerPost</h1>
+                                            </div>
+                                            <div class="pull-right">
+
+                                            </div>
+                                            <div class="clearfix"></div>
+
+                                            <p></p>
+                                            <p>The endpoint used to register a new user into the Rucsokprovider with the role of user.</p>
+                                            <p></p>
+                                            <br />
+
+                                            <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/register</span></code></pre>
+
+                                            <p>
+                                                <h3>Usage and SDK Samples</h3>
+                                            </p>
+
+                                            <ul class="nav nav-tabs nav-tabs-examples">
+                                                <li class="active">
+                                                    <a href="#examples-User-registerPost-0-curl">Curl</a>
+                                                </li>
+                                                <li class="">
+              <a href="#examples-User-registerPost-0-java">Java</a>
+            </li>
+            <li class="">
+              <a href="#examples-User-registerPost-0-android">Android</a>
+            </li>
+            <!--<li class="">
+              <a href="#examples-User-registerPost-0-groovy">Groovy</a>
+            </li>-->
+                                                <li class="">
+                                                    <a href="#examples-User-registerPost-0-objc">Obj-C</a>
+                                                </li>
+                                                <li class="">
+                                                    <a href="#examples-User-registerPost-0-javascript">JavaScript</a>
+                                                </li>
+                                                <!--<li class="">
+              <a href="#examples-User-registerPost-0-angular">Angular</a>
+            </li>-->
+                                                <li class="">
+                                                    <a href="#examples-User-registerPost-0-csharp">C#</a>
+                                                </li>
+                                                <li class="">
+              <a href="#examples-User-registerPost-0-php">PHP</a>
+            </li>
+                                            </ul>
+
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="examples-User-registerPost-0-curl">
+                                                    <pre class="prettyprint"><code class="language-bsh">
+curl -X <span style="text-transform: uppercase;">post</span> -H "apiKey: [[apiKey]]" -H "apiSecret: [[apiSecret]]" "http://localhost//register?email=&username=&password=&passwordConfirmation="
+
+
+</code></pre>
+                                                </div>
+
+                                                <div class="tab-pane" id="examples-User-registerPost-0-java">
+                                                  <pre class="prettyprint"><code class="language-java">
+import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import .UserApi;
+
+import java.io.File;
+import java.util.*;
+
+public class UserApiExample {
+
+    public static void main(String[] args) {
+        
+        UserApi apiInstance = new UserApi();
+        String email = email_example; // String | The e-mail address of the user to be registered
+        String username = username_example; // String | The username wanted
+        String password = password_example; // String | The password used to login
+        String passwordConfirmation = passwordConfirmation_example; // String | The password confirmation
+        try {
+            UserRegistrationResponse result = apiInstance.registerPost(email, username, password, passwordConfirmation);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling UserApi#registerPost");
+            e.printStackTrace();
+        }
+    }
+}
+
+                                                  </code></pre>
+          </div>
+
+
+                                                <div class="tab-pane" id="examples-User-registerPost-0-android">
+                                                  <pre class="prettyprint"><code class="language-java">
+import .UserApi;
+
+public class UserApiExample {
+
+    public static void main(String[] args) {
+        UserApi apiInstance = new UserApi();
+        String email = email_example; // String | The e-mail address of the user to be registered
+        String username = username_example; // String | The username wanted
+        String password = password_example; // String | The password used to login
+        String passwordConfirmation = passwordConfirmation_example; // String | The password confirmation
+        try {
+            UserRegistrationResponse result = apiInstance.registerPost(email, username, password, passwordConfirmation);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling UserApi#registerPost");
+            e.printStackTrace();
+        }
+    }
+}
+
+                                                  </code></pre>
+          </div>
+
+          <!--
+          <div class="tab-pane" id="examples-User-registerPost-0-groovy">
+            <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+          </div> -->
+
+
+                                                <div class="tab-pane" id="examples-User-registerPost-0-objc">
+                                                    <pre class="prettyprint"><code class="language-cpp">
+
+String *email = email_example; // The e-mail address of the user to be registered
+String *username = username_example; // The username wanted
+String *password = password_example; // The password used to login
+String *passwordConfirmation = passwordConfirmation_example; // The password confirmation
+
+UserApi *apiInstance = [[UserApi alloc] init];
+
+// Registering user
+[apiInstance registerPostWith:email
+    username:username
+    password:password
+    passwordConfirmation:passwordConfirmation
+              completionHandler: ^(UserRegistrationResponse output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+
+                                                    </code></pre>
+                                                </div>
+                                                <div class="tab-pane" id="examples-User-registerPost-0-javascript">
+                                                    <pre class="prettyprint"><code class="language-js">
+var  = require('');
+
+var api = new .UserApi()
+
+var email = email_example; // {String} The e-mail address of the user to be registered
+
+var username = username_example; // {String} The username wanted
+
+var password = password_example; // {String} The password used to login
+
+var passwordConfirmation = passwordConfirmation_example; // {String} The password confirmation
+
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.registerPost(email, username, password, passwordConfirmation, callback);
+
+                                                    </code></pre>
+                                                </div>
+
+                                                <!--<div class="tab-pane" id="examples-User-registerPost-0-angular">
+            <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+          </div>-->
+
+                                                <div class="tab-pane" id="examples-User-registerPost-0-csharp">
+                                                    <pre class="prettyprint"><code class="language-cs">
+using System;
+using System.Diagnostics;
+using .Api;
+using .Client;
+using ;
+
+namespace Example
+{
+    public class registerPostExample
+    {
+        public void main()
+        {
+            
+            var apiInstance = new UserApi();
+            var email = email_example;  // String | The e-mail address of the user to be registered
+            var username = username_example;  // String | The username wanted
+            var password = password_example;  // String | The password used to login
+            var passwordConfirmation = passwordConfirmation_example;  // String | The password confirmation
+
+            try
+            {
+                // Registering user
+                UserRegistrationResponse result = apiInstance.registerPost(email, username, password, passwordConfirmation);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling UserApi.registerPost: " + e.Message );
+            }
+        }
+    }
+}
+
+                                                    </code></pre>
+                                                </div>
+
+
+                                                <div class="tab-pane" id="examples-User-registerPost-0-php">
+                                                  <pre class="prettyprint"><code class="language-php">
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$api_instance = new io.swagger.client\Api\UserApi();
+$email = email_example; // String | The e-mail address of the user to be registered
+$username = username_example; // String | The username wanted
+$password = password_example; // String | The password used to login
+$passwordConfirmation = passwordConfirmation_example; // String | The password confirmation
+
+try {
+    $result = $api_instance->registerPost($email, $username, $password, $passwordConfirmation);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling UserApi->registerPost: ', $e->getMessage(), PHP_EOL;
+}
+
+                                                  </code></pre>
+          </div>
+
+                                            </div>
+
+
+
+
+
+                                            <h2>Parameters</h2>
+
+
+
+
+
+
+
+                                                <div class="methodsubtabletitle">Query parameters</div>
+                                                <table id="methodsubtable">
+                                                    <tr>
+                                                        <th width="150px">Name</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                    <!---->
+                                                        <tr><td style="width:150px;">email*</td>
+<td>
+
+
+<script>
+												$(document).ready(function() {
+													var schemaWrapper = {
+  "name" : "email",
+  "in" : "query",
+  "description" : "The e-mail address of the user to be registered",
+  "required" : true,
+  "type" : "string"
+};
+													var schema = schemaWrapper;
+
+
+
+
+													var view = new JSONSchemaView(schema,0);
+													var result = $('#d2e199_registerPost_email');
+													result.empty();
+													result.append(view.render());
+
+
+
+
+
+												});
+												</script>
+												<div id="d2e199_registerPost_email"></div>
+</td>
+</tr>
+
+                                                        <tr><td style="width:150px;">username*</td>
+<td>
+
+
+<script>
+												$(document).ready(function() {
+													var schemaWrapper = {
+  "name" : "username",
+  "in" : "query",
+  "description" : "The username wanted",
+  "required" : true,
+  "type" : "string"
+};
+													var schema = schemaWrapper;
+
+
+
+
+													var view = new JSONSchemaView(schema,0);
+													var result = $('#d2e199_registerPost_username');
+													result.empty();
+													result.append(view.render());
+
+
+
+
+
+												});
+												</script>
+												<div id="d2e199_registerPost_username"></div>
+</td>
+</tr>
+
+                                                        <tr><td style="width:150px;">password*</td>
+<td>
+
+
+<script>
+												$(document).ready(function() {
+													var schemaWrapper = {
+  "name" : "password",
+  "in" : "query",
+  "description" : "The password used to login",
+  "required" : true,
+  "type" : "string"
+};
+													var schema = schemaWrapper;
+
+
+
+
+													var view = new JSONSchemaView(schema,0);
+													var result = $('#d2e199_registerPost_password');
+													result.empty();
+													result.append(view.render());
+
+
+
+
+
+												});
+												</script>
+												<div id="d2e199_registerPost_password"></div>
+</td>
+</tr>
+
+                                                        <tr><td style="width:150px;">passwordConfirmation*</td>
+<td>
+
+
+<script>
+												$(document).ready(function() {
+													var schemaWrapper = {
+  "name" : "passwordConfirmation",
+  "in" : "query",
+  "description" : "The password confirmation",
+  "required" : true,
+  "type" : "string"
+};
+													var schema = schemaWrapper;
+
+
+
+
+													var view = new JSONSchemaView(schema,0);
+													var result = $('#d2e199_registerPost_passwordConfirmation');
+													result.empty();
+													result.append(view.render());
+
+
+
+
+
+												});
+												</script>
+												<div id="d2e199_registerPost_passwordConfirmation"></div>
+</td>
+</tr>
+
+                                                </table>
+
+                                            <h2>Responses</h2>
+
+                                                <h3> Status: 201 - The profile information about the user recently registered </h3>
+
+                                                <ul class="nav nav-tabs nav-tabs-examples" >
+
+                                                    <li class="active">
+                                                        <a href="#examples-User-registerPost-schema">Schema</a>
+                                                    </li>
+
+
+                                                </ul>
+
+
+
+
+
+
+
+                                                <div class="tab-content" style='margin-bottom: 10px;'>
+
+
+
+                                                    <div class="tab-pane active" id="examples-User-registerPost-schema">
+
+
+
+
+                                                        <div id='examples-User-registerPost-schema-201' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+
+                                                            <script>
+                                                                $(document).ready(function() {
+                                                                    var schemaWrapper = {
+  "description" : "The profile information about the user recently registered",
+  "schema" : {
+    "$ref" : "#/definitions/UserRegistrationResponse"
+  }
+};
+                                                                    var schema = schemaWrapper.schema;
+                                                                    schemaWrapper.definitions = defs;
+                                                                    //console.log(JSON.stringify(schema))
+                                                                    JsonRefs.resolveRefs(schemaWrapper, {
+                                                                        "depth": 3,
+                                                                        "resolveRemoteRefs": false,
+                                                                        "resolveFileRefs": false
+                                                                    }, function(err, resolved, metadata) {
+
+                                                                        //console.log(JSON.stringify(resolved));
+
+
+
+                                                                        var view = new JSONSchemaView(resolved.schema, 3);
+                                                                        $('#examples-User-registerPost-schema-data').val(JSON.stringify(resolved.schema));
+                                                                        var result = $('#examples-User-registerPost-schema-201');
+                                                                        result.empty();
+                                                                        result.append(view.render());
+                                                                    });
+
+
+
+
+                                                                });
+                                                            </script>
+                                                        </div>
+                                                        <input id='examples-User-registerPost-schema-data' type='hidden' value=''></input>
+
+
+
+
+
+
+                                                    </div>
+
+
+
+
+                                                </div>
+
+
+
+
+
+
+
+
+
+                                        </article>
+
+                                    </div>
+
+                                    <hr>
+
                             </section>
 
                             <section id="api-Vote">
@@ -4370,7 +5678,7 @@ try {
             </div>
             <div id="generator">
                 <div class="content">
-                    Generated 2016-09-07T15:36:06.592+02:00
+                    Generated 2016-09-08T09:25:42.548+02:00
                 </div>
             </div>
         </div>

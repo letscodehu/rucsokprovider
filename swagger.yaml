@@ -193,6 +193,40 @@ paths:
           description: A single rucsok
           schema:
             $ref: '#/definitions/Rucsok'
+  /rucsok/new/{pagenumber}:
+    get:
+      summary: Newest rucsoks
+      description: Returns fixed number of rucsoks
+      parameters:
+        - name: pagenumber
+          in: path
+          required: true
+          type: number
+          description: Pagination number
+      tags:
+        - Rucsok
+      responses:
+        200:
+          description: List of new rucsoks
+          schema:
+            $ref: '#/definitions/Rucsok'
+  /rucsok/hot?date=###:
+    get:
+      summary: Hottest rucsoks
+      description: Returns the most upvoted rucsoks of the given date
+      parameters:
+        - name: date
+          in: query
+          required: true
+          type: string
+          description: yyyy-MM-dd format
+      tags:
+        - Rucsok
+      responses:
+        200:
+          description: List of hottest rucsoks
+          schema:
+            $ref: '#/definitions/ListedRucsok'
 definitions:
   LoginResponse:
     type: object
@@ -257,6 +291,30 @@ definitions:
       username:
         type: string
         description : The user's name who posted the rucsok
+      vote:
+        type: number
+        description: The aggregated number of upvotes/downvotes
+  ListedRucsok:
+    type: object
+    properties:
+      id:
+        type: number
+        description: The identifier of the Rucsok
+      title:
+        type: string
+        description: The title of the rucsok, crawled from the site meta tags/title tag.
+      link:
+        type: string
+        description: The source the rucsok got crawled from.
+      imageUrl:
+        type: string
+        description: The image URL if present
+      videoUrl:
+        type: string
+        description: The video URL if present
+      type: 
+        type: string
+        description : The type of the rucsok. Valid values are IMAGE, EMBEDVIDEO, HTML5VIDEO
       vote:
         type: number
         description: The aggregated number of upvotes/downvotes
