@@ -12,17 +12,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.rucsok.comment.config.CommentViewConverterConfig;
 import com.rucsok.comment.domain.Comment;
 import com.rucsok.comment.transform.DateTimeTransformer;
 import com.rucsok.comment.transform.OutputTextTransformer;
 import com.rucsok.comment.view.convert.CommentViewConverter;
 import com.rucsok.comment.view.model.CommentView;
-import com.rucsok.comment.view.transform.CommentTransformer;
-import com.rucsok.config.CommentTransformerConfig;
 import com.rucsok.user.domain.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = { CommentTransformerConfig.class, CommentViewConverter.class })
+@ContextConfiguration(classes = { CommentViewConverterConfig.class, CommentViewConverter.class })
 public class CommentViewConverterTest {
 
 	private static final String TEST_USERNAME = "rucsok";

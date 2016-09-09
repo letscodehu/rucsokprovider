@@ -35,6 +35,9 @@ public class CommentService {
 
 	@Autowired
 	private CommentConverter commentConverter;
+	
+	@Autowired
+	private CommentEntityConverter commentEntityConverter;
 
 	@Autowired
 	private UserTransformer userTransformer;
@@ -45,17 +48,11 @@ public class CommentService {
 	}
 
 	public Comment saveRucsok(Comment comment) {
-//		CommentEntity commentToSave = transformer.transformToEntity(comment);
-//		setRucsok(comment, commentToSave);
-//		setUserToEntity(comment, commentToSave);
-//		setParentIfExists(comment, commentToSave);
-//		return transformer.transformToComment(commentRepository.save(commentToSave));
-		
-		return null;
-	}
-
-	private void setUserToComment(Comment comment, CommentEntity commentEntity) {
-		comment.setUser(userTransformer.transformEntityToUser(commentEntity.getUser()));
+		CommentEntity commentToSave = commentEntityConverter.convert(comment);
+		setRucsok(comment, commentToSave);
+		setUserToEntity(comment, commentToSave);
+		setParentIfExists(comment, commentToSave);
+		return commentConverter.convert(commentRepository.save(commentToSave));
 	}
 
 	private void setUserToEntity(Comment comment, CommentEntity commentToSave) {

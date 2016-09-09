@@ -11,23 +11,32 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rucsok.comment.CommentService;
+import com.rucsok.comment.domain.Comment;
+import com.rucsok.comment.view.convert.CommentPostTransformer;
+import com.rucsok.comment.view.convert.CommentViewConverter;
 import com.rucsok.comment.view.model.CommentInsertRequest;
 import com.rucsok.comment.view.model.CommentView;
-import com.rucsok.comment.view.transform.CommentTransformer;
 
 @RestController
 public class PostCommentController {
-//	public static final String REQUEST_MAPPING = "/comment";
-//
-//	@Autowired
-//	private CommentService commentService;
-//
-//	@Autowired
-//	private CommentTransformer commentTransformer;
-//
-//	@RequestMapping(name = "postcomment", path = REQUEST_MAPPING, method = RequestMethod.POST)
-//	@ResponseStatus(value = HttpStatus.CREATED)
-//	public CommentView putRucsok(@RequestBody CommentInsertRequest request, Principal principal) {		
-//		return commentTransformer.transformToView(commentService.saveRucsok(commentTransformer.transformToRucsok(request), principal.getName()));
-//	}
+
+	public static final String REQUEST_MAPPING = "/comment";
+
+	@Autowired
+	private CommentService commentService;
+
+	@Autowired
+	private CommentPostTransformer commentPostTransformer;
+	
+	@Autowired
+	private CommentViewConverter commentViewConverter;
+
+	@RequestMapping(name = "postcomment", path = REQUEST_MAPPING, method = RequestMethod.POST)
+	@ResponseStatus(value = HttpStatus.CREATED)
+	public CommentView putRucsok(@RequestBody CommentInsertRequest request, Principal principal) {		
+		Comment transform = commentPostTransformer.transform(request, principal);
+		Comment saveRucsok = commentService.saveRucsok(transform);
+		CommentView convert = commentViewConverter.convert(saveRucsok);
+		return convert;
+	}
 }

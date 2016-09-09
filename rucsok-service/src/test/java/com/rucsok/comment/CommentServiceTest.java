@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -255,6 +256,7 @@ public class CommentServiceTest {
 		verify(userCheckerService).findUserByName(testUsername);
 		verify(commentConverter).convert(commentEntity);
 	}
+	
 	@Test
 	public void itShouldThrowIllegalRucsokException_When_UserNotExists() {
 		// Given
@@ -273,9 +275,9 @@ public class CommentServiceTest {
 		when(user.getUsername()).thenReturn(testUsername);
 		when(comment.getParent()).thenReturn(null);
 
-//		when(commentEntityTransformer.transformToEntity(comment)).thenReturn(commentEntity);
-//		when(rucsokRepository.findOne(testId)).thenReturn(existingRucsok);
-//		when(userCheckerService.findUserByName(testUsername)).thenReturn(null);
+		when(commentEntityConverter.convert(comment)).thenReturn(commentEntity);
+		when(rucsokRepository.findOne(testId)).thenReturn(existingRucsok);
+		when(userCheckerService.findUserByName(testUsername)).thenReturn(null);
 
 		underTest.saveRucsok(comment);
 
@@ -287,9 +289,9 @@ public class CommentServiceTest {
 		verify(comment).getParent();
 		verify(user).getUsername();
 
-//		verify(commentEntityTransformer).transformToEntity(comment);
-//		verify(rucsokRepository).findOne(testId);
-//		verify(userCheckerService).findUserByName(testUsername);
+		verify(commentEntityConverter).convert(comment);
+		verify(rucsokRepository).findOne(testId);
+		verify(userCheckerService).findUserByName(testUsername);
 	}
 	
 	@Test
@@ -307,8 +309,8 @@ public class CommentServiceTest {
 		when(comment.getRucsok()).thenReturn(rucsok);
 		when(rucsok.getId()).thenReturn(testId);
 
-//		when(commentEntityTransformer.transformToEntity(comment)).thenReturn(commentEntity);
-//		when(rucsokRepository.findOne(testId)).thenReturn(null);
+		when(commentEntityConverter.convert(comment)).thenReturn(commentEntity);
+		when(rucsokRepository.findOne(testId)).thenReturn(null);
 
 		underTest.saveRucsok(comment);
 
@@ -317,8 +319,8 @@ public class CommentServiceTest {
 		verify(commentEntity).setRucsok(existingRucsok);
 		verify(comment).getRucsok();
 
-//		verify(commentEntityTransformer).transformToEntity(comment);
-//		verify(rucsokRepository).findOne(testId);
+		verify(commentEntityConverter).convert(comment);
+		verify(rucsokRepository).findOne(testId);
 	}
 	
 	@Test
@@ -338,13 +340,13 @@ public class CommentServiceTest {
 		when(comment.getParent()).thenReturn(parent);
 		when(comment.getParent()).thenReturn(parent);
 		when(parent.getId()).thenReturn(testParentId);
-//
-//		when(commentEntityTransformer.transformToEntity(comment)).thenReturn(commentEntity);
-//		when(commentRepository.findOne(testParentId)).thenReturn(commentParentEntity);
-//		when(rucsokRepository.findOne(testId)).thenReturn(existingRucsok);
-//		when(userCheckerService.findUserByName(testUsername)).thenReturn(userEntity);
-//		when(commentEntityTransformer.transformToComment(commentEntity)).thenReturn(comment);
-//		when(commentRepository.save(commentEntity)).thenReturn(commentEntity);
+
+		when(commentEntityConverter.convert(comment)).thenReturn(commentEntity);
+		when(commentRepository.findOne(testParentId)).thenReturn(commentParentEntity);
+		when(rucsokRepository.findOne(testId)).thenReturn(existingRucsok);
+		when(userCheckerService.findUserByName(testUsername)).thenReturn(userEntity);
+		when(commentConverter.convert(commentEntity)).thenReturn(comment);
+		when(commentRepository.save(commentEntity)).thenReturn(commentEntity);
 
 		underTest.saveRucsok(comment);
 
@@ -356,12 +358,12 @@ public class CommentServiceTest {
 		verify(comment).getUser();
 		verify(comment, times(2)).getParent();
 		verify(user).getUsername();
-//
-//		verify(commentEntityTransformer).transformToEntity(comment);
-//		verify(rucsokRepository).findOne(testId);
-//		verify(userCheckerService).findUserByName(testUsername);
-//		verify(commentEntityTransformer).transformToComment(commentEntity);
-//		verify(commentRepository).save(commentEntity);
+
+		verify(commentEntityConverter).convert(comment);
+		verify(rucsokRepository).findOne(testId);
+		verify(userCheckerService).findUserByName(testUsername);
+		verify(commentConverter).convert(commentEntity);
+		verify(commentRepository).save(commentEntity);
 	}
 
 }
