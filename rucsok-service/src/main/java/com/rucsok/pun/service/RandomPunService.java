@@ -22,7 +22,7 @@ public class RandomPunService {
 	private PunServiceRandom random;
 
 	public Pun serveRandom() {
-		return punTransformer.transformEntityToDTO(punRepository.findOne(getRandomValueBetweenSize()));
+		return punTransformer.convert(punRepository.findOne(getRandomValueBetweenSize()));
 	}
 
 	private long getRandomValueBetweenSize() {

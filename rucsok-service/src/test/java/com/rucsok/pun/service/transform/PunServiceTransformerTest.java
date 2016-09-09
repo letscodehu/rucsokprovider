@@ -29,7 +29,7 @@ public class PunServiceTransformerTest {
 		Mockito.when(entity.getId()).thenReturn(testId);
 		Mockito.when(entity.getText()).thenReturn(testText);
 		
-		Pun pun = punTransformer.transformEntityToDTO(entity);
+		Pun pun = punTransformer.convert(entity);
 		
 		assertEquals(testText, pun.getText());
 		assertEquals(testId, pun.getId());

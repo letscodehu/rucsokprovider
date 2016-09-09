@@ -18,6 +18,17 @@ public class PunEntity {
 	private long id;
 	private String text;
 	
+	public PunEntity() {
+		
+	}
+	
+	public PunEntity(long id, String text, UserEntity user) {
+		super();
+		this.id = id;
+		this.text = text;
+		this.user = user;
+	}
+
 	public void setText(String text) {
 		this.text = text;
 	}

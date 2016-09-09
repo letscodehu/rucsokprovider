@@ -34,7 +34,7 @@ public class ListedRucsokRepository {
 
 						+ "WHERE Rucsok.createdAt BETWEEN :startDate AND :endDate "
 						+ "ORDER BY up_vs.up_vote_number DESC, down_vs.down_vote_number DESC, Rucsok.createdAt DESC LIMIT 0, :limit";
-
+		
 		Query query = em.createNativeQuery(queryStr);
 		query.setParameter("startDate", startDate);
 		query.setParameter("endDate", endDate);
