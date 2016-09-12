@@ -20,8 +20,11 @@ public class CommentPostConverter implements Converter<CommentInsertRequest, Com
 	}
 
 	private Comment createParent(CommentInsertRequest source) {
-		Comment parent = new Comment();
-		parent.setId(source.getParentId());
+		Comment parent = null;
+		if(0 != source.getParentId() ){
+			parent = new Comment();
+			parent.setId(source.getParentId());
+		}
 		return parent;
 	}
 

@@ -1,9 +1,6 @@
 package com.rucsok.comment;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -48,6 +45,8 @@ public class CommentService {
 	}
 
 	public Comment saveRucsok(Comment comment) {
+		checkIfUserExists(comment);
+		checkIfTextIsNull(comment);
 		CommentEntity commentToSave = commentEntityConverter.convert(comment);
 		setRucsok(comment, commentToSave);
 		setUserToEntity(comment, commentToSave);
@@ -55,19 +54,31 @@ public class CommentService {
 		return commentConverter.convert(commentRepository.save(commentToSave));
 	}
 
+	private void checkIfTextIsNull(Comment comment) {
+		if(null == comment.getText() ||0 == comment.getText().length()){
+			throw new IllegalRucsokArgumentException("Cannot create comment without text!");
+		}
+	}
+
+	private void checkIfUserExists(Comment comment) {
+		if(null == comment.getUser()){
+			throw new IllegalRucsokArgumentException("Cannot create comment without user!");
+		}
+	}
+
 	private void setUserToEntity(Comment comment, CommentEntity commentToSave) {
 		UserEntity user = findUserByName(comment);
-		assertNotNull(user);
+		assertNotNull(user, "User is null!");
 		commentToSave.setUser(user);
 	}
 
-	private UserEntity findUserByName(Comment comment) {
+	private UserEntity findUserByName(Comment comment) {		
 		return userService.findUserByName(comment.getUser().getUsername());
 	}
 
 	private void setRucsok(Comment comment, CommentEntity commentToSave) {
 		RucsokEntity rucsok = findRucsokById(comment);
-		assertNotNull(rucsok);
+		assertNotNull(rucsok, "Rucsok is null!");
 		commentToSave.setRucsok(rucsok);
 	}
 
@@ -79,13 +90,13 @@ public class CommentService {
 
 	private void setParent(Comment comment, CommentEntity commentToSave) {
 		CommentEntity parent = findParentById(comment);
-		assertNotNull(parent);
+		assertNotNull(parent, "Parent is null!");
 		commentToSave.setParent(parent);
 	}
 
-	private void assertNotNull(Object object) {
+	private void assertNotNull(Object object, String errorMessage) {
 		if (null == object) {
-			throw new IllegalRucsokArgumentException();
+			throw new IllegalRucsokArgumentException(errorMessage);
 		}
 	}
 

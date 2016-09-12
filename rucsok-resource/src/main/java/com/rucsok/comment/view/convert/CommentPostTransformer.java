@@ -17,8 +17,14 @@ public class CommentPostTransformer {
 
 	public Comment transform(CommentInsertRequest request, Principal principal) {
 		Comment result = commentPostConverter.convert(request);
-		result.setUser(createUserFromName(principal));
-		return result;		
+		setUserFromPrincipal(result, principal);
+		return result;
+	}
+
+	private void setUserFromPrincipal(Comment result, Principal principal) {
+		if (null != principal) {
+			result.setUser(createUserFromName(principal));
+		}
 	}
 
 	private User createUserFromName(Principal principal) {
@@ -26,5 +32,5 @@ public class CommentPostTransformer {
 		user.setUsername(principal.getName());
 		return user;
 	}
-	
+
 }

@@ -44,7 +44,9 @@ import com.rucsok.user.transform.UserTransformer;
 @ContextConfiguration(classes = { CommentServiceConfig.class, CommentService.class, DateService.class })
 @TestPropertySource("classpath:application.properties")
 public class CommentServiceTest {
-	
+
+	private static final String TEST_TEXT = "test";
+
 	@Rule
 	public ExpectedException expectedException = ExpectedException.none();
 
@@ -59,19 +61,19 @@ public class CommentServiceTest {
 
 	@Autowired
 	private UserCheckerService userCheckerService;
-	
+
 	@Autowired
 	private UserTransformer userTransformer;
 
 	@Autowired
 	private CommentEntityConverter commentEntityConverter;
-	
+
 	@Autowired
 	private CommentConverter commentConverter;
 
 	@Mock
 	private Comment comment;
-	
+
 	@Mock
 	private Comment parent;
 
@@ -83,7 +85,7 @@ public class CommentServiceTest {
 
 	@Mock
 	private CommentEntity commentEntity;
-	
+
 	@Mock
 	private CommentEntity commentParentEntity;
 
@@ -96,31 +98,32 @@ public class CommentServiceTest {
 	private String testUsername;
 
 	private long testId;
-	
+
 	private long testParentId;
-	
+
 	@Before
 	public void setUp() {
 		MockitoAnnotations.initMocks(this);
 	}
-	
+
 	@Test
 	public void itShouldReturnCommentList_When_CalledWithExistingRucsokId() {
 		// Given
-		
+
 		int rucsokId = 33;
 		int offset = 1;
-		
+
 		@SuppressWarnings("unchecked")
 		Page<CommentEntity> commenEntityPage = Mockito.mock(Page.class);
 		@SuppressWarnings("unchecked")
-		Page<Comment> commentPage =  Mockito.mock(Page.class);
+		Page<Comment> commentPage = Mockito.mock(Page.class);
 		PageRequest pageRequest = Mockito.mock(PageRequest.class);
 		List<Comment> commentList = Arrays.asList(comment);
 
 		// When
 
-		when(commentRepository.findByRucsokIdAndParentNullOrderByCreatedAt(rucsokId, pageRequest)).thenReturn(commenEntityPage);
+		when(commentRepository.findByRucsokIdAndParentNullOrderByCreatedAt(rucsokId, pageRequest))
+				.thenReturn(commenEntityPage);
 		when(commenEntityPage.map(commentConverter)).thenReturn(commentPage);
 		when(commentPage.getContent()).thenReturn(commentList);
 		when(comment.getUser()).thenReturn(user);
@@ -132,54 +135,97 @@ public class CommentServiceTest {
 		Page<Comment> result = underTest.findCommentsByRucsokId(rucsokId, pageRequest);
 
 		// Then
-		
+
 		Assert.assertEquals("List should match", commentPage, result);
 		Assert.assertEquals("List should match", offset, result.getContent().size());
 		Assert.assertEquals("Username should match", testUsername, result.getContent().get(0).getUser().getUsername());
-		
+
 		verify(commentRepository).findByRucsokIdAndParentNullOrderByCreatedAt(rucsokId, pageRequest);
 		verify(commenEntityPage).map(commentConverter);
 		verify(comment).getUser();
 
 	}
-	
-	
+
 	@Test
 	public void itShouldReturnEmptyCommentList_When_CalledWithNotExistingRucsokId() {
 		// Given
-		
+
 		int rucsokId = 0;
 		int offset = 0;
-		
+
 		@SuppressWarnings("unchecked")
 		Page<CommentEntity> commenEntityPage = Mockito.mock(Page.class);
 		@SuppressWarnings("unchecked")
-		Page<Comment> commentPage =  Mockito.mock(Page.class);
+		Page<Comment> commentPage = Mockito.mock(Page.class);
 		PageRequest pageRequest = Mockito.mock(PageRequest.class);
 		List<Comment> commentList = Collections.emptyList();
 
 		// When
 
-		when(commentRepository.findByRucsokIdAndParentNullOrderByCreatedAt(rucsokId, pageRequest)).thenReturn(commenEntityPage);
+		when(commentRepository.findByRucsokIdAndParentNullOrderByCreatedAt(rucsokId, pageRequest))
+				.thenReturn(commenEntityPage);
 		when(commenEntityPage.map(commentConverter)).thenReturn(commentPage);
 		when(commentPage.getContent()).thenReturn(commentList);
 
 		Page<Comment> result = underTest.findCommentsByRucsokId(rucsokId, pageRequest);
 
 		// Then
-		
+
 		Assert.assertEquals("List should match", commentPage, result);
 		Assert.assertEquals("List should match", offset, result.getContent().size());
-		
+
 		verify(commentRepository).findByRucsokIdAndParentNullOrderByCreatedAt(rucsokId, pageRequest);
 		verify(commenEntityPage).map(commentConverter);
 
 	}
 
 	@Test
+	public void itShouldSaveNewComment_When_ParentIsSetAndParentIdIsNull() {
+		// Given
+
+		testId = 801L;
+		testParentId = 482L;
+		testUsername = "rucsoklikenotomorrow";
+		long parentId = 0L;
+
+		// When
+
+		when(comment.getRucsok()).thenReturn(rucsok);
+		when(rucsok.getId()).thenReturn(testId);
+		when(comment.getUser()).thenReturn(user);
+		when(user.getUsername()).thenReturn(testUsername);
+		when(comment.getParent()).thenReturn(parent);
+		when(comment.getParent()).thenReturn(parent);
+		when(comment.getText()).thenReturn(TEST_TEXT);
+		when(parent.getId()).thenReturn(parentId);
+
+		when(commentEntityConverter.convert(comment)).thenReturn(commentEntity);
+		when(rucsokRepository.findOne(testId)).thenReturn(existingRucsok);
+		when(userCheckerService.findUserByName(testUsername)).thenReturn(userEntity);
+		when(commentRepository.save(commentEntity)).thenReturn(commentEntity);
+		when(commentRepository.findOne(parentId)).thenReturn(commentParentEntity);
+		when(commentConverter.convert(commentEntity)).thenReturn(comment);
+
+		underTest.saveRucsok(comment);
+
+		// Then
+
+		verify(commentEntity).setRucsok(existingRucsok);
+		verify(comment).getRucsok();
+		verify(comment, times(2)).getUser();
+		verify(comment, times(2)).getParent();
+		verify(user).getUsername();
+
+		verify(commentEntityConverter).convert(comment);
+		verify(rucsokRepository).findOne(testId);
+		verify(userCheckerService, times(2)).findUserByName(testUsername);
+		verify(commentConverter).convert(commentEntity);
+	}
+
+	@Test
 	public void itShouldSaveNewComment_When_PostedToExistingRucsok() {
 		// Given
-		
+
 		testId = 1L;
 		testParentId = 2L;
 		testUsername = "rucsok";
@@ -190,6 +236,7 @@ public class CommentServiceTest {
 		when(rucsok.getId()).thenReturn(testId);
 		when(comment.getUser()).thenReturn(user);
 		when(user.getUsername()).thenReturn(testUsername);
+		when(comment.getText()).thenReturn(TEST_TEXT);
 		when(comment.getParent()).thenReturn(null);
 
 		when(commentEntityConverter.convert(comment)).thenReturn(commentEntity);
@@ -204,7 +251,7 @@ public class CommentServiceTest {
 
 		verify(commentEntity).setRucsok(existingRucsok);
 		verify(comment).getRucsok();
-		verify(comment).getUser();
+		verify(comment, times(2)).getUser();
 		verify(comment).getParent();
 		verify(user).getUsername();
 
@@ -216,13 +263,122 @@ public class CommentServiceTest {
 	}
 
 	@Test
-	public void itShouldThrowIllegalRucsokException_When_ParentNotExists() {
+	public void itShouldSaveNewComment_When_ParentIsSetAndParentExists() {
 		// Given
-		
+
+		testId = 101L;
+		testParentId = 282L;
+		testUsername = "rucsoklikenotomorrow";
+
+		// When
+
+		when(comment.getRucsok()).thenReturn(rucsok);
+		when(rucsok.getId()).thenReturn(testId);
+		when(comment.getUser()).thenReturn(user);
+		when(user.getUsername()).thenReturn(testUsername);
+		when(comment.getParent()).thenReturn(parent);
+		when(comment.getParent()).thenReturn(parent);
+		when(comment.getText()).thenReturn(TEST_TEXT);
+		when(parent.getId()).thenReturn(testParentId);
+
+		when(commentEntityConverter.convert(comment)).thenReturn(commentEntity);
+		when(commentRepository.findOne(testParentId)).thenReturn(commentParentEntity);
+		when(rucsokRepository.findOne(testId)).thenReturn(existingRucsok);
+		when(userCheckerService.findUserByName(testUsername)).thenReturn(userEntity);
+		when(commentRepository.save(commentEntity)).thenReturn(commentEntity);
+		when(commentConverter.convert(commentEntity)).thenReturn(comment);
+
+		underTest.saveRucsok(comment);
+
+		// Then
+
+		verify(commentEntity).setRucsok(existingRucsok);
+		verify(comment).getRucsok();
+		verify(comment, times(2)).getUser();
+		verify(comment, times(2)).getParent();
+		verify(user).getUsername();
+
+		verify(commentEntityConverter).convert(comment);
+		verify(rucsokRepository).findOne(testId);
+		verify(userCheckerService).findUserByName(testUsername);
+		verify(commentConverter).convert(commentEntity);
+	}
+
+	@Test
+	public void itShouldSaveNewComment_When_PostedToExistingComment() {
+		// Given
+
+		testId = 3L;
+		testParentId = 4L;
+		testUsername = "rucsok123";
+
+		// When
+
+		when(comment.getRucsok()).thenReturn(rucsok);
+		when(rucsok.getId()).thenReturn(testId);
+		when(comment.getUser()).thenReturn(user);
+		when(user.getUsername()).thenReturn(testUsername);
+		when(comment.getParent()).thenReturn(parent);
+		when(comment.getParent()).thenReturn(parent);
+		when(comment.getText()).thenReturn(TEST_TEXT);
+		when(parent.getId()).thenReturn(testParentId);
+
+		when(commentEntityConverter.convert(comment)).thenReturn(commentEntity);
+		when(commentRepository.findOne(testParentId)).thenReturn(commentParentEntity);
+		when(rucsokRepository.findOne(testId)).thenReturn(existingRucsok);
+		when(userCheckerService.findUserByName(testUsername)).thenReturn(userEntity);
+		when(commentConverter.convert(commentEntity)).thenReturn(comment);
+		when(commentRepository.save(commentEntity)).thenReturn(commentEntity);
+
+		underTest.saveRucsok(comment);
+
+		// Then
+
+		verify(commentEntity).setRucsok(existingRucsok);
+		verify(commentEntity).setParent(commentParentEntity);
+		verify(comment).getRucsok();
+		verify(comment, times(2)).getUser();
+		verify(comment, times(2)).getParent();
+		verify(user).getUsername();
+
+		verify(commentEntityConverter).convert(comment);
+		verify(rucsokRepository).findOne(testId);
+		verify(userCheckerService).findUserByName(testUsername);
+		verify(commentConverter).convert(commentEntity);
+		verify(commentRepository).save(commentEntity);
+	}
+
+	@Test
+	public void itShouldThrowIllegalRucsokException_When_RucsokNotExists() {
+		// Given
+
+		testId = 10L;
+		testParentId = 20L;
+		testUsername = "rucsokbela";
+
+		expectedException.expect(IllegalRucsokArgumentException.class);
+
+		// When
+
+		when(comment.getRucsok()).thenReturn(rucsok);
+		when(rucsok.getId()).thenReturn(testId);
+
+		when(commentEntityConverter.convert(comment)).thenReturn(commentEntity);
+		when(rucsokRepository.findOne(testId)).thenReturn(null);
+
+		underTest.saveRucsok(comment);
+
+		// Then
+	}
+
+	@Test
+	public void itShouldThrowIllegalRucsokException_When_ParentIsSetAndParentNotExists() {
+		// Given
+
 		testId = 111L;
 		testParentId = 222L;
 		testUsername = "rucsoklikenotomorrow";
-		
+
 		expectedException.expect(IllegalRucsokArgumentException.class);
 
 		// When
@@ -244,27 +400,91 @@ public class CommentServiceTest {
 		underTest.saveRucsok(comment);
 
 		// Then
+	}
 
-		verify(commentEntity).setRucsok(existingRucsok);
-		verify(comment).getRucsok();
-		verify(comment).getUser();
-		verify(comment).getParent();
-		verify(user).getUsername();
+	@Test
+	public void itShouldThrowIllegalRucsokException_When_TextIsNull() {
+		// Given
 
-		verify(commentEntityConverter).convert(comment);
-		verify(rucsokRepository).findOne(testId);
-		verify(userCheckerService).findUserByName(testUsername);
-		verify(commentConverter).convert(commentEntity);
+		testId = 45L;
+		testParentId = 98L;
+		testUsername = "rucsoklikenotomorrow";
+
+		expectedException.expect(IllegalRucsokArgumentException.class);
+		expectedException.expectMessage("Cannot create comment without text!");
+
+		// When
+
+		when(comment.getRucsok()).thenReturn(rucsok);
+		when(rucsok.getId()).thenReturn(testId);
+		when(comment.getUser()).thenReturn(user);
+		when(user.getUsername()).thenReturn(testUsername);
+		when(comment.getText()).thenReturn(null);
+
+		underTest.saveRucsok(comment);
+
+		// Then
+	}
+
+	@Test
+	public void itShouldThrowIllegalRucsokException_When_TextIsEmpty() {
+		// Given
+
+		testId = 5454L;
+		testParentId = 9845L;
+		testUsername = "rucsoklikenotomorrow";
+
+		expectedException.expect(IllegalRucsokArgumentException.class);
+		expectedException.expectMessage("Cannot create comment without text!");
+
+		// When
+
+		when(comment.getRucsok()).thenReturn(rucsok);
+		when(rucsok.getId()).thenReturn(testId);
+		when(comment.getUser()).thenReturn(user);
+		when(user.getUsername()).thenReturn(testUsername);
+		when(comment.getText()).thenReturn("");
+
+		underTest.saveRucsok(comment);
+
+		// Then
 	}
 	
 	@Test
+	public void itShouldThrowIllegalRucsokException_When_UserIsNullInComment() {
+		// Given
+
+		testId = 12L;
+		testParentId = 42L;
+		testUsername = "rucsokotto";
+
+		expectedException.expect(IllegalRucsokArgumentException.class);
+		expectedException.expectMessage("Cannot create comment without user!");
+		
+		// When
+
+		when(comment.getRucsok()).thenReturn(rucsok);
+		when(rucsok.getId()).thenReturn(testId);
+		when(comment.getUser()).thenReturn(null);
+		when(user.getUsername()).thenReturn(testUsername);
+		when(comment.getParent()).thenReturn(null);
+
+		when(commentEntityConverter.convert(comment)).thenReturn(commentEntity);
+		when(rucsokRepository.findOne(testId)).thenReturn(existingRucsok);
+
+		underTest.saveRucsok(comment);
+
+		// Then
+	}
+
+	@Test
 	public void itShouldThrowIllegalRucsokException_When_UserNotExists() {
 		// Given
-		
+
 		testId = 11L;
 		testParentId = 22L;
 		testUsername = "rucsokotto";
-		
+
 		expectedException.expect(IllegalRucsokArgumentException.class);
 
 		// When
@@ -283,87 +503,6 @@ public class CommentServiceTest {
 
 		// Then
 
-		verify(commentEntity).setRucsok(existingRucsok);
-		verify(comment).getRucsok();
-		verify(comment).getUser();
-		verify(comment).getParent();
-		verify(user).getUsername();
-
-		verify(commentEntityConverter).convert(comment);
-		verify(rucsokRepository).findOne(testId);
-		verify(userCheckerService).findUserByName(testUsername);
-	}
-	
-	@Test
-	public void itShouldThrowIllegalRucsokException_When_RucsokNotExists() {
-		// Given
-		
-		testId = 10L;
-		testParentId = 20L;
-		testUsername = "rucsokbela";
-		
-		expectedException.expect(IllegalRucsokArgumentException.class);
-
-		// When
-
-		when(comment.getRucsok()).thenReturn(rucsok);
-		when(rucsok.getId()).thenReturn(testId);
-
-		when(commentEntityConverter.convert(comment)).thenReturn(commentEntity);
-		when(rucsokRepository.findOne(testId)).thenReturn(null);
-
-		underTest.saveRucsok(comment);
-
-		// Then
-
-		verify(commentEntity).setRucsok(existingRucsok);
-		verify(comment).getRucsok();
-
-		verify(commentEntityConverter).convert(comment);
-		verify(rucsokRepository).findOne(testId);
-	}
-	
-	@Test
-	public void itShouldSaveNewComment_When_PostedToExistingComment() {
-		// Given
-		
-		testId = 3L;
-		testParentId = 4L;
-		testUsername = "rucsok123";
-
-		// When
-
-		when(comment.getRucsok()).thenReturn(rucsok);
-		when(rucsok.getId()).thenReturn(testId);
-		when(comment.getUser()).thenReturn(user);
-		when(user.getUsername()).thenReturn(testUsername);
-		when(comment.getParent()).thenReturn(parent);
-		when(comment.getParent()).thenReturn(parent);
-		when(parent.getId()).thenReturn(testParentId);
-
-		when(commentEntityConverter.convert(comment)).thenReturn(commentEntity);
-		when(commentRepository.findOne(testParentId)).thenReturn(commentParentEntity);
-		when(rucsokRepository.findOne(testId)).thenReturn(existingRucsok);
-		when(userCheckerService.findUserByName(testUsername)).thenReturn(userEntity);
-		when(commentConverter.convert(commentEntity)).thenReturn(comment);
-		when(commentRepository.save(commentEntity)).thenReturn(commentEntity);
-
-		underTest.saveRucsok(comment);
-
-		// Then
-
-		verify(commentEntity).setRucsok(existingRucsok);
-		verify(commentEntity).setParent(commentParentEntity);
-		verify(comment).getRucsok();
-		verify(comment).getUser();
-		verify(comment, times(2)).getParent();
-		verify(user).getUsername();
-
-		verify(commentEntityConverter).convert(comment);
-		verify(rucsokRepository).findOne(testId);
-		verify(userCheckerService).findUserByName(testUsername);
-		verify(commentConverter).convert(commentEntity);
-		verify(commentRepository).save(commentEntity);
 	}
 
 }
