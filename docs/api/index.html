@@ -702,6 +702,23 @@ margin-bottom: 20px;
 
   var defs = {}
 
+  defs.Comment = {
+  "type" : "object",
+  "properties" : {
+    "id" : {
+      "type" : "string",
+      "description" : "Text of the comment."
+    },
+    "username" : {
+      "type" : "string",
+      "description" : "Username of the author."
+    },
+    "date" : {
+      "type" : "string",
+      "description" : "Date in yyyy.MM.dd HH:mm:ss format."
+    }
+  }
+};
   defs.ListedRucsok = {
   "type" : "object",
   "properties" : {
@@ -862,6 +879,10 @@ margin-bottom: 20px;
                     <li class="nav-fixed nav-header active" data-group="_"><a href="#api-_">API Summary</a></li>
 
 
+                                <li class="nav-header" data-group="Comment"><a href="#api-Comment">API Methods - Comment</a></li>
+                                    <li data-group="Comment" data-name="rucsokRucsokIdCommentPageGet" class="">
+                                        <a href="#api-Comment-rucsokRucsokIdCommentPageGet">rucsokRucsokIdCommentPageGet</a>
+                                    </li>
                                 <li class="nav-header" data-group="Login"><a href="#api-Login">API Methods - Login</a></li>
                                     <li data-group="Login" data-name="loginPost" class="">
                                         <a href="#api-Login-loginPost">loginPost</a>
@@ -873,6 +894,9 @@ margin-bottom: 20px;
                                 <li class="nav-header" data-group="Rucsok"><a href="#api-Rucsok">API Methods - Rucsok</a></li>
                                     <li data-group="Rucsok" data-name="checkRucsokPost" class="">
                                         <a href="#api-Rucsok-checkRucsokPost">checkRucsokPost</a>
+                                    </li>
+                                    <li data-group="Rucsok" data-name="commentPost" class="">
+                                        <a href="#api-Rucsok-commentPost">commentPost</a>
                                     </li>
                                     <li data-group="Rucsok" data-name="rucsokDelete" class="">
                                         <a href="#api-Rucsok-rucsokDelete">rucsokDelete</a>
@@ -891,6 +915,9 @@ margin-bottom: 20px;
                                     </li>
                                     <li data-group="Rucsok" data-name="rucsokPost" class="">
                                         <a href="#api-Rucsok-rucsokPost">rucsokPost</a>
+                                    </li>
+                                    <li data-group="Rucsok" data-name="rucsokRucsokIdCommentPageGet" class="">
+                                        <a href="#api-Rucsok-rucsokRucsokIdCommentPageGet">rucsokRucsokIdCommentPageGet</a>
                                     </li>
                                 <li class="nav-header" data-group="User"><a href="#api-User">API Methods - User</a></li>
                                     <li data-group="User" data-name="profileGet" class="">
@@ -931,6 +958,427 @@ margin-bottom: 20px;
             </div>
             <div id="sections">
 
+
+                            <section id="api-Comment">
+                                <h1>Comment</h1>
+
+
+
+
+
+
+
+                                    <div id="api-Comment-rucsokRucsokIdCommentPageGet">
+
+                                        <article id="api-Comment-rucsokRucsokIdCommentPageGet-0" data-group="User" data-name="rucsokRucsokIdCommentPageGet" data-version="0">
+                                            <div class="pull-left">
+                                                <h1>rucsokRucsokIdCommentPageGet</h1>
+                                            </div>
+                                            <div class="pull-right">
+
+                                            </div>
+                                            <div class="clearfix"></div>
+
+                                            <p></p>
+                                            <p>Pageable comment list</p>
+                                            <p></p>
+                                            <br />
+
+                                            <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/rucsok/{rucsokId}/comment/{page}</span></code></pre>
+
+                                            <p>
+                                                <h3>Usage and SDK Samples</h3>
+                                            </p>
+
+                                            <ul class="nav nav-tabs nav-tabs-examples">
+                                                <li class="active">
+                                                    <a href="#examples-Comment-rucsokRucsokIdCommentPageGet-0-curl">Curl</a>
+                                                </li>
+                                                <li class="">
+              <a href="#examples-Comment-rucsokRucsokIdCommentPageGet-0-java">Java</a>
+            </li>
+            <li class="">
+              <a href="#examples-Comment-rucsokRucsokIdCommentPageGet-0-android">Android</a>
+            </li>
+            <!--<li class="">
+              <a href="#examples-Comment-rucsokRucsokIdCommentPageGet-0-groovy">Groovy</a>
+            </li>-->
+                                                <li class="">
+                                                    <a href="#examples-Comment-rucsokRucsokIdCommentPageGet-0-objc">Obj-C</a>
+                                                </li>
+                                                <li class="">
+                                                    <a href="#examples-Comment-rucsokRucsokIdCommentPageGet-0-javascript">JavaScript</a>
+                                                </li>
+                                                <!--<li class="">
+              <a href="#examples-Comment-rucsokRucsokIdCommentPageGet-0-angular">Angular</a>
+            </li>-->
+                                                <li class="">
+                                                    <a href="#examples-Comment-rucsokRucsokIdCommentPageGet-0-csharp">C#</a>
+                                                </li>
+                                                <li class="">
+              <a href="#examples-Comment-rucsokRucsokIdCommentPageGet-0-php">PHP</a>
+            </li>
+                                            </ul>
+
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="examples-Comment-rucsokRucsokIdCommentPageGet-0-curl">
+                                                    <pre class="prettyprint"><code class="language-bsh">
+curl -X <span style="text-transform: uppercase;">get</span> -H "apiKey: [[apiKey]]" -H "apiSecret: [[apiSecret]]" "http://localhost//rucsok/{rucsokId}/comment/{page}"
+
+
+</code></pre>
+                                                </div>
+
+                                                <div class="tab-pane" id="examples-Comment-rucsokRucsokIdCommentPageGet-0-java">
+                                                  <pre class="prettyprint"><code class="language-java">
+import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import .CommentApi;
+
+import java.io.File;
+import java.util.*;
+
+public class CommentApiExample {
+
+    public static void main(String[] args) {
+        
+        CommentApi apiInstance = new CommentApi();
+        BigDecimal rucsokId = 3.4; // BigDecimal | Rucsok Id
+        BigDecimal page = 3.4; // BigDecimal | Pagination number
+        try {
+            Comment result = apiInstance.rucsokRucsokIdCommentPageGet(rucsokId, page);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling CommentApi#rucsokRucsokIdCommentPageGet");
+            e.printStackTrace();
+        }
+    }
+}
+
+                                                  </code></pre>
+          </div>
+
+
+                                                <div class="tab-pane" id="examples-Comment-rucsokRucsokIdCommentPageGet-0-android">
+                                                  <pre class="prettyprint"><code class="language-java">
+import .CommentApi;
+
+public class CommentApiExample {
+
+    public static void main(String[] args) {
+        CommentApi apiInstance = new CommentApi();
+        BigDecimal rucsokId = 3.4; // BigDecimal | Rucsok Id
+        BigDecimal page = 3.4; // BigDecimal | Pagination number
+        try {
+            Comment result = apiInstance.rucsokRucsokIdCommentPageGet(rucsokId, page);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling CommentApi#rucsokRucsokIdCommentPageGet");
+            e.printStackTrace();
+        }
+    }
+}
+
+                                                  </code></pre>
+          </div>
+
+          <!--
+          <div class="tab-pane" id="examples-Comment-rucsokRucsokIdCommentPageGet-0-groovy">
+            <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+          </div> -->
+
+
+                                                <div class="tab-pane" id="examples-Comment-rucsokRucsokIdCommentPageGet-0-objc">
+                                                    <pre class="prettyprint"><code class="language-cpp">
+
+BigDecimal *rucsokId = 3.4; // Rucsok Id
+BigDecimal *page = 3.4; // Pagination number
+
+CommentApi *apiInstance = [[CommentApi alloc] init];
+
+// Comments of the rucsok
+[apiInstance rucsokRucsokIdCommentPageGetWith:rucsokId
+    page:page
+              completionHandler: ^(Comment output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+
+                                                    </code></pre>
+                                                </div>
+                                                <div class="tab-pane" id="examples-Comment-rucsokRucsokIdCommentPageGet-0-javascript">
+                                                    <pre class="prettyprint"><code class="language-js">
+var  = require('');
+
+var api = new .CommentApi()
+
+var rucsokId = 3.4; // {BigDecimal} Rucsok Id
+
+var page = 3.4; // {BigDecimal} Pagination number
+
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.rucsokRucsokIdCommentPageGet(rucsokId, page, callback);
+
+                                                    </code></pre>
+                                                </div>
+
+                                                <!--<div class="tab-pane" id="examples-Comment-rucsokRucsokIdCommentPageGet-0-angular">
+            <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+          </div>-->
+
+                                                <div class="tab-pane" id="examples-Comment-rucsokRucsokIdCommentPageGet-0-csharp">
+                                                    <pre class="prettyprint"><code class="language-cs">
+using System;
+using System.Diagnostics;
+using .Api;
+using .Client;
+using ;
+
+namespace Example
+{
+    public class rucsokRucsokIdCommentPageGetExample
+    {
+        public void main()
+        {
+            
+            var apiInstance = new CommentApi();
+            var rucsokId = 3.4;  // BigDecimal | Rucsok Id
+            var page = 3.4;  // BigDecimal | Pagination number
+
+            try
+            {
+                // Comments of the rucsok
+                Comment result = apiInstance.rucsokRucsokIdCommentPageGet(rucsokId, page);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling CommentApi.rucsokRucsokIdCommentPageGet: " + e.Message );
+            }
+        }
+    }
+}
+
+                                                    </code></pre>
+                                                </div>
+
+
+                                                <div class="tab-pane" id="examples-Comment-rucsokRucsokIdCommentPageGet-0-php">
+                                                  <pre class="prettyprint"><code class="language-php">
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$api_instance = new io.swagger.client\Api\CommentApi();
+$rucsokId = 3.4; // BigDecimal | Rucsok Id
+$page = 3.4; // BigDecimal | Pagination number
+
+try {
+    $result = $api_instance->rucsokRucsokIdCommentPageGet($rucsokId, $page);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling CommentApi->rucsokRucsokIdCommentPageGet: ', $e->getMessage(), PHP_EOL;
+}
+
+                                                  </code></pre>
+          </div>
+
+                                            </div>
+
+
+
+
+
+                                            <h2>Parameters</h2>
+
+
+
+                                                <div class="methodsubtabletitle">Path parameters</div>
+                                                <table id="methodsubtable">
+                                                    <tr>
+                                                        <th width="150px">Name</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                    <!---->
+                                                        <tr><td style="width:150px;">rucsokId*</td>
+<td>
+
+
+<script>
+												$(document).ready(function() {
+													var schemaWrapper = {
+  "name" : "rucsokId",
+  "in" : "path",
+  "description" : "Rucsok Id",
+  "required" : true,
+  "type" : "number",
+  "x-codegen-hasMoreRequired" : true,
+  "x-codegen-hasMoreOptional" : true
+};
+													var schema = schemaWrapper;
+
+
+
+
+													var view = new JSONSchemaView(schema,0);
+													var result = $('#d2e199_rucsokRucsokIdCommentPageGet_rucsokId');
+													result.empty();
+													result.append(view.render());
+
+
+
+
+
+												});
+												</script>
+												<div id="d2e199_rucsokRucsokIdCommentPageGet_rucsokId"></div>
+</td>
+</tr>
+
+                                                        <tr><td style="width:150px;">page*</td>
+<td>
+
+
+<script>
+												$(document).ready(function() {
+													var schemaWrapper = {
+  "name" : "page",
+  "in" : "path",
+  "description" : "Pagination number",
+  "required" : true,
+  "type" : "number",
+  "x-codegen-hasMoreRequired" : false
+};
+													var schema = schemaWrapper;
+
+
+
+
+													var view = new JSONSchemaView(schema,0);
+													var result = $('#d2e199_rucsokRucsokIdCommentPageGet_page');
+													result.empty();
+													result.append(view.render());
+
+
+
+
+
+												});
+												</script>
+												<div id="d2e199_rucsokRucsokIdCommentPageGet_page"></div>
+</td>
+</tr>
+
+                                                </table>
+
+
+
+
+
+                                            <h2>Responses</h2>
+
+                                                <h3> Status: 200 - Pageable comments </h3>
+
+                                                <ul class="nav nav-tabs nav-tabs-examples" >
+
+                                                    <li class="active">
+                                                        <a href="#examples-Comment-rucsokRucsokIdCommentPageGet-schema">Schema</a>
+                                                    </li>
+
+
+                                                </ul>
+
+
+
+
+
+
+
+                                                <div class="tab-content" style='margin-bottom: 10px;'>
+
+
+
+                                                    <div class="tab-pane active" id="examples-Comment-rucsokRucsokIdCommentPageGet-schema">
+
+
+
+
+                                                        <div id='examples-Comment-rucsokRucsokIdCommentPageGet-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+
+                                                            <script>
+                                                                $(document).ready(function() {
+                                                                    var schemaWrapper = {
+  "description" : "Pageable comments",
+  "schema" : {
+    "$ref" : "#/definitions/Comment"
+  }
+};
+                                                                    var schema = schemaWrapper.schema;
+                                                                    schemaWrapper.definitions = defs;
+                                                                    //console.log(JSON.stringify(schema))
+                                                                    JsonRefs.resolveRefs(schemaWrapper, {
+                                                                        "depth": 3,
+                                                                        "resolveRemoteRefs": false,
+                                                                        "resolveFileRefs": false
+                                                                    }, function(err, resolved, metadata) {
+
+                                                                        //console.log(JSON.stringify(resolved));
+
+
+
+                                                                        var view = new JSONSchemaView(resolved.schema, 3);
+                                                                        $('#examples-Comment-rucsokRucsokIdCommentPageGet-schema-data').val(JSON.stringify(resolved.schema));
+                                                                        var result = $('#examples-Comment-rucsokRucsokIdCommentPageGet-schema-200');
+                                                                        result.empty();
+                                                                        result.append(view.render());
+                                                                    });
+
+
+
+
+                                                                });
+                                                            </script>
+                                                        </div>
+                                                        <input id='examples-Comment-rucsokRucsokIdCommentPageGet-schema-data' type='hidden' value=''></input>
+
+
+
+
+
+
+                                                    </div>
+
+
+
+
+                                                </div>
+
+
+
+
+
+
+
+
+
+                                        </article>
+
+                                    </div>
+
+                                    <hr>
+
+                            </section>
 
                             <section id="api-Login">
                                 <h1>Login</h1>
@@ -2106,6 +2554,450 @@ try {
                                                             </script>
                                                         </div>
                                                         <input id='examples-Rucsok-checkRucsokPost-schema-data' type='hidden' value=''></input>
+
+
+
+
+
+
+                                                    </div>
+
+
+
+
+                                                </div>
+
+
+
+
+
+
+
+
+
+                                        </article>
+
+                                    </div>
+
+                                    <hr>
+
+
+
+
+
+
+
+
+                                    <div id="api-Rucsok-commentPost">
+
+                                        <article id="api-Rucsok-commentPost-0" data-group="User" data-name="commentPost" data-version="0">
+                                            <div class="pull-left">
+                                                <h1>commentPost</h1>
+                                            </div>
+                                            <div class="pull-right">
+
+                                            </div>
+                                            <div class="clearfix"></div>
+
+                                            <p></p>
+                                            <p>Add new comment to specific rucsok or comment.</p>
+                                            <p></p>
+                                            <br />
+
+                                            <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/comment</span></code></pre>
+
+                                            <p>
+                                                <h3>Usage and SDK Samples</h3>
+                                            </p>
+
+                                            <ul class="nav nav-tabs nav-tabs-examples">
+                                                <li class="active">
+                                                    <a href="#examples-Rucsok-commentPost-0-curl">Curl</a>
+                                                </li>
+                                                <li class="">
+              <a href="#examples-Rucsok-commentPost-0-java">Java</a>
+            </li>
+            <li class="">
+              <a href="#examples-Rucsok-commentPost-0-android">Android</a>
+            </li>
+            <!--<li class="">
+              <a href="#examples-Rucsok-commentPost-0-groovy">Groovy</a>
+            </li>-->
+                                                <li class="">
+                                                    <a href="#examples-Rucsok-commentPost-0-objc">Obj-C</a>
+                                                </li>
+                                                <li class="">
+                                                    <a href="#examples-Rucsok-commentPost-0-javascript">JavaScript</a>
+                                                </li>
+                                                <!--<li class="">
+              <a href="#examples-Rucsok-commentPost-0-angular">Angular</a>
+            </li>-->
+                                                <li class="">
+                                                    <a href="#examples-Rucsok-commentPost-0-csharp">C#</a>
+                                                </li>
+                                                <li class="">
+              <a href="#examples-Rucsok-commentPost-0-php">PHP</a>
+            </li>
+                                            </ul>
+
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="examples-Rucsok-commentPost-0-curl">
+                                                    <pre class="prettyprint"><code class="language-bsh">
+curl -X <span style="text-transform: uppercase;">post</span> -H "apiKey: [[apiKey]]" -H "apiSecret: [[apiSecret]]" "http://localhost//comment?rucsokId=&parentId=&text="
+
+
+</code></pre>
+                                                </div>
+
+                                                <div class="tab-pane" id="examples-Rucsok-commentPost-0-java">
+                                                  <pre class="prettyprint"><code class="language-java">
+import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import .RucsokApi;
+
+import java.io.File;
+import java.util.*;
+
+public class RucsokApiExample {
+
+    public static void main(String[] args) {
+        
+        RucsokApi apiInstance = new RucsokApi();
+        BigDecimal rucsokId = 3.4; // BigDecimal | Rucsok ID.
+        BigDecimal parentId = 3.4; // BigDecimal | Optional, Parent comment ID.
+        String text = text_example; // String | Text of the comment.
+        try {
+            apiInstance.commentPost(rucsokId, parentId, text);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling RucsokApi#commentPost");
+            e.printStackTrace();
+        }
+    }
+}
+
+                                                  </code></pre>
+          </div>
+
+
+                                                <div class="tab-pane" id="examples-Rucsok-commentPost-0-android">
+                                                  <pre class="prettyprint"><code class="language-java">
+import .RucsokApi;
+
+public class RucsokApiExample {
+
+    public static void main(String[] args) {
+        RucsokApi apiInstance = new RucsokApi();
+        BigDecimal rucsokId = 3.4; // BigDecimal | Rucsok ID.
+        BigDecimal parentId = 3.4; // BigDecimal | Optional, Parent comment ID.
+        String text = text_example; // String | Text of the comment.
+        try {
+            apiInstance.commentPost(rucsokId, parentId, text);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling RucsokApi#commentPost");
+            e.printStackTrace();
+        }
+    }
+}
+
+                                                  </code></pre>
+          </div>
+
+          <!--
+          <div class="tab-pane" id="examples-Rucsok-commentPost-0-groovy">
+            <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+          </div> -->
+
+
+                                                <div class="tab-pane" id="examples-Rucsok-commentPost-0-objc">
+                                                    <pre class="prettyprint"><code class="language-cpp">
+
+BigDecimal *rucsokId = 3.4; // Rucsok ID. (optional)
+BigDecimal *parentId = 3.4; // Optional, Parent comment ID. (optional)
+String *text = text_example; // Text of the comment. (optional)
+
+RucsokApi *apiInstance = [[RucsokApi alloc] init];
+
+// Add comment.
+[apiInstance commentPostWith:rucsokId
+    parentId:parentId
+    text:text
+              completionHandler: ^(NSError* error) {
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+
+                                                    </code></pre>
+                                                </div>
+                                                <div class="tab-pane" id="examples-Rucsok-commentPost-0-javascript">
+                                                    <pre class="prettyprint"><code class="language-js">
+var  = require('');
+
+var api = new .RucsokApi()
+
+var opts = { 
+  'rucsokId': 3.4, // {BigDecimal} Rucsok ID.
+  'parentId': 3.4, // {BigDecimal} Optional, Parent comment ID.
+  'text': text_example // {String} Text of the comment.
+};
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully.');
+  }
+};
+api.commentPost(opts, callback);
+
+                                                    </code></pre>
+                                                </div>
+
+                                                <!--<div class="tab-pane" id="examples-Rucsok-commentPost-0-angular">
+            <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+          </div>-->
+
+                                                <div class="tab-pane" id="examples-Rucsok-commentPost-0-csharp">
+                                                    <pre class="prettyprint"><code class="language-cs">
+using System;
+using System.Diagnostics;
+using .Api;
+using .Client;
+using ;
+
+namespace Example
+{
+    public class commentPostExample
+    {
+        public void main()
+        {
+            
+            var apiInstance = new RucsokApi();
+            var rucsokId = 3.4;  // BigDecimal | Rucsok ID. (optional) 
+            var parentId = 3.4;  // BigDecimal | Optional, Parent comment ID. (optional) 
+            var text = text_example;  // String | Text of the comment. (optional) 
+
+            try
+            {
+                // Add comment.
+                apiInstance.commentPost(rucsokId, parentId, text);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling RucsokApi.commentPost: " + e.Message );
+            }
+        }
+    }
+}
+
+                                                    </code></pre>
+                                                </div>
+
+
+                                                <div class="tab-pane" id="examples-Rucsok-commentPost-0-php">
+                                                  <pre class="prettyprint"><code class="language-php">
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$api_instance = new io.swagger.client\Api\RucsokApi();
+$rucsokId = 3.4; // BigDecimal | Rucsok ID.
+$parentId = 3.4; // BigDecimal | Optional, Parent comment ID.
+$text = text_example; // String | Text of the comment.
+
+try {
+    $api_instance->commentPost($rucsokId, $parentId, $text);
+} catch (Exception $e) {
+    echo 'Exception when calling RucsokApi->commentPost: ', $e->getMessage(), PHP_EOL;
+}
+
+                                                  </code></pre>
+          </div>
+
+                                            </div>
+
+
+
+
+
+                                            <h2>Parameters</h2>
+
+
+
+
+
+
+
+                                                <div class="methodsubtabletitle">Query parameters</div>
+                                                <table id="methodsubtable">
+                                                    <tr>
+                                                        <th width="150px">Name</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                    <!---->
+                                                        <tr><td style="width:150px;">rucsokId</td>
+<td>
+
+
+<script>
+												$(document).ready(function() {
+													var schemaWrapper = {
+  "name" : "rucsokId",
+  "in" : "query",
+  "description" : "Rucsok ID.",
+  "required" : false,
+  "type" : "number"
+};
+													var schema = schemaWrapper;
+
+
+
+
+													var view = new JSONSchemaView(schema,0);
+													var result = $('#d2e199_commentPost_rucsokId');
+													result.empty();
+													result.append(view.render());
+
+
+
+
+
+												});
+												</script>
+												<div id="d2e199_commentPost_rucsokId"></div>
+</td>
+</tr>
+
+                                                        <tr><td style="width:150px;">parentId</td>
+<td>
+
+
+<script>
+												$(document).ready(function() {
+													var schemaWrapper = {
+  "name" : "parentId",
+  "in" : "query",
+  "description" : "Optional, Parent comment ID.",
+  "required" : false,
+  "type" : "number"
+};
+													var schema = schemaWrapper;
+
+
+
+
+													var view = new JSONSchemaView(schema,0);
+													var result = $('#d2e199_commentPost_parentId');
+													result.empty();
+													result.append(view.render());
+
+
+
+
+
+												});
+												</script>
+												<div id="d2e199_commentPost_parentId"></div>
+</td>
+</tr>
+
+                                                        <tr><td style="width:150px;">text</td>
+<td>
+
+
+<script>
+												$(document).ready(function() {
+													var schemaWrapper = {
+  "name" : "text",
+  "in" : "query",
+  "description" : "Text of the comment.",
+  "required" : false,
+  "type" : "string"
+};
+													var schema = schemaWrapper;
+
+
+
+
+													var view = new JSONSchemaView(schema,0);
+													var result = $('#d2e199_commentPost_text');
+													result.empty();
+													result.append(view.render());
+
+
+
+
+
+												});
+												</script>
+												<div id="d2e199_commentPost_text"></div>
+</td>
+</tr>
+
+                                                </table>
+
+                                            <h2>Responses</h2>
+
+                                                <h3> Status: 201 - The comment created. </h3>
+
+                                                <ul class="nav nav-tabs nav-tabs-examples" >
+
+                                                    <li class="active">
+                                                        <a href="#examples-Rucsok-commentPost-schema">Schema</a>
+                                                    </li>
+
+
+                                                </ul>
+
+
+
+
+
+
+
+                                                <div class="tab-content" style='margin-bottom: 10px;'>
+
+
+
+                                                    <div class="tab-pane active" id="examples-Rucsok-commentPost-schema">
+
+
+
+
+                                                        <div id='examples-Rucsok-commentPost-schema-201' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+
+                                                            <script>
+                                                                $(document).ready(function() {
+                                                                    var schemaWrapper = {
+  "description" : "The comment created."
+};
+                                                                    var schema = schemaWrapper.schema;
+                                                                    schemaWrapper.definitions = defs;
+                                                                    //console.log(JSON.stringify(schema))
+                                                                    JsonRefs.resolveRefs(schemaWrapper, {
+                                                                        "depth": 3,
+                                                                        "resolveRemoteRefs": false,
+                                                                        "resolveFileRefs": false
+                                                                    }, function(err, resolved, metadata) {
+
+                                                                        //console.log(JSON.stringify(resolved));
+
+
+
+                                                                        var view = new JSONSchemaView(resolved.schema, 3);
+                                                                        $('#examples-Rucsok-commentPost-schema-data').val(JSON.stringify(resolved.schema));
+                                                                        var result = $('#examples-Rucsok-commentPost-schema-201');
+                                                                        result.empty();
+                                                                        result.append(view.render());
+                                                                    });
+
+
+
+
+                                                                });
+                                                            </script>
+                                                        </div>
+                                                        <input id='examples-Rucsok-commentPost-schema-data' type='hidden' value=''></input>
 
 
 
@@ -4267,6 +5159,420 @@ try {
 
                                     <hr>
 
+
+
+
+
+
+
+
+                                    <div id="api-Rucsok-rucsokRucsokIdCommentPageGet">
+
+                                        <article id="api-Rucsok-rucsokRucsokIdCommentPageGet-0" data-group="User" data-name="rucsokRucsokIdCommentPageGet" data-version="0">
+                                            <div class="pull-left">
+                                                <h1>rucsokRucsokIdCommentPageGet</h1>
+                                            </div>
+                                            <div class="pull-right">
+
+                                            </div>
+                                            <div class="clearfix"></div>
+
+                                            <p></p>
+                                            <p>Pageable comment list</p>
+                                            <p></p>
+                                            <br />
+
+                                            <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/rucsok/{rucsokId}/comment/{page}</span></code></pre>
+
+                                            <p>
+                                                <h3>Usage and SDK Samples</h3>
+                                            </p>
+
+                                            <ul class="nav nav-tabs nav-tabs-examples">
+                                                <li class="active">
+                                                    <a href="#examples-Rucsok-rucsokRucsokIdCommentPageGet-0-curl">Curl</a>
+                                                </li>
+                                                <li class="">
+              <a href="#examples-Rucsok-rucsokRucsokIdCommentPageGet-0-java">Java</a>
+            </li>
+            <li class="">
+              <a href="#examples-Rucsok-rucsokRucsokIdCommentPageGet-0-android">Android</a>
+            </li>
+            <!--<li class="">
+              <a href="#examples-Rucsok-rucsokRucsokIdCommentPageGet-0-groovy">Groovy</a>
+            </li>-->
+                                                <li class="">
+                                                    <a href="#examples-Rucsok-rucsokRucsokIdCommentPageGet-0-objc">Obj-C</a>
+                                                </li>
+                                                <li class="">
+                                                    <a href="#examples-Rucsok-rucsokRucsokIdCommentPageGet-0-javascript">JavaScript</a>
+                                                </li>
+                                                <!--<li class="">
+              <a href="#examples-Rucsok-rucsokRucsokIdCommentPageGet-0-angular">Angular</a>
+            </li>-->
+                                                <li class="">
+                                                    <a href="#examples-Rucsok-rucsokRucsokIdCommentPageGet-0-csharp">C#</a>
+                                                </li>
+                                                <li class="">
+              <a href="#examples-Rucsok-rucsokRucsokIdCommentPageGet-0-php">PHP</a>
+            </li>
+                                            </ul>
+
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="examples-Rucsok-rucsokRucsokIdCommentPageGet-0-curl">
+                                                    <pre class="prettyprint"><code class="language-bsh">
+curl -X <span style="text-transform: uppercase;">get</span> -H "apiKey: [[apiKey]]" -H "apiSecret: [[apiSecret]]" "http://localhost//rucsok/{rucsokId}/comment/{page}"
+
+
+</code></pre>
+                                                </div>
+
+                                                <div class="tab-pane" id="examples-Rucsok-rucsokRucsokIdCommentPageGet-0-java">
+                                                  <pre class="prettyprint"><code class="language-java">
+import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import .RucsokApi;
+
+import java.io.File;
+import java.util.*;
+
+public class RucsokApiExample {
+
+    public static void main(String[] args) {
+        
+        RucsokApi apiInstance = new RucsokApi();
+        BigDecimal rucsokId = 3.4; // BigDecimal | Rucsok Id
+        BigDecimal page = 3.4; // BigDecimal | Pagination number
+        try {
+            Comment result = apiInstance.rucsokRucsokIdCommentPageGet(rucsokId, page);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling RucsokApi#rucsokRucsokIdCommentPageGet");
+            e.printStackTrace();
+        }
+    }
+}
+
+                                                  </code></pre>
+          </div>
+
+
+                                                <div class="tab-pane" id="examples-Rucsok-rucsokRucsokIdCommentPageGet-0-android">
+                                                  <pre class="prettyprint"><code class="language-java">
+import .RucsokApi;
+
+public class RucsokApiExample {
+
+    public static void main(String[] args) {
+        RucsokApi apiInstance = new RucsokApi();
+        BigDecimal rucsokId = 3.4; // BigDecimal | Rucsok Id
+        BigDecimal page = 3.4; // BigDecimal | Pagination number
+        try {
+            Comment result = apiInstance.rucsokRucsokIdCommentPageGet(rucsokId, page);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling RucsokApi#rucsokRucsokIdCommentPageGet");
+            e.printStackTrace();
+        }
+    }
+}
+
+                                                  </code></pre>
+          </div>
+
+          <!--
+          <div class="tab-pane" id="examples-Rucsok-rucsokRucsokIdCommentPageGet-0-groovy">
+            <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+          </div> -->
+
+
+                                                <div class="tab-pane" id="examples-Rucsok-rucsokRucsokIdCommentPageGet-0-objc">
+                                                    <pre class="prettyprint"><code class="language-cpp">
+
+BigDecimal *rucsokId = 3.4; // Rucsok Id
+BigDecimal *page = 3.4; // Pagination number
+
+RucsokApi *apiInstance = [[RucsokApi alloc] init];
+
+// Comments of the rucsok
+[apiInstance rucsokRucsokIdCommentPageGetWith:rucsokId
+    page:page
+              completionHandler: ^(Comment output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+
+                                                    </code></pre>
+                                                </div>
+                                                <div class="tab-pane" id="examples-Rucsok-rucsokRucsokIdCommentPageGet-0-javascript">
+                                                    <pre class="prettyprint"><code class="language-js">
+var  = require('');
+
+var api = new .RucsokApi()
+
+var rucsokId = 3.4; // {BigDecimal} Rucsok Id
+
+var page = 3.4; // {BigDecimal} Pagination number
+
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.rucsokRucsokIdCommentPageGet(rucsokId, page, callback);
+
+                                                    </code></pre>
+                                                </div>
+
+                                                <!--<div class="tab-pane" id="examples-Rucsok-rucsokRucsokIdCommentPageGet-0-angular">
+            <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+          </div>-->
+
+                                                <div class="tab-pane" id="examples-Rucsok-rucsokRucsokIdCommentPageGet-0-csharp">
+                                                    <pre class="prettyprint"><code class="language-cs">
+using System;
+using System.Diagnostics;
+using .Api;
+using .Client;
+using ;
+
+namespace Example
+{
+    public class rucsokRucsokIdCommentPageGetExample
+    {
+        public void main()
+        {
+            
+            var apiInstance = new RucsokApi();
+            var rucsokId = 3.4;  // BigDecimal | Rucsok Id
+            var page = 3.4;  // BigDecimal | Pagination number
+
+            try
+            {
+                // Comments of the rucsok
+                Comment result = apiInstance.rucsokRucsokIdCommentPageGet(rucsokId, page);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling RucsokApi.rucsokRucsokIdCommentPageGet: " + e.Message );
+            }
+        }
+    }
+}
+
+                                                    </code></pre>
+                                                </div>
+
+
+                                                <div class="tab-pane" id="examples-Rucsok-rucsokRucsokIdCommentPageGet-0-php">
+                                                  <pre class="prettyprint"><code class="language-php">
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$api_instance = new io.swagger.client\Api\RucsokApi();
+$rucsokId = 3.4; // BigDecimal | Rucsok Id
+$page = 3.4; // BigDecimal | Pagination number
+
+try {
+    $result = $api_instance->rucsokRucsokIdCommentPageGet($rucsokId, $page);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling RucsokApi->rucsokRucsokIdCommentPageGet: ', $e->getMessage(), PHP_EOL;
+}
+
+                                                  </code></pre>
+          </div>
+
+                                            </div>
+
+
+
+
+
+                                            <h2>Parameters</h2>
+
+
+
+                                                <div class="methodsubtabletitle">Path parameters</div>
+                                                <table id="methodsubtable">
+                                                    <tr>
+                                                        <th width="150px">Name</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                    <!---->
+                                                        <tr><td style="width:150px;">rucsokId*</td>
+<td>
+
+
+<script>
+												$(document).ready(function() {
+													var schemaWrapper = {
+  "name" : "rucsokId",
+  "in" : "path",
+  "description" : "Rucsok Id",
+  "required" : true,
+  "type" : "number"
+};
+													var schema = schemaWrapper;
+
+
+
+
+													var view = new JSONSchemaView(schema,0);
+													var result = $('#d2e199_rucsokRucsokIdCommentPageGet_rucsokId');
+													result.empty();
+													result.append(view.render());
+
+
+
+
+
+												});
+												</script>
+												<div id="d2e199_rucsokRucsokIdCommentPageGet_rucsokId"></div>
+</td>
+</tr>
+
+                                                        <tr><td style="width:150px;">page*</td>
+<td>
+
+
+<script>
+												$(document).ready(function() {
+													var schemaWrapper = {
+  "name" : "page",
+  "in" : "path",
+  "description" : "Pagination number",
+  "required" : true,
+  "type" : "number"
+};
+													var schema = schemaWrapper;
+
+
+
+
+													var view = new JSONSchemaView(schema,0);
+													var result = $('#d2e199_rucsokRucsokIdCommentPageGet_page');
+													result.empty();
+													result.append(view.render());
+
+
+
+
+
+												});
+												</script>
+												<div id="d2e199_rucsokRucsokIdCommentPageGet_page"></div>
+</td>
+</tr>
+
+                                                </table>
+
+
+
+
+
+                                            <h2>Responses</h2>
+
+                                                <h3> Status: 200 - Pageable comments </h3>
+
+                                                <ul class="nav nav-tabs nav-tabs-examples" >
+
+                                                    <li class="active">
+                                                        <a href="#examples-Rucsok-rucsokRucsokIdCommentPageGet-schema">Schema</a>
+                                                    </li>
+
+
+                                                </ul>
+
+
+
+
+
+
+
+                                                <div class="tab-content" style='margin-bottom: 10px;'>
+
+
+
+                                                    <div class="tab-pane active" id="examples-Rucsok-rucsokRucsokIdCommentPageGet-schema">
+
+
+
+
+                                                        <div id='examples-Rucsok-rucsokRucsokIdCommentPageGet-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+
+                                                            <script>
+                                                                $(document).ready(function() {
+                                                                    var schemaWrapper = {
+  "description" : "Pageable comments",
+  "schema" : {
+    "$ref" : "#/definitions/Comment"
+  }
+};
+                                                                    var schema = schemaWrapper.schema;
+                                                                    schemaWrapper.definitions = defs;
+                                                                    //console.log(JSON.stringify(schema))
+                                                                    JsonRefs.resolveRefs(schemaWrapper, {
+                                                                        "depth": 3,
+                                                                        "resolveRemoteRefs": false,
+                                                                        "resolveFileRefs": false
+                                                                    }, function(err, resolved, metadata) {
+
+                                                                        //console.log(JSON.stringify(resolved));
+
+
+
+                                                                        var view = new JSONSchemaView(resolved.schema, 3);
+                                                                        $('#examples-Rucsok-rucsokRucsokIdCommentPageGet-schema-data').val(JSON.stringify(resolved.schema));
+                                                                        var result = $('#examples-Rucsok-rucsokRucsokIdCommentPageGet-schema-200');
+                                                                        result.empty();
+                                                                        result.append(view.render());
+                                                                    });
+
+
+
+
+                                                                });
+                                                            </script>
+                                                        </div>
+                                                        <input id='examples-Rucsok-rucsokRucsokIdCommentPageGet-schema-data' type='hidden' value=''></input>
+
+
+
+
+
+
+                                                    </div>
+
+
+
+
+                                                </div>
+
+
+
+
+
+
+
+
+
+                                        </article>
+
+                                    </div>
+
+                                    <hr>
+
                             </section>
 
                             <section id="api-User">
@@ -5678,7 +6984,7 @@ try {
             </div>
             <div id="generator">
                 <div class="content">
-                    Generated 2016-09-08T09:25:42.548+02:00
+                    Generated 2016-09-12T17:04:06.808+02:00
                 </div>
             </div>
         </div>
