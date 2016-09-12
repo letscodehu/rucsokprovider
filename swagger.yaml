@@ -250,7 +250,7 @@ paths:
           description: Pageable comments
           schema:
             $ref: '#/definitions/Comment'
-  /comment:
+  /comment/:
     post:
       summary: Add comment.
       description: Add new comment to specific rucsok or comment.
@@ -269,6 +269,7 @@ paths:
           description: Text of the comment.
       tags:
         - Rucsok
+        - Comment
       responses:
         201:
           description: The comment created.
