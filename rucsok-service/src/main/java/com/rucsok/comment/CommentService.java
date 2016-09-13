@@ -20,7 +20,6 @@ import com.rucsok.user.transform.UserTransformer;
 @Service
 public class CommentService {
 
-
 	@Autowired
 	private CommentRepository commentRepository;
 
@@ -32,16 +31,20 @@ public class CommentService {
 
 	@Autowired
 	private CommentConverter commentConverter;
-	
+
 	@Autowired
 	private CommentEntityConverter commentEntityConverter;
 
 	@Autowired
 	private UserTransformer userTransformer;
 
+	public Page<Comment> findCommentsByParentId(int parentId, PageRequest pageRequest) {
+		return commentRepository.findByParentIdOrderByCreatedAt(parentId, pageRequest).map(commentConverter);
+	}
+
 	public Page<Comment> findCommentsByRucsokId(int rucsokId, PageRequest pageRequest) {
-		return commentRepository.findByRucsokIdAndParentNullOrderByCreatedAt(rucsokId,
-				pageRequest).map(commentConverter);
+		return commentRepository.findByRucsokIdAndParentNullOrderByCreatedAt(rucsokId, pageRequest)
+				.map(commentConverter);
 	}
 
 	public Comment saveRucsok(Comment comment) {
@@ -55,13 +58,13 @@ public class CommentService {
 	}
 
 	private void checkIfTextIsNull(Comment comment) {
-		if(null == comment.getText() ||0 == comment.getText().length()){
+		if (null == comment.getText() || 0 == comment.getText().length()) {
 			throw new IllegalRucsokArgumentException("Cannot create comment without text!");
 		}
 	}
 
 	private void checkIfUserExists(Comment comment) {
-		if(null == comment.getUser()){
+		if (null == comment.getUser()) {
 			throw new IllegalRucsokArgumentException("Cannot create comment without user!");
 		}
 	}
@@ -72,7 +75,7 @@ public class CommentService {
 		commentToSave.setUser(user);
 	}
 
-	private UserEntity findUserByName(Comment comment) {		
+	private UserEntity findUserByName(Comment comment) {
 		return userService.findUserByName(comment.getUser().getUsername());
 	}
 

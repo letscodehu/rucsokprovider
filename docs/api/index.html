@@ -880,6 +880,9 @@ margin-bottom: 20px;
 
 
                                 <li class="nav-header" data-group="Comment"><a href="#api-Comment">API Methods - Comment</a></li>
+                                    <li data-group="Comment" data-name="commentCommentIdRepliesPageGet" class="">
+                                        <a href="#api-Comment-commentCommentIdRepliesPageGet">commentCommentIdRepliesPageGet</a>
+                                    </li>
                                     <li data-group="Comment" data-name="commentPost" class="">
                                         <a href="#api-Comment-commentPost">commentPost</a>
                                     </li>
@@ -971,6 +974,420 @@ margin-bottom: 20px;
 
 
 
+                                    <div id="api-Comment-commentCommentIdRepliesPageGet">
+
+                                        <article id="api-Comment-commentCommentIdRepliesPageGet-0" data-group="User" data-name="commentCommentIdRepliesPageGet" data-version="0">
+                                            <div class="pull-left">
+                                                <h1>commentCommentIdRepliesPageGet</h1>
+                                            </div>
+                                            <div class="pull-right">
+
+                                            </div>
+                                            <div class="clearfix"></div>
+
+                                            <p></p>
+                                            <p>Pageable comment list</p>
+                                            <p></p>
+                                            <br />
+
+                                            <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/comment/{commentId}/replies/{page}</span></code></pre>
+
+                                            <p>
+                                                <h3>Usage and SDK Samples</h3>
+                                            </p>
+
+                                            <ul class="nav nav-tabs nav-tabs-examples">
+                                                <li class="active">
+                                                    <a href="#examples-Comment-commentCommentIdRepliesPageGet-0-curl">Curl</a>
+                                                </li>
+                                                <li class="">
+              <a href="#examples-Comment-commentCommentIdRepliesPageGet-0-java">Java</a>
+            </li>
+            <li class="">
+              <a href="#examples-Comment-commentCommentIdRepliesPageGet-0-android">Android</a>
+            </li>
+            <!--<li class="">
+              <a href="#examples-Comment-commentCommentIdRepliesPageGet-0-groovy">Groovy</a>
+            </li>-->
+                                                <li class="">
+                                                    <a href="#examples-Comment-commentCommentIdRepliesPageGet-0-objc">Obj-C</a>
+                                                </li>
+                                                <li class="">
+                                                    <a href="#examples-Comment-commentCommentIdRepliesPageGet-0-javascript">JavaScript</a>
+                                                </li>
+                                                <!--<li class="">
+              <a href="#examples-Comment-commentCommentIdRepliesPageGet-0-angular">Angular</a>
+            </li>-->
+                                                <li class="">
+                                                    <a href="#examples-Comment-commentCommentIdRepliesPageGet-0-csharp">C#</a>
+                                                </li>
+                                                <li class="">
+              <a href="#examples-Comment-commentCommentIdRepliesPageGet-0-php">PHP</a>
+            </li>
+                                            </ul>
+
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="examples-Comment-commentCommentIdRepliesPageGet-0-curl">
+                                                    <pre class="prettyprint"><code class="language-bsh">
+curl -X <span style="text-transform: uppercase;">get</span> -H "apiKey: [[apiKey]]" -H "apiSecret: [[apiSecret]]" "http://localhost//comment/{commentId}/replies/{page}"
+
+
+</code></pre>
+                                                </div>
+
+                                                <div class="tab-pane" id="examples-Comment-commentCommentIdRepliesPageGet-0-java">
+                                                  <pre class="prettyprint"><code class="language-java">
+import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import .CommentApi;
+
+import java.io.File;
+import java.util.*;
+
+public class CommentApiExample {
+
+    public static void main(String[] args) {
+        
+        CommentApi apiInstance = new CommentApi();
+        BigDecimal commentId = 3.4; // BigDecimal | Parent comment Id
+        BigDecimal page = 3.4; // BigDecimal | Pagination number
+        try {
+            Comment result = apiInstance.commentCommentIdRepliesPageGet(commentId, page);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling CommentApi#commentCommentIdRepliesPageGet");
+            e.printStackTrace();
+        }
+    }
+}
+
+                                                  </code></pre>
+          </div>
+
+
+                                                <div class="tab-pane" id="examples-Comment-commentCommentIdRepliesPageGet-0-android">
+                                                  <pre class="prettyprint"><code class="language-java">
+import .CommentApi;
+
+public class CommentApiExample {
+
+    public static void main(String[] args) {
+        CommentApi apiInstance = new CommentApi();
+        BigDecimal commentId = 3.4; // BigDecimal | Parent comment Id
+        BigDecimal page = 3.4; // BigDecimal | Pagination number
+        try {
+            Comment result = apiInstance.commentCommentIdRepliesPageGet(commentId, page);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling CommentApi#commentCommentIdRepliesPageGet");
+            e.printStackTrace();
+        }
+    }
+}
+
+                                                  </code></pre>
+          </div>
+
+          <!--
+          <div class="tab-pane" id="examples-Comment-commentCommentIdRepliesPageGet-0-groovy">
+            <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+          </div> -->
+
+
+                                                <div class="tab-pane" id="examples-Comment-commentCommentIdRepliesPageGet-0-objc">
+                                                    <pre class="prettyprint"><code class="language-cpp">
+
+BigDecimal *commentId = 3.4; // Parent comment Id
+BigDecimal *page = 3.4; // Pagination number
+
+CommentApi *apiInstance = [[CommentApi alloc] init];
+
+// Comments replies
+[apiInstance commentCommentIdRepliesPageGetWith:commentId
+    page:page
+              completionHandler: ^(Comment output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+
+                                                    </code></pre>
+                                                </div>
+                                                <div class="tab-pane" id="examples-Comment-commentCommentIdRepliesPageGet-0-javascript">
+                                                    <pre class="prettyprint"><code class="language-js">
+var  = require('');
+
+var api = new .CommentApi()
+
+var commentId = 3.4; // {BigDecimal} Parent comment Id
+
+var page = 3.4; // {BigDecimal} Pagination number
+
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.commentCommentIdRepliesPageGet(commentId, page, callback);
+
+                                                    </code></pre>
+                                                </div>
+
+                                                <!--<div class="tab-pane" id="examples-Comment-commentCommentIdRepliesPageGet-0-angular">
+            <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+          </div>-->
+
+                                                <div class="tab-pane" id="examples-Comment-commentCommentIdRepliesPageGet-0-csharp">
+                                                    <pre class="prettyprint"><code class="language-cs">
+using System;
+using System.Diagnostics;
+using .Api;
+using .Client;
+using ;
+
+namespace Example
+{
+    public class commentCommentIdRepliesPageGetExample
+    {
+        public void main()
+        {
+            
+            var apiInstance = new CommentApi();
+            var commentId = 3.4;  // BigDecimal | Parent comment Id
+            var page = 3.4;  // BigDecimal | Pagination number
+
+            try
+            {
+                // Comments replies
+                Comment result = apiInstance.commentCommentIdRepliesPageGet(commentId, page);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling CommentApi.commentCommentIdRepliesPageGet: " + e.Message );
+            }
+        }
+    }
+}
+
+                                                    </code></pre>
+                                                </div>
+
+
+                                                <div class="tab-pane" id="examples-Comment-commentCommentIdRepliesPageGet-0-php">
+                                                  <pre class="prettyprint"><code class="language-php">
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$api_instance = new io.swagger.client\Api\CommentApi();
+$commentId = 3.4; // BigDecimal | Parent comment Id
+$page = 3.4; // BigDecimal | Pagination number
+
+try {
+    $result = $api_instance->commentCommentIdRepliesPageGet($commentId, $page);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling CommentApi->commentCommentIdRepliesPageGet: ', $e->getMessage(), PHP_EOL;
+}
+
+                                                  </code></pre>
+          </div>
+
+                                            </div>
+
+
+
+
+
+                                            <h2>Parameters</h2>
+
+
+
+                                                <div class="methodsubtabletitle">Path parameters</div>
+                                                <table id="methodsubtable">
+                                                    <tr>
+                                                        <th width="150px">Name</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                    <!---->
+                                                        <tr><td style="width:150px;">commentId*</td>
+<td>
+
+
+<script>
+												$(document).ready(function() {
+													var schemaWrapper = {
+  "name" : "commentId",
+  "in" : "path",
+  "description" : "Parent comment Id",
+  "required" : true,
+  "type" : "number"
+};
+													var schema = schemaWrapper;
+
+
+
+
+													var view = new JSONSchemaView(schema,0);
+													var result = $('#d2e199_commentCommentIdRepliesPageGet_commentId');
+													result.empty();
+													result.append(view.render());
+
+
+
+
+
+												});
+												</script>
+												<div id="d2e199_commentCommentIdRepliesPageGet_commentId"></div>
+</td>
+</tr>
+
+                                                        <tr><td style="width:150px;">page*</td>
+<td>
+
+
+<script>
+												$(document).ready(function() {
+													var schemaWrapper = {
+  "name" : "page",
+  "in" : "path",
+  "description" : "Pagination number",
+  "required" : true,
+  "type" : "number"
+};
+													var schema = schemaWrapper;
+
+
+
+
+													var view = new JSONSchemaView(schema,0);
+													var result = $('#d2e199_commentCommentIdRepliesPageGet_page');
+													result.empty();
+													result.append(view.render());
+
+
+
+
+
+												});
+												</script>
+												<div id="d2e199_commentCommentIdRepliesPageGet_page"></div>
+</td>
+</tr>
+
+                                                </table>
+
+
+
+
+
+                                            <h2>Responses</h2>
+
+                                                <h3> Status: 200 - Pageable comments </h3>
+
+                                                <ul class="nav nav-tabs nav-tabs-examples" >
+
+                                                    <li class="active">
+                                                        <a href="#examples-Comment-commentCommentIdRepliesPageGet-schema">Schema</a>
+                                                    </li>
+
+
+                                                </ul>
+
+
+
+
+
+
+
+                                                <div class="tab-content" style='margin-bottom: 10px;'>
+
+
+
+                                                    <div class="tab-pane active" id="examples-Comment-commentCommentIdRepliesPageGet-schema">
+
+
+
+
+                                                        <div id='examples-Comment-commentCommentIdRepliesPageGet-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+
+                                                            <script>
+                                                                $(document).ready(function() {
+                                                                    var schemaWrapper = {
+  "description" : "Pageable comments",
+  "schema" : {
+    "$ref" : "#/definitions/Comment"
+  }
+};
+                                                                    var schema = schemaWrapper.schema;
+                                                                    schemaWrapper.definitions = defs;
+                                                                    //console.log(JSON.stringify(schema))
+                                                                    JsonRefs.resolveRefs(schemaWrapper, {
+                                                                        "depth": 3,
+                                                                        "resolveRemoteRefs": false,
+                                                                        "resolveFileRefs": false
+                                                                    }, function(err, resolved, metadata) {
+
+                                                                        //console.log(JSON.stringify(resolved));
+
+
+
+                                                                        var view = new JSONSchemaView(resolved.schema, 3);
+                                                                        $('#examples-Comment-commentCommentIdRepliesPageGet-schema-data').val(JSON.stringify(resolved.schema));
+                                                                        var result = $('#examples-Comment-commentCommentIdRepliesPageGet-schema-200');
+                                                                        result.empty();
+                                                                        result.append(view.render());
+                                                                    });
+
+
+
+
+                                                                });
+                                                            </script>
+                                                        </div>
+                                                        <input id='examples-Comment-commentCommentIdRepliesPageGet-schema-data' type='hidden' value=''></input>
+
+
+
+
+
+
+                                                    </div>
+
+
+
+
+                                                </div>
+
+
+
+
+
+
+
+
+
+                                        </article>
+
+                                    </div>
+
+                                    <hr>
+
+
+
+
+
+
+
+
                                     <div id="api-Comment-commentPost">
 
                                         <article id="api-Comment-commentPost-0" data-group="User" data-name="commentPost" data-version="0">
@@ -1051,7 +1468,8 @@ public class CommentApiExample {
         BigDecimal parentId = 3.4; // BigDecimal | Optional, Parent comment ID.
         String text = text_example; // String | Text of the comment.
         try {
-            apiInstance.commentPost(rucsokId, parentId, text);
+            Comment result = apiInstance.commentPost(rucsokId, parentId, text);
+            System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling CommentApi#commentPost");
             e.printStackTrace();
@@ -1075,7 +1493,8 @@ public class CommentApiExample {
         BigDecimal parentId = 3.4; // BigDecimal | Optional, Parent comment ID.
         String text = text_example; // String | Text of the comment.
         try {
-            apiInstance.commentPost(rucsokId, parentId, text);
+            Comment result = apiInstance.commentPost(rucsokId, parentId, text);
+            System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling CommentApi#commentPost");
             e.printStackTrace();
@@ -1105,7 +1524,10 @@ CommentApi *apiInstance = [[CommentApi alloc] init];
 [apiInstance commentPostWith:rucsokId
     parentId:parentId
     text:text
-              completionHandler: ^(NSError* error) {
+              completionHandler: ^(Comment output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
                             if (error) {
                                 NSLog(@"Error: %@", error);
                             }
@@ -1129,7 +1551,7 @@ var callback = function(error, data, response) {
   if (error) {
     console.error(error);
   } else {
-    console.log('API called successfully.');
+    console.log('API called successfully. Returned data: ' + data);
   }
 };
 api.commentPost(opts, callback);
@@ -1164,7 +1586,8 @@ namespace Example
             try
             {
                 // Add comment.
-                apiInstance.commentPost(rucsokId, parentId, text);
+                Comment result = apiInstance.commentPost(rucsokId, parentId, text);
+                Debug.WriteLine(result);
             }
             catch (Exception e)
             {
@@ -1189,7 +1612,8 @@ $parentId = 3.4; // BigDecimal | Optional, Parent comment ID.
 $text = text_example; // String | Text of the comment.
 
 try {
-    $api_instance->commentPost($rucsokId, $parentId, $text);
+    $result = $api_instance->commentPost($rucsokId, $parentId, $text);
+    print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling CommentApi->commentPost: ', $e->getMessage(), PHP_EOL;
 }
@@ -1357,7 +1781,10 @@ try {
                                                             <script>
                                                                 $(document).ready(function() {
                                                                     var schemaWrapper = {
-  "description" : "The comment created."
+  "description" : "The comment created.",
+  "schema" : {
+    "$ref" : "#/definitions/Comment"
+  }
 };
                                                                     var schema = schemaWrapper.schema;
                                                                     schemaWrapper.definitions = defs;
@@ -3120,7 +3547,8 @@ public class RucsokApiExample {
         BigDecimal parentId = 3.4; // BigDecimal | Optional, Parent comment ID.
         String text = text_example; // String | Text of the comment.
         try {
-            apiInstance.commentPost(rucsokId, parentId, text);
+            Comment result = apiInstance.commentPost(rucsokId, parentId, text);
+            System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling RucsokApi#commentPost");
             e.printStackTrace();
@@ -3144,7 +3572,8 @@ public class RucsokApiExample {
         BigDecimal parentId = 3.4; // BigDecimal | Optional, Parent comment ID.
         String text = text_example; // String | Text of the comment.
         try {
-            apiInstance.commentPost(rucsokId, parentId, text);
+            Comment result = apiInstance.commentPost(rucsokId, parentId, text);
+            System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling RucsokApi#commentPost");
             e.printStackTrace();
@@ -3174,7 +3603,10 @@ RucsokApi *apiInstance = [[RucsokApi alloc] init];
 [apiInstance commentPostWith:rucsokId
     parentId:parentId
     text:text
-              completionHandler: ^(NSError* error) {
+              completionHandler: ^(Comment output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
                             if (error) {
                                 NSLog(@"Error: %@", error);
                             }
@@ -3198,7 +3630,7 @@ var callback = function(error, data, response) {
   if (error) {
     console.error(error);
   } else {
-    console.log('API called successfully.');
+    console.log('API called successfully. Returned data: ' + data);
   }
 };
 api.commentPost(opts, callback);
@@ -3233,7 +3665,8 @@ namespace Example
             try
             {
                 // Add comment.
-                apiInstance.commentPost(rucsokId, parentId, text);
+                Comment result = apiInstance.commentPost(rucsokId, parentId, text);
+                Debug.WriteLine(result);
             }
             catch (Exception e)
             {
@@ -3258,7 +3691,8 @@ $parentId = 3.4; // BigDecimal | Optional, Parent comment ID.
 $text = text_example; // String | Text of the comment.
 
 try {
-    $api_instance->commentPost($rucsokId, $parentId, $text);
+    $result = $api_instance->commentPost($rucsokId, $parentId, $text);
+    print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling RucsokApi->commentPost: ', $e->getMessage(), PHP_EOL;
 }
@@ -3421,7 +3855,10 @@ try {
                                                             <script>
                                                                 $(document).ready(function() {
                                                                     var schemaWrapper = {
-  "description" : "The comment created."
+  "description" : "The comment created.",
+  "schema" : {
+    "$ref" : "#/definitions/Comment"
+  }
 };
                                                                     var schema = schemaWrapper.schema;
                                                                     schemaWrapper.definitions = defs;
@@ -7436,7 +7873,7 @@ try {
             </div>
             <div id="generator">
                 <div class="content">
-                    Generated 2016-09-12T17:08:57.225+02:00
+                    Generated 2016-09-13T11:42:02.013+02:00
                 </div>
             </div>
         </div>

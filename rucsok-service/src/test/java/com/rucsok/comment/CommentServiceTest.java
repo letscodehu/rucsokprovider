@@ -85,6 +85,9 @@ public class CommentServiceTest {
 
 	@Mock
 	private CommentEntity commentEntity;
+	
+	@Mock
+	private CommentEntity commentChildrenEntity;
 
 	@Mock
 	private CommentEntity commentParentEntity;
@@ -145,6 +148,78 @@ public class CommentServiceTest {
 		verify(comment).getUser();
 
 	}
+	
+	@Test
+	public void itShouldReturnCommentList_When_CalledWithExistingParentId() {
+		// Given
+		
+		int parentId = 33;
+		int offset = 1;
+		
+		@SuppressWarnings("unchecked")
+		Page<CommentEntity> commentRepliesPage = Mockito.mock(Page.class);
+		@SuppressWarnings("unchecked")
+		Page<Comment> commentPage = Mockito.mock(Page.class);
+		PageRequest pageRequest = Mockito.mock(PageRequest.class);
+		List<Comment> commentList = Arrays.asList(comment);
+		
+		// When
+		
+		when(commentRepository.findByParentIdOrderByCreatedAt(parentId, pageRequest))
+		.thenReturn(commentRepliesPage);
+		when(commentRepliesPage.map(commentConverter)).thenReturn(commentPage);
+		when(commentPage.getContent()).thenReturn(commentList);
+		when(comment.getUser()).thenReturn(user);
+		when(user.getUsername()).thenReturn(testUsername);
+		when(userCheckerService.findUserByName(testUsername)).thenReturn(userEntity);
+		when(userTransformer.transformEntityToUser(userEntity)).thenReturn(user);
+		when(commentEntity.getUser()).thenReturn(userEntity);
+		
+		Page<Comment> result = underTest.findCommentsByParentId(parentId, pageRequest);
+		
+		// Then
+		
+		Assert.assertEquals("List should match", commentPage, result);
+		Assert.assertEquals("List should match", offset, result.getContent().size());
+		Assert.assertEquals("Username should match", testUsername, result.getContent().get(0).getUser().getUsername());
+		
+		verify(commentRepository).findByParentIdOrderByCreatedAt(parentId, pageRequest);
+		verify(commentRepliesPage).map(commentConverter);
+		verify(comment).getUser();
+		
+	}
+	
+	@Test
+	public void itShouldReturnEmptyCommentList_When_CalledWithNonExistingParentId() {
+		// Given
+		
+		int parentId = 1000;
+		int offset = 0;
+		
+		@SuppressWarnings("unchecked")
+		Page<CommentEntity> commentRepliesPage = Mockito.mock(Page.class);
+		@SuppressWarnings("unchecked")
+		Page<Comment> commentPage = Mockito.mock(Page.class);
+		PageRequest pageRequest = Mockito.mock(PageRequest.class);
+		List<Comment> commentList =  Collections.emptyList();
+		
+		// When
+		
+		when(commentRepository.findByParentIdOrderByCreatedAt(parentId, pageRequest))
+		.thenReturn(commentRepliesPage);
+		when(commentRepliesPage.map(commentConverter)).thenReturn(commentPage);
+		when(commentPage.getContent()).thenReturn(commentList);
+		
+		Page<Comment> result = underTest.findCommentsByParentId(parentId, pageRequest);
+		
+		// Then
+		
+		Assert.assertEquals("List size should match", offset, result.getContent().size());
+		
+		verify(commentRepository).findByParentIdOrderByCreatedAt(parentId, pageRequest);
+		verify(commentRepliesPage).map(commentConverter);
+		
+	}
 
 	@Test
 	public void itShouldReturnEmptyCommentList_When_CalledWithNotExistingRucsokId() {
@@ -171,8 +246,8 @@ public class CommentServiceTest {
 
 		// Then
 
-		Assert.assertEquals("List should match", commentPage, result);
-		Assert.assertEquals("List should match", offset, result.getContent().size());
+		Assert.assertEquals("Page should match", commentPage, result);
+		Assert.assertEquals("List size should match", offset, result.getContent().size());
 
 		verify(commentRepository).findByRucsokIdAndParentNullOrderByCreatedAt(rucsokId, pageRequest);
 		verify(commenEntityPage).map(commentConverter);

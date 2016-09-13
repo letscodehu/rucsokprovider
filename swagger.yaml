@@ -273,6 +273,30 @@ paths:
       responses:
         201:
           description: The comment created.
+          schema:
+            $ref: '#/definitions/Comment'
+  /comment/{commentId}/replies/{page}:
+    get:
+      summary: Comments replies
+      description: Pageable comment list
+      parameters:
+        - name: commentId
+          in: path
+          required: true
+          type: number
+          description: Parent comment Id
+        - name: page
+          in: path
+          required: true
+          type: number
+          description: Pagination number
+      tags:
+        - Comment
+      responses:
+        200:
+          description: Pageable comments
+          schema:
+            $ref: '#/definitions/Comment'
 definitions:
   LoginResponse:
     type: object

@@ -106,6 +106,17 @@ values (7, 'rucs it up3 best sequel', 1, 1, null, '2016-08-20 12:12:15');
 insert into comment(id, text, user_id, rucsok_id, parent_id, createdAt)
 values (8, 'rucsok and robin', 2, 1, null, '2016-08-21 12:12:15');
 
+insert into comment(id, text, user_id, rucsok_id, parent_id, createdAt)
+values (9, 'rucsok forever', 2, 1, 8, '2016-08-23 12:12:15');
+
+insert into comment(id, text, user_id, rucsok_id, parent_id, createdAt)
+values (10, 'rucsok begins', 2, 1, 8, '2016-08-23 13:12:15');
+
+insert into comment(id, text, user_id, rucsok_id, parent_id, createdAt)
+values (11, 'rucsok knight', 2, 1, 8, '2016-08-23 13:14:15');
+
+insert into comment(id, text, user_id, rucsok_id, parent_id, createdAt)
+values (12, 'rucsok rises', 1, 1, 8, '2016-08-24 13:14:15');
 
 -- used in tests that use HSQL
 create table oauth_client_details (

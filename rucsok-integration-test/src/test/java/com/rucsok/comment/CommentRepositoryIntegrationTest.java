@@ -26,8 +26,8 @@ import com.rucsok.user.repository.domain.UserEntity;
 @SpringBootTest
 public class CommentRepositoryIntegrationTest {
 
-	private static final int TEST_DATA_SIZE = 8;
-	private static final int TEST_DATA_REPLIES = 2;
+	private static final int TEST_DATA_SIZE = 12;
+	private static final int TEST_DATA_REPLIES = 6;
 
 	@Autowired
 	private CommentRepository underTest;
@@ -58,15 +58,15 @@ public class CommentRepositoryIntegrationTest {
 	public void commentShouldHaveCorrectNumberOfChildrens() {
 
 		// Given
-
+		int replies = 4;
 		// When
 
-		CommentEntity result = underTest.findOne(Long.valueOf(1));
+		CommentEntity result = underTest.findOne(Long.valueOf(8));
 		long numberOfReplies = result.getReplies().size();
 
 		// Then
 
-		Assert.assertEquals(TEST_DATA_REPLIES, numberOfReplies);
+		Assert.assertEquals(replies, numberOfReplies);
 	}
 
 	@Test
@@ -103,15 +103,17 @@ public class CommentRepositoryIntegrationTest {
 		int limit = 2;
 
 		// When
-		
-		Page<CommentEntity> commentPage = underTest.findByRucsokIdAndParentNullOrderByCreatedAt(1, new PageRequest(0, limit));
+
+		Page<CommentEntity> commentPage = underTest.findByRucsokIdAndParentNullOrderByCreatedAt(1,
+				new PageRequest(0, limit));
 
 		// Then
-		Assert.assertEquals("Total amount of comments of the Rucsok", expectedAmountOfComments, commentPage.getTotalElements());
+		Assert.assertEquals("Total amount of comments of the Rucsok", expectedAmountOfComments,
+				commentPage.getTotalElements());
 		Assert.assertEquals("Number of comments on the page", limit, commentPage.getSize());
 		Assert.assertTrue("Nextpage", commentPage.hasNext());
 	}
-	
+
 	@Test
 	@Transactional
 	public void itShouldReturnEmptyPage_When_RucsokIdNotExists() {
@@ -121,11 +123,13 @@ public class CommentRepositoryIntegrationTest {
 		int limit = 2;
 
 		// When
-		
-		Page<CommentEntity> commentPage = underTest.findByRucsokIdAndParentNullOrderByCreatedAt(-1, new PageRequest(0, limit));
+
+		Page<CommentEntity> commentPage = underTest.findByRucsokIdAndParentNullOrderByCreatedAt(-1,
+				new PageRequest(0, limit));
 
 		// Then
-		Assert.assertEquals("Total amount of comments of the Rucsok", expectedAmountOfComments, commentPage.getTotalElements());
+		Assert.assertEquals("Total amount of comments of the Rucsok", expectedAmountOfComments,
+				commentPage.getTotalElements());
 		Assert.assertEquals("Number of comments on the page", limit, commentPage.getSize());
 		Assert.assertFalse("Nextpage", commentPage.hasNext());
 	}
@@ -138,13 +142,13 @@ public class CommentRepositoryIntegrationTest {
 		int limit = 2;
 
 		// When
-		
+
 		Page<CommentEntity> commentPage = underTest.findByParentIdOrderByCreatedAt(1, new PageRequest(0, limit));
 
 		// Then
-		Assert.assertEquals("Total amount of comments of the Rucsok", TEST_DATA_REPLIES, commentPage.getTotalElements());
+		Assert.assertEquals("Total amount of comments of the Rucsok", limit, commentPage.getTotalElements());
 		Assert.assertEquals("Number of comments on the page", limit, commentPage.getSize());
 		Assert.assertFalse("Nextpage", commentPage.hasNext());
 	}
-	
+
 }
