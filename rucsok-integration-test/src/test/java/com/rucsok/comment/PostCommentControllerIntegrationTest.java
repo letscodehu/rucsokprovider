@@ -5,6 +5,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import javax.transaction.Transactional;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -58,6 +59,10 @@ public class PostCommentControllerIntegrationTest {
 		mapper = new ObjectMapper();
 		accessToken = TokenHelper.getAccessToken("rucsok", "123", mockMvc);
 	}
+	
+	@After
+	public void tearDown(){
+	}
 
 	@Test
 	@Transactional
@@ -93,7 +98,7 @@ public class PostCommentControllerIntegrationTest {
 
 		CommentInsertRequest request = new CommentInsertRequest();
 		int rucsokId = 1;
-		int parentId = 8;
+		int parentId = 9;
 		request.setRucsokId(rucsokId);
 		request.setParentId(parentId);
 		request.setText(TEST_TEXT);
@@ -107,7 +112,7 @@ public class PostCommentControllerIntegrationTest {
 		// Then
 
 		Page<CommentEntity> commentPage = commentRepo.findByParentIdOrderByCreatedAt(parentId, new PageRequest(0, 10));
-		CommentEntity comment = commentPage.getContent().get(0);
+		CommentEntity comment = commentPage.getContent().get(commentPage.getContent().size() - 1);
 
 		Assert.assertNotNull("Entity should'nt be null", comment);
 		Assert.assertEquals("Text should match", TEST_TEXT, comment.getText());
