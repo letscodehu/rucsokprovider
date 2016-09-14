@@ -32,6 +32,17 @@
 	color: #ef473a;
 }
 
+.language-bar {
+	padding: 10px 0;
+}
+
+.pull-felt {
+	float: left;
+}
+
+.pull-right {
+	float: right;
+}
 /* HACK - veryyyyy baaad, on emulated android tabs bar disappears without this */
 .nav-bar-tabs-top.hide ~ .view-container .tabs-top .tabs {
 	top: 44px;

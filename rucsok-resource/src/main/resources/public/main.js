@@ -8,23 +8,27 @@ var require = {
     "ion-floating-menu" : '../lib/ion-floating-menu/dist/ion-floating-menu',
     'spring-token-interceptor' : '../lib/spring-security-csrf-token-interceptor/dist/spring-security-csrf-token-interceptor.min',
     'angular-http-auth' : '../lib/angular-http-auth-master/http-auth-interceptor',
+    'pascalprecht.translate' : '../lib/angular-translate/angular-translate.min',
   },
   shim : {
-	  'ionic-gallery' : {
-		  'deps' : ['ionic']
-	  },
-	  'ion-floating-menu' : {
-		  'deps' : ['ionic']
-	  },
-	  'spring-token-interceptor' : {
-		  'deps' : ['ionic']
-	  },
-	  "app" : {
-		  "deps" : ["ionic", "localforage"]
-	  },
-	  "angular-http-auth" : {
-		  "deps" : ["ionic"]
-	  }
+        "app" : {
+            "deps" : ["ionic", "localforage"]
+        },
+        'ionic-gallery' : {
+            'deps' : ['ionic']
+        },
+        'ion-floating-menu' : {
+            'deps' : ['ionic']
+        },
+        'spring-token-interceptor' : {
+            'deps' : ['ionic']
+        },
+        "angular-http-auth" : {
+            "deps" : ["ionic"]
+        },
+        "pascalprecht.translate" : {
+            "deps" : ["ionic"]
+        }
   },
   deps : ["app"]
 };

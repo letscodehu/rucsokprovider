@@ -4,13 +4,15 @@ define([
         "directives/imageRucsokDirective", 
         "directives/embedvideoRucsokDirective", 
         "directives/html5videoRucsokDirective", 
+        "directives/changeLanguageDirective"
   ], function(
-		  addRucsokDirective, 
-		  rucsokPreviewDirective,
-		  imageRucsokDirective,
-		  embedvideoRucsokDirective,
-		  html5videoRucsokDirective
-		  ) {
+        addRucsokDirective, 
+        rucsokPreviewDirective,
+        imageRucsokDirective,
+        embedvideoRucsokDirective,
+        html5videoRucsokDirective,
+        changeLanguageDirective
+	) {
 	
 	var directives = angular.module("directives", []);
 	
@@ -19,5 +21,5 @@ define([
 	directives.directive("imageRucsok", imageRucsokDirective);
 	directives.directive("embedvideoRucsok", embedvideoRucsokDirective);
 	directives.directive("html5videoRucsok", html5videoRucsokDirective);
-	
+	directives.directive("changeLanguage", changeLanguageDirective);
 });
