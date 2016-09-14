@@ -16,7 +16,7 @@ values (1, 'rucsok01', 'http://letscode.hu','http://localhost:8080/images/test/0
 insert into rucsok(id, title,  link, image_url, video_url, user_id, created_at) 
 values (2, 'rucsok02', 'http://letscode.hu','http://localhost:8080/images/test/02.jpg', null, 1, STR_TO_DATE('2016-08-08 11:11:11', '%Y-%m-%d %H:%i:%s'));
 insert into rucsok(id, title,  link, image_url, video_url, user_id, created_at) 
-values (3, 'rucsok03', 'http://letscode.hu','http://localhost:8080/images/test/03.jpg', null, 1, STR_TO_DATE('2016-08-08 11:11:11', '%Y-%m-%d %H:%i:%s'));
+values (3, 'rucsok03', 'http://img-comment-fun.9cache.com/media/f04afec4142528034309088476_700wa_0.gif ','http://img-comment-fun.9cache.com/media/f04afec4142528034309088476_700wa_0.gif ', null, 1, STR_TO_DATE('2016-08-08 11:11:11', '%Y-%m-%d %H:%i:%s'));
 insert into rucsok(id, title,  link, image_url, video_url, user_id, created_at) 
 values (4, 'rucsok04', 'http://letscode.hu','http://localhost:8080/images/test/04.jpg', 'https://www.youtube.com/watch?v=2fccc1AAqco', 1, STR_TO_DATE('2016-08-08 11:11:11', '%Y-%m-%d %H:%i:%s'));
 insert into rucsok(id, title,  link, image_url, video_url, user_id, created_at) 
