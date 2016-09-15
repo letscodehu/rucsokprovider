@@ -8,6 +8,8 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.testng.Assert;
 
+import com.rucsok.pun.model.PunInsertForm;
+
 @RunWith(MockitoJUnitRunner.class)
 public class PunGetInsertFormControllerTestTest {
 
@@ -30,5 +32,5 @@ public class PunGetInsertFormControllerTestTest {
 		// THEN		
 		Assert.assertEquals(viewName, expectedViewName );
 	}
-
+	
 }
