@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"></meta>
+<title>Rücsök admin</title>
+</head>
+<body>
+<form action="#" th:action="@{/puns/add}" th:object="${punInsertForm}" method="post">
+	<input type="text" th:field="*{text}"></input>
+</form>
+</body>
+</html>
