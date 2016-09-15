@@ -29,5 +29,10 @@
 	</classpathentry>
 	<classpathentry combineaccessrules="false" kind="src" path="/rucsok-repository"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/rucsok-service"/>
+	<classpathentry excluding="**" kind="src" output="target/test-classes" path="src/test/resources">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

@@ -131,8 +131,10 @@ public class PostRucsokControllerIntegrationTest {
 
 		// Then
 
-		mockMvc.perform(post(PostRucsokController.REQUEST_MAPPING).header("Authorization", "Bearer " + accessToken)
-				.contentType(MediaType.APPLICATION_JSON).content(mapper.writeValueAsString(request)))
+		mockMvc.perform(post(PostRucsokController.REQUEST_MAPPING)
+				.header("Authorization", "Bearer " + accessToken)
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(mapper.writeValueAsString(request)))
 				.andExpect(status().isBadRequest());
 
 	}

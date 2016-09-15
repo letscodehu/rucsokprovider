@@ -227,6 +227,76 @@ paths:
           description: List of hottest rucsoks
           schema:
             $ref: '#/definitions/ListedRucsok'
+  /rucsok/{rucsokId}/comment/{page}:
+    get:
+      summary: Comments of the rucsok
+      description: Pageable comment list
+      parameters:
+        - name: rucsokId
+          in: path
+          required: true
+          type: number
+          description: Rucsok Id
+        - name: page
+          in: path
+          required: true
+          type: number
+          description: Pagination number
+      tags:
+        - Rucsok
+        - Comment
+      responses:
+        200:
+          description: Pageable comments
+          schema:
+            $ref: '#/definitions/Comment'
+  /comment/:
+    post:
+      summary: Add comment.
+      description: Add new comment to specific rucsok or comment.
+      parameters:
+        - name: rucsokId
+          in: query
+          type: number
+          description: Rucsok ID.
+        - name: parentId
+          in: query
+          type: number
+          description: Optional, Parent comment ID.
+        - name: text
+          in: query
+          type: string
+          description: Text of the comment.
+      tags:
+        - Rucsok
+        - Comment
+      responses:
+        201:
+          description: The comment created.
+          schema:
+            $ref: '#/definitions/Comment'
+  /comment/{commentId}/replies/{page}:
+    get:
+      summary: Comments replies
+      description: Pageable comment list
+      parameters:
+        - name: commentId
+          in: path
+          required: true
+          type: number
+          description: Parent comment Id
+        - name: page
+          in: path
+          required: true
+          type: number
+          description: Pagination number
+      tags:
+        - Comment
+      responses:
+        200:
+          description: Pageable comments
+          schema:
+            $ref: '#/definitions/Comment'
 definitions:
   LoginResponse:
     type: object
@@ -267,6 +337,18 @@ definitions:
       message:
         type: string
         description: The cause of the error
+  Comment:
+    type: object
+    properties:
+      id:
+        type: string
+        description: Text of the comment.
+      username:
+        type: string
+        description: Username of the author.
+      date:
+        type: string
+        description: Date in yyyy.MM.dd HH:mm:ss format.
   Rucsok:
     type: object
     properties:
