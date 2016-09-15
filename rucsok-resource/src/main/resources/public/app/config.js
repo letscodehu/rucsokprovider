@@ -19,9 +19,6 @@ define([
         $httpProvider.interceptors.push(function(){
             return {
                 request: function(config) {
-                    if (/\.\D{2,4}$/.test(config.url) === false) {
-                        config.url = 'http://10.0.14.85:3333' + config.url;
-                    }
                     return config;
                 }
             };
