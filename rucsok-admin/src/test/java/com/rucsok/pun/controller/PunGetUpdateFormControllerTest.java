@@ -43,7 +43,7 @@ public class PunGetUpdateFormControllerTest {
 		// GIVEN
 		final long punId = 1L;
 		// WHEN
-		controller.getPun(1L);
+		controller.punUpdateForm(1L);
 		
 		// THEN
 		Mockito.verify(service).getPun(1L);
@@ -58,7 +58,7 @@ public class PunGetUpdateFormControllerTest {
 		Mockito.when(service.getPun(punId)).thenReturn(mockPun);
 		// WHEN
 
-		controller.getPun(punId);
+		controller.punUpdateForm(punId);
 		
 		// THEN
 		Mockito.verify(transformer).convert(mockPun);

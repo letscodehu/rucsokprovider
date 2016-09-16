@@ -5,8 +5,10 @@
 <title>Rücsök admin</title>
 </head>
 <body>
-<form action="#" th:action="@{/puns/add}" th:object="${punInsertForm}" method="post">
+<form action="#" th:action="@{/puns/edit}" th:object="${punUpdateForm}" method="post">
+	<input type="hidden" th:field="*{id}"></input>
 	<input type="text" th:field="*{text}"></input>
+	<input type="submit"></input>
 </form>
 </body>
 </html>

@@ -41,7 +41,7 @@ public class PunListControllerTest {
 		String viewName = controller.index();
 
 		// THEN
-		Assert.assertEquals(viewName, PunListController.PUN_INDEX);
+		Assert.assertEquals(viewName, PunListController.PUN_INDEX_VIEW);
 
 	}
 

@@ -11,13 +11,11 @@ public class PunUpdateTransformer implements Converter<Pun, PunUpdateForm> {
 
 	@Override
 	public PunUpdateForm convert(Pun source) {
-		// TODO Auto-generated method stub
-		return null;
+		return new PunUpdateForm(source.getId(), source.getText());
 	}
 
-	public Pun convertToPun(PunUpdateForm mockPun) {
-		// TODO Auto-generated method stub
-		return null;
+	public Pun convertToPun(PunUpdateForm punUpdateForm) {
+		return new Pun(punUpdateForm.getId(), punUpdateForm.getText());
 	}
 
 }

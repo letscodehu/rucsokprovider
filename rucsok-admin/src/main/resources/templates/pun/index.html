@@ -5,6 +5,15 @@
 <title>Rücsök admin</title>
 </head>
 <body>
-
+<table>
+      <tr>
+        <th>ID</th>
+        <th>Text</th>
+      </tr>
+      <tr th:each="pun : ${puns}">
+        <td th:text="${pun.id}">Onions</td>
+        <td th:text="${pun.text}">2.41</td>
+      </tr>
+    </table>
 </body>
 </html>

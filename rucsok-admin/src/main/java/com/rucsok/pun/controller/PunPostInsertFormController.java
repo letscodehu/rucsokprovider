@@ -17,6 +17,7 @@ import com.rucsok.pun.transform.PunInsertTransformer;
 @Controller
 public class PunPostInsertFormController {
 
+	public static final String REDIRECTVIEW = "redirect:/puns";
 	
 	private PunInsertTransformer transformer;
 	private PunInsertService service;
@@ -27,8 +28,6 @@ public class PunPostInsertFormController {
 		this.service = service;
 		this.transformer = transformer;
 	}
-
-	public static final String REDIRECTVIEW = "redirect:" + PunListController.PUN_INDEX;
 
 	@RequestMapping(path = PunGetInsertFormController.PUN_ADD_URL, method= RequestMethod.POST)
 	public String index(@ModelAttribute @Valid PunInsertForm form, BindingResult result, final RedirectAttributes redirectAttributes) {

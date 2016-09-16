@@ -1,5 +1,7 @@
 package com.rucsok.pun.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -14,8 +16,10 @@ import com.rucsok.pun.transform.PunUpdateTransformer;
 @Controller
 public class PunPostUpdateFormController {
 
-	private static final String URL_EDIT = "/pun/edit";
-		
+	private static final String URL_EDIT = "/puns/edit";
+
+	public static final String REDIRECT_VIEW = "redirect:/puns";
+	
 	private PunUpdateService service;
 	
 	private PunUpdateTransformer transformer;
@@ -28,12 +32,12 @@ public class PunPostUpdateFormController {
 	}
 	
 	@RequestMapping(path = URL_EDIT, method = RequestMethod.POST )
-	public String index(@ModelAttribute PunUpdateForm mockPun, BindingResult result) {
+	public String index(@ModelAttribute @Valid PunUpdateForm mockPun, BindingResult result) {
 		if (result.hasErrors()) {
-			return null;
+			return PunGetUpdateFormController.VIEW_NAME;
 		}
 		service.updatePun(transformer.convertToPun(mockPun));
-		return null;
+		return REDIRECT_VIEW;
 	}
 	
 }

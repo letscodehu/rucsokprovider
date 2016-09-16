@@ -10,7 +10,7 @@ import com.rucsok.pun.model.PunInsertForm;
 @Controller
 public class PunGetInsertFormController {
 
-	public static final String PUN_ADD_URL = "/pun/add";
+	public static final String PUN_ADD_URL = "/puns/add";
 	public static final String VIEW_NAME = "pun/add";
 
 	@ModelAttribute("punInsertForm")

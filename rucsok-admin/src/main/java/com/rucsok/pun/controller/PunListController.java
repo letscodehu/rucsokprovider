@@ -14,7 +14,8 @@ import com.rucsok.pun.service.domain.Pun;
 @Controller
 public class PunListController {
 
-	public static final String PUN_INDEX = "pun/index";
+	private static final String PUNS_INDEX_URL = "/puns";
+	public static final String PUN_INDEX_VIEW = "pun/index";
 	@Autowired
 	private PunListService punListService;
 	
@@ -23,9 +24,9 @@ public class PunListController {
 		return punListService.listAll(pageRequest);
 	}
 	
-	@RequestMapping(path = "/puns", method = RequestMethod.GET)
+	@RequestMapping(path = PUNS_INDEX_URL, method = RequestMethod.GET)
 	public String index() {
-		return PUN_INDEX;
+		return PUN_INDEX_VIEW;
 	}
 	
 }

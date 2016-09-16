@@ -1,9 +1,13 @@
 package com.rucsok.pun.service;
 
+import javax.transaction.Transactional;
+
+import org.parboiled.parserunners.ProfilingParseRunner.Report;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rucsok.pun.repository.PunRepository;
+import com.rucsok.pun.repository.domain.PunEntity;
 import com.rucsok.pun.service.domain.Pun;
 import com.rucsok.pun.service.transform.PunServiceTransformer;
 
@@ -26,10 +30,9 @@ public class PunUpdateService {
 		return transformer.convert(punRepository.findOne(id));
 	}
 
-
-	public void updatePun(Pun mockPun) {
-		// TODO Auto-generated method stub
-		
+	@Transactional
+	public void updatePun(Pun punToUpdate) {
+		punRepository.setTextById(punToUpdate.getText(), punToUpdate.getId());
 	}
 
 	

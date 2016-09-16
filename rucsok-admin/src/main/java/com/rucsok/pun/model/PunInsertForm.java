@@ -3,9 +3,11 @@ package com.rucsok.pun.model;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component
+@Scope("prototype")
 public class PunInsertForm {
 
 	@NotNull

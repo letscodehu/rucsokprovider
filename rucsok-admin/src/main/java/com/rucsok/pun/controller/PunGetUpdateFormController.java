@@ -15,7 +15,7 @@ import com.rucsok.pun.transform.PunUpdateTransformer;
 public class PunGetUpdateFormController {
 
 	public static final String VIEW_NAME = "/pun/edit";
-	private static final String PUN_UPDATE_URL = "/pun/edit";
+	private static final String PUN_UPDATE_URL = "/puns/edit/{id}";
 	
 	private PunUpdateService service;
 	
@@ -33,8 +33,8 @@ public class PunGetUpdateFormController {
 		return VIEW_NAME;
 	}
 
-	@ModelAttribute
-	public PunUpdateForm getPun(@PathVariable long id) {
+	@ModelAttribute("punUpdateForm")
+	public PunUpdateForm punUpdateForm(@PathVariable("id") long id) {
 		return transformer.convert(service.getPun(id));		
 	}
 

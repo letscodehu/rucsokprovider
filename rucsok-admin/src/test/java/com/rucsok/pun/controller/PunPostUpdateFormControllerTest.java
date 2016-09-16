@@ -1,6 +1,8 @@
 package com.rucsok.pun.controller;
 
 
+import static org.junit.Assert.*;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -63,9 +65,27 @@ public class PunPostUpdateFormControllerTest {
 		// THEN
 		Mockito.verify(service).updatePun(mockPun);
 	}
-
-	public void indexShouldRedirectOnSuccess() {
+	
+	@Test
+	public void indexShouldReturnSameViewOnValidationError() {
+		// GIVEN
+		Mockito.when(result.hasErrors()).thenReturn(true);
+		// WHEN
+		String logicalViewName = controller.index(null, result);
 		
+		// THEN
+		assertEquals(PunGetUpdateFormController.VIEW_NAME, logicalViewName);
+	}
+	
+	@Test
+	public void indexShouldRedirectOnSuccess() {
+		// GIVEN
+		final PunUpdateForm mockPunUpdate = new PunUpdateForm(1L, "text");
+		Mockito.when(result.hasErrors()).thenReturn(false);
+		// WHEN
+		String logicalViewName = controller.index(mockPunUpdate, result);
+		// THEN
+		assertEquals(PunPostUpdateFormController.REDIRECT_VIEW, logicalViewName);		
 	}
 	
 }
