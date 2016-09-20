@@ -12,7 +12,10 @@ public class UserRegistrationServiceTransformer {
 		if (registration == null) {
 			throw new IllegalArgumentException();
 		}		
-		return new UserEntity(registration.getUsername(), registration.getEmail(), registration.getPassword());
+		return new UserEntity(
+				registration.getUsername(), 
+				registration.getEmail(), 
+				registration.getPassword());
 	}
 
 	public UserRegistration transformFromEntity(UserEntity entity) {

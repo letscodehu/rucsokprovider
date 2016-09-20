@@ -50,7 +50,7 @@ public class ListedRucsokRepositoryIntegrationTest {
 
 	@Test
 	@Transactional
-	public void itShouldReturnTheFirstRucsokBetweenTheDates() {
+	public void getHotRucsokShouldReturnTheFirstRucsokBetweenTheDates() {
 		// Given
 
 		// When
@@ -72,7 +72,7 @@ public class ListedRucsokRepositoryIntegrationTest {
 
 	@Test
 	@Transactional
-	public void itShouldIncreaseTheVoteNumberWithOne_When_UpvotedOnce() {
+	public void getHotRucsokShouldIncreaseTheVoteNumberWithOne_When_UpvotedOnce() {
 		// Given
 
 		createAVote(VoteTypeEntity.UP, TEST_ID.intValue(), 1);
@@ -98,7 +98,7 @@ public class ListedRucsokRepositoryIntegrationTest {
 
 	@Test
 	@Transactional
-	public void itShouldReturnDifferentRucsok_When_DownvotedTwice() {
+	public void getHotRucsokShouldReturnDifferentRucsok_When_DownvotedTwice() {
 		// Given
 
 		createAVote(VoteTypeEntity.DOWN, 5, 1);

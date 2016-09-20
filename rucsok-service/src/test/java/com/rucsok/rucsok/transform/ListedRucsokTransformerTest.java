@@ -37,7 +37,7 @@ public class ListedRucsokTransformerTest {
 	private ListedRucsokTransformer underTest;
 	
 	@Test
-	public void itShouldReturnListRucsokFromObjectArray() {
+	public void transformToRucsokListShouldReturnListRucsokFromObjectArray() {
 		// Given
 		List<Object[]> object = createStubList();
 		// When
@@ -66,7 +66,7 @@ public class ListedRucsokTransformerTest {
 	
 
 	@Test
-	public void itShouldReturnRucsokFromObjectArray() {
+	public void transformToRucsokShouldReturnRucsokFromObjectArray() {
 		// Given
 		Object[] object = createStub();
 		// When

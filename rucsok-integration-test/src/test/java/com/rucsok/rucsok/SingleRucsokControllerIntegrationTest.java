@@ -56,7 +56,7 @@ public class SingleRucsokControllerIntegrationTest {
 	}
 
 	@Test
-	public void statusShouldOk() throws Exception {
+	public void getShouldReturnOk() throws Exception {
 		// Given		
 		// When
 		// Then
@@ -64,7 +64,7 @@ public class SingleRucsokControllerIntegrationTest {
 	}
 
 	@Test
-	public void contentShouldBeJson() throws Exception {
+	public void getShouldReturnJson() throws Exception {
 		// Given		
 		// When
 		// Then
@@ -74,7 +74,7 @@ public class SingleRucsokControllerIntegrationTest {
 
 	@Test
 	@Transactional
-	public void contentShouldContainCorrectProperties() throws Exception {
+	public void getShouldContainCorrectProperties() throws Exception {
 		// Given	
 		RucsokEntity rucsok = rucsokDao.findById(TEST_DATA_ID).get(1);
 		String rucsokType = rucsokTypeTransform.getRucsokTypeFromEntity(rucsok).toString().toLowerCase();

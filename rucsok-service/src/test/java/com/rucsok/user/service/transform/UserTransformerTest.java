@@ -24,7 +24,7 @@ public class UserTransformerTest {
 	private String email = "testemail";
 	
 	@Test
-	public void shouldTransformFromEntity() {
+	public void transformEntityToUserShouldTransformFromEntity() {
 		// GIVEN
 		final UserEntity entity = new UserEntity(name, email);
 		// WHEN
@@ -38,7 +38,7 @@ public class UserTransformerTest {
 	}
 	
 	@Test
-	public void shouldTransformToEntity() {
+	public void transformUserToEntityShouldTransformToEntity() {
 		// GIVEN
 		final User user = new User(email, name);
 		

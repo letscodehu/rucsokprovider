@@ -30,7 +30,7 @@ public class ListedRucsokServiceIntegrationTest {
 	private ListedRucsokService underTest;
 	
 	@Test
-	public void itShouldReturnRucsokWithCorrectId() {
+	public void getListedRucsokShouldReturnRucsokWithCorrectId() {
 		// Given
 		LocalDate date = LocalDate.of(2016, 8, 30);	
 		// When
@@ -43,7 +43,7 @@ public class ListedRucsokServiceIntegrationTest {
 	}
 	
 	@Test
-	public void itShouldThrowIllegalRucsokArgumentException_When_DateIsNull() {
+	public void getListedRucsokShouldThrowIllegalRucsokArgumentException_When_DateIsNull() {
 		// Given
 		expectedException.expect(IllegalRucsokArgumentException.class);
 		// When

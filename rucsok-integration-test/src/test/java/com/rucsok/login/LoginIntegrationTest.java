@@ -65,7 +65,7 @@ public class LoginIntegrationTest {
 	}
 	
 	@Test
-	public void loginShouldReturnCorrectAcceptToken() throws Exception {
+	public void postShouldReturnCorrectAcceptToken() throws Exception {
 		
 		// Given
 				
@@ -97,7 +97,7 @@ public class LoginIntegrationTest {
 	}
 
 	@Test
-	public void postLoginShouldReturnOkWhenUsingCorrectCredentials() throws Exception {
+	public void postLoginShouldReturnOk_When_UsingCorrectCredentials() throws Exception {
 		
 		// Given	
 		
@@ -120,7 +120,7 @@ public class LoginIntegrationTest {
 	}
 
 	@Test
-	public void postLoginShouldReturnBadRequestWhenUsingWrongCredentials() throws Exception {
+	public void postLoginShouldReturnBadRequest_When_UsingWrongCredentials() throws Exception {
 
 		// Given		
 		

@@ -56,7 +56,7 @@ public class VoteControllerIntegrationTest {
 	}
 	
 	@Test
-	public void voteWithoutLoginShouldReturnUnauthorizedWhenNotLoggedIn() throws Exception {
+	public void postShouldReturnUnauthorized_When_NotLoggedIn() throws Exception {
 
 		// Given in setup
 		
@@ -70,7 +70,7 @@ public class VoteControllerIntegrationTest {
 	}
 	
 	@Test
-	public void voteShouldReturnBadRequestWhenRequestIsNull() throws Exception {
+	public void postShouldReturnBadRequest_When_RequestIsNull() throws Exception {
 
 		// Given in setup
 		
@@ -87,7 +87,7 @@ public class VoteControllerIntegrationTest {
 	
 	@Test
 	@Transactional
-	public void voteShouldCreateNewEntity() throws Exception {
+	public void postShouldCreateNewEntity() throws Exception {
 
 		// Given
 		

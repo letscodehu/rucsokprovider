@@ -33,7 +33,7 @@ public class GeneralDocumentParserTest {
 	}
 
 	@Test
-	public void titleUrlShouldReturnCorrectTitleUrlWhenCallingDocumentTitle() {
+	public void getTitleShouldReturnCorrectTitleUrl_When_CallingDocumentTitle() {
 		// Given
 		when(document.title()).thenReturn(TEST_TITLE);
 		// When
@@ -44,7 +44,7 @@ public class GeneralDocumentParserTest {
 	}
 	
 	@Test
-	public void titleUrlShouldReturnCorrectTitleUrlWhenCallingElementsAttr() {
+	public void getTitleShouldReturnCorrectTitleUrl_When_CallingElementsAttr() {
 		// Given
 		Elements elements = Mockito.mock(Elements.class);
 		when((elements).attr(GeneralDocumentParser.CONTENT)).thenReturn(TEST_TITLE);
@@ -58,7 +58,7 @@ public class GeneralDocumentParserTest {
 	}
 	
 	@Test
-	public void imageUrlShouldReturnEmptyStringWhenCallingElementsIsNull() {
+	public void getImageUrlShouldReturnEmptyString_When_CallingElementsIsNull() {
 		// Given
 		when(document.select(GeneralDocumentParser.META_PROPERTY_OG_IMAGE)).thenReturn(null);
 		// When
@@ -69,7 +69,7 @@ public class GeneralDocumentParserTest {
 	}
 
 	@Test
-	public void imageUrlShouldReturnCorrectImageUrlWhenCallingElementsAttr() {
+	public void getImageUrlShouldReturnCorrectImageUrl_When_CallingElementsAttr() {
 		// Given
 		Elements elements = Mockito.mock(Elements.class);
 		when((elements).attr(GeneralDocumentParser.CONTENT)).thenReturn(TEST_URL);
@@ -83,7 +83,7 @@ public class GeneralDocumentParserTest {
 	}
 	
 	@Test
-	public void videoUrlShouldReturnCorrectUrlWhenCallingElementsAttr() {
+	public void getVideoUrlShouldReturnCorrectUrl_When_CallingElementsAttr() {
 		// Given
 		Elements elements = Mockito.mock(Elements.class);
 		when((elements).attr(GeneralDocumentParser.CONTENT)).thenReturn(TEST_URL);
@@ -97,7 +97,7 @@ public class GeneralDocumentParserTest {
 	}
 	
 	@Test
-	public void videoUrlShouldReturnCorrectUrlWhenHasVideoUrlButNotVideo() {
+	public void getVideoUrlShouldReturnCorrectUrl_When_HasVideoUrlButNotVideo() {
 		// Given
 		Elements elements = Mockito.mock(Elements.class);
 		when((elements).attr(GeneralDocumentParser.CONTENT)).thenReturn(TEST_URL);
@@ -113,7 +113,7 @@ public class GeneralDocumentParserTest {
 	}
 	
 	@Test
-	public void videoUrlShouldReturnCorrectEmptyStringWhenHasNoVideo() {
+	public void getVideoUrlShouldReturnCorrectEmptyString_When_HasNoVideo() {
 		// Given
 		Elements elements = Mockito.mock(Elements.class);
 		when((elements).attr(GeneralDocumentParser.CONTENT)).thenReturn(TEST_URL);

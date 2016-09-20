@@ -46,7 +46,7 @@ public class VoteServiceIntegrationTest {
 
 	@Test
 	@Transactional
-	public void createOrUpdateVoteShouldCreateANewVote() {
+	public void createVoteShouldCreateANewVote() {
 		
 		// Given
 		

@@ -1,4 +1,4 @@
-package com.rucsok.test.vote.service.transform;
+package com.rucsok.vote.service.transform;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -35,13 +35,12 @@ public class VoteTransformerTest {
 	}
 
 	@Test
-	public void itTransformsToVoteEntityFromVoteRucsokEntityAndUserEntity() {
+	public void transformToVoteEntityShouldTransformsToVoteEntityFromVoteRucsokEntityAndUserEntity() {
 		//GIVEN in setup
 		
 		final Vote vote = new Vote();
 		vote.setVoteType(VoteTypeEntity.UP);
 		
-			
 		//WHEN
 		final VoteEntity voteEntity = transformer.transformToVoteEntity(vote, rucsok, user);
 		

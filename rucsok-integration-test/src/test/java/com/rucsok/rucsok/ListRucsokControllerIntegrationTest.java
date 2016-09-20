@@ -57,7 +57,7 @@ public class ListRucsokControllerIntegrationTest {
 
 	@Test
 	@Transactional
-	public void statusShouldOk() throws Exception {
+	public void getShouldReturnStatusOk() throws Exception {
 		// Given
 		// When
 		// Then
@@ -66,7 +66,7 @@ public class ListRucsokControllerIntegrationTest {
 
 	@Test
 	@Transactional
-	public void contentShouldBeJson() throws Exception {
+	public void getShouldReturnJson() throws Exception {
 		// Given
 		// When
 		// Then
@@ -76,7 +76,7 @@ public class ListRucsokControllerIntegrationTest {
 
 	@Test
 	@Transactional
-	public void contentShouldContainsSameAmountOfDataThatCreatedInTheTestDatabase() throws Exception {
+	public void getShouldContainsSameAmountOfDataThatCreatedInTheTestDatabase() throws Exception {
 		// Given
 		int numberOfItems = (int) rucsokDao.count();
 		// When
@@ -87,7 +87,7 @@ public class ListRucsokControllerIntegrationTest {
 
 	@Test
 	@Transactional
-	public void contentShouldContainCorrectProperties() throws Exception {
+	public void getShouldContainCorrectProperties() throws Exception {
 		// Given
 		List<RucsokEntity> allRucsok = rucsokDao.getAllRucsok();
 		// When

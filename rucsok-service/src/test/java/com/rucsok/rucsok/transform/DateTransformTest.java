@@ -24,7 +24,7 @@ public class DateTransformTest {
 	private DateTransformer underTest;
 	
 	@Test
-	public void itShouldThrowNullpointerException_When_CalledWithNull() {
+	public void getCurrentDayShouldThrowNullpointerException_When_CalledWithNull() {
 		// Given
 		expectedException.expect(NullPointerException.class);
 		// When
@@ -33,7 +33,7 @@ public class DateTransformTest {
 	}
 	
 	@Test
-	public void itShouldReturnCurrentDayAsString() {
+	public void getCurrentDayShouldReturnCurrentDayAsString() {
 		// Given
 		LocalDate date = LocalDate.of(2016, 8, 30);
 		// When
@@ -43,7 +43,7 @@ public class DateTransformTest {
 	}
 	
 	@Test
-	public void itShouldReturnNextDayAsString() {
+	public void getNextDayShouldReturnNextDayAsString() {
 		// Given
 		LocalDate date = LocalDate.of(2016, 8, 30);
 		// When

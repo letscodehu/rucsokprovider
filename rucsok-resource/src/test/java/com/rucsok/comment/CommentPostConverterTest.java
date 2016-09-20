@@ -37,7 +37,7 @@ public class CommentPostConverterTest {
 	}
 
 	@Test
-	public void itShouldConvertRequestToComment() {
+	public void convertShouldConvertRequestToComment() {
 
 		// Given
 		// When
@@ -60,7 +60,7 @@ public class CommentPostConverterTest {
 	}
 
 	@Test
-	public void itShouldConvertRequestToComment_When_ParentIdIsZero() {
+	public void convertShouldConvertRequestToComment_When_ParentIdIsZero() {
 
 		// Given
 		// When
@@ -83,7 +83,7 @@ public class CommentPostConverterTest {
 	}
 
 	@Test
-	public void itShouldSetParentNull_When_ParentIdIsZero() {
+	public void convertShouldSetParentNull_When_ParentIdIsZero() {
 
 		// Given
 		// When

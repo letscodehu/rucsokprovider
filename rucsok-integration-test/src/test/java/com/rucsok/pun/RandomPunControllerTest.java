@@ -40,7 +40,7 @@ public class RandomPunControllerTest {
 	
 	@Test
 	@Repeat(10)
-	public void isShouldReturnStatusOk() throws Exception {
+	public void getShouldReturnStatusOk_When_CalledMultipleTimes() throws Exception {
 
 		// Given
 		

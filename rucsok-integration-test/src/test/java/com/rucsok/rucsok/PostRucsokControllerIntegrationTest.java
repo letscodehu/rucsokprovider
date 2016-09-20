@@ -171,7 +171,7 @@ public class PostRucsokControllerIntegrationTest {
 	}
 
 	@Test
-	public void postShouldNotSaveTheSameUrlAgain() throws Exception {
+	public void postShouldNotSave_When_CalledWithSameUrlAgain() throws Exception {
 
 		// Given
 

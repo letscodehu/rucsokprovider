@@ -47,9 +47,10 @@ public class CommentPostTransformerTest {
 	}
 
 	@Test
-	public void itShouldConvertRequestToComment() {
+	public void transformShouldConvertRequestToComment() {
 
 		// Given
+		
 		// When
 
 		Mockito.when(principal.getName()).thenReturn(TEST_USERNAME);
@@ -67,9 +68,10 @@ public class CommentPostTransformerTest {
 	}
 
 	@Test
-	public void itShouldConvertRequestToComment_When_PrincipalNull() {
+	public void transformShouldConvertRequestToComment_When_PrincipalNull() {
 
 		// Given
+		
 		// When
 
 		Mockito.when(commentPostConverter.convert(commentInsertRequest)).thenReturn(comment);

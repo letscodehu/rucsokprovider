@@ -56,7 +56,7 @@ public class UserProfileIntegrationTest {
 	}
 
 	@Test
-	public void statusShouldOk() throws Exception {
+	public void getShouldReturnOk() throws Exception {
 		// Given
 		// When
 		// Then
@@ -66,7 +66,7 @@ public class UserProfileIntegrationTest {
 	}
 
 	@Test
-	public void contentShouldBeJson() throws Exception {
+	public void getShouldReturnJson() throws Exception {
 		// Given
 
 		// When
@@ -79,7 +79,7 @@ public class UserProfileIntegrationTest {
 
 	@Test
 	@WithUserDetails("rucsok")
-	public void contentShouldContainsCorrectData() throws Exception {
+	public void getShouldContainsCorrectData() throws Exception {
 		// Given
 		// When
 		// Then
@@ -89,7 +89,7 @@ public class UserProfileIntegrationTest {
 	}
 
 	@Test
-	public void contentShouldReturnUnauthorizedWhenUserNotLoggedIn() throws Exception {
+	public void getShouldReturnUnauthorized_When_UserNotLoggedIn() throws Exception {
 		// Given
 		// When
 		// Then

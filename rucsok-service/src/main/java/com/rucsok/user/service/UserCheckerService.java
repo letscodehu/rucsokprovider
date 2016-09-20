@@ -20,7 +20,15 @@ public class UserCheckerService {
 		return userRepository.findByName(username);
 	}
 	
+	public UserEntity findUserByEmail(String email) {
+		return userRepository.findByEmail(email);
+	}
+	
 	public boolean isUserExists(String username) {
 		return null != findUserByName(username);
+	}
+	
+	public boolean isEmailExists(String email) {
+		return null != findUserByEmail(email);
 	}
 }

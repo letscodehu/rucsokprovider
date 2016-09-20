@@ -110,7 +110,7 @@ public class CommentServiceTest {
 	}
 
 	@Test
-	public void itShouldReturnCommentList_When_CalledWithExistingRucsokId() {
+	public void findCommentsByRucsokIdShouldReturnCommentList_When_CalledWithExistingRucsokId() {
 		// Given
 
 		int rucsokId = 33;
@@ -150,7 +150,7 @@ public class CommentServiceTest {
 	}
 	
 	@Test
-	public void itShouldReturnCommentList_When_CalledWithExistingParentId() {
+	public void findCommentsByParentIdShouldReturnCommentList_When_CalledWithExistingParentId() {
 		// Given
 		
 		int parentId = 33;
@@ -190,7 +190,7 @@ public class CommentServiceTest {
 	}
 	
 	@Test
-	public void itShouldReturnEmptyCommentList_When_CalledWithNonExistingParentId() {
+	public void findCommentsByParentIdShouldReturnEmptyCommentList_When_CalledWithNonExistingParentId() {
 		// Given
 		
 		int parentId = 1000;
@@ -222,7 +222,7 @@ public class CommentServiceTest {
 	}
 
 	@Test
-	public void itShouldReturnEmptyCommentList_When_CalledWithNotExistingRucsokId() {
+	public void findCommentsByRucsokIdShouldReturnEmptyCommentList_When_CalledWithNotExistingRucsokId() {
 		// Given
 
 		int rucsokId = 0;
@@ -255,7 +255,7 @@ public class CommentServiceTest {
 	}
 
 	@Test
-	public void itShouldSaveNewComment_When_ParentIsSetAndParentIdIsNull() {
+	public void saveRucsokShouldSaveNewComment_When_ParentIsSetAndParentIdIsNull() {
 		// Given
 
 		testId = 801L;
@@ -298,7 +298,7 @@ public class CommentServiceTest {
 	}
 
 	@Test
-	public void itShouldSaveNewComment_When_PostedToExistingRucsok() {
+	public void saveRucsokShouldSaveNewComment_When_PostedToExistingRucsok() {
 		// Given
 
 		testId = 1L;
@@ -338,7 +338,7 @@ public class CommentServiceTest {
 	}
 
 	@Test
-	public void itShouldSaveNewComment_When_ParentIsSetAndParentExists() {
+	public void saveRucsokShouldSaveNewComment_When_ParentIsSetAndParentExists() {
 		// Given
 
 		testId = 101L;
@@ -380,7 +380,7 @@ public class CommentServiceTest {
 	}
 
 	@Test
-	public void itShouldSaveNewComment_When_PostedToExistingComment() {
+	public void saveRucsokShouldSaveNewComment_When_PostedToExistingComment() {
 		// Given
 
 		testId = 3L;
@@ -424,7 +424,7 @@ public class CommentServiceTest {
 	}
 
 	@Test
-	public void itShouldThrowIllegalRucsokException_When_RucsokNotExists() {
+	public void saveRucsokShouldThrowIllegalRucsokException_When_RucsokNotExists() {
 		// Given
 
 		testId = 10L;
@@ -447,7 +447,7 @@ public class CommentServiceTest {
 	}
 
 	@Test
-	public void itShouldThrowIllegalRucsokException_When_ParentIsSetAndParentNotExists() {
+	public void saveRucsokShouldThrowIllegalRucsokException_When_ParentIsSetAndParentNotExists() {
 		// Given
 
 		testId = 111L;
@@ -478,7 +478,7 @@ public class CommentServiceTest {
 	}
 
 	@Test
-	public void itShouldThrowIllegalRucsokException_When_TextIsNull() {
+	public void saveRucsokShouldThrowIllegalRucsokException_When_TextIsNull() {
 		// Given
 
 		testId = 45L;
@@ -502,7 +502,7 @@ public class CommentServiceTest {
 	}
 
 	@Test
-	public void itShouldThrowIllegalRucsokException_When_TextIsEmpty() {
+	public void saveRucsokShouldThrowIllegalRucsokException_When_TextIsEmpty() {
 		// Given
 
 		testId = 5454L;
@@ -526,7 +526,7 @@ public class CommentServiceTest {
 	}
 	
 	@Test
-	public void itShouldThrowIllegalRucsokException_When_UserIsNullInComment() {
+	public void saveRucsokShouldThrowIllegalRucsokException_When_UserIsNullInComment() {
 		// Given
 
 		testId = 12L;
@@ -553,7 +553,7 @@ public class CommentServiceTest {
 	}
 
 	@Test
-	public void itShouldThrowIllegalRucsokException_When_UserNotExists() {
+	public void saveRucsokShouldThrowIllegalRucsokException_When_UserNotExists() {
 		// Given
 
 		testId = 11L;

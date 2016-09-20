@@ -38,7 +38,7 @@ public class CommentEntityConverterTest {
 	private CommentEntity commentEntity;
 
 	@Test
-	public void itShouldReturnEntityWithCorrectAttributes() {
+	public void convertShouldReturnEntityWithCorrectAttributes() {
 		// Given
 		Comment comment = Mockito.mock(Comment.class);
 		Date date = Mockito.mock(Date.class);

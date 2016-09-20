@@ -9,11 +9,11 @@ import com.rucsok.pun.repository.domain.PunEntity;
 @Component
 public class PunServiceTransformer {
 
-	public Pun transformEntityToDTO(PunEntity pun) {
+	public Pun transformToPun(PunEntity pun) {
 		return new Pun(pun.getId(), pun.getText());
 	}
 
-	public PunEntity transformDTOToEntity(Pun pun) {
+	public PunEntity transformToEntity(Pun pun) {
 		PunEntity punEntity = new PunEntity();
 		punEntity.setText(pun.getText());
 		return punEntity;

@@ -48,9 +48,9 @@ public class VoteDaoIntegrationTest {
 
 	@Test
 	@Transactional
-	public void saveShouldIncreaseTheCountValue() {
+	public void saveShouldIncreaseTheCountValue_When_NewVoteAdded() {
 		// Given
-		Long rucsokId = Long.valueOf(4);
+		Long rucsokId = Long.valueOf(9);
 		Long userId = Long.valueOf(1);
 		VoteTypeEntity vote = VoteTypeEntity.UP;
 		VoteEntity voteEntity = new VoteEntity();

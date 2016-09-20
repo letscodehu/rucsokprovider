@@ -16,8 +16,7 @@ import com.rucsok.user.domain.User;
 import com.rucsok.user.domain.UserRegistration;
 import com.rucsok.user.repository.dao.UserRepository;
 import com.rucsok.user.repository.domain.UserEntity;
-import com.rucsok.user.service.UserCheckerService;
-import com.rucsok.user.service.UserRegistrationService;
+import com.rucsok.user.service.exception.EmailAlreadyTakenException;
 import com.rucsok.user.service.exception.NoUserGivenException;
 import com.rucsok.user.service.exception.UserAlreadyPresentException;
 import com.rucsok.user.transform.UserRegistrationServiceTransformer;
@@ -47,7 +46,7 @@ public class UserRegistrationServiceTest {
 	private final String testPassword = "testpass";
 	
 	@Test
-	public void itThrowsExceptionWhenNullGiven() {
+	public void registerUserShouldThrowsException_When_NullGiven() {
 		// GIVEN
 		final UserRegistration userRegistration = null;
 		expectedEx.expect(NoUserGivenException.class);
@@ -61,7 +60,7 @@ public class UserRegistrationServiceTest {
 	}
 	
 	@Test
-	public void itThrowsExceptionWhenUserIsPresent() {
+	public void registerUserShouldThrowsException_When_UserIsPresent() {
 		// GIVEN
 		Mockito.when(mockCheckerService.isUserExists(testUsername)).thenReturn(true);
 		expectedEx.expect(UserAlreadyPresentException.class);
@@ -74,9 +73,26 @@ public class UserRegistrationServiceTest {
 		
 		// THEN in expected
 	}
+	
 
 	@Test
-	public void itReturnsTheUserAfterSuccessfulRegistration() {
+	public void registerUserShouldThrowsException_When_EmailIsPresent() {
+		// GIVEN
+		Mockito.when(mockCheckerService.isEmailExists(testEmail)).thenReturn(true);
+		expectedEx.expect(EmailAlreadyTakenException.class);
+		expectedEx.expectMessage("Email " + testEmail + " already taken!");
+		final UserRegistration user = new UserRegistration(testEmail, testUsername, testPassword);
+
+		// WHEN
+
+		registrationService.registerUser(user);
+		
+		// THEN in expected
+	}
+
+
+	@Test
+	public void registerUserShouldReturnsTheUser_When_SuccessfulRegistration() {
 		// GIVEN
 		final UserEntity mockEntity = new UserEntity(testUsername, testEmail);
 		final UserRegistration user = new UserRegistration(testEmail, testUsername, testPassword);

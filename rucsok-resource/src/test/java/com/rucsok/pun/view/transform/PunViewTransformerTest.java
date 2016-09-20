@@ -1,4 +1,4 @@
-package com.rucsok.test.pun.view.transform;
+package com.rucsok.pun.view.transform;
 
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,6 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = PunViewTransformer.class)
 public class PunViewTransformerTest {
@@ -22,13 +21,19 @@ public class PunViewTransformerTest {
 	private PunViewTransformer punViewTransformer;
 	
 	@Test
-	public void itTransformsFromPunToRandomPunResponse() {
-		final String testText = "testText";
-		final Long testId = 5L;
+	public void transfromToRandomPunResponseShouldTransformsFromPunToRandomPunResponse() {
 		
+		// Given
+		
+		final String testText = "testText";
+		final Long testId = 5L;		
 		final Pun pun = new Pun(testId, testText);
 		
+		// When
+		
 		RandomPunResponse response = punViewTransformer.transfromToRandomPunResponse(pun);
+
+		// Then
 		
 		assertEquals(testId, response.getId());
 		assertEquals(testText, response.getText());

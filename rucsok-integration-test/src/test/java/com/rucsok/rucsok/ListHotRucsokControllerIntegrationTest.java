@@ -47,7 +47,7 @@ public class ListHotRucsokControllerIntegrationTest {
 	}
 
 	@Test
-	public void statusShouldOk() throws Exception {
+	public void getShouldReturnStatusOk() throws Exception {
 		// Given
 		// When
 		// Then
@@ -59,7 +59,7 @@ public class ListHotRucsokControllerIntegrationTest {
 	}
 
 	@Test
-	public void contentShouldBeJson() throws Exception {
+	public void getShouldReturnJson() throws Exception {
 		// Given
 		// When
 		// Then
@@ -71,7 +71,7 @@ public class ListHotRucsokControllerIntegrationTest {
 	}
 
 	@Test
-	public void contentShouldContainsSameAmountOfDataThatCreatedInTheTestDatabase() throws Exception {
+	public void getShouldContainsSameAmountOfDataThatCreatedInTheTestDatabase() throws Exception {
 		// Given
 		int numberOfItems = ListedRucsokService.HOT_PAGINATION_SIZE;
 		// When

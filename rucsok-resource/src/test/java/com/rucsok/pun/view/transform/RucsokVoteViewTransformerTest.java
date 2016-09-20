@@ -1,6 +1,4 @@
-package com.rucsok.test.pun.view.transform;
-
-import static org.junit.Assert.*;
+package com.rucsok.pun.view.transform;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -23,7 +21,7 @@ public class RucsokVoteViewTransformerTest {
 	
 
 	@Test
-	public void itTransformsFromRucsokVoteRequestToVote() {
+	public void transformFromRucsokVoteRequestShouldTransformsFromRucsokVoteRequestToVote() {
 		
 		// GIVEN
 		

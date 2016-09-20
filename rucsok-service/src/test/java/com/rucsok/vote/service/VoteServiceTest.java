@@ -1,4 +1,4 @@
-package com.rucsok.test.vote.service;
+package com.rucsok.vote.service;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -47,7 +47,7 @@ public class VoteServiceTest {
 	}
 	
 	@Test
-	public void itReturns_NOT_VOTED_whenNoEntityIsPresent() {
+	public void getVoteStatusForSingleRucsokShouldReturnsNOTVOTED_When_NoEntityIsPresent() {
 		// GIVEN in setup
 		
 		Mockito.when(userRepository.findByName(username)).thenReturn(userEntity);		
@@ -61,7 +61,7 @@ public class VoteServiceTest {
 	}
 	
 	@Test
-	public void itReturns_UP_whenEntityIsPresentWithVoteTypeUP() {
+	public void getVoteStatusForSingleRucsokShouldReturnsUP_When_EntityIsPresentWithVoteTypeUP() {
 		// GIVEN in setup
 
 		queryResult.setVoteType(VoteTypeEntity.UP);
@@ -79,7 +79,7 @@ public class VoteServiceTest {
 	}
 	
 	@Test
-	public void itReturns_DOWN_whenEntityIsPresentWithVoteTypeDOWN() {
+	public void getVoteStatusForSingleRucsokShouldReturnDOWN_When_EntityIsPresentWithVoteTypeDOWN() {
 		// GIVEN in setup
 		
 		queryResult.setVoteType(VoteTypeEntity.DOWN);

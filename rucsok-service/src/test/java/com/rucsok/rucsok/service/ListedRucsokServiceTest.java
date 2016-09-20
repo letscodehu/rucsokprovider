@@ -63,7 +63,7 @@ public class ListedRucsokServiceTest {
 	private ListedRucsokService underTest;
 
 	@Test
-	public void itShouldReturnRucsokWithCorrectData() {
+	public void getListedRucsokShouldReturnRucsokWithCorrectData() {
 		// Given
 		LocalDate date = LocalDate.of(2016, 8, 30);
 		List<Object[]> fakeObjects = createFakeObjects();

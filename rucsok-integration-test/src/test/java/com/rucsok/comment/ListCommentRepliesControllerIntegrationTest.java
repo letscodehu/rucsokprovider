@@ -53,7 +53,7 @@ public class ListCommentRepliesControllerIntegrationTest {
 	}
 	
 	@Test
-	public void itShouldReturnStatusOk() throws Exception {
+	public void getShouldReturnStatusOk() throws Exception {
 		// Given
 		// When
 		// Then
@@ -70,7 +70,7 @@ public class ListCommentRepliesControllerIntegrationTest {
 	}
 
 	@Test
-	public void itShouldContainCorrectData_When_FirstPageLoaded() throws Exception {
+	public void getShouldContainCorrectData_When_FirstPageLoaded() throws Exception {
 		// Given
 		// When
 		// Then
@@ -89,7 +89,7 @@ public class ListCommentRepliesControllerIntegrationTest {
 	}
 	
 	@Test
-	public void itShouldContainCorrectData_When_LastPageLoaded() throws Exception {
+	public void getShouldContainCorrectData_When_LastPageLoaded() throws Exception {
 		// Given
 		// When
 		// Then

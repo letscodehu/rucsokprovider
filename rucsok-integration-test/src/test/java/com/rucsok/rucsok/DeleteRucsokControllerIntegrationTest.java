@@ -59,7 +59,7 @@ public class DeleteRucsokControllerIntegrationTest {
 	
 
 	@Test
-	public void deleteShouldReturnUnauthorizedWhenUserNotLoggedIn() throws Exception {
+	public void deleteShouldReturnUnauthorized_When_UserNotLoggedIn() throws Exception {
 
 		// Given
 		
@@ -76,7 +76,7 @@ public class DeleteRucsokControllerIntegrationTest {
 	
 	@Test
 	@WithUserDetails("rucsok")
-	public void deleteShouldReturnBadGatewayWhenEmptyStringId() throws Exception {
+	public void deleteShouldReturnBadGateway_When_EmptyStringId() throws Exception {
 
 		// Given
 		
@@ -96,7 +96,7 @@ public class DeleteRucsokControllerIntegrationTest {
 	
 	@Test
 	@WithUserDetails("rucsok")
-	public void deleteShouldReturnBadGatewayWhenNullIdProvided() throws Exception {
+	public void deleteShouldReturnBadGateway_When_NullIdProvided() throws Exception {
 
 		// Given
 		

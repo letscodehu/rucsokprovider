@@ -28,7 +28,7 @@ public class PunServiceTest {
 	private PunServiceRandom random;
 	
 	@Test
-	public void itServesRandomPun() {
+	public void serveRandomShouldReturnRandomPun() {
 		// GIVEN
 		final Long max = 500L;
 		final Long id = 5L;
@@ -48,7 +48,7 @@ public class PunServiceTest {
 	}
 	
 	@Test
-	public void itSavesPuns() {
+	public void saveShouldCreateANewPun() {
 		
 		// GIVEN
 		

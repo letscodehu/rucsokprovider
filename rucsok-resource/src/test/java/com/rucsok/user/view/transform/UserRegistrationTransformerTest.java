@@ -1,4 +1,4 @@
-package com.rucsok.test.user.view.transform;
+package com.rucsok.user.view.transform;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -12,10 +12,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.testng.Assert;
 
-import com.rucsok.test.config.UserRegistrationConfig;
 import com.rucsok.user.domain.User;
 import com.rucsok.user.domain.UserRegistration;
 import com.rucsok.user.service.exception.NoUserGivenException;
+import com.rucsok.user.view.config.UserRegistrationConfig;
 import com.rucsok.user.view.model.UserProfileView;
 import com.rucsok.user.view.model.UserRegistrationError;
 import com.rucsok.user.view.model.UserRegistrationRequest;
@@ -43,13 +43,18 @@ public class UserRegistrationTransformerTest {
 
 	
 	@Test
-	public void itShouldTransformFromUserRegistrationRequestToUserRegistration() {
+	public void transformToRegistrationShouldTransformFromUserRegistrationRequestToUserRegistration() {
+		
 		// GIVEN
+		
 		UserRegistrationRequest request = new UserRegistrationRequest(
 				testEmail, testUsername, testPassword, testPasswordConfirmation);
 		Mockito.when(mockEncoder.encode(testPassword)).thenReturn(encodedPassword);
+		
 		// WHEN
+		
 		UserRegistration user = transformer.transformToRegistration(request);
+		
 		// THEN
 		
 		Assert.assertEquals(user.getEmail(), testEmail);
@@ -58,25 +63,33 @@ public class UserRegistrationTransformerTest {
 	}
 	
 	@Test
-	public void shouldThrowExceptionOnNullRequest() {
+	public void transformToRegistrationShouldThrowException_On_NullRequest() {
+		
 		// GIVEN
+		
 		expectedEx.expect(IllegalArgumentException.class);
 		UserRegistrationRequest request = null;
+		
 		// WHEN
+		
 		transformer.transformToRegistration(request);
 		
 		// THEN
 	}
 	
 	@Test
-	public void shouldReturnResponseWithUserInformation() {
+	public void transformToResponseShouldReturnResponseWithUserInformation() {
+		
 		// GIVEN
+		
 		final User user = new User(testEmail, testUsername);
+		
 		// WHEN
 
 		UserRegistrationResponse response = transformer.transformToResponse(user); 
 		
 		// THEN
+		
 		UserProfileView userView = response.getUser();
 		Assert.assertEquals(userView.getEmail(), testEmail);
 		Assert.assertEquals(userView.getUsername(), testUsername);
@@ -84,23 +97,34 @@ public class UserRegistrationTransformerTest {
 	
 	
 	@Test
-	public void shouldThrowExceptionOnNullUserInformation() {
+	public void transformToResponseShouldThrowException_On_NullUserInformation() {
+		
 		// GIVEN
+		
 		expectedEx.expect(IllegalArgumentException.class);
 		User user = null;
+		
 		// WHEN
+		
 		transformer.transformToResponse(user);
+		
 		// THEN
 	}
 	
 	@Test
-	public void shouldConvertToResponseWhenExceptionGiven() {
+	public void transformToResponseShouldConvertToResponse_When_ExceptionGiven() {
+		
 		// GIVEN
+		
 		NoUserGivenException exception = new NoUserGivenException();
+		
 		// WHEN
+		
 		UserRegistrationResponse response = transformer.transformToResponse(exception);
 		UserRegistrationError error = response.getError();
+		
 		// THEN
+		
 		Assert.assertEquals(error.getMessage(), exception.getMessage());
 	}
 

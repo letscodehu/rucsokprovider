@@ -55,7 +55,7 @@ public class CommentRepositoryIntegrationTest {
 
 	@Test
 	@Transactional
-	public void commentShouldHaveCorrectNumberOfChildrens() {
+	public void findOneShouldHaveCorrectNumberOfChildrens() {
 
 		// Given
 		int replies = 4;
@@ -71,7 +71,7 @@ public class CommentRepositoryIntegrationTest {
 
 	@Test
 	@Transactional
-	public void saveCommentShouldPersist() {
+	public void saveShouldPersistNewComment() {
 
 		// Given
 
@@ -96,7 +96,7 @@ public class CommentRepositoryIntegrationTest {
 
 	@Test
 	@Transactional
-	public void itShouldReturnPage_When_RucsokIdExists() {
+	public void findByRucsokIdAndParentNullOrderByCreatedAtShouldReturnPage_When_RucsokIdExists() {
 
 		// Given
 		int expectedAmountOfComments = TEST_DATA_SIZE - TEST_DATA_REPLIES;
@@ -116,7 +116,7 @@ public class CommentRepositoryIntegrationTest {
 
 	@Test
 	@Transactional
-	public void itShouldReturnEmptyPage_When_RucsokIdNotExists() {
+	public void findByRucsokIdAndParentNullOrderByCreatedAtShouldReturnEmptyPage_When_RucsokIdNotExists() {
 
 		// Given
 		int expectedAmountOfComments = 0;
@@ -136,7 +136,7 @@ public class CommentRepositoryIntegrationTest {
 
 	@Test
 	@Transactional
-	public void itShouldReturnPage_When_FindByParentId() {
+	public void findByParentIdOrderByCreatedAtShouldReturnPage_When_FindByParentId() {
 
 		// Given
 		int limit = 2;

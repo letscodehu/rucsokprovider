@@ -52,6 +52,8 @@ public class PostCommentControllerIntegrationTest {
 
 	private ObjectMapper mapper;
 
+	private CommentEntity postedComment;
+
 	@Before
 	public void setUp() throws Exception {
 		mockMvc = MockMvcBuilders.webAppContextSetup(context).apply(SecurityMockMvcConfigurers.springSecurity())
@@ -59,14 +61,17 @@ public class PostCommentControllerIntegrationTest {
 		mapper = new ObjectMapper();
 		accessToken = TokenHelper.getAccessToken("rucsok", "123", mockMvc);
 	}
-	
+
 	@After
-	public void tearDown(){
+	public void tearDown() {
+		if (null != postedComment) {
+			commentRepo.delete(postedComment);
+		}
 	}
 
 	@Test
 	@Transactional
-	public void itShouldSaveComment_When_UserLoggedIn() throws Exception {
+	public void postShouldSaveComment_When_UserLoggedIn() throws Exception {
 
 		// Given
 
@@ -84,15 +89,15 @@ public class PostCommentControllerIntegrationTest {
 
 		Page<CommentEntity> commentPage = commentRepo.findByRucsokIdAndParentNullOrderByCreatedAt(1,
 				new PageRequest(0, 10));
-		CommentEntity comment = commentPage.getContent().get(commentPage.getContent().size() - 1);
+		postedComment = commentPage.getContent().get(commentPage.getContent().size() - 1);
 
-		Assert.assertNotNull("Entity should'nt be null", comment);
-		Assert.assertEquals("Text should match", TEST_TEXT, comment.getText());
-		Assert.assertEquals("Id should match", 1, comment.getRucsok().getId());
+		Assert.assertNotNull("Entity should'nt be null", postedComment);
+		Assert.assertEquals("Text should match", TEST_TEXT, postedComment.getText());
+		Assert.assertEquals("Id should match", 1, postedComment.getRucsok().getId());
 	}
-	
+
 	@Test
-	public void itShouldSaveCommentToParent_When_UserLoggedIn() throws Exception {
+	public void postShouldSaveCommentToParent_When_UserLoggedIn() throws Exception {
 
 		// Given
 
@@ -112,15 +117,15 @@ public class PostCommentControllerIntegrationTest {
 		// Then
 
 		Page<CommentEntity> commentPage = commentRepo.findByParentIdOrderByCreatedAt(parentId, new PageRequest(0, 10));
-		CommentEntity comment = commentPage.getContent().get(commentPage.getContent().size() - 1);
+		postedComment= commentPage.getContent().get(commentPage.getContent().size() - 1);
 
-		Assert.assertNotNull("Entity should'nt be null", comment);
-		Assert.assertEquals("Text should match", TEST_TEXT, comment.getText());
-		Assert.assertEquals("Id should match", rucsokId, comment.getRucsok().getId());
-	}	
-	
+		Assert.assertNotNull("Entity should'nt be null", postedComment);
+		Assert.assertEquals("Text should match", TEST_TEXT, postedComment.getText());
+		Assert.assertEquals("Id should match", rucsokId, postedComment.getRucsok().getId());
+	}
+
 	@Test
-	public void itShouldReturnBadRequest_When_TextNotProvided() throws Exception {
+	public void postShouldReturnBadRequest_When_TextNotProvided() throws Exception {
 
 		// Given
 
@@ -134,16 +139,14 @@ public class PostCommentControllerIntegrationTest {
 
 		// Then
 
-		mockMvc.perform(post(PostCommentController.REQUEST_MAPPING)
-				.header("Authorization", "Bearer " + accessToken)
-				.contentType(MediaType.APPLICATION_JSON)
-				.content(mapper.writeValueAsBytes(request)))
-		.andExpect(status().isBadRequest());
-		
+		mockMvc.perform(post(PostCommentController.REQUEST_MAPPING).header("Authorization", "Bearer " + accessToken)
+				.contentType(MediaType.APPLICATION_JSON).content(mapper.writeValueAsBytes(request)))
+				.andExpect(status().isBadRequest());
+
 	}
-	
+
 	@Test
-	public void itShouldReturnBadRequest_When_RucsokIdNotProvided() throws Exception {
+	public void postShouldReturnBadRequest_When_RucsokIdNotProvided() throws Exception {
 
 		// Given
 
@@ -156,16 +159,14 @@ public class PostCommentControllerIntegrationTest {
 
 		// Then
 
-		mockMvc.perform(post(PostCommentController.REQUEST_MAPPING)
-				.header("Authorization", "Bearer " + accessToken)
-				.contentType(MediaType.APPLICATION_JSON)
-				.content(mapper.writeValueAsBytes(request)))
-		.andExpect(status().isBadRequest());
-		
+		mockMvc.perform(post(PostCommentController.REQUEST_MAPPING).header("Authorization", "Bearer " + accessToken)
+				.contentType(MediaType.APPLICATION_JSON).content(mapper.writeValueAsBytes(request)))
+				.andExpect(status().isBadRequest());
+
 	}
-	
+
 	@Test
-	public void itShouldReturnBadRequest_When_RucsokIsNotExists() throws Exception {
+	public void postShouldReturnBadRequest_When_RucsokIsNotExists() throws Exception {
 
 		// Given
 
@@ -179,16 +180,14 @@ public class PostCommentControllerIntegrationTest {
 
 		// Then
 
-		mockMvc.perform(post(PostCommentController.REQUEST_MAPPING)
-				.header("Authorization", "Bearer " + accessToken)
-				.contentType(MediaType.APPLICATION_JSON)
-				.content(mapper.writeValueAsBytes(request)))
-		.andExpect(status().isBadRequest());
-		
+		mockMvc.perform(post(PostCommentController.REQUEST_MAPPING).header("Authorization", "Bearer " + accessToken)
+				.contentType(MediaType.APPLICATION_JSON).content(mapper.writeValueAsBytes(request)))
+				.andExpect(status().isBadRequest());
+
 	}
-	
+
 	@Test
-	public void itShouldReturnBadRequest_When_ParentIsNotExists() throws Exception {
+	public void postShouldReturnBadRequest_When_ParentIsNotExists() throws Exception {
 
 		// Given
 
@@ -203,16 +202,14 @@ public class PostCommentControllerIntegrationTest {
 
 		// Then
 
-		mockMvc.perform(post(PostCommentController.REQUEST_MAPPING)
-				.header("Authorization", "Bearer " + accessToken)
-				.contentType(MediaType.APPLICATION_JSON)
-				.content(mapper.writeValueAsBytes(request)))
-		.andExpect(status().isBadRequest());
-		
+		mockMvc.perform(post(PostCommentController.REQUEST_MAPPING).header("Authorization", "Bearer " + accessToken)
+				.contentType(MediaType.APPLICATION_JSON).content(mapper.writeValueAsBytes(request)))
+				.andExpect(status().isBadRequest());
+
 	}
 
 	@Test
-	public void itShouldReturnUnauthorized_When_UserNotLoggedIn() throws Exception {
+	public void postShouldReturnUnauthorized_When_UserNotLoggedIn() throws Exception {
 
 		// Given
 

@@ -1,5 +1,8 @@
 package com.rucsok.user.view.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class UserRegistrationError {
 
 	private String message;
@@ -8,7 +11,8 @@ public class UserRegistrationError {
 		return message;
 	}
 
-	public UserRegistrationError(String message) {
+	@JsonCreator
+	public UserRegistrationError(@JsonProperty("message") String message) {
 		super();
 		this.message = message;
 	}

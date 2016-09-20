@@ -21,7 +21,7 @@ public class PunServiceTransformerTest {
 	private PunServiceTransformer punTransformer;
 
 	@Test
-	public void itTransformsEntityToDTO() {
+	public void transformToPunShouldTransformsEntityToDTO() {
 		
 		PunEntity entity = Mockito.mock(PunEntity.class);
 		final String testText = "test text";
@@ -29,7 +29,7 @@ public class PunServiceTransformerTest {
 		Mockito.when(entity.getId()).thenReturn(testId);
 		Mockito.when(entity.getText()).thenReturn(testText);
 		
-		Pun pun = punTransformer.transformEntityToDTO(entity);
+		Pun pun = punTransformer.transformToPun(entity);
 		
 		assertEquals(testText, pun.getText());
 		assertEquals(testId, pun.getId());
@@ -37,13 +37,13 @@ public class PunServiceTransformerTest {
 	}
 	
 	@Test
-	public void it_Transforms_DTO_To_Entity() {
+	public void transformToEntityShouldTransformDTOToEntity() {
 		final String testText = "test text";
 		final Long testId = 1L;
 		
 		final Pun pun = new Pun(testId, testText);
 		
-		PunEntity entity = punTransformer.transformDTOToEntity(pun);
+		PunEntity entity = punTransformer.transformToEntity(pun);
 		
 		assertEquals(testText, entity.getText());
 		

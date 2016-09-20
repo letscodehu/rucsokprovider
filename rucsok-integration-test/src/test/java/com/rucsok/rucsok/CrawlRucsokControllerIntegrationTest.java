@@ -84,7 +84,7 @@ public class CrawlRucsokControllerIntegrationTest {
 
 	@Test
 	@WithUserDetails(TEST_USERNAME)
-	public void crawlerShouldReturnCorrectCrawledObject() throws Exception {
+	public void postShouldReturnCorrectCrawledObject() throws Exception {
 
 		// Given
 
@@ -133,7 +133,7 @@ public class CrawlRucsokControllerIntegrationTest {
 
 	@Test
 	@Ignore
-	public void crawlerShouldReturnUnauthorizedWhenUserNotLoggedIn() throws Exception {
+	public void postShouldReturnUnauthorized_When_UserNotLoggedIn() throws Exception {
 
 		// Given
 

@@ -23,10 +23,10 @@ import com.rucsok.user.service.UserCheckerService;
 public class RucsokService {
 
 	@Value("${rucsok.fresh.page.size}")
-	public static int FRESH_PAGINATION_SIZE;
+	public int FRESH_PAGINATION_SIZE;
 
 	@Value("${rucsok.hot.page.size}")
-	public static int HOT_PAGINATION_SIZE;
+	public int HOT_PAGINATION_SIZE;
 
 	@Autowired
 	private RucsokRepository rucsokRepository;

@@ -20,12 +20,16 @@ import com.rucsok.rucsok.transform.RucsokTypeTransform;
 @ContextConfiguration(classes = { RucsokTypeTransform.class })
 public class RucsokTypeTransformTest {
 	
+	private static final String WEBM_URL = "http://techslides.com/demos/sample-videos/small.webm";
+	private static final String OGV_URL = "http://techslides.com/demos/sample-videos/small.ogv";
+	private static final String IMGUR_URL = "http://i.imgur.com/ZSkyp8F.mp4";
+	private static final String YOUTUBE_URL = "https://www.youtube.com/watch?v=buXwBr9H3VY";
 	private static final String EMPTY_STRING = "";
 	@Autowired
 	private RucsokTypeTransform underTest;
 
 	@Test
-	public void getRucsokTypeFromEntityShouldReturnImageWhenVideoUrlIsNull() {
+	public void getRucsokTypeFromEntityShouldReturnImage_When_VideoUrlIsNull() {
 		// Given
 		RucsokEntity rucsok = Mockito.mock(RucsokEntity.class);
 		when(rucsok.getVideoUrl()).thenReturn(null);
@@ -37,7 +41,7 @@ public class RucsokTypeTransformTest {
 	}
 	
 	@Test
-	public void getRucsokTypeFromEntityShouldReturnImageWhenVideoUrlIsEmpty() {
+	public void getRucsokTypeFromEntityShouldReturnImage_When_VideoUrlIsEmpty() {
 		// Given
 		RucsokEntity rucsok = Mockito.mock(RucsokEntity.class);
 		when(rucsok.getVideoUrl()).thenReturn(EMPTY_STRING);
@@ -49,10 +53,10 @@ public class RucsokTypeTransformTest {
 	}
 	
 	@Test
-	public void getRucsokTypeFromEntityShouldReturnEmbedWhenVideoUrlIsYoutube() {
+	public void getRucsokTypeFromEntityShouldReturnEmbed_When_VideoUrlIsYoutube() {
 		// Given
 		RucsokEntity rucsok = Mockito.mock(RucsokEntity.class);
-		when(rucsok.getVideoUrl()).thenReturn("https://www.youtube.com/watch?v=buXwBr9H3VY");
+		when(rucsok.getVideoUrl()).thenReturn(YOUTUBE_URL);
 		// When
 		RucsokType result = underTest.getRucsokTypeFromEntity(rucsok);
 		// Then
@@ -61,10 +65,10 @@ public class RucsokTypeTransformTest {
 	}
 	
 	@Test
-	public void getRucsokTypeFromEntityShouldReturnHtml5VideoWhenVideoUrlIsMp4() {
+	public void getRucsokTypeFromEntityShouldReturnHtml5Video_When_VideoUrlIsMp4() {
 		// Given
 		RucsokEntity rucsok = Mockito.mock(RucsokEntity.class);
-		when(rucsok.getVideoUrl()).thenReturn("http://i.imgur.com/ZSkyp8F.mp4");
+		when(rucsok.getVideoUrl()).thenReturn(IMGUR_URL);
 		// When
 		RucsokType result = underTest.getRucsokTypeFromEntity(rucsok);
 		// Then
@@ -73,10 +77,10 @@ public class RucsokTypeTransformTest {
 	}
 	
 	@Test
-	public void getRucsokTypeFromEntityShouldReturnHtml5VideoWhenVideoUrlIsOgg() {
+	public void getRucsokTypeFromEntityShouldReturnHtml5Video_When_VideoUrlIsOgg() {
 		// Given
 		RucsokEntity rucsok = Mockito.mock(RucsokEntity.class);
-		when(rucsok.getVideoUrl()).thenReturn("http://techslides.com/demos/sample-videos/small.ogv");
+		when(rucsok.getVideoUrl()).thenReturn(OGV_URL);
 		// When
 		RucsokType result = underTest.getRucsokTypeFromEntity(rucsok);
 		// Then
@@ -85,10 +89,10 @@ public class RucsokTypeTransformTest {
 	}
 	
 	@Test
-	public void getRucsokTypeFromEntityShouldReturnHtml5VideoWhenVideoUrlIsWebm() {
+	public void getRucsokTypeFromEntityShouldReturnHtml5Video_When_VideoUrlIsWebm() {
 		// Given
 		RucsokEntity rucsok = Mockito.mock(RucsokEntity.class);
-		when(rucsok.getVideoUrl()).thenReturn("http://techslides.com/demos/sample-videos/small.webm");
+		when(rucsok.getVideoUrl()).thenReturn(WEBM_URL);
 		// When
 		RucsokType result = underTest.getRucsokTypeFromEntity(rucsok);
 		// Then

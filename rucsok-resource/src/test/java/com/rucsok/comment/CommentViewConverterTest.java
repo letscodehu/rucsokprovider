@@ -38,7 +38,8 @@ public class CommentViewConverterTest {
 	private OutputTextTransformer outputTextTransformer;
 
 	@Test
-	public void itShouldReturnCommentView() {
+	public void convertShouldReturnCommentView() {
+		
 		// Given
 
 		LocalDateTime timestamp = LocalDateTime.now(); // cannot simply mocked

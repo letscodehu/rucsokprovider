@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 
 import com.rucsok.user.domain.User;
@@ -20,7 +21,7 @@ public class UserRegistrationTransformer {
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-	
+
 	public UserRegistration transformToRegistration(UserRegistrationRequest request) {
 		if (request == null) {
 			throw new IllegalArgumentException();
@@ -40,16 +41,22 @@ public class UserRegistrationTransformer {
 		return new UserRegistrationResponse(userView, null);
 	}
 
-	public UserRegistrationResponse transformToResponse(RuntimeException exception) {
+	public UserRegistrationResponse transformToResponse(Exception exception) {
 		return new UserRegistrationResponse(null, new UserRegistrationError(exception.getMessage()));
 	}
 
-	
 	public UserRegistrationResponse transformToResponseError(List<ObjectError> allErrors) {
-		return new UserRegistrationResponse(null, new UserRegistrationError(allErrors.get(0).getDefaultMessage()));
+		StringBuilder sb = new StringBuilder();
+		setErrorMessage(sb, allErrors.get(0));
+		return new UserRegistrationResponse(null, new UserRegistrationError(sb.toString()));
 	}
 
-	
-	
-	
+	private void setErrorMessage(StringBuilder sb, ObjectError error) {
+		if (error instanceof FieldError) {
+			sb.append(((FieldError) error).getField());
+			sb.append(" ");
+		}
+		sb.append(error.getDefaultMessage());
+	}
+
 }

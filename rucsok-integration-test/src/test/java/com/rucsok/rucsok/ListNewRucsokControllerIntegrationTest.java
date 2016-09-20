@@ -12,6 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers;
@@ -37,6 +38,12 @@ public class ListNewRucsokControllerIntegrationTest {
 	private static final String REQUEST_MAPPING_PREFIX = "/rucsok/new/";
 	private static final int START_PAGE_NUMBER = 0;
 	private static final String REQUEST_MAPPING = REQUEST_MAPPING_PREFIX + START_PAGE_NUMBER;
+	
+	@Value("${rucsok.fresh.page.size}")
+	public int FRESH_PAGINATION_SIZE;
+
+	@Value("${rucsok.hot.page.size}")
+	public int HOT_PAGINATION_SIZE;
 
 	@Autowired
 	private RucsokService rucsokService;
@@ -54,7 +61,7 @@ public class ListNewRucsokControllerIntegrationTest {
 
 	@Test
 	@Transactional
-	public void statusShouldOk() throws Exception {
+	public void getShouldReturnOk() throws Exception {
 		// Given
 		// When
 		// Then
@@ -63,7 +70,7 @@ public class ListNewRucsokControllerIntegrationTest {
 
 	@Test
 	@Transactional
-	public void contentShouldBeJson() throws Exception {
+	public void getShouldReturnJson() throws Exception {
 		// Given
 		// When
 		// Then
@@ -73,9 +80,9 @@ public class ListNewRucsokControllerIntegrationTest {
 
 	@Test
 	@Transactional
-	public void contentShouldContainsSameAmountOfDataThatCreatedInTheTestDatabase() throws Exception {
+	public void getShouldContainsSameAmountOfDataThatCreatedInTheTestDatabase() throws Exception {
 		// Given
-		int numberOfItems = RucsokService.FRESH_PAGINATION_SIZE;
+		int numberOfItems = FRESH_PAGINATION_SIZE;
 		// When
 		// Then
 		mockMvc.perform(get(REQUEST_MAPPING)).andExpect((jsonPath("$", hasSize(numberOfItems))));
@@ -83,7 +90,7 @@ public class ListNewRucsokControllerIntegrationTest {
 
 	@Test
 	@Transactional
-	public void contentShouldContainCorrectProperties() throws Exception {
+	public void getShouldContainCorrectProperties() throws Exception {
 		// Given
 		List<Rucsok> rucsoks = rucsokService.findFresh(START_PAGE_NUMBER);
 		// When
@@ -97,7 +104,7 @@ public class ListNewRucsokControllerIntegrationTest {
 
 	@Test
 	@Transactional
-	public void contentShouldContainCorrectPropertiesOnSecondPage() throws Exception {
+	public void getShouldContainCorrectPropertiesOnSecondPage() throws Exception {
 		// Given
 		int page = 1;
 		List<Rucsok> rucsoks = rucsokService.findFresh(page);
@@ -113,7 +120,7 @@ public class ListNewRucsokControllerIntegrationTest {
 
 	@Test
 	@Transactional
-	public void itShouldReturnEmptyDataWhenPageNumberLargerThanDataSet() throws Exception {	
+	public void getShouldReturnEmptyDataWhenPageNumberLargerThanDataSet() throws Exception {	
 		// Given
 		int page = 100;
 		// When

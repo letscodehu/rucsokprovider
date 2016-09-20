@@ -51,13 +51,16 @@ public class CommentConverterTest {
 	private UserEntity userEntity;
 
 	@Test
-	public void itShouldReturnCommentWithCorrectAttributes() {
+	public void convertShouldReturnCommentWithCorrectAttributes() {
+		
 		// Given
+		
 		CommentEntity commentEntity = Mockito.mock(CommentEntity.class);
 		LocalDateTime timestamp = LocalDateTime.now(); // cannot -simply- mocked
 		Date date = Mockito.mock(Date.class);
 
 		// When
+		
 		when(dateService.getLocaldateTimeFromDate(date)).thenReturn(timestamp);
 		when(commentEntity.getText()).thenReturn(TEST_STRING);
 		when(commentEntity.getCreatedAt()).thenReturn(date);
@@ -65,7 +68,9 @@ public class CommentConverterTest {
 		when(userTransformer.transformEntityToUser(userEntity)).thenReturn(user);
 
 		Comment result = underTest.convert(commentEntity);
+		
 		// Then
+		
 		Assert.assertEquals("Text should match", TEST_STRING, result.getText());
 		Assert.assertEquals("Date should match", timestamp, result.getCreatedAt());
 		Assert.assertNull("Parent should be null", result.getParent());
