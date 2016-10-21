@@ -15,17 +15,17 @@ define([
 
         // Disable global view caching, caused a state-not-change-but-url-does anomaly
         $ionicConfigProvider.views.maxCache(0);
-
-        $httpProvider.interceptors.push(function(){
-            return {
-                request: function(config) {
-                    if (/\.\D{2,4}$/.test(config.url) === false) {
-                        config.url = 'http://10.0.14.85:3333' + config.url;
-                    }
-                    return config;
-                }
-            };
-        });
+//
+//        $httpProvider.interceptors.push(function(){
+//            return {
+//                request: function(config) {
+//                    if (/\.\D{2,4}$/.test(config.url) === false) {
+//                        config.url = 'http://10.0.14.85:3333' + config.url;
+//                    }
+//                    return config;
+//                }
+//            };
+//        });
 
 		// ion gallery config 
 		ionGalleryConfigProvider.setGalleryConfig({

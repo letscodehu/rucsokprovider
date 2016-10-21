@@ -43,6 +43,20 @@
 .pull-right {
 	float: right;
 }
+
+.post-meta{
+	border-top: 1px solid #ddd;
+}
+
+.post-parent{
+	background: #f8f8f8;
+	padding: 10px;
+}
+
+.post-content{
+	display: block;
+    margin: auto;
+}
 /* HACK - veryyyyy baaad, on emulated android tabs bar disappears without this */
 .nav-bar-tabs-top.hide ~ .view-container .tabs-top .tabs {
 	top: 44px;

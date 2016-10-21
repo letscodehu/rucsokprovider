@@ -22,7 +22,8 @@ define([], function() {
             this.currentLanguage = $translate.use();
 
             if ($translate.isReady()) {
-                this.languages = $translate.getAvailableLanguageKeys();
+//                this.languages = $translate.getAvailableLanguageKeys();
+                this.languages = ['en'];
             }
 
             this.changeLanguage = function(langKey) {

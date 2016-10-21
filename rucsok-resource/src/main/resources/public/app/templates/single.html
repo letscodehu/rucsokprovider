@@ -2,25 +2,26 @@
     <ion-nav-bar>
         <ion-nav-title>{{ item.title }}</ion-nav-title>
     </ion-nav-bar>
+    <ion-nav-buttons side="primary">
+        <button class="button btn-danger" data-ng-click="backButton()">
+           <i class="ion-arrow-left-c"></i> Back
+        </button>
+    </ion-nav-buttons>
     <ion-content data-ng-keyup="onKeyUp($event)" tabindex="1" on-swipe-left="swipeLeft()" on-swipe-right="swipeRight()">
         <div data-ng-switch="item.type">
-            <div data-ng-switch-when="embedvideo">
-                <embedvideo-rucsok>
+            	<div data-ng-switch-when="embedvideo">
+                	<embedvideo-rucsok>
                 </div>
                 <div data-ng-switch-when="html5video">
                     <html5video-rucsok>
                 </div>
-                <div data-ng-switch-default>
-                    <image-rucsok>
-                    </div>
+                <div data-ng-switch-default >
+                    <image-rucsok >                 
                 </div>
-
-                <div class="row">
-                    <span></span>
-                </div>
-                <div class="row centered">
+             
+                <div class="row centered post-meta">
                     <span class="col col-40">
-                        <a href={{ item.link }} target="_blank">
+                        <a href="{{ item.link }}" target="_blank">
                             Source
                         </a>
                     </span>  
@@ -41,9 +42,5 @@
                     </span>  		
                 </div>
             </ion-content>
-            <ion-nav-buttons side="primary">
-                <button class="button btn-danger" data-ng-click="backButton()">
-                    <i class="ion-arrow-left-c"></i> Back
-                </button>
-            </ion-nav-buttons>
+       
         </ion-view>
