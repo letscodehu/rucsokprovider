@@ -1,7 +1,7 @@
 define([], function() {
 
 	singleController.$inject = [ "$scope", "$state", "rucsokService",
-			"$stateParams", '$ionicHistory', '$document',  'rucsokModelService' ];
+			"$stateParams", '$ionicHistory', '$document',  'rucsokModelService'];
 
 	function singleController($scope, $state, rucsokService, $stateParams,
 			$ionicHistory, $document, rucsokModelService) {
@@ -11,6 +11,8 @@ define([], function() {
 		$scope.onKeyUp = onKeyUp;
 		$scope.swipeLeft = swipeLeft;
 		$scope.swipeRight = swipeRight;
+		$scope.voteRucsok = voteRucsok;
+		$scope.alreadyVotedClass = '';
 
 		$scope.backButton = function() {
 			if (canGoBackInHistory()) {
@@ -21,7 +23,7 @@ define([], function() {
 		};
 		
 		function goToDashboard() {
-			$state.go('dashboard');
+			$state.go('app.tabs');
 		}
 
 		function goBackInHistory() {
@@ -45,14 +47,12 @@ define([], function() {
 		}
 
 		function swipeLeft() {
-			console.log($scope.raw);
 			$state.go('single', {
 				id : $scope.next
 			});
 		}
 
 		function swipeRight() {
-			console.log(  $scope.raw);
 			$state.go('single', {
 				id : $scope.prev
 			});
@@ -76,6 +76,33 @@ define([], function() {
 			$scope.item = rucsokModelService.createRucsokFromRequest(data.current);
 			$scope.next = data.nextId;
 			$scope.prev = data.previousId;
+		}
+
+		function voteRucsok(where) {
+			var voteObject = {
+				'rucsokid': $stateParams.id,
+				'voteType': where
+			}
+			switch(where) {
+				case 'UP':
+					// Backend logic copy here(inc/dec vote count, set alreadyVoted to value)
+					$scope.item.vote++;
+					$scope.item.alreadyVoted = 'UP';
+					break;
+				case 'DOWN':
+					// Backend logic copy here(inc/dec vote count, set alreadyVoted to value)
+					$scope.item.vote--;
+					$scope.item.alreadyVoted = 'DOWN';
+					break;
+				default: 
+					$scope.item.alreadyVoted = "NOT_VOTED";
+					break;
+			}
+			rucsokService.voteRucsok(voteObject).then(function(data) {
+				$scope.item.alreadyVoted = where;
+			}, function() {
+				$scope.item.alreadyVoted = 'NOT_VOTED';
+			});
 		}
 
 		init();

@@ -91,6 +91,39 @@ paths:
             $ref: '#/definitions/Profile'
         401:
           description:  Unauthorized response if the provided token is expired or not valid
+  /register:
+    post: 
+      summary: Registering user
+      description: The endpoint used to register a new user into the Rucsokprovider with the role of user.
+      parameters:
+        - name: email
+          in: query
+          required: true
+          type: string
+          description: The e-mail address of the user to be registered
+        - name: username
+          in: query
+          required : true
+          type: string
+          description: The username wanted
+        - name: password
+          in : query
+          required: true
+          type: string
+          description: The password used to login
+        - name: passwordConfirmation
+          in : query
+          required: true
+          type: string
+          description: The password confirmation
+      tags:
+        - User
+      responses:
+        201: 
+          description: The profile information about the user recently registered
+          schema:
+            $ref: "#/definitions/UserRegistrationResponse"
+        
   /check-rucsok:
     post:
       summary: URL check
@@ -160,6 +193,110 @@ paths:
           description: A single rucsok
           schema:
             $ref: '#/definitions/Rucsok'
+  /rucsok/new/{pagenumber}:
+    get:
+      summary: Newest rucsoks
+      description: Returns fixed number of rucsoks
+      parameters:
+        - name: pagenumber
+          in: path
+          required: true
+          type: number
+          description: Pagination number
+      tags:
+        - Rucsok
+      responses:
+        200:
+          description: List of new rucsoks
+          schema:
+            $ref: '#/definitions/Rucsok'
+  /rucsok/hot?date=###:
+    get:
+      summary: Hottest rucsoks
+      description: Returns the most upvoted rucsoks of the given date
+      parameters:
+        - name: date
+          in: query
+          required: true
+          type: string
+          description: yyyy-MM-dd format
+      tags:
+        - Rucsok
+      responses:
+        200:
+          description: List of hottest rucsoks
+          schema:
+            $ref: '#/definitions/ListedRucsok'
+  /rucsok/{rucsokId}/comment/{page}:
+    get:
+      summary: Comments of the rucsok
+      description: Pageable comment list
+      parameters:
+        - name: rucsokId
+          in: path
+          required: true
+          type: number
+          description: Rucsok Id
+        - name: page
+          in: path
+          required: true
+          type: number
+          description: Pagination number
+      tags:
+        - Rucsok
+        - Comment
+      responses:
+        200:
+          description: Pageable comments
+          schema:
+            $ref: '#/definitions/Comment'
+  /comment/:
+    post:
+      summary: Add comment.
+      description: Add new comment to specific rucsok or comment.
+      parameters:
+        - name: rucsokId
+          in: query
+          type: number
+          description: Rucsok ID.
+        - name: parentId
+          in: query
+          type: number
+          description: Optional, Parent comment ID.
+        - name: text
+          in: query
+          type: string
+          description: Text of the comment.
+      tags:
+        - Rucsok
+        - Comment
+      responses:
+        201:
+          description: The comment created.
+          schema:
+            $ref: '#/definitions/Comment'
+  /comment/{commentId}/replies/{page}:
+    get:
+      summary: Comments replies
+      description: Pageable comment list
+      parameters:
+        - name: commentId
+          in: path
+          required: true
+          type: number
+          description: Parent comment Id
+        - name: page
+          in: path
+          required: true
+          type: number
+          description: Pagination number
+      tags:
+        - Comment
+      responses:
+        200:
+          description: Pageable comments
+          schema:
+            $ref: '#/definitions/Comment'
 definitions:
   LoginResponse:
     type: object
@@ -179,11 +316,39 @@ definitions:
       username:
         type: string
         description: First username of the Rucsokprovider user.
+      email:
+        type: string
+        description: The e-mail address of the Rucsokprovider user.
   RucsokPost:
     type: object
     properties:
       rucsok:
         $ref: '#/definitions/Rucsok'
+  UserRegistrationResponse:
+    type: object
+    properties:
+      user: 
+        $ref: '#/definitions/Profile'
+      error:
+        $ref: '#/definitions/UserRegistrationError'
+  UserRegistrationError:
+    type: object
+    properties: 
+      message:
+        type: string
+        description: The cause of the error
+  Comment:
+    type: object
+    properties:
+      id:
+        type: string
+        description: Text of the comment.
+      username:
+        type: string
+        description: Username of the author.
+      date:
+        type: string
+        description: Date in yyyy.MM.dd HH:mm:ss format.
   Rucsok:
     type: object
     properties:
@@ -208,6 +373,30 @@ definitions:
       username:
         type: string
         description : The user's name who posted the rucsok
+      vote:
+        type: number
+        description: The aggregated number of upvotes/downvotes
+  ListedRucsok:
+    type: object
+    properties:
+      id:
+        type: number
+        description: The identifier of the Rucsok
+      title:
+        type: string
+        description: The title of the rucsok, crawled from the site meta tags/title tag.
+      link:
+        type: string
+        description: The source the rucsok got crawled from.
+      imageUrl:
+        type: string
+        description: The image URL if present
+      videoUrl:
+        type: string
+        description: The video URL if present
+      type: 
+        type: string
+        description : The type of the rucsok. Valid values are IMAGE, EMBEDVIDEO, HTML5VIDEO
       vote:
         type: number
         description: The aggregated number of upvotes/downvotes

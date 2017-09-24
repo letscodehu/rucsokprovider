@@ -13,6 +13,7 @@
 		<module>rucsok-repository</module>
 		<module>rucsok-integration-test</module>
 		<module>rucsok-service</module>
+		<module>rucsok-admin</module>
 	</modules>
 
 	<properties>
@@ -55,6 +56,7 @@
 		<junit.version>4.12</junit.version>
 		<mockito.version>1.10.19</mockito.version>
 		<maven.failsafe.plugin.version>2.6</maven.failsafe.plugin.version>
+		<maven-resources-plugin.version>3.0.1</maven-resources-plugin.version>
 		<neo4j.version>2.1.8</neo4j.version>		
 
 	</properties>

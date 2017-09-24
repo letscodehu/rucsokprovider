@@ -16,6 +16,15 @@ import org.springframework.web.client.HttpClientErrorException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.rucsok.login.service.LoginService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
+@Api(
+		tags = "User",
+		produces = "application/json", 
+		consumes = "application/json", 
+		value = "/login",
+		description = "Login with user credentials to the application")
 @Controller
 public class LoginController {
 
@@ -26,7 +35,6 @@ public class LoginController {
 	@Autowired
 	private LoginService loginService;
 
-	@CrossOrigin(origins = "*")
 	@ResponseBody
 	@RequestMapping(path = REQUEST_MAPPING, method = RequestMethod.POST)
 	public JsonNode login(@RequestParam String username, @RequestParam String password) {

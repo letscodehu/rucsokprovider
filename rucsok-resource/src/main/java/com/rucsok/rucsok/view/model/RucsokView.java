@@ -15,11 +15,22 @@ public class RucsokView {
 	private String type;
 	private String username;
 	private int vote;
+	private String alreadyVoted;
 
 	private LocalDateTime createdAt;
 
 	private DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATEFORMAT);
 
+
+	public String getAlreadyVoted() {
+		return alreadyVoted;
+	}
+
+	public void setAlreadyVoted(String alreadyVoted) {
+		this.alreadyVoted = alreadyVoted;
+	}
+
+	
 	public long getId() {
 		return id;
 	}

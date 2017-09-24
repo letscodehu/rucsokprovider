@@ -3,6 +3,7 @@
 	<name>rucsok-service</name>
 	<comment></comment>
 	<projects>
+		<project>rucsok-repository</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

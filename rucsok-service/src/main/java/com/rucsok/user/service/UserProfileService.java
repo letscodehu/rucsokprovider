@@ -15,7 +15,7 @@ import com.rucsok.user.transform.UserTransformer;
 public class UserProfileService {
 
 	@Autowired
-	private UserRepository userDao;
+	private UserRepository userRepository;
 
 	@Autowired
 	private UserTransformer userTranformer;
@@ -29,7 +29,7 @@ public class UserProfileService {
 	}
 
 	private Optional<UserEntity> findUserByName(String username) {
-		return Optional.ofNullable(userDao.findByName(username));
+		return Optional.ofNullable(userRepository.findByName(username));
 	}
 
 }

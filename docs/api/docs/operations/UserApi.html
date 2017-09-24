@@ -1,0 +1,75 @@
+<div class="main-content">
+  <h2><a name=""></a></h2>
+  <p>This is the  API</p>
+
+  <h2><a name="profileGet"></a>profileGet</h2>
+  <hr>
+  <p></p>
+  <p>The User Profile endpoint returns information about the Rucsokprovider user that has authorized with the application.</p>
+  <h3 class="section">URL</h3>
+  <code>http://localhost//profile</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>GET</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="Profile"><a href="">Profile</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+  </ul>
+  <h2><a name="registerPost"></a>registerPost</h2>
+  <hr>
+  <p></p>
+  <p>The endpoint used to register a new user into the Rucsokprovider with the role of user.</p>
+  <h3 class="section">URL</h3>
+  <code>http://localhost//register</code>
+  <h3 class="section">HTTP Method</h3>
+  <code>POST</code>
+  <h3 class="section">Response Type</h3>
+  <div class="model" data-model="UserRegistrationResponse"><a href="">UserRegistrationResponse</a></div>
+  <h3 class="section">Parameters</h3>
+  <ul>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">email</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">The e-mail address of the user to be registered</p>
+	  </li>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">username</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">The username wanted</p>
+	  </li>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">password</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">The password used to login</p>
+	  </li>
+	  <li class="parameter">
+      
+      <span class="param-in">Query: </span>
+      
+      
+      
+      <span class="param-name">passwordConfirmation</span>
+      <span class="param-type">String</span>
+      
+      <p class="param-description">The password confirmation</p>
+	  </li>
+  </ul>
+</div>

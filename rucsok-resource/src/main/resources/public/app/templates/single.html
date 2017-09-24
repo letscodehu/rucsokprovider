@@ -1,38 +1,49 @@
 <ion-view>
-<ion-nav-bar>
-<ion-nav-title>{{item.title}}</ion-nav-title>
-</ion-nav-bar>
-  <ion-content ng-keyup="onKeyUp($event)" tabindex="1" on-swipe-left="swipeLeft()" on-swipe-right="swipeRight()">
+    <ion-nav-bar>
+        <ion-nav-title>{{ item.title }}</ion-nav-title>
+    </ion-nav-bar>
+    <ion-content data-ng-keyup="onKeyUp($event)" tabindex="1" on-swipe-left="swipeLeft()" on-swipe-right="swipeRight()">
+        <div data-ng-switch="item.type">
+            <div data-ng-switch-when="embedvideo">
+                <embedvideo-rucsok>
+                </div>
+                <div data-ng-switch-when="html5video">
+                    <html5video-rucsok>
+                </div>
+                <div data-ng-switch-default>
+                    <image-rucsok>
+                    </div>
+                </div>
 
-	<div ng-switch="item.type">
-		<div ng-switch-when="embedvideo">
-			<embedvideo-rucsok>
-		</div>
-		<div ng-switch-when="html5video">
-			<html5video-rucsok>
-		</div>
-		<div ng-switch-default>
-			<image-rucsok>
-		</div>
-	</div>
-	
-  	<div class="row">
-  		<span></span>
-  	</div>
-  	<div class="row">
-  		<span class="col">
-  			<a href={{item.link}} target="_blank">
-  				Source
-  			</a>
-  		</span>  
-  		<span class="col">
-  			Posted by {{item.username}}
-  		</span>  		
-  	</div>
-  </ion-content>
-      <ion-nav-buttons side="primary">
-	      <button class="button btn-danger" ng-click="backButton()">
-	        <i class="ion-arrow-left-c"></i> Back
-	      </button>
-    </ion-nav-buttons>
-</ion-view>
+                <div class="row">
+                    <span></span>
+                </div>
+                <div class="row centered">
+                    <span class="col col-40">
+                        <a href={{ item.link }} target="_blank">
+                            Source
+                        </a>
+                    </span>  
+                    <span class="col col-20">
+                        <span class="col" data-ng-if="item.alreadyVoted !== 'NOT_LOGGED_IN'">
+                            <a href="#" data-ng-class="{'voted-up': item.alreadyVoted === 'UP'}" class="ion-chevron-up vote-up" data-ng-click="voteRucsok('UP')" data-ng-disabled="item.alreadyVoted === 'UP' || item.alreadyVoted === 'DOWN'"></a>
+                            <a href="#" data-ng-class="{'voted-down': item.alreadyVoted === 'DOWN'}" class="ion-chevron-down vote-down" data-ng-click="voteRucsok('DOWN')" data-ng-disabled="item.alreadyVoted === 'UP' || item.alreadyVoted === 'DOWN'"></a>
+                        </span>
+                        <span class="col" data-ng-if="item.alreadyVoted === 'NOT_LOGGED_IN'">
+                            Login
+                        </span>
+                        <span class="col" data-ng-class="{'assertive': item.vote < 0, 'balanced': item.vote > 0}">
+                            {{ item.vote | removeNumSign }}
+                        </span>
+                    </span>
+                    <span class="col col-40">
+                        Posted by {{item.username}}
+                    </span>  		
+                </div>
+            </ion-content>
+            <ion-nav-buttons side="primary">
+                <button class="button btn-danger" data-ng-click="backButton()">
+                    <i class="ion-arrow-left-c"></i> Back
+                </button>
+            </ion-nav-buttons>
+        </ion-view>

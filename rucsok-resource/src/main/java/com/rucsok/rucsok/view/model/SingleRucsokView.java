@@ -1,5 +1,7 @@
 package com.rucsok.rucsok.view.model;
 
+import com.rucsok.vote.domain.UserVoteType;
+
 public class SingleRucsokView {
 
 	private RucsokView current;
@@ -28,6 +30,10 @@ public class SingleRucsokView {
 
 	public void setNextId(long nextId) {
 		this.nextId = nextId;
+	}
+
+	public void setCurrentVoteType(UserVoteType userVoteType) {
+		current.setAlreadyVoted(userVoteType.toString());
 	}
 
 }

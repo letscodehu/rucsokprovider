@@ -5,57 +5,70 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.rucsok.rucsok.domain.Rucsok;
 import com.rucsok.rucsok.domain.SingleRucsok;
-import com.rucsok.rucsok.repository.dao.RucsokDao;
-import com.rucsok.rucsok.repository.dao.VoteDao;
+import com.rucsok.rucsok.repository.dao.RucsokRepository;
+import com.rucsok.rucsok.repository.dao.VoteRepository;
 import com.rucsok.rucsok.repository.domain.RucsokEntity;
 import com.rucsok.rucsok.service.exception.AlreadyExistsRucsokException;
 import com.rucsok.rucsok.service.exception.IllegalRucsokArgumentException;
 import com.rucsok.rucsok.transform.RucsokServiceTransform;
-import com.rucsok.user.service.UserService;
+import com.rucsok.user.service.UserCheckerService;
 
 @Service
 public class RucsokService {
 
-	@Autowired
-	private RucsokDao rucsokRepo;
+	@Value("${rucsok.fresh.page.size}")
+	public static int FRESH_PAGINATION_SIZE;
+
+	@Value("${rucsok.hot.page.size}")
+	public static int HOT_PAGINATION_SIZE;
 
 	@Autowired
-	private VoteDao voteDao;
+	private RucsokRepository rucsokRepository;
 
 	@Autowired
-	private UserService userService;
+	private VoteRepository voteRepository;
+
+	@Autowired
+	private UserCheckerService userService;
 
 	@Autowired
 	private RucsokServiceTransform rucsokServiceTransform;
 
 	public List<Rucsok> findAll() {
-		return rucsokServiceTransform.transformToRucsok(rucsokRepo.getAllRucsok());
+		return rucsokServiceTransform.transformToRucsok(rucsokRepository.getAllRucsok());
+	}
+
+	public List<Rucsok> findFresh(int page) {
+		return rucsokServiceTransform
+				.transformToRucsok(rucsokRepository.getAllRucsokByCreatedAt(new PageRequest(page, FRESH_PAGINATION_SIZE)));
 	}
 
 	public void deleteById(long id) {
-		rucsokRepo.delete(rucsokRepo.findOne(id));
+		rucsokRepository.delete(rucsokRepository.findOne(id));
 	}
 
 	public Optional<RucsokEntity> findByLink(String url) {
-		return Optional.ofNullable(rucsokRepo.findByLink(url));
+		return Optional.ofNullable(rucsokRepository.findByLink(url));
 	}
 
 	public SingleRucsok findRucsokById(int id) {
-		SingleRucsok rucsok = getTransformetRucsok(id);
+		SingleRucsok rucsok = getTransformedRucsok(id);
 		setVoteNumber(rucsok.getCurrent());
 		return rucsok;
 	}
 
-	private SingleRucsok getTransformetRucsok(int id) {
-		return rucsokServiceTransform.transformToSingleRucsok(rucsokRepo.findById(id));
+	private SingleRucsok getTransformedRucsok(int id) {
+		return rucsokServiceTransform.transformToSingleRucsok(rucsokRepository.findById(id));
 	}
 
 	private void setVoteNumber(Rucsok rucsok) {
-		Long voteNumber = voteDao.countByRucsokId(rucsok.getId());
+		Long voteNumber = voteRepository.countByRucsokId(rucsok.getId());
 		rucsok.setVote(voteNumber.intValue());
 	}
 
@@ -69,7 +82,7 @@ public class RucsokService {
 	}
 
 	private RucsokEntity createNewRucsok(Rucsok rucsok, String username) {
-		return rucsokRepo.save(transformToRucsokEntity(rucsok, username));
+		return rucsokRepository.save(transformToRucsokEntity(rucsok, username));
 	}
 
 	private RucsokEntity transformToRucsokEntity(Rucsok rucsok, String username) {

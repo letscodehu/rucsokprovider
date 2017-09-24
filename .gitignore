@@ -1,1 +1,8 @@
 .settings/
+.classpath
+bin
+target
+maven.bat
+start-authserver.bat
+start-resource-server.bat
+swagger-codegen-cli*.jar
